@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.title}}{% endblock %}
+
+{% block race_detail %}
+<h2>{{ object.race_name }} Results</h2>
+
+<p><b>Race date:</b> {{ object.race_date|date:"F j, Y" }}</p>
+{% if object.event %}
+<p><b>Race details:</b> {{object.event.description}}</a>
+{% endif %}
+<p><b>Race distance:</b> {{ object.distance }}
+	{% if object.unit == 1 %}
+	km
+	{% else %}
+	mi
+	{% endif %}
+	</p>
+{% if object.report_set %}
+<h3>Race Reports</h3>
+<ul>
+	{% for report in object.get_race_reports %}
+	<li><a href="{{ report.report}}">{{ report.title }}</a> by {{report.racer.name}}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+<h3>Overall Results</h3>
+<table border="1" cellpadding="10">
+	<tr align="center">
+		<th>Place</th>
+		<th>Bib</th>
+		<th>Name</th>
+		<th>Gender</th>
+		<th>Time</th>
+		<th>Award</th>
+	</tr>
+{% for result in object.get_overall_results %}
+<tr>
+	<td>{{ forloop.counter }}</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{% if result.racer.gender == 1 %}
+		Male
+		{% else %}
+		Female
+		{% endif %}
+	</td>
+	<td>{{ result.time }}</td>
+	<td>{{ result.place }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Male Results</h3>
+<table border="1" cellpadding="10">
+	<tr align="center">
+		<th>Place</th>
+		<th>Bib</th>
+		<th>Name</th>
+		<th>Time</th>
+		<th>Award</th>
+	</tr>
+{% for result in object.get_male_results %}
+<tr>
+	<td>{{ forloop.counter }}</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{{ result.time }}</td>
+	<td>{{ result.place }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Female Results</h3>
+<table border="1" cellpadding="10">
+	<tr align="center">
+		<th>Place</th>
+		<th>Bib</th>
+		<th>Name</th>
+		<th>Time</th>
+		<th>Award</th>
+	</tr>
+{% for result in object.get_female_results %}
+<tr>
+	<td>{{ forloop.counter }}</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{{ result.time }}</td>
+	<td>{{ result.place }}</td>
+</tr>
+{% endfor %}
+</table>
+
+
+{% endblock %}

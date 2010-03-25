@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+	<title>{% block title %}Lawrence Trail Hawks{% endblock %}</title> 
+    <style> 
+        /* Generic Selectors */
+
+    body {
+     	font-family: Georgia, "Times New Roman", Times, serif;
+     	font-size: 14px;
+     	color: #333333;		
+     	background-color: #FFFFFF;
+     	/*margin: 0 0 0 0; top right bottom left*/	
+    }
+
+    p {
+     	width: 80%;
+    }
+
+	li {
+     	list-style-type: none;
+     	line-height: 150%;
+	}
+
+    h1 {
+
+    	font-family: Georgia, "Times New Roman", Times, serif;
+    	font-size: 18px;
+    	font-weight: bold;
+    	color: #000000;
+	}
+
+    h2 {
+    	font-family: Georgia, "Times New Roman", Times, serif;
+	    font-size: 16px;
+	    font-weight: bold;
+	    color: #000000;
+        border-bottom: 1px solid #C6EC8C;
+	}
+
+	/*************************  ID's *************************/
+
+	#navigation {
+    	position: absolute;
+
+    	width: 210px;
+     	height: 600px;	
+     	margin-top: 0px;
+     	border-right: 1px solid #C6EC8C;
+     	font-weight: normal;
+	}   
+
+	#centerDoc {
+    	position: absolute;	
+
+		padding: 0 0 20px 235px; /*top right bottom left*/
+     	margin-top: 50px;		
+	}
+       
+	#latest_event {
+		position: absolute;
+		padding: 0px 0 20px 0px;
+		width: 300px;
+		margin-top:100px;
+		border-right: 1px solid #C6EC8C;
+	
+	}
+		
+	#todays_run {
+		position: absolute;
+		padding: 0 0 20px 310px;
+		width: 300px;
+		margin-top:100px;
+		border-right: 1px solid #C6EC8C;
+	}
+		
+	#other_news {
+		position: absolute;
+		padding: 0 0 20px 620px;
+		width: 300px;
+		margin-top:100px;
+		border-right: 1px solid #C6EC8C;	
+			
+	}
+
+
+       /*************************  Pseudo classes *************************/
+       a:link {
+    color: #3D9140;
+    text-decoration: underline;
+    font-weight: bold;
+       }  
+
+       a:visited { 
+           color: #3D9140;
+           text-decoration: underline;
+           font-weight: bold;
+       }
+
+       a:hover {
+           color: rgb(0, 96, 255);
+           padding-bottom: 5px;
+           font-weight: bold;
+           text-decoration: underline;
+
+       }  
+       a:active { 
+           color: rgb(255, 0, 102);
+           font-weight: bold; 
+       } 
+
+    </style> 
+    </head>
+    <body>
+		<div id="centerDoc"> 
+			{% block homepage %}{% endblock %}
+			{% block event_index %}{% endblock %}
+			{% block faq %}{% endblock %}
+			{% block about %}{% endblock %}
+			{% block weekly_runs %}{% endblock %}
+			{% block run_detail %}{% endblock %}
+			{% block link_list %}{% endblock %}
+			{% block members %}{% endblock %}
+			{% block member_detail %}{% endblock %}
+			{% block result_index %}{% endblock %}
+			{% block race_detail %}{% endblock %}
+			{% block faq_detail %}{% endblock %} 
+			
+		</div> 
+        <div id="navigation"> 
+            <ul> 
+	            <li><a href="/">home</a> </li> 
+	            <li><a href="/members/">members</a> </li> 
+	            <li><a href="/runs/">runs</a> </li> 
+	            <li><a href="/events/">events</a> </li> 
+				<li><a href="/results/">results</a> </li>
+	            <li><a href="/about/">about</a> </li> 
+	            <li><a href="/links/">links</a> </li> 
+	            <li><a href="/faq/">faq</a> </li> 
+	    	</ul> 
+		</div>
+	</body>
+</html>

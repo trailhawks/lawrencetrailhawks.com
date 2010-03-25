@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Weekly Runs{% endblock %}
+
+{% block weekly_runs %}
+<h2>Weekly Runs</h2>
+  <ul>
+  {% for run in object_list %}
+    <li><a href="{{run.get_absolute_url}}">{{run.name}}</a> on {{ run.run_date }} at {{ run.run_time }}</li>
+  {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block weekly_runs %}
+<h2>Frequently Asked Questions</h2>
+  <ul>
+  {% for faq in object_list %}
+    <p><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></p>
+    <p>{{ faq.answer }}</p>
+  {% endfor %}
+{% endblock %}
+

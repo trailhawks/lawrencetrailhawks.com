@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.name}}{% endblock %}
+
+{% block run_detail %}
+<h2>{{ object.name }}</h2>
+<p><b>When:</b> {{ object.run_date }} at {{ object.run_time }}</p>
+<p><b>Where:</b> {{ object.location }}</p>
+<p><b>Details:</b> {{ object.details }}</p>
+<p><b>Contact:</b> {{ object.contact.first_name }} {{ object.contact.last_name }} at {{ object.contact.email }}
+{% endblock %}
+
+

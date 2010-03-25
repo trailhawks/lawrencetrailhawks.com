@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.title}}{% endblock %}
+
+{% block event_index %}
+<h2>{{ object.title }}</h2>
+<p><b>Race date:</b> {{ object.date|date:"F j, Y" }}</p>
+<p><b>Start time:</b> {{ object.date|date:"h:i A" }}</p>
+<p><b>Race Location:</b> {{ object.location }}</p>
+<p><b>Description:</b> {{ object.description }}</p>
+<p>Click <a href="{{ object.reg_url }}">here</a> to register.</p>
+<p><b>Phone:</b> {{ object.contact_phone }}</p>
+<p><b>Email:</b> {{ object.contact_email }}</p>
+{% endblock %}

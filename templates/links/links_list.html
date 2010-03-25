@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Trail Hawk Links{% endblock %}
+
+{% block link_list %}
+<h2>Links</h2>
+  {% for link in object_list %}
+    <p><a href="{{ link.link }}">{{ link.name }}</a>
+    <p>{{ link.description }}</p>
+  {% endfor %}
+{% endblock %}
+

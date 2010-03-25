@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Sponsors{% endblock %}
+
+{% block members %}
+<h2>Sponsors</h2>
+
+<ul>
+	{% for sponsor in sponsors %}
+	<li>{{sponsor.name}}</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

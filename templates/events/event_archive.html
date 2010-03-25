@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Events Index{% endblock %}
+
+{% block event_index %}
+<h2>Upcoming Events</h2>
+  <ul>
+  {% for event in latest reversed %}
+    <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a> - {{ event.date|date:"F j, Y h:i A" }}</li>
+  {% endfor %}
+{% endblock %}
