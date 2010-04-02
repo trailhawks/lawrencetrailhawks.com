@@ -1,5 +1,6 @@
 from django.db import models
 from lawrencetrailhawks.events.models import Event
+from django.contrib.auth.models import User
 
 class Race(models.Model):
     KM = 1
@@ -56,12 +57,12 @@ class Racer(models.Model):
         (FEMALE,"Female"),
     )
     
-    name = models.CharField(max_length=100)
+    name = models.ForeignKey(User, unique=True)
     gender = models.IntegerField(choices=GENDER_CHOICES)
     birth_date = models.DateField(null=True, blank=True)
     
     def __unicode__(self):
-        return self.name
+        return self.name.username
 
 
 class Result(models.Model):

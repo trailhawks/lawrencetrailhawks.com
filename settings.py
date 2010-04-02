@@ -69,20 +69,28 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	'templates',
+    'templates',
 )
+
+
+#twitter and flickr details left blank, please use your own.
+TWITTER={'username':'', 'password':''}
+FLICKR={'key':'', 'secret':''}
 
 INSTALLED_APPS = (
     'django.contrib.auth',
-	'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-	'events',
-	'faq',
-	'links',
-	'members',
-	'runs',
-	'sponsors',
+    'events',
+    'faq',
+    'links',
+    'members',
+    'runs',
+    'sponsors',
     'results',
+    'tagging',
+    'syncr.flickr',
+    'syncr.twitter',
 )
