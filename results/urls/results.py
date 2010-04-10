@@ -7,6 +7,8 @@ result_info_dict = {
     'queryset': Race.objects.all(),
     'date_field': 'race_date',
 }
+
+print result_info_dict
 urlpatterns = patterns('django.views.generic.date_based',
      (r'^$',
      'archive_index',

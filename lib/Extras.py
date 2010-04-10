@@ -1,6 +1,6 @@
 from lawrencetrailhawks.events.models import Event
 from lawrencetrailhawks.runs.models import Runs
-from lawrencetrailhawks.syncr.twitter.models import Tweet
+from syncr.twitter.models import Tweet
 import datetime
 
 def get_latest():

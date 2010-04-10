@@ -23,6 +23,5 @@ urlpatterns = patterns('',
     (r'^members/', include('lawrencetrailhawks.members.urls.members') ),
     (r'^sponsors/', include('lawrencetrailhawks.sponsors.urls.sponsors') ),
     (r'^results/', include('lawrencetrailhawks.results.urls.results') ),
-    (r'^photos/', include('lawrencetrailhawks.photos.urls.photos') ),
 )
 
