@@ -1,5 +1,5 @@
 from django.db import models
-from lawrencetrailhawks.members.models import Members
+from lawrencetrailhawks.members.models import Member
 
 class Runs(models.Model):
     name = models.CharField(max_length=50)
@@ -13,7 +13,7 @@ class Runs(models.Model):
     map_link = models.URLField(default="http://",
                                help_text="Link to google maps location")
     details = models.TextField()
-    contact = models.ForeignKey(Members)
+    contact = models.ForeignKey(Member)
     
     class Meta:
         verbose_name_plural = "Runs"

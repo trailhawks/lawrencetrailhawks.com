@@ -1,4 +1,5 @@
 from django.db import models
+from results.models import Result
 
 class Event(models.Model):
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
@@ -18,10 +19,10 @@ class Event(models.Model):
     reg_description = models.TextField()
     awards = models.CharField(max_length=300)
     packet_pickup = models.TextField(blank=True, null=True)
+    results = models.ForeignKey(Result)
     
     
     class Meta:
-        verbose_name_plural = "Events"
         ordering = ['-date']
     
     def __unicode__(self):

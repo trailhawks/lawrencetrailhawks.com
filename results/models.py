@@ -1,5 +1,4 @@
 from django.db import models
-from lawrencetrailhawks.events.models import Event
 from django.contrib.auth.models import User
 
 class Race(models.Model):
@@ -9,17 +8,29 @@ class Race(models.Model):
         (KM,"km"),
         (MI,"mi"),
     )
+    
+    RUN = 1
+    BIKE = 2
+    SWIM = 3
+    DISCIPLINE_CHOICES = (
+        (RUN,"Run"),
+        (BIKE,"Bike"),
+        (SWIM,"Swim"),
+    )
 
-    race_name = models.CharField(max_length=200)
-    annual = models.CharField(max_length=25)
+    race_name = models.CharField(max_length=200,
+                                 help_text="Name of race.")
+    annual = models.CharField(max_length=25,
+                              help_text="Inagural, second, third, etc...")
     slug = models.SlugField(unique=True,
                             help_text="Prepopulated from Race Name and Annual. Must be unique.")
+    race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     race_date = models.DateField()
     distance = models.IntegerField()
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
-
-    event = models.ForeignKey(Event, null=True, blank=True,
-                              help_text="Link to Event if results for a Trailhawk event.")
+    loops = models.IntegerField(default=1,
+                                help_text="Number of loops for the race. If a Point-to-Point set loops = 0.")
+   
 
     def __unicode__(self):
         return self.slug
@@ -57,13 +68,14 @@ class Racer(models.Model):
         (FEMALE,"Female"),
     )
     
-    name = models.ForeignKey(User, unique=True)
+    name = models.CharField(max_length=40, help_text="Name of racer")
+    user = models.ForeignKey(User, unique=True, null=True, blank=True,
+                             help_text="If user exists in our system link it to a user profile.")
     gender = models.IntegerField(choices=GENDER_CHOICES)
     birth_date = models.DateField(null=True, blank=True)
     
     def __unicode__(self):
-        return self.name.username
-
+        return self.name
 
 class Result(models.Model):
     race = models.ForeignKey(Race)

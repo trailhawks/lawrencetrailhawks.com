@@ -1,8 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Members(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+class Member(models.Model):
+    name = models.ForeignKey(User, unique=True)
     hawk_name = models.CharField(max_length=50)
     email = models.EmailField()
     phone = models.PositiveIntegerField()
