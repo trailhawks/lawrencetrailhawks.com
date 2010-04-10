@@ -9,7 +9,7 @@
 <p><em><strong>See you on the trails!</strong></em></p></p>
 
 <div id="latest_event">
-	<h2>Up Coming Events:</h2>
+	<h2>Up Coming Event</h2>
 {% if latest_event %}
   <p><h3>{{ latest_event.title }}</h3></p>
   <p><b>Where:</b> {{latest_event.location}}</p>
@@ -32,14 +32,19 @@
 {% endif %}
 </div>
 
-<div id="other_news">
-	<h2>Hawk News</h2>
-{% if other_news %}
-  <p>{{hawk_news}}</p>
-{% else %}
-  <p>No news! :( </p>
-{% endif %}
+<div id="tweets">
+	<h2>Hawk Tweets</h2>
+    {% for tweet in tweets|slice:":5" %}
+    <p>{{ tweet.text }}</p>
+    {% endfor %}
 </div>
+
+<div id="other_news">
+	{% for tweet in tweets %}
+	<p>
+	{% endfor %}
+</div>
+	
 
 <div id="footer">
 	<p>Join our <a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/">Yahoo! Group</a> e-mail list and get connected!</p> 

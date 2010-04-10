@@ -8,12 +8,6 @@ members_info_dict = {
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
-     (r'^$',
-     'object_list',
-     members_info_dict,
-     'member_list'),
-    (r'^(?P<object_id>[-\w]+)/$',
-     'object_detail',
-     members_info_dict,
-     'member_detail'),
+    (r'^$', 'object_list', members_info_dict, 'member_list'),
+    (r'^(?P<object_id>[-\w]+)/$', 'object_detail', members_info_dict, 'member_detail'),
 )
