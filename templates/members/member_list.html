@@ -6,7 +6,7 @@
 <h2>Trail Hawk Members</h2>
   <ul>
   {% for member in object_list %}
-    <li><a href="{{member.get_absolute_url}}">{{ member.first_name }} "{{ member.hawk_name }}" {{ member.last_name}}</a></li>
+    <li><a href="{{member.get_absolute_url}}">{{ member.username.first_name }} "{{ member.hawk_name }}" {{ member.username.last_name}}</a></li>
   {% endfor %}
 {% endblock %}
 

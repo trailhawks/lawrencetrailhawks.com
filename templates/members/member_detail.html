@@ -3,7 +3,7 @@
 {% block title %}{{object.name}}{% endblock %}
 
 {% block member_detail %}
-<h2>Member info for {{ object.first_name }} {{ object.last_name}}</h2>
+<h2>Member info for {{ object.username.first_name }} {{ object.username.last_name}}</h2>
 <p><b>Active:</b> {{ object.active }}</p>
 <p><b>Hawk Name:</b> {{ object.hawk_name }}</p>
 
