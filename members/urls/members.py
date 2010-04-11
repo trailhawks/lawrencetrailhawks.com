@@ -1,10 +1,10 @@
 from django.conf.urls.defaults import *
 
-from lawrencetrailhawks.members.models import Members
+from lawrencetrailhawks.members.models import Member
 
 
 members_info_dict = {
-    'queryset': Members.objects.all(),
+    'queryset': Member.objects.all(),
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
