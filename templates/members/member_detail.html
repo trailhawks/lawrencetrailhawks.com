@@ -4,8 +4,10 @@
 
 {% block member_detail %}
 <h2>Member info for {{ object.username.first_name }} {{ object.username.last_name}}</h2>
-<p><b>Active:</b> {{ object.active }}</p>
-<p><b>Hawk Name:</b> {{ object.hawk_name }}</p>
+<p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
+<p><strong>Paid date:</strong> {{ object.date_paid }}</p>
+<p><strong>Expires:</strong> {{ object.date_expires }}</p>
+<p><strong>Active:</strong> {{ object.active }}</p>
 
 {% endblock %}
 
