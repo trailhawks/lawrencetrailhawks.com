@@ -1,7 +1,7 @@
 from django.db import models
 from lawrencetrailhawks.members.models import Member
 
-class Runs(models.Model):
+class Run(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(unique=True,
                             help_text="Suggested value automatically generated from title. Must be unique.")

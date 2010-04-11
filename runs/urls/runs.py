@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
-from lawrencetrailhawks.runs.models import Runs
+from lawrencetrailhawks.runs.models import Run
 
 runs_info_dict = {
-    'queryset': Runs.objects.all(),
+    'queryset': Run.objects.all(),
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
