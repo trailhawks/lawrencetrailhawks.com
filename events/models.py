@@ -1,27 +1,17 @@
 from django.db import models
-from results.models import Result
+from members.models import Member
 
 class Event(models.Model):
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
-    annual = models.CharField(max_length=15)
     slug = models.SlugField(unique=True,
                             help_text="Suggested value automatically generated from title. Must be unique.")
-    
     date = models.DateTimeField()
-    contact_email = models.EmailField(help_text="Email of contact")
-    contact_phone = models.PositiveIntegerField(help_text="ex. 7856668888")
+    contact = models.ForeignKey(Member)
     location = models.TextField()
     map_link = models.URLField(default="http://",
                                help_text="Link to google maps or other mapping software pointing towards the start location")
     description = models.TextField()
-    reg_url = models.URLField(default="http://",
-                              help_text="Link to registartion flyer or to registration URL for online signup.")
-    reg_description = models.TextField()
-    awards = models.CharField(max_length=300)
-    packet_pickup = models.TextField(blank=True, null=True)
-    results = models.ForeignKey(Result)
-    
-    
+   
     class Meta:
         ordering = ['-date']
     

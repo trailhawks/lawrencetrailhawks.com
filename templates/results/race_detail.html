@@ -3,12 +3,10 @@
 {% block title %}{{object.title}}{% endblock %}
 
 {% block race_detail %}
-<h2>{{ object.race_name }} Results</h2>
+<h2>{{ object.title }} Results</h2>
 
-<p><b>Race date:</b> {{ object.race_date|date:"F j, Y" }}</p>
-{% if object.event %}
-<p><b>Race details:</b> {{object.event.description}}</a>
-{% endif %}
+<p><b>Race date:</b> {{ object.date|date:"F j, Y" }}</p>
+<p><b>Race details:</b> {{object.description}}</a>
 <p><b>Race distance:</b> {{ object.distance }}
 	{% if object.unit == 1 %}
 	km
@@ -20,7 +18,7 @@
 <h3>Race Reports</h3>
 <ul>
 	{% for report in object.get_race_reports %}
-	<li><a href="{{ report.report}}">{{ report.title }}</a> by {{report.racer.name}}</li>
+	<li><a href="{{ report.report }}">{{ report.title }}</a> by {{report.racer.name}}</li>
 	{% endfor %}
 </ul>
 {% endif %}

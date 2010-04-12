@@ -1,15 +1,13 @@
 from django.conf.urls.defaults import *
-from lawrencetrailhawks.events.models import Event
+from lawrencetrailhawks.results.models import Race
 import datetime
 
 event_info_dict = {
-    'queryset': Event.objects.filter(date__gte=datetime.datetime.now()).order_by('-date'),
+    'queryset': Race.objects.filter(date__gt=datetime.datetime.now()).order_by('-date'),
     'date_field': 'date',
     'allow_future': True,
 }
-
-
-
+print event_info_dict
 urlpatterns = patterns('django.views.generic.date_based',
      (r'^$',
      'archive_index',

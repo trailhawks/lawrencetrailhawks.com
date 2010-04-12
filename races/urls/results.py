@@ -5,7 +5,7 @@ from lawrencetrailhawks.results.models import Race, Racer, Result, Report
 
 result_info_dict = {
     'queryset': Race.objects.all(),
-    'date_field': 'race_date',
+    'date_field': 'date',
 }
 
 print result_info_dict
