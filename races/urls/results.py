@@ -1,11 +1,11 @@
 from django.conf.urls.defaults import *
 
-from lawrencetrailhawks.results.models import Race, Racer, Result, Report
+from lawrencetrailhawks.races.models import Race, Racer, Result, Report
 
 
 result_info_dict = {
     'queryset': Race.objects.all(),
-    'date_field': 'date',
+    'date_field': 'start_datetime',
 }
 
 print result_info_dict

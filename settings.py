@@ -89,7 +89,7 @@ INSTALLED_APPS = (
     'members',
     'runs',
     'sponsors',
-    'results',
+    'races',
     'tagging',
     'syncr.flickr',
     'syncr.twitter',

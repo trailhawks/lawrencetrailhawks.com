@@ -1,11 +1,11 @@
 from django.contrib import admin
-from lawrencetrailhawks.results.models import Race, Racer, Result, Report
+from lawrencetrailhawks.races.models import Race, Racer, Result, Report
 
 
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title', 'annual'] }
-    list_display = ('title', 'annual', 'date', )
-    list_filter = ('date', 'annual',)
+    list_display = ('title', 'annual', 'start_datetime', )
+    list_filter = ('start_datetime', 'annual',)
     
 class ResultAdmin(admin.ModelAdmin):
     list_display = ('race', 'time', 'racer', 'bib_number', 'place')

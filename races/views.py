@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from lawrencetrailhawks.results.models import Race, Racer, RaceResult, RaceReport
+from lawrencetrailhawks.races.models import Race, Racer, RaceResult, RaceReport
 import datetime
 
 

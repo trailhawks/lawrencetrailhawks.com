@@ -22,6 +22,6 @@ urlpatterns = patterns('',
     (r'^runs/', include('lawrencetrailhawks.runs.urls.runs') ),
     (r'^members/', include('lawrencetrailhawks.members.urls.members') ),
     (r'^sponsors/', include('lawrencetrailhawks.sponsors.urls.sponsors') ),
-    (r'^results/', include('lawrencetrailhawks.results.urls.results') ),
+    (r'^results/', include('lawrencetrailhawks.races.urls.results') ),
 )
 

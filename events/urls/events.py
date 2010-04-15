@@ -1,9 +1,9 @@
 from django.conf.urls.defaults import *
-from lawrencetrailhawks.results.models import Race
+from lawrencetrailhawks.races.models import Race
 import datetime
 
 event_info_dict = {
-    'queryset': Race.objects.filter(date__gt=datetime.datetime.now()).order_by('-date'),
+    'queryset': Race.objects.filter(start_datetime__gt=datetime.datetime.now()).order_by('-start_datetime'),
     'date_field': 'date',
     'allow_future': True,
 }
