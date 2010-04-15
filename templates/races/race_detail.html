@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load race_extras %}
 {% block title %}{{object.title}}{% endblock %}
 
 {% block race_detail %}
@@ -45,7 +45,7 @@
 		Female
 		{% endif %}
 	</td>
-	<td>{{ result.time }}</td>
+	<td>{{ result.time|replace_char:"," ":" }}</td>
 	<td>{{ result.place }}</td>
 	{% else %}
 	<td>DQ</td>
