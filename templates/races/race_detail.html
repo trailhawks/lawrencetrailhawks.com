@@ -5,7 +5,8 @@
 {% block race_detail %}
 <h2>{{ object.title }} Results</h2>
 
-<p><b>Race date:</b> {{ object.date|date:"F j, Y" }}</p>
+<p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
+<p><b>Start time:</b> {{ object.start_datetime|time:"H:i A" }}</p>
 <p><b>Race details:</b> {{object.description}}</a>
 <p><b>Race distance:</b> {{ object.distance }}
 	{% if object.unit == 1 %}
@@ -14,7 +15,7 @@
 	mi
 	{% endif %}
 	</p>
-{% if object.report_set %}
+{% if object.get_race_reports %}
 <h3>Race Reports</h3>
 <ul>
 	{% for report in object.get_race_reports %}
@@ -34,6 +35,7 @@
 	</tr>
 {% for result in object.get_overall_results %}
 <tr>
+	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
 	<td>{{ result.racer.name }}</td>
@@ -45,6 +47,19 @@
 	</td>
 	<td>{{ result.time }}</td>
 	<td>{{ result.place }}</td>
+	{% else %}
+	<td>DQ</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{% if result.racer.gender == 1 %}
+		Male
+		{% else %}
+		Female
+		{% endif %}
+	</td>
+	<td></td>
+	<td></td>
+	{% endif %}
 </tr>
 {% endfor %}
 </table>
@@ -60,11 +75,31 @@
 	</tr>
 {% for result in object.get_male_results %}
 <tr>
+	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
 	<td>{{ result.racer.name }}</td>
+	<td>{% if result.racer.gender == 1 %}
+		Male
+		{% else %}
+		Female
+		{% endif %}
+	</td>
 	<td>{{ result.time }}</td>
 	<td>{{ result.place }}</td>
+	{% else %}
+	<td>DQ</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{% if result.racer.gender == 1 %}
+		Male
+		{% else %}
+		Female
+		{% endif %}
+	</td>
+	<td></td>
+	<td></td>
+	{% endif %}
 </tr>
 {% endfor %}
 </table>
@@ -80,11 +115,31 @@
 	</tr>
 {% for result in object.get_female_results %}
 <tr>
+	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
 	<td>{{ result.racer.name }}</td>
+	<td>{% if result.racer.gender == 1 %}
+		Male
+		{% else %}
+		Female
+		{% endif %}
+	</td>
 	<td>{{ result.time }}</td>
 	<td>{{ result.place }}</td>
+	{% else %}
+	<td>DQ</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{% if result.racer.gender == 1 %}
+		Male
+		{% else %}
+		Female
+		{% endif %}
+	</td>
+	<td></td>
+	<td></td>
+	{% endif %}
 </tr>
 {% endfor %}
 </table>

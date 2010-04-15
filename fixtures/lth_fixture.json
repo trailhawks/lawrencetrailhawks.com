@@ -1,1 +1,2265 @@
-[{"pk": 6, "model": "contenttypes.contenttype", "fields": {"model": "contenttype", "name": "content type", "app_label": "contenttypes"}}, {"pk": 9, "model": "contenttypes.contenttype", "fields": {"model": "event", "name": "event", "app_label": "events"}}, {"pk": 10, "model": "contenttypes.contenttype", "fields": {"model": "faq", "name": "faq", "app_label": "faq"}}, {"pk": 23, "model": "contenttypes.contenttype", "fields": {"model": "favoritelist", "name": "favorite list", "app_label": "flickr"}}, {"pk": 2, "model": "contenttypes.contenttype", "fields": {"model": "group", "name": "group", "app_label": "auth"}}, {"pk": 11, "model": "contenttypes.contenttype", "fields": {"model": "links", "name": "links", "app_label": "links"}}, {"pk": 5, "model": "contenttypes.contenttype", "fields": {"model": "logentry", "name": "log entry", "app_label": "admin"}}, {"pk": 12, "model": "contenttypes.contenttype", "fields": {"model": "member", "name": "member", "app_label": "members"}}, {"pk": 4, "model": "contenttypes.contenttype", "fields": {"model": "message", "name": "message", "app_label": "auth"}}, {"pk": 1, "model": "contenttypes.contenttype", "fields": {"model": "permission", "name": "permission", "app_label": "auth"}}, {"pk": 22, "model": "contenttypes.contenttype", "fields": {"model": "photo", "name": "photo", "app_label": "flickr"}}, {"pk": 25, "model": "contenttypes.contenttype", "fields": {"model": "photocomment", "name": "photo comment", "app_label": "flickr"}}, {"pk": 24, "model": "contenttypes.contenttype", "fields": {"model": "photoset", "name": "photo set", "app_label": "flickr"}}, {"pk": 15, "model": "contenttypes.contenttype", "fields": {"model": "race", "name": "race", "app_label": "races"}}, {"pk": 16, "model": "contenttypes.contenttype", "fields": {"model": "racenews", "name": "race news", "app_label": "races"}}, {"pk": 17, "model": "contenttypes.contenttype", "fields": {"model": "racer", "name": "racer", "app_label": "races"}}, {"pk": 19, "model": "contenttypes.contenttype", "fields": {"model": "report", "name": "report", "app_label": "races"}}, {"pk": 18, "model": "contenttypes.contenttype", "fields": {"model": "result", "name": "result", "app_label": "races"}}, {"pk": 13, "model": "contenttypes.contenttype", "fields": {"model": "run", "name": "run", "app_label": "runs"}}, {"pk": 7, "model": "contenttypes.contenttype", "fields": {"model": "session", "name": "session", "app_label": "sessions"}}, {"pk": 8, "model": "contenttypes.contenttype", "fields": {"model": "site", "name": "site", "app_label": "sites"}}, {"pk": 14, "model": "contenttypes.contenttype", "fields": {"model": "sponsors", "name": "sponsors", "app_label": "sponsors"}}, {"pk": 20, "model": "contenttypes.contenttype", "fields": {"model": "tag", "name": "tag", "app_label": "tagging"}}, {"pk": 21, "model": "contenttypes.contenttype", "fields": {"model": "taggeditem", "name": "tagged item", "app_label": "tagging"}}, {"pk": 26, "model": "contenttypes.contenttype", "fields": {"model": "tweet", "name": "tweet", "app_label": "twitter"}}, {"pk": 27, "model": "contenttypes.contenttype", "fields": {"model": "twitteruser", "name": "twitter user", "app_label": "twitter"}}, {"pk": 3, "model": "contenttypes.contenttype", "fields": {"model": "user", "name": "user", "app_label": "auth"}}, {"pk": "1072ecc6b6bd8b424acb6dff77931cb2", "model": "sessions.session", "fields": {"expire_date": "2010-04-28 00:51:17", "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjkzNWVlOTJmOGJjNTY1YzU0OTRm\nN2Q0NTNmOTU3OWI2\n"}}, {"pk": 1, "model": "sites.site", "fields": {"domain": "example.com", "name": "example.com"}}, {"pk": 1, "model": "members.member", "fields": {"username": 2, "date_paid": "2010-04-14", "phone": 7752405717, "avatar": "", "address": "833 Indiana St.Lawrence, KS 66044", "active": true, "hawk_name": "Colo Hawk"}}, {"pk": 2, "model": "members.member", "fields": {"username": 4, "date_paid": "2010-04-14", "phone": 7851234567, "avatar": "", "address": "123 Apple St.\nLawrence, KS 66044", "active": true, "hawk_name": "Story Hawk"}}, {"pk": 3, "model": "members.member", "fields": {"username": 3, "date_paid": "2010-04-14", "phone": 7851234567, "avatar": "", "address": "123 Apple St.\nLawrence, KS 66044", "active": true, "hawk_name": "Pixie Hawk"}}, {"pk": 4, "model": "members.member", "fields": {"username": 5, "date_paid": "2010-04-14", "phone": 7851234567, "avatar": "", "address": "123 Apple St.\nLawrence, KS 66044", "active": true, "hawk_name": "Scoop Hawk"}}, {"pk": 5, "model": "members.member", "fields": {"username": 6, "date_paid": "2010-04-14", "phone": 7851234567, "avatar": "", "address": "123 Apple St.\nLawrence, KS 66044", "active": true, "hawk_name": "GNT Hawk"}}, {"pk": 6, "model": "members.member", "fields": {"username": 7, "date_paid": "2010-04-14", "phone": 7851234567, "avatar": "", "address": "123 Apple St.\nLawrence, KS 66044", "active": true, "hawk_name": "Beatnick Hawk"}}, {"pk": 7, "model": "members.member", "fields": {"username": 10, "date_paid": "2010-04-14", "phone": 7851234567, "avatar": "", "address": "123 Apple St.\nLawrence, KS 66044", "active": true, "hawk_name": "Black Mamba Hawk"}}, {"pk": 1, "model": "races.race", "fields": {"cut_off": "12 hours", "entry_form": "http://www.ultrastory.com/Trail_Hawks/Hawk50_entry.pdf", "lodging": "http://www.visitlawrence.com/accommodations", "loops": 1, "logo": "", "unit": 2, "title": "Hawk50 - marathon", "discounts": "Dues-paying Trail Hawks subtract $5 from entry fee.", "location": "Clinton Lake Corps of Engineers", "start_datetime": "2010-05-22 08:00:00", "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. Two traverses of scenic Sanders' Mound.", "map_link": "http://corpslakes.usace.army.mil/visitors/projects.cfm?Id=G503480", "awards": "Male/Female 1st, 2nd, 3rd and all finishers", "slug": "hawk50-marathon", "reg_url": "http://ultrasignup.com/register.aspx?did=7624", "distance": 26, "course_map": "http://www.ultrastory.com/Trail_Hawks/Hawk50_Map%26Descrip.pdf", "slogan": "26.2 miles as the Hawk flies.", "race_type": 1, "packet_pickup": "packet pickup avail at Gary Gribbles.", "annual": "inaugural", "contact": 2, "reg_description": "Entry includes post-race BBQ and cotton t-shirts\nEntry fees: $35 until May 1, $45 until May 15, $55 after May 15"}}, {"pk": 2, "model": "races.race", "fields": {"cut_off": "13 hours", "entry_form": "http://www.ultrastory.com/Trail_Hawks/Hawk50_entry.pdf", "lodging": "http://www.visitlawrence.com/accommodations", "loops": 2, "logo": "", "unit": 2, "title": "Hawk50 - 50 mile", "discounts": "Dues-paying Trail Hawks subtract $10 entry fee.", "location": "Clinton Lake Corps of Engineers", "start_datetime": "2010-05-22 07:00:00", "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. Two traverses of scenic Sanders' Mound.", "map_link": "http://corpslakes.usace.army.mil/visitors/projects.cfm?Id=G503480", "awards": "Male/Female 1st, 2nd, 3rd and all finishers", "slug": "hawk50-50mile", "reg_url": "http://ultrasignup.com/register.aspx?did=7624", "distance": 50, "course_map": "http://www.ultrastory.com/Trail_Hawks/Hawk50_Map%26Descrip.pdf", "slogan": "50 miles as the Hawk flies", "race_type": 1, "packet_pickup": "packet pickup avail at Gary Gribbles.", "annual": "inaugural", "contact": 2, "reg_description": "Entry includes post-race BBQ, technical t-shirt\nEntry fees: $65 until May 1, $75 until May 15, $85 after May 15"}}, {"pk": 3, "model": "races.race", "fields": {"cut_off": "", "entry_form": "https://docs.google.com/fileview?id=0B4dCt_e8ol7OMGRhYzBlMjQtMWIxNC00ZWMyLWI3N2QtZDE2NzA1YmI3NTcz&hl=en", "lodging": "", "loops": 1, "logo": "", "unit": 1, "title": "Sanders Saunter", "discounts": "", "location": "Clinton Lake Corps of Engineers", "start_datetime": "2009-11-22 09:00:00", "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. With two passings over Sanders Mound.", "map_link": "http://local.google.com/maps/ms?ie=UTF8&hl=en&msa=0&msid=107185060515460825509.0004600da435d4b1bc567&ll=38.939776,-95.340847&spn=0.002366,0.004823&t=h&z=18", "awards": "Overall Male and Female", "slug": "sanders-saunter-inaugural", "reg_url": "", "distance": 10, "course_map": "", "slogan": "Pound the mound!", "race_type": 1, "packet_pickup": "Pre-Race packet pickup is at Gary Gribbles in Lawrence on Saturday, Nov. 21 2009 from 1-3 pm. ", "annual": "inaugural", "contact": 1, "reg_description": "Race Day, Corps of Engineering Parking lot. Mail-in registration available. Check-in and race day registration begin at 8:00 a.m."}}, {"pk": 4, "model": "races.race", "fields": {"cut_off": "", "entry_form": "http://ultrastory.com/Trail_Hawks/Shoreline_Shuffle_Entry.pdf", "lodging": "", "loops": 1, "logo": "", "unit": 1, "title": "Shoreline Shuffle", "discounts": "", "location": "Shelter 4, Campground 1, Clinton Lake State Park\n798 N 1415 Rd., Lawrence, KS 66049", "start_datetime": "2009-09-26 09:00:00", "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. Possible sightings of the Clinton Lake sea serpent 'Clintie'.", "map_link": "http://www.google.com", "awards": "Overall Male and Female", "slug": "shoreline-shuffle-inaugural", "reg_url": "", "distance": 5, "course_map": "", "slogan": "Short Shuffle along the Shoreline", "race_type": 1, "packet_pickup": "", "annual": "inaugural", "contact": 2, "reg_description": "Mail-in $8/$4 for dues-paying Trail Hawks. Race day $10/$5 for dues- paying Trail Hawks. Race entry DOES NOT include $4.20 per vehicle Kansas State Park entry fee for vehicles without an annual entry permit sticker."}}, {"pk": 1, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Tim Hibbard", "email": "tim.hibbard@gmail.com"}}, {"pk": 2, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Troy Blair", "email": "tony.blair@gmail.com"}}, {"pk": 3, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Michael Eglinski", "email": "michael.eglinski@gmail.com"}}, {"pk": 4, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Lisa Giullian", "email": "lisa.giullian@gmail.com"}}, {"pk": 5, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Nick Lang", "email": "nick.lang@gmail.com"}}, {"pk": 6, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Kristy Mayo", "email": "kristy.mayo@gmail.com"}}, {"pk": 7, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "John Wickersham", "email": "john.wickersham@gmail.com"}}, {"pk": 8, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Susan Mayberry", "email": "susan.mayberry@gmail.com"}}, {"pk": 9, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Lynn Krug", "email": "lynn.krug@gmail.com"}}, {"pk": 10, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Kelsey Trimble", "email": "kelsey.trimble@gmail.com"}}, {"pk": 11, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Carol Lowman", "email": "carol.lowman@gmail.com"}}, {"pk": 12, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Amy Heartig", "email": "amy.heartig@gmail.com"}}, {"pk": 13, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Cynthia Gordon", "email": "cynthia.gordon@gmail.com"}}, {"pk": 14, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Ruth Story", "email": "ruth.story@gmail.com"}}, {"pk": 15, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Jarret Schneidewind", "email": "jarrret.schneiderwind@gmail.com"}}, {"pk": 16, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Darcie Schneidewind", "email": "darcie.schneiderind@gmail.com"}}, {"pk": 17, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Beck Ireland", "email": "beck.ireland@gmail.com"}}, {"pk": 18, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Janice Loudon", "email": "janice.loudon@gmail.com"}}, {"pk": 19, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Mac McSpadden", "email": "mac.mcspadden@gmail.com"}}, {"pk": 20, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Rick Mayo", "email": "rmayo@gmail.com"}}, {"pk": 21, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Tyson Willoughby", "email": "twilloughby@aol.com"}}, {"pk": 22, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Keith Dowel", "email": "britishkeith@msn.com"}}, {"pk": 23, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Josh Weber", "email": "joshweber@gmail.com"}}, {"pk": 24, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Peter Euler", "email": "peuler@somewhere.com"}}, {"pk": 25, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Michael Eslinsla", "email": "mikee@gmail.com"}}, {"pk": 26, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Stephanie Zelnick", "email": "steph.z@gmail.com"}}, {"pk": 27, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Jared Steinshouer", "email": "bockhawk@hawk.com"}}, {"pk": 28, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Kristi Mayo", "email": "kristy.mayo@gmail.com"}}, {"pk": 29, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Coleen Voeks", "email": "miniuber@gmail.com"}}, {"pk": 30, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Sarah Henning", "email": "shhenning@gmail.com"}}, {"pk": 31, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Justin Douglas", "email": "jd@scrubs.com"}}, {"pk": 32, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Fritz Menninger", "email": "fmenninger@gmail.com"}}, {"pk": 33, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "James Barker", "email": "james@jamesbarker.com"}}, {"pk": 34, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Christine Metz", "email": "cmetz@ljworld.com"}}, {"pk": 35, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Dennis Anthony", "email": "danthony@aol.com"}}, {"pk": 36, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Steve Sell", "email": "steves@gribbles.com"}}, {"pk": 37, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Chip Blaser", "email": "chip@dales.com"}}, {"pk": 38, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Joe Erwin", "email": "joe.e@gmail.com"}}, {"pk": 39, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Laurie Euler", "email": "lluhar@gmail.com"}}, {"pk": 40, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Renee Babin", "email": "renanimal@hawk.com"}}, {"pk": 41, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Jennifer Franklin", "email": "jenfrank@gprc.com"}}, {"pk": 42, "model": "races.racer", "fields": {"birth_date": null, "gender": 1, "trailhawk": null, "name": "Lee Crane", "email": "lee@lays.com"}}, {"pk": 43, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Susan Mayberry", "email": "susan@school.com"}}, {"pk": 44, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Rhonda Lyne", "email": "rhonda@triathlon.com"}}, {"pk": 45, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Beth Hilt", "email": "beth@brightgreen.com"}}, {"pk": 46, "model": "races.racer", "fields": {"birth_date": null, "gender": 2, "trailhawk": null, "name": "Jenni McSpadden", "email": "mac@mac.com"}}, {"pk": 13, "model": "auth.permission", "fields": {"codename": "add_logentry", "name": "Can add log entry", "content_type": 5}}, {"pk": 14, "model": "auth.permission", "fields": {"codename": "change_logentry", "name": "Can change log entry", "content_type": 5}}, {"pk": 15, "model": "auth.permission", "fields": {"codename": "delete_logentry", "name": "Can delete log entry", "content_type": 5}}, {"pk": 4, "model": "auth.permission", "fields": {"codename": "add_group", "name": "Can add group", "content_type": 2}}, {"pk": 5, "model": "auth.permission", "fields": {"codename": "change_group", "name": "Can change group", "content_type": 2}}, {"pk": 6, "model": "auth.permission", "fields": {"codename": "delete_group", "name": "Can delete group", "content_type": 2}}, {"pk": 10, "model": "auth.permission", "fields": {"codename": "add_message", "name": "Can add message", "content_type": 4}}, {"pk": 11, "model": "auth.permission", "fields": {"codename": "change_message", "name": "Can change message", "content_type": 4}}, {"pk": 12, "model": "auth.permission", "fields": {"codename": "delete_message", "name": "Can delete message", "content_type": 4}}, {"pk": 1, "model": "auth.permission", "fields": {"codename": "add_permission", "name": "Can add permission", "content_type": 1}}, {"pk": 2, "model": "auth.permission", "fields": {"codename": "change_permission", "name": "Can change permission", "content_type": 1}}, {"pk": 3, "model": "auth.permission", "fields": {"codename": "delete_permission", "name": "Can delete permission", "content_type": 1}}, {"pk": 7, "model": "auth.permission", "fields": {"codename": "add_user", "name": "Can add user", "content_type": 3}}, {"pk": 8, "model": "auth.permission", "fields": {"codename": "change_user", "name": "Can change user", "content_type": 3}}, {"pk": 9, "model": "auth.permission", "fields": {"codename": "delete_user", "name": "Can delete user", "content_type": 3}}, {"pk": 16, "model": "auth.permission", "fields": {"codename": "add_contenttype", "name": "Can add content type", "content_type": 6}}, {"pk": 17, "model": "auth.permission", "fields": {"codename": "change_contenttype", "name": "Can change content type", "content_type": 6}}, {"pk": 18, "model": "auth.permission", "fields": {"codename": "delete_contenttype", "name": "Can delete content type", "content_type": 6}}, {"pk": 25, "model": "auth.permission", "fields": {"codename": "add_event", "name": "Can add event", "content_type": 9}}, {"pk": 26, "model": "auth.permission", "fields": {"codename": "change_event", "name": "Can change event", "content_type": 9}}, {"pk": 27, "model": "auth.permission", "fields": {"codename": "delete_event", "name": "Can delete event", "content_type": 9}}, {"pk": 28, "model": "auth.permission", "fields": {"codename": "add_faq", "name": "Can add faq", "content_type": 10}}, {"pk": 29, "model": "auth.permission", "fields": {"codename": "change_faq", "name": "Can change faq", "content_type": 10}}, {"pk": 30, "model": "auth.permission", "fields": {"codename": "delete_faq", "name": "Can delete faq", "content_type": 10}}, {"pk": 67, "model": "auth.permission", "fields": {"codename": "add_favoritelist", "name": "Can add favorite list", "content_type": 23}}, {"pk": 68, "model": "auth.permission", "fields": {"codename": "change_favoritelist", "name": "Can change favorite list", "content_type": 23}}, {"pk": 69, "model": "auth.permission", "fields": {"codename": "delete_favoritelist", "name": "Can delete favorite list", "content_type": 23}}, {"pk": 64, "model": "auth.permission", "fields": {"codename": "add_photo", "name": "Can add photo", "content_type": 22}}, {"pk": 65, "model": "auth.permission", "fields": {"codename": "change_photo", "name": "Can change photo", "content_type": 22}}, {"pk": 66, "model": "auth.permission", "fields": {"codename": "delete_photo", "name": "Can delete photo", "content_type": 22}}, {"pk": 73, "model": "auth.permission", "fields": {"codename": "add_photocomment", "name": "Can add photo comment", "content_type": 25}}, {"pk": 74, "model": "auth.permission", "fields": {"codename": "change_photocomment", "name": "Can change photo comment", "content_type": 25}}, {"pk": 75, "model": "auth.permission", "fields": {"codename": "delete_photocomment", "name": "Can delete photo comment", "content_type": 25}}, {"pk": 70, "model": "auth.permission", "fields": {"codename": "add_photoset", "name": "Can add photo set", "content_type": 24}}, {"pk": 71, "model": "auth.permission", "fields": {"codename": "change_photoset", "name": "Can change photo set", "content_type": 24}}, {"pk": 72, "model": "auth.permission", "fields": {"codename": "delete_photoset", "name": "Can delete photo set", "content_type": 24}}, {"pk": 31, "model": "auth.permission", "fields": {"codename": "add_links", "name": "Can add links", "content_type": 11}}, {"pk": 32, "model": "auth.permission", "fields": {"codename": "change_links", "name": "Can change links", "content_type": 11}}, {"pk": 33, "model": "auth.permission", "fields": {"codename": "delete_links", "name": "Can delete links", "content_type": 11}}, {"pk": 34, "model": "auth.permission", "fields": {"codename": "add_member", "name": "Can add member", "content_type": 12}}, {"pk": 35, "model": "auth.permission", "fields": {"codename": "change_member", "name": "Can change member", "content_type": 12}}, {"pk": 36, "model": "auth.permission", "fields": {"codename": "delete_member", "name": "Can delete member", "content_type": 12}}, {"pk": 43, "model": "auth.permission", "fields": {"codename": "add_race", "name": "Can add race", "content_type": 15}}, {"pk": 44, "model": "auth.permission", "fields": {"codename": "change_race", "name": "Can change race", "content_type": 15}}, {"pk": 45, "model": "auth.permission", "fields": {"codename": "delete_race", "name": "Can delete race", "content_type": 15}}, {"pk": 46, "model": "auth.permission", "fields": {"codename": "add_racenews", "name": "Can add race news", "content_type": 16}}, {"pk": 47, "model": "auth.permission", "fields": {"codename": "change_racenews", "name": "Can change race news", "content_type": 16}}, {"pk": 48, "model": "auth.permission", "fields": {"codename": "delete_racenews", "name": "Can delete race news", "content_type": 16}}, {"pk": 49, "model": "auth.permission", "fields": {"codename": "add_racer", "name": "Can add racer", "content_type": 17}}, {"pk": 50, "model": "auth.permission", "fields": {"codename": "change_racer", "name": "Can change racer", "content_type": 17}}, {"pk": 51, "model": "auth.permission", "fields": {"codename": "delete_racer", "name": "Can delete racer", "content_type": 17}}, {"pk": 55, "model": "auth.permission", "fields": {"codename": "add_report", "name": "Can add report", "content_type": 19}}, {"pk": 56, "model": "auth.permission", "fields": {"codename": "change_report", "name": "Can change report", "content_type": 19}}, {"pk": 57, "model": "auth.permission", "fields": {"codename": "delete_report", "name": "Can delete report", "content_type": 19}}, {"pk": 52, "model": "auth.permission", "fields": {"codename": "add_result", "name": "Can add result", "content_type": 18}}, {"pk": 53, "model": "auth.permission", "fields": {"codename": "change_result", "name": "Can change result", "content_type": 18}}, {"pk": 54, "model": "auth.permission", "fields": {"codename": "delete_result", "name": "Can delete result", "content_type": 18}}, {"pk": 37, "model": "auth.permission", "fields": {"codename": "add_run", "name": "Can add run", "content_type": 13}}, {"pk": 38, "model": "auth.permission", "fields": {"codename": "change_run", "name": "Can change run", "content_type": 13}}, {"pk": 39, "model": "auth.permission", "fields": {"codename": "delete_run", "name": "Can delete run", "content_type": 13}}, {"pk": 19, "model": "auth.permission", "fields": {"codename": "add_session", "name": "Can add session", "content_type": 7}}, {"pk": 20, "model": "auth.permission", "fields": {"codename": "change_session", "name": "Can change session", "content_type": 7}}, {"pk": 21, "model": "auth.permission", "fields": {"codename": "delete_session", "name": "Can delete session", "content_type": 7}}, {"pk": 22, "model": "auth.permission", "fields": {"codename": "add_site", "name": "Can add site", "content_type": 8}}, {"pk": 23, "model": "auth.permission", "fields": {"codename": "change_site", "name": "Can change site", "content_type": 8}}, {"pk": 24, "model": "auth.permission", "fields": {"codename": "delete_site", "name": "Can delete site", "content_type": 8}}, {"pk": 40, "model": "auth.permission", "fields": {"codename": "add_sponsors", "name": "Can add sponsors", "content_type": 14}}, {"pk": 41, "model": "auth.permission", "fields": {"codename": "change_sponsors", "name": "Can change sponsors", "content_type": 14}}, {"pk": 42, "model": "auth.permission", "fields": {"codename": "delete_sponsors", "name": "Can delete sponsors", "content_type": 14}}, {"pk": 58, "model": "auth.permission", "fields": {"codename": "add_tag", "name": "Can add tag", "content_type": 20}}, {"pk": 59, "model": "auth.permission", "fields": {"codename": "change_tag", "name": "Can change tag", "content_type": 20}}, {"pk": 60, "model": "auth.permission", "fields": {"codename": "delete_tag", "name": "Can delete tag", "content_type": 20}}, {"pk": 61, "model": "auth.permission", "fields": {"codename": "add_taggeditem", "name": "Can add tagged item", "content_type": 21}}, {"pk": 62, "model": "auth.permission", "fields": {"codename": "change_taggeditem", "name": "Can change tagged item", "content_type": 21}}, {"pk": 63, "model": "auth.permission", "fields": {"codename": "delete_taggeditem", "name": "Can delete tagged item", "content_type": 21}}, {"pk": 76, "model": "auth.permission", "fields": {"codename": "add_tweet", "name": "Can add tweet", "content_type": 26}}, {"pk": 77, "model": "auth.permission", "fields": {"codename": "change_tweet", "name": "Can change tweet", "content_type": 26}}, {"pk": 78, "model": "auth.permission", "fields": {"codename": "delete_tweet", "name": "Can delete tweet", "content_type": 26}}, {"pk": 79, "model": "auth.permission", "fields": {"codename": "add_twitteruser", "name": "Can add twitter user", "content_type": 27}}, {"pk": 80, "model": "auth.permission", "fields": {"codename": "change_twitteruser", "name": "Can change twitter user", "content_type": 27}}, {"pk": 81, "model": "auth.permission", "fields": {"codename": "delete_twitteruser", "name": "Can delete twitter user", "content_type": 27}}, {"pk": 1, "model": "auth.user", "fields": {"username": "nick", "first_name": "", "last_name": "", "is_active": true, "is_superuser": true, "is_staff": true, "last_login": "2010-04-14 00:51:17", "groups": [], "user_permissions": [], "password": "sha1$9be20$5c89d69bbd00632eb0372e5461034c8d70e02ade", "email": "nick.lang@gmail.com", "date_joined": "2010-04-14 00:50:32"}}, {"pk": 2, "model": "auth.user", "fields": {"username": "nick.lang@gmail.com", "first_name": "Nick", "last_name": "Lang", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "nick.lang@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 3, "model": "auth.user", "fields": {"username": "lluhar@gmail.com", "first_name": "Laurie", "last_name": "Euler", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "lluhar@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 4, "model": "auth.user", "fields": {"username": "unews@ultrastory.com", "first_name": "Gary", "last_name": "Henry", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "unews@ultrastory.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 5, "model": "auth.user", "fields": {"username": "shhenning@gmail.com", "first_name": "Sarah", "last_name": "Henning", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "shhenning@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 6, "model": "auth.user", "fields": {"username": "jhhenning@gmail.com", "first_name": "Justin", "last_name": "Henning", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "jhhenning@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 7, "model": "auth.user", "fields": {"username": "jtripplet@gmail.com", "first_name": "Jeff", "last_name": "Tripplet", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "jtripplet@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 8, "model": "auth.user", "fields": {"username": "tim.hibbard@gmail.com", "first_name": "Tim", "last_name": "Hibbard", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "tim.hibbard@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 9, "model": "auth.user", "fields": {"username": "rmayo@gmail.com", "first_name": "Rick", "last_name": "Mayo", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "rmayo@gmail.com", "date_joined": "2010-04-14 00:50:39"}}, {"pk": 10, "model": "auth.user", "fields": {"username": "kristy.mayo@gmail.com", "first_name": "Kristy", "last_name": "Mayo", "is_active": true, "is_superuser": false, "is_staff": false, "last_login": "2010-04-14 00:50:39", "groups": [], "user_permissions": [], "password": "", "email": "kristy.mayo@gmail.com", "date_joined": "2010-04-14 00:50:39"}}]
+
+[
+    {
+        "pk": 6,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "contenttype",
+             "name": "content type",
+             "app_label": "contenttypes"
+        }
+    },
+     
+    {
+        "pk": 9,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "event",
+             "name": "event",
+             "app_label": "events"
+        }
+    },
+     
+    {
+        "pk": 10,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "faq",
+             "name": "faq",
+             "app_label": "faq"
+        }
+    },
+     
+    {
+        "pk": 23,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "favoritelist",
+             "name": "favorite list",
+             "app_label": "flickr"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "group",
+             "name": "group",
+             "app_label": "auth"
+        }
+    },
+     
+    {
+        "pk": 11,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "links",
+             "name": "links",
+             "app_label": "links"
+        }
+    },
+     
+    {
+        "pk": 5,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "logentry",
+             "name": "log entry",
+             "app_label": "admin"
+        }
+    },
+     
+    {
+        "pk": 12,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "member",
+             "name": "member",
+             "app_label": "members"
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "message",
+             "name": "message",
+             "app_label": "auth"
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "permission",
+             "name": "permission",
+             "app_label": "auth"
+        }
+    },
+     
+    {
+        "pk": 22,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "photo",
+             "name": "photo",
+             "app_label": "flickr"
+        }
+    },
+     
+    {
+        "pk": 25,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "photocomment",
+             "name": "photo comment",
+             "app_label": "flickr"
+        }
+    },
+     
+    {
+        "pk": 24,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "photoset",
+             "name": "photo set",
+             "app_label": "flickr"
+        }
+    },
+     
+    {
+        "pk": 15,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "race",
+             "name": "race",
+             "app_label": "races"
+        }
+    },
+     
+    {
+        "pk": 16,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "racenews",
+             "name": "race news",
+             "app_label": "races"
+        }
+    },
+     
+    {
+        "pk": 17,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "racer",
+             "name": "racer",
+             "app_label": "races"
+        }
+    },
+     
+    {
+        "pk": 19,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "report",
+             "name": "report",
+             "app_label": "races"
+        }
+    },
+     
+    {
+        "pk": 18,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "result",
+             "name": "result",
+             "app_label": "races"
+        }
+    },
+     
+    {
+        "pk": 13,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "run",
+             "name": "run",
+             "app_label": "runs"
+        }
+    },
+     
+    {
+        "pk": 7,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "session",
+             "name": "session",
+             "app_label": "sessions"
+        }
+    },
+     
+    {
+        "pk": 8,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "site",
+             "name": "site",
+             "app_label": "sites"
+        }
+    },
+     
+    {
+        "pk": 14,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "sponsors",
+             "name": "sponsors",
+             "app_label": "sponsors"
+        }
+    },
+     
+    {
+        "pk": 20,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "tag",
+             "name": "tag",
+             "app_label": "tagging"
+        }
+    },
+     
+    {
+        "pk": 21,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "taggeditem",
+             "name": "tagged item",
+             "app_label": "tagging"
+        }
+    },
+     
+    {
+        "pk": 26,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "tweet",
+             "name": "tweet",
+             "app_label": "twitter"
+        }
+    },
+     
+    {
+        "pk": 27,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "twitteruser",
+             "name": "twitter user",
+             "app_label": "twitter"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "contenttypes.contenttype",
+         "fields": 
+        {
+            "model": "user",
+             "name": "user",
+             "app_label": "auth"
+        }
+    },
+     
+    {
+        "pk": "1072ecc6b6bd8b424acb6dff77931cb2",
+         "model": "sessions.session",
+         "fields": 
+        {
+            "expire_date": "2010-04-28 00:51:17",
+             "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjkzNWVlOTJmOGJjNTY1YzU0OTRm\nN2Q0NTNmOTU3OWI2\n"
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "sites.site",
+         "fields": 
+        {
+            "domain": "example.com",
+             "name": "example.com"
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 2,
+             "date_paid": "2010-04-14",
+             "phone": 7752405717,
+             "avatar": "",
+             "address": "833 Indiana St.\nLawrence,KS 66044",
+             "active": true,
+             "hawk_name": "Colo Hawk"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 4,
+             "date_paid": "2010-04-14",
+             "phone": 7851234567,
+             "avatar": "",
+             "address": "123 Apple St.\nLawrence, KS 66044",
+             "active": true,
+             "hawk_name": "Story Hawk"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 3,
+             "date_paid": "2010-04-14",
+             "phone": 7851234567,
+             "avatar": "",
+             "address": "123 Apple St.\nLawrence, KS 66044",
+             "active": true,
+             "hawk_name": "Pixie Hawk"
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 5,
+             "date_paid": "2010-04-14",
+             "phone": 7851234567,
+             "avatar": "",
+             "address": "123 Apple St.\nLawrence, KS 66044",
+             "active": true,
+             "hawk_name": "Scoop Hawk"
+        }
+    },
+     
+    {
+        "pk": 5,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 6,
+             "date_paid": "2010-04-14",
+             "phone": 7851234567,
+             "avatar": "",
+             "address": "123 Apple St.\nLawrence, KS 66044",
+             "active": true,
+             "hawk_name": "GNT Hawk"
+        }
+    },
+     
+    {
+        "pk": 6,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 7,
+             "date_paid": "2010-04-14",
+             "phone": 7851234567,
+             "avatar": "",
+             "address": "123 Apple St.\nLawrence, KS 66044",
+             "active": true,
+             "hawk_name": "Beatnick Hawk"
+        }
+    },
+     
+    {
+        "pk": 7,
+         "model": "members.member",
+         "fields": 
+        {
+            "username": 10,
+             "date_paid": "2010-04-14",
+             "phone": 7851234567,
+             "avatar": "",
+             "address": "123 Apple St.\nLawrence, KS 66044",
+             "active": true,
+             "hawk_name": "Black Mamba Hawk"
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "12 hours",
+             "entry_form": "http://www.ultrastory.com/Trail_Hawks/Hawk50_entry.pdf",
+             "lodging": "http://www.visitlawrence.com/accommodations",
+             "loops": 1,
+             "logo": "",
+             "unit": 2,
+             "title": "Hawk50 - marathon",
+             "discounts": "Dues-paying Trail Hawks subtract $5 from entry fee.",
+             "location": "Clinton Lake Corps of Engineers",
+             "start_datetime": "2010-05-22 08:00:00",
+             "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. Two traverses of scenic Sanders' Mound.",
+             "map_link": "http://corpslakes.usace.army.mil/visitors/projects.cfm?Id=G503480",
+             "awards": "Male/Female 1st, 2nd, 3rd and all finishers",
+             "slug": "hawk50-marathon",
+             "reg_url": "http://ultrasignup.com/register.aspx?did=7624",
+             "distance": 26,
+             "course_map": "http://www.ultrastory.com/Trail_Hawks/Hawk50_Map%26Descrip.pdf",
+             "slogan": "26.2 miles as the Hawk flies.",
+             "race_type": 1,
+             "packet_pickup": "packet pickup avail at Gary Gribbles.",
+             "annual": "inaugural",
+             "contact": 2,
+             "reg_description": "Entry includes post-race BBQ and cotton t-shirts\nEntry fees: $35 until May 1,\n$45 until May 15,\n$55 after May 15"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "13 hours",
+             "entry_form": "http://www.ultrastory.com/Trail_Hawks/Hawk50_entry.pdf",
+             "lodging": "http://www.visitlawrence.com/accommodations",
+             "loops": 2,
+             "logo": "",
+             "unit": 2,
+             "title": "Hawk50 - 50 mile",
+             "discounts": "Dues-paying Trail Hawks subtract $10 entry fee.",
+             "location": "Clinton Lake Corps of Engineers",
+             "start_datetime": "2010-05-22 07:00:00",
+             "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. Two traverses of scenic Sanders' Mound.",
+             "map_link": "http://corpslakes.usace.army.mil/visitors/projects.cfm?Id=G503480",
+             "awards": "Male/Female 1st, 2nd, 3rd and all finishers",
+             "slug": "hawk50-50mile",
+             "reg_url": "http://ultrasignup.com/register.aspx?did=7624",
+             "distance": 50,
+             "course_map": "http://www.ultrastory.com/Trail_Hawks/Hawk50_Map%26Descrip.pdf",
+             "slogan": "50 miles as the Hawk flies",
+             "race_type": 1,
+             "packet_pickup": "packet pickup avail at Gary Gribbles.",
+             "annual": "inaugural",
+             "contact": 2,
+             "reg_description": "Entry includes post-race BBQ, technical t-shirt\nEntry fees: $65 until May 1,\n$75 until May 15,\n$85 after May 15"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "",
+             "entry_form": "https://docs.google.com/fileview?id=0B4dCt_e8ol7OMGRhYzBlMjQtMWIxNC00ZWMyLWI3N2QtZDE2NzA1YmI3NTcz&hl=en",
+             "lodging": "",
+             "loops": 1,
+             "logo": "",
+             "unit": 1,
+             "title": "Sanders Saunter",
+             "discounts": "",
+             "location": "Clinton Lake Corps of Engineers",
+             "start_datetime": "2009-11-22 09:00:00",
+             "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. With two passings over Sanders Mound.",
+             "map_link": "http://local.google.com/maps/ms?ie=UTF8&hl=en&msa=0&msid=107185060515460825509.0004600da435d4b1bc567&ll=38.939776,-95.340847&spn=0.002366,0.004823&t=h&z=18",
+             "awards": "Overall Male and Female",
+             "slug": "sanders-saunter-inaugural",
+             "reg_url": "",
+             "distance": 10,
+             "course_map": "",
+             "slogan": "Pound the mound!",
+             "race_type": 1,
+             "packet_pickup": "Pre-Race packet pickup is at Gary Gribbles in Lawrence on Saturday, Nov. 21 2009 from 1-3 pm. ",
+             "annual": "inaugural",
+             "contact": 1,
+             "reg_description": "Race Day, Corps of Engineering Parking lot. Mail-in registration available. Check-in and race day registration begin at 8:00 a.m."
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "",
+             "entry_form": "http://ultrastory.com/Trail_Hawks/Shoreline_Shuffle_Entry.pdf",
+             "lodging": "",
+             "loops": 1,
+             "logo": "",
+             "unit": 1,
+             "title": "Shoreline Shuffle",
+             "discounts": "",
+             "location": "Shelter 4, Campground 1, Clinton Lake State Park\n798 N 1415 Rd., Lawrence, KS 66049",
+             "start_datetime": "2009-09-26 09:00:00",
+             "description": "Trail run with rocky, rooty sections, and smooth flat sections. Scenic lake views. Beautiful shady woods. Possible sightings of the Clinton Lake sea serpent 'Clintie'.",
+             "map_link": "http://www.google.com",
+             "awards": "Overall Male and Female",
+             "slug": "shoreline-shuffle-inaugural",
+             "reg_url": "",
+             "distance": 5,
+             "course_map": "",
+             "slogan": "Short Shuffle along the Shoreline",
+             "race_type": 1,
+             "packet_pickup": "",
+             "annual": "inaugural",
+             "contact": 2,
+             "reg_description": "Mail-in $8/$4 for dues-paying Trail Hawks. Race day $10/$5 for dues- paying Trail Hawks. Race entry DOES NOT include $4.20 per vehicle Kansas State Park entry fee for vehicles without an annual entry permit sticker."
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Tim Hibbard",
+             "email": "tim.hibbard@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Troy Blair",
+             "email": "tony.blair@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Michael Eglinski",
+             "email": "michael.eglinski@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Lisa Giullian",
+             "email": "lisa.giullian@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 5,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Nick Lang",
+             "email": "nick.lang@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 6,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Kristy Mayo",
+             "email": "kristy.mayo@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 7,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "John Wickersham",
+             "email": "john.wickersham@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 8,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Susan Mayberry",
+             "email": "susan.mayberry@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 9,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Lynn Krug",
+             "email": "lynn.krug@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 10,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Kelsey Trimble",
+             "email": "kelsey.trimble@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 11,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Carol Lowman",
+             "email": "carol.lowman@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 12,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Amy Heartig",
+             "email": "amy.heartig@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 13,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Cynthia Gordon",
+             "email": "cynthia.gordon@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 14,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Ruth Story",
+             "email": "ruth.story@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 15,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Jarret Schneidewind",
+             "email": "jarrret.schneiderwind@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 16,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Darcie Schneidewind",
+             "email": "darcie.schneiderind@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 17,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Beck Ireland",
+             "email": "beck.ireland@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 18,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Janice Loudon",
+             "email": "janice.loudon@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 19,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Mac McSpadden",
+             "email": "mac.mcspadden@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 20,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Rick Mayo",
+             "email": "rmayo@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 21,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Tyson Willoughby",
+             "email": "twilloughby@aol.com"
+        }
+    },
+     
+    {
+        "pk": 22,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Keith Dowel",
+             "email": "britishkeith@msn.com"
+        }
+    },
+     
+    {
+        "pk": 23,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Josh Weber",
+             "email": "joshweber@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 24,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Peter Euler",
+             "email": "peuler@somewhere.com"
+        }
+    },
+     
+    {
+        "pk": 25,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Michael Eslinsla",
+             "email": "mikee@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 26,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Stephanie Zelnick",
+             "email": "steph.z@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 27,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Jared Steinshouer",
+             "email": "bockhawk@hawk.com"
+        }
+    },
+     
+    {
+        "pk": 28,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Kristi Mayo",
+             "email": "kristy.mayo@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 29,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Coleen Voeks",
+             "email": "miniuber@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 30,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Sarah Henning",
+             "email": "shhenning@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 31,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Justin Douglas",
+             "email": "jd@scrubs.com"
+        }
+    },
+     
+    {
+        "pk": 32,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Fritz Menninger",
+             "email": "fmenninger@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 33,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "James Barker",
+             "email": "james@jamesbarker.com"
+        }
+    },
+     
+    {
+        "pk": 34,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Christine Metz",
+             "email": "cmetz@ljworld.com"
+        }
+    },
+     
+    {
+        "pk": 35,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Dennis Anthony",
+             "email": "danthony@aol.com"
+        }
+    },
+     
+    {
+        "pk": 36,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Steve Sell",
+             "email": "steves@gribbles.com"
+        }
+    },
+     
+    {
+        "pk": 37,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Chip Blaser",
+             "email": "chip@dales.com"
+        }
+    },
+     
+    {
+        "pk": 38,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Joe Erwin",
+             "email": "joe.e@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 39,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Laurie Euler",
+             "email": "lluhar@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 40,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Renee Babin",
+             "email": "renanimal@hawk.com"
+        }
+    },
+     
+    {
+        "pk": 41,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Jennifer Franklin",
+             "email": "jenfrank@gprc.com"
+        }
+    },
+     
+    {
+        "pk": 42,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Lee Crane",
+             "email": "lee@lays.com"
+        }
+    },
+     
+    {
+        "pk": 44,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Rhonda Lyne",
+             "email": "rhonda@triathlon.com"
+        }
+    },
+     
+    {
+        "pk": 45,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Beth Hilt",
+             "email": "beth@brightgreen.com"
+        }
+    },
+     
+    {
+        "pk": 46,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Jenni McSpadden",
+             "email": "mac@mac.com"
+        }
+    },
+     
+    {
+        "pk": 13,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_logentry",
+             "name": "Can add log entry",
+             "content_type": 5
+        }
+    },
+     
+    {
+        "pk": 14,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_logentry",
+             "name": "Can change log entry",
+             "content_type": 5
+        }
+    },
+     
+    {
+        "pk": 15,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_logentry",
+             "name": "Can delete log entry",
+             "content_type": 5
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_group",
+             "name": "Can add group",
+             "content_type": 2
+        }
+    },
+     
+    {
+        "pk": 5,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_group",
+             "name": "Can change group",
+             "content_type": 2
+        }
+    },
+     
+    {
+        "pk": 6,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_group",
+             "name": "Can delete group",
+             "content_type": 2
+        }
+    },
+     
+    {
+        "pk": 10,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_message",
+             "name": "Can add message",
+             "content_type": 4
+        }
+    },
+     
+    {
+        "pk": 11,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_message",
+             "name": "Can change message",
+             "content_type": 4
+        }
+    },
+     
+    {
+        "pk": 12,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_message",
+             "name": "Can delete message",
+             "content_type": 4
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_permission",
+             "name": "Can add permission",
+             "content_type": 1
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_permission",
+             "name": "Can change permission",
+             "content_type": 1
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_permission",
+             "name": "Can delete permission",
+             "content_type": 1
+        }
+    },
+     
+    {
+        "pk": 7,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_user",
+             "name": "Can add user",
+             "content_type": 3
+        }
+    },
+     
+    {
+        "pk": 8,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_user",
+             "name": "Can change user",
+             "content_type": 3
+        }
+    },
+     
+    {
+        "pk": 9,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_user",
+             "name": "Can delete user",
+             "content_type": 3
+        }
+    },
+     
+    {
+        "pk": 16,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_contenttype",
+             "name": "Can add content type",
+             "content_type": 6
+        }
+    },
+     
+    {
+        "pk": 17,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_contenttype",
+             "name": "Can change content type",
+             "content_type": 6
+        }
+    },
+     
+    {
+        "pk": 18,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_contenttype",
+             "name": "Can delete content type",
+             "content_type": 6
+        }
+    },
+     
+    {
+        "pk": 25,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_event",
+             "name": "Can add event",
+             "content_type": 9
+        }
+    },
+     
+    {
+        "pk": 26,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_event",
+             "name": "Can change event",
+             "content_type": 9
+        }
+    },
+     
+    {
+        "pk": 27,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_event",
+             "name": "Can delete event",
+             "content_type": 9
+        }
+    },
+     
+    {
+        "pk": 28,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_faq",
+             "name": "Can add faq",
+             "content_type": 10
+        }
+    },
+     
+    {
+        "pk": 29,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_faq",
+             "name": "Can change faq",
+             "content_type": 10
+        }
+    },
+     
+    {
+        "pk": 30,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_faq",
+             "name": "Can delete faq",
+             "content_type": 10
+        }
+    },
+     
+    {
+        "pk": 67,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_favoritelist",
+             "name": "Can add favorite list",
+             "content_type": 23
+        }
+    },
+     
+    {
+        "pk": 68,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_favoritelist",
+             "name": "Can change favorite list",
+             "content_type": 23
+        }
+    },
+     
+    {
+        "pk": 69,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_favoritelist",
+             "name": "Can delete favorite list",
+             "content_type": 23
+        }
+    },
+     
+    {
+        "pk": 64,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_photo",
+             "name": "Can add photo",
+             "content_type": 22
+        }
+    },
+     
+    {
+        "pk": 65,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_photo",
+             "name": "Can change photo",
+             "content_type": 22
+        }
+    },
+     
+    {
+        "pk": 66,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_photo",
+             "name": "Can delete photo",
+             "content_type": 22
+        }
+    },
+     
+    {
+        "pk": 73,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_photocomment",
+             "name": "Can add photo comment",
+             "content_type": 25
+        }
+    },
+     
+    {
+        "pk": 74,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_photocomment",
+             "name": "Can change photo comment",
+             "content_type": 25
+        }
+    },
+     
+    {
+        "pk": 75,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_photocomment",
+             "name": "Can delete photo comment",
+             "content_type": 25
+        }
+    },
+     
+    {
+        "pk": 70,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_photoset",
+             "name": "Can add photo set",
+             "content_type": 24
+        }
+    },
+     
+    {
+        "pk": 71,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_photoset",
+             "name": "Can change photo set",
+             "content_type": 24
+        }
+    },
+     
+    {
+        "pk": 72,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_photoset",
+             "name": "Can delete photo set",
+             "content_type": 24
+        }
+    },
+     
+    {
+        "pk": 31,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_links",
+             "name": "Can add links",
+             "content_type": 11
+        }
+    },
+     
+    {
+        "pk": 32,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_links",
+             "name": "Can change links",
+             "content_type": 11
+        }
+    },
+     
+    {
+        "pk": 33,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_links",
+             "name": "Can delete links",
+             "content_type": 11
+        }
+    },
+     
+    {
+        "pk": 34,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_member",
+             "name": "Can add member",
+             "content_type": 12
+        }
+    },
+     
+    {
+        "pk": 35,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_member",
+             "name": "Can change member",
+             "content_type": 12
+        }
+    },
+     
+    {
+        "pk": 36,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_member",
+             "name": "Can delete member",
+             "content_type": 12
+        }
+    },
+     
+    {
+        "pk": 43,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_race",
+             "name": "Can add race",
+             "content_type": 15
+        }
+    },
+     
+    {
+        "pk": 44,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_race",
+             "name": "Can change race",
+             "content_type": 15
+        }
+    },
+     
+    {
+        "pk": 45,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_race",
+             "name": "Can delete race",
+             "content_type": 15
+        }
+    },
+     
+    {
+        "pk": 46,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_racenews",
+             "name": "Can add race news",
+             "content_type": 16
+        }
+    },
+     
+    {
+        "pk": 47,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_racenews",
+             "name": "Can change race news",
+             "content_type": 16
+        }
+    },
+     
+    {
+        "pk": 48,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_racenews",
+             "name": "Can delete race news",
+             "content_type": 16
+        }
+    },
+     
+    {
+        "pk": 49,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_racer",
+             "name": "Can add racer",
+             "content_type": 17
+        }
+    },
+     
+    {
+        "pk": 50,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_racer",
+             "name": "Can change racer",
+             "content_type": 17
+        }
+    },
+     
+    {
+        "pk": 51,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_racer",
+             "name": "Can delete racer",
+             "content_type": 17
+        }
+    },
+     
+    {
+        "pk": 55,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_report",
+             "name": "Can add report",
+             "content_type": 19
+        }
+    },
+     
+    {
+        "pk": 56,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_report",
+             "name": "Can change report",
+             "content_type": 19
+        }
+    },
+     
+    {
+        "pk": 57,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_report",
+             "name": "Can delete report",
+             "content_type": 19
+        }
+    },
+     
+    {
+        "pk": 52,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_result",
+             "name": "Can add result",
+             "content_type": 18
+        }
+    },
+     
+    {
+        "pk": 53,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_result",
+             "name": "Can change result",
+             "content_type": 18
+        }
+    },
+     
+    {
+        "pk": 54,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_result",
+             "name": "Can delete result",
+             "content_type": 18
+        }
+    },
+     
+    {
+        "pk": 37,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_run",
+             "name": "Can add run",
+             "content_type": 13
+        }
+    },
+     
+    {
+        "pk": 38,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_run",
+             "name": "Can change run",
+             "content_type": 13
+        }
+    },
+     
+    {
+        "pk": 39,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_run",
+             "name": "Can delete run",
+             "content_type": 13
+        }
+    },
+     
+    {
+        "pk": 19,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_session",
+             "name": "Can add session",
+             "content_type": 7
+        }
+    },
+     
+    {
+        "pk": 20,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_session",
+             "name": "Can change session",
+             "content_type": 7
+        }
+    },
+     
+    {
+        "pk": 21,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_session",
+             "name": "Can delete session",
+             "content_type": 7
+        }
+    },
+     
+    {
+        "pk": 22,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_site",
+             "name": "Can add site",
+             "content_type": 8
+        }
+    },
+     
+    {
+        "pk": 23,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_site",
+             "name": "Can change site",
+             "content_type": 8
+        }
+    },
+     
+    {
+        "pk": 24,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_site",
+             "name": "Can delete site",
+             "content_type": 8
+        }
+    },
+     
+    {
+        "pk": 40,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_sponsors",
+             "name": "Can add sponsors",
+             "content_type": 14
+        }
+    },
+     
+    {
+        "pk": 41,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_sponsors",
+             "name": "Can change sponsors",
+             "content_type": 14
+        }
+    },
+     
+    {
+        "pk": 42,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_sponsors",
+             "name": "Can delete sponsors",
+             "content_type": 14
+        }
+    },
+     
+    {
+        "pk": 58,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_tag",
+             "name": "Can add tag",
+             "content_type": 20
+        }
+    },
+     
+    {
+        "pk": 59,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_tag",
+             "name": "Can change tag",
+             "content_type": 20
+        }
+    },
+     
+    {
+        "pk": 60,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_tag",
+             "name": "Can delete tag",
+             "content_type": 20
+        }
+    },
+     
+    {
+        "pk": 61,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_taggeditem",
+             "name": "Can add tagged item",
+             "content_type": 21
+        }
+    },
+     
+    {
+        "pk": 62,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_taggeditem",
+             "name": "Can change tagged item",
+             "content_type": 21
+        }
+    },
+     
+    {
+        "pk": 63,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_taggeditem",
+             "name": "Can delete tagged item",
+             "content_type": 21
+        }
+    },
+     
+    {
+        "pk": 76,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_tweet",
+             "name": "Can add tweet",
+             "content_type": 26
+        }
+    },
+     
+    {
+        "pk": 77,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_tweet",
+             "name": "Can change tweet",
+             "content_type": 26
+        }
+    },
+     
+    {
+        "pk": 78,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_tweet",
+             "name": "Can delete tweet",
+             "content_type": 26
+        }
+    },
+     
+    {
+        "pk": 79,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "add_twitteruser",
+             "name": "Can add twitter user",
+             "content_type": 27
+        }
+    },
+     
+    {
+        "pk": 80,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "change_twitteruser",
+             "name": "Can change twitter user",
+             "content_type": 27
+        }
+    },
+     
+    {
+        "pk": 81,
+         "model": "auth.permission",
+         "fields": 
+        {
+            "codename": "delete_twitteruser",
+             "name": "Can delete twitter user",
+             "content_type": 27
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "nick",
+             "first_name": "",
+             "last_name": "",
+             "is_active": true,
+             "is_superuser": true,
+             "is_staff": true,
+             "last_login": "2010-04-14 00:51:17",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "sha1$9be20$5c89d69bbd00632eb0372e5461034c8d70e02ade",
+             "email": "nick.lang@gmail.com",
+             "date_joined": "2010-04-14 00:50:32"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "nick.lang@gmail.com",
+             "first_name": "Nick",
+             "last_name": "Lang",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "nick.lang@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "lluhar@gmail.com",
+             "first_name": "Laurie",
+             "last_name": "Euler",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "lluhar@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "unews@ultrastory.com",
+             "first_name": "Gary",
+             "last_name": "Henry",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "unews@ultrastory.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 5,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "shhenning@gmail.com",
+             "first_name": "Sarah",
+             "last_name": "Henning",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "shhenning@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 6,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "jhhenning@gmail.com",
+             "first_name": "Justin",
+             "last_name": "Henning",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "jhhenning@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 7,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "jtripplet@gmail.com",
+             "first_name": "Jeff",
+             "last_name": "Tripplet",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "jtripplet@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 8,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "tim.hibbard@gmail.com",
+             "first_name": "Tim",
+             "last_name": "Hibbard",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "tim.hibbard@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 9,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "rmayo@gmail.com",
+             "first_name": "Rick",
+             "last_name": "Mayo",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "rmayo@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    },
+     
+    {
+        "pk": 10,
+         "model": "auth.user",
+         "fields": 
+        {
+            "username": "kristy.mayo@gmail.com",
+             "first_name": "Kristy",
+             "last_name": "Mayo",
+             "is_active": true,
+             "is_superuser": false,
+             "is_staff": false,
+             "last_login": "2010-04-14 00:50:39",
+             "groups": 
+            [
+            ],
+             "user_permissions": 
+            [
+            ],
+             "password": "",
+             "email": "kristy.mayo@gmail.com",
+             "date_joined": "2010-04-14 00:50:39"
+        }
+    }
+]
+

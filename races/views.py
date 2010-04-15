@@ -1,17 +1,12 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from lawrencetrailhawks.races.models import Race, Racer, RaceResult, RaceReport
+from lawrencetrailhawks.races.models import Race
+from django.views.generic.date_based import object_detail, archive_index
 import datetime
 
 
-
-def get_results(request):
-    race = Race.objects.get(pk=1)
-    results = RaceResult.objects.all()
-    t = loader.get_template('results/race_detail.html')
-    c = Context({
-        "results" : results,
-    })
-    
-    return HttpResponse(t.render(c))
+def upcoming_events(request):
+    queryset = Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('-start_datetime')
+    a = archive_index(request, queryset, "start_datetime", template_name="events/event_archive.html", allow_future=True)
+    return HttpResponse(a)
     

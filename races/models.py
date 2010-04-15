@@ -55,9 +55,9 @@ class Race(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('race_detail', (), { 'year': self.date.strftime("%Y"),
-                                      'month': self.date.strftime("%b").lower(),
-                                      'day': self.date.strftime("%d"),
+        return ('race_detail', (), { 'year': self.start_datetime.strftime("%Y"),
+                                      'month': self.start_datetime.strftime("%b").lower(),
+                                      'day': self.start_datetime.strftime("%d"),
                                       'slug': self.slug } )
     
     @property
@@ -107,9 +107,11 @@ class Result(models.Model):
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)
     bib_number = models.IntegerField()
-    time = models.TimeField()
+    time = models.CommaSeparatedIntegerField(max_length=20)
     place = models.CharField(max_length=25, null=True, blank=True, 
                              help_text='Ex. First Overall Male or First Masters Female')
+    course_record = models.BooleanField()
+    dq = models.BooleanField()
                              
     def __unicode__(self):
         return "%s - %s - %s"%(self.racer.name,self.race.title, self.time)
