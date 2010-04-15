@@ -1,0 +1,750 @@
+
+[
+    {
+        "pk": 1,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "12 hours",
+             "entry_form": "http://www.ultrastory.com/Trail_Hawks/Hawk50_entry.pdf",
+             "lodging": "http://www.visitlawrence.com/accommodations",
+             "loops": 1,
+             "logo": "",
+             "unit": 2,
+             "title": "Hawk50 - marathon",
+             "discounts": "Dues-paying Trail Hawks subtract $5 from entry fee.",
+             "location": "Clinton Lake Corps of Engineers",
+             "start_datetime": "2010-05-22 08:00:00",
+             "description": "Trail run with rocky,
+             rooty sections,
+             and smooth flat sections. Scenic lake views. Beautiful shady woods. Two traverses of scenic Sanders' Mound.",
+             "map_link": "http://corpslakes.usace.army.mil/visitors/projects.cfm?Id=G503480",
+             "awards": "Male/Female 1st,
+             2nd,
+             3rd and all finishers",
+             "slug": "hawk50-marathon",
+             "reg_url": "http://ultrasignup.com/register.aspx?did=7624",
+             "distance": 26,
+             "course_map": "http://www.ultrastory.com/Trail_Hawks/Hawk50_Map%26Descrip.pdf",
+             "slogan": "26.2 miles as the Hawk flies.",
+             "race_type": 1,
+             "packet_pickup": "packet pickup avail at Gary Gribbles.",
+             "annual": "inaugural",
+             "contact": 2,
+             "reg_description": "Entry includes post-race BBQ and cotton t-shirts\nEntry fees: $35 until May 1,
+             $45 until May 15,
+             $55 after May 15"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "13 hours",
+             "entry_form": "http://www.ultrastory.com/Trail_Hawks/Hawk50_entry.pdf",
+             "lodging": "http://www.visitlawrence.com/accommodations",
+             "loops": 2,
+             "logo": "",
+             "unit": 2,
+             "title": "Hawk50 - 50 mile",
+             "discounts": "Dues-paying Trail Hawks subtract $10 entry fee.",
+             "location": "Clinton Lake Corps of Engineers",
+             "start_datetime": "2010-05-22 07:00:00",
+             "description": "Trail run with rocky,
+             rooty sections,
+             and smooth flat sections. Scenic lake views. Beautiful shady woods. Two traverses of scenic Sanders' Mound.",
+             "map_link": "http://corpslakes.usace.army.mil/visitors/projects.cfm?Id=G503480",
+             "awards": "Male/Female 1st,
+             2nd,
+             3rd and all finishers",
+             "slug": "hawk50-50mile",
+             "reg_url": "http://ultrasignup.com/register.aspx?did=7624",
+             "distance": 50,
+             "course_map": "http://www.ultrastory.com/Trail_Hawks/Hawk50_Map%26Descrip.pdf",
+             "slogan": "50 miles as the Hawk flies",
+             "race_type": 1,
+             "packet_pickup": "packet pickup avail at Gary Gribbles.",
+             "annual": "inaugural",
+             "contact": 2,
+             "reg_description": "Entry includes post-race BBQ,
+             technical t-shirt\nEntry fees: $65 until May 1,
+             $75 until May 15,
+             $85 after May 15"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "",
+             "entry_form": "https://docs.google.com/fileview?id=0B4dCt_e8ol7OMGRhYzBlMjQtMWIxNC00ZWMyLWI3N2QtZDE2NzA1YmI3NTcz&hl=en",
+             "lodging": "",
+             "loops": 1,
+             "logo": "",
+             "unit": 1,
+             "title": "Sanders Saunter",
+             "discounts": "",
+             "location": "Clinton Lake Corps of Engineers",
+             "start_datetime": "2009-11-22 09:00:00",
+             "description": "Trail run with rocky,
+             rooty sections,
+             and smooth flat sections. Scenic lake views. Beautiful shady woods. With two passings over Sanders Mound.",
+             "map_link": "http://local.google.com/maps/ms?ie=UTF8&hl=en&msa=0&msid=107185060515460825509.0004600da435d4b1bc567&ll=38.939776,
+            -95.340847&spn=0.002366,
+            0.004823&t=h&z=18",
+             "awards": "Overall Male and Female",
+             "slug": "sanders-saunter-inaugural",
+             "reg_url": "",
+             "distance": 10,
+             "course_map": "",
+             "slogan": "Pound the mound!",
+             "race_type": 1,
+             "packet_pickup": "Pre-Race packet pickup is at Gary Gribbles in Lawrence on Saturday,
+             Nov. 21 2009 from 1-3 pm. ",
+             "annual": "inaugural",
+             "contact": 1,
+             "reg_description": "Race Day,
+             Corps of Engineering Parking lot. Mail-in registration available. Check-in and race day registration begin at 8:00 a.m."
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "races.race",
+         "fields": 
+        {
+            "cut_off": "",
+             "entry_form": "http://ultrastory.com/Trail_Hawks/Shoreline_Shuffle_Entry.pdf",
+             "lodging": "",
+             "loops": 1,
+             "logo": "",
+             "unit": 1,
+             "title": "Shoreline Shuffle",
+             "discounts": "",
+             "location": "Shelter 4,
+             Campground 1,
+             Clinton Lake State Park\n798 N 1415 Rd.,
+             Lawrence,
+             KS 66049",
+             "start_datetime": "2009-09-26 09:00:00",
+             "description": "Trail run with rocky,
+             rooty sections,
+             and smooth flat sections. Scenic lake views. Beautiful shady woods. Possible sightings of the Clinton Lake sea serpent 'Clintie'.",
+             "map_link": "http://www.google.com",
+             "awards": "Overall Male and Female",
+             "slug": "shoreline-shuffle-inaugural",
+             "reg_url": "",
+             "distance": 5,
+             "course_map": "",
+             "slogan": "Short Shuffle along the Shoreline",
+             "race_type": 1,
+             "packet_pickup": "",
+             "annual": "inaugural",
+             "contact": 2,
+             "reg_description": "Mail-in $8/$4 for dues-paying Trail Hawks. Race day $10/$5 for dues- paying Trail Hawks. Race entry DOES NOT include $4.20 per vehicle Kansas State Park entry fee for vehicles without an annual entry permit sticker."
+        }
+    },
+     
+    {
+        "pk": 1,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Tim Hibbard",
+             "email": "tim.hibbard@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 2,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Troy Blair",
+             "email": "tony.blair@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 3,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Michael Eglinski",
+             "email": "michael.eglinski@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 4,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Lisa Giullian",
+             "email": "lisa.giullian@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 5,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Nick Lang",
+             "email": "nick.lang@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 6,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Kristy Mayo",
+             "email": "kristy.mayo@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 7,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "John Wickersham",
+             "email": "john.wickersham@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 8,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Susan Mayberry",
+             "email": "susan.mayberry@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 9,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Lynn Krug",
+             "email": "lynn.krug@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 10,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Kelsey Trimble",
+             "email": "kelsey.trimble@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 11,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Carol Lowman",
+             "email": "carol.lowman@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 12,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Amy Heartig",
+             "email": "amy.heartig@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 13,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Cynthia Gordon",
+             "email": "cynthia.gordon@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 14,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Ruth Story",
+             "email": "ruth.story@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 15,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Jarret Schneidewind",
+             "email": "jarrret.schneiderwind@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 16,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Darcie Schneidewind",
+             "email": "darcie.schneiderind@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 17,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Beck Ireland",
+             "email": "beck.ireland@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 18,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Janice Loudon",
+             "email": "janice.loudon@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 19,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Mac McSpadden",
+             "email": "mac.mcspadden@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 20,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Rick Mayo",
+             "email": "rmayo@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 21,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Tyson Willoughby",
+             "email": "twilloughby@aol.com"
+        }
+    },
+     
+    {
+        "pk": 22,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Keith Dowel",
+             "email": "britishkeith@msn.com"
+        }
+    },
+     
+    {
+        "pk": 23,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Josh Weber",
+             "email": "joshweber@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 24,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Peter Euler",
+             "email": "peuler@somewhere.com"
+        }
+    },
+     
+    {
+        "pk": 25,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Michael Eslinsla",
+             "email": "mikee@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 26,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Stephanie Zelnick",
+             "email": "steph.z@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 27,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Jared Steinshouer",
+             "email": "bockhawk@hawk.com"
+        }
+    },
+     
+    {
+        "pk": 28,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Kristi Mayo",
+             "email": "kristy.mayo@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 29,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Coleen Voeks",
+             "email": "miniuber@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 30,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Sarah Henning",
+             "email": "shhenning@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 31,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Justin Douglas",
+             "email": "jd@scrubs.com"
+        }
+    },
+     
+    {
+        "pk": 32,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Fritz Menninger",
+             "email": "fmenninger@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 33,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "James Barker",
+             "email": "james@jamesbarker.com"
+        }
+    },
+     
+    {
+        "pk": 34,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Christine Metz",
+             "email": "cmetz@ljworld.com"
+        }
+    },
+     
+    {
+        "pk": 35,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Dennis Anthony",
+             "email": "danthony@aol.com"
+        }
+    },
+     
+    {
+        "pk": 36,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Steve Sell",
+             "email": "steves@gribbles.com"
+        }
+    },
+     
+    {
+        "pk": 37,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Chip Blaser",
+             "email": "chip@dales.com"
+        }
+    },
+     
+    {
+        "pk": 38,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Joe Erwin",
+             "email": "joe.e@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 39,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Laurie Euler",
+             "email": "lluhar@gmail.com"
+        }
+    },
+     
+    {
+        "pk": 40,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Renee Babin",
+             "email": "renanimal@hawk.com"
+        }
+    },
+     
+    {
+        "pk": 41,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Jennifer Franklin",
+             "email": "jenfrank@gprc.com"
+        }
+    },
+     
+    {
+        "pk": 42,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 1,
+             "trailhawk": null,
+             "name": "Lee Crane",
+             "email": "lee@lays.com"
+        }
+    },
+     
+    {
+        "pk": 43,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Susan Mayberry",
+             "email": "susan@school.com"
+        }
+    },
+     
+    {
+        "pk": 44,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Rhonda Lyne",
+             "email": "rhonda@triathlon.com"
+        }
+    },
+     
+    {
+        "pk": 45,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Beth Hilt",
+             "email": "beth@brightgreen.com"
+        }
+    },
+     
+    {
+        "pk": 46,
+         "model": "races.racer",
+         "fields": 
+        {
+            "birth_date": null,
+             "gender": 2,
+             "trailhawk": null,
+             "name": "Jenni McSpadden",
+             "email": "mac@mac.com"
+        }
+    }
+]
+
