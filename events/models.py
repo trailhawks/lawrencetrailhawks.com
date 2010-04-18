@@ -1,17 +1,9 @@
 from django.db import models
-from members.models import Member
+from races.models import Race
 
 class Event(models.Model):
-    title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
-    slug = models.SlugField(unique=True,
-                            help_text="Suggested value automatically generated from title. Must be unique.")
-    date = models.DateTimeField()
-    contact = models.ForeignKey(Member)
-    location = models.TextField()
-    map_link = models.URLField(default="http://",
-                               help_text="Link to google maps or other mapping software pointing towards the start location")
-    description = models.TextField()
-   
+    race = models.ForeignKey(Race)
+    date = models.DateField(null=True, blank=True)
     class Meta:
         ordering = ['-date']
     

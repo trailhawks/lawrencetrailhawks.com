@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Result Index{% endblock %}
+{% block title %}Races{% endblock %}
 
 {% block result_index %}
+<h2>Upcoming Races</h2>
+  <ul>
+	{% for race in upcoming_races %}
+	<li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</li>
+	{% endfor %}
+  </ul>
 <h2>Results</h2>
   <ul>
-  {% for race in latest %}
+  {% for race in completed_races %}
     <li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</li>
   {% endfor %}
+  </ul>
 {% endblock %}

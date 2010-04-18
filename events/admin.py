@@ -3,8 +3,7 @@ from lawrencetrailhawks.events.models import Event
 
 
 class EventAdmin(admin.ModelAdmin):
-    prepopulated_fields = { 'slug': ['title'] }
-    list_display = ('title', 'date',)
-    list_filter = ('title', 'date', )
+    list_display = ('race',)
+    list_filter = ('race', )
 
 admin.site.register(Event, EventAdmin)

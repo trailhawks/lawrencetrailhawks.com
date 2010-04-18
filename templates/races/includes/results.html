@@ -1,0 +1,99 @@
+{% block results %}
+{% load races_extras %}
+<h3>Overall Results</h3>
+<table border="1" cellpadding="10">
+	<tr align="center">
+		<th>Place</th>
+		<th>Bib</th>
+		<th>Name</th>
+		<th>Gender</th>
+		<th>Time</th>
+		<th>Award</th>
+	</tr>
+{% for result in object.get_overall_results %}
+<tr>
+	{% if not result.dq %}
+	<td>{{ forloop.counter }}</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{% ifequal result.racer.gender 1 %}
+		Male
+		{% else %}
+		Female
+		{% endifequal %}
+	</td>
+	<td>{{ result.time|replace_char:",:" }}</td>
+	<td>{{ result.place }}</td>
+	{% else %}
+	<td>DQ</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{% ifequal result.racer.gender 1 %}
+		Male
+		{% else %}
+		Female
+		{% endifequal %}
+	</td>
+	<td></td>
+	<td></td>
+	{% endif %}
+</tr>
+{% endfor %}
+</table>
+
+<h3>Male Results</h3>
+<table border="1" cellpadding="10">
+	<tr align="center">
+		<th>Place</th>
+		<th>Bib</th>
+		<th>Name</th>
+		<th>Time</th>
+		<th>Award</th>
+	</tr>
+{% for result in object.get_male_results %}
+<tr>
+	{% if not result.dq %}
+	<td>{{ forloop.counter }}</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{{ result.time|replace_char:",:" }}</td>
+	<td>{{ result.place }}</td>
+	{% else %}
+	<td>DQ</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td></td>
+	<td></td>
+	{% endif %}
+</tr>
+{% endfor %}
+</table>
+
+<h3>Female Results</h3>
+<table border="1" cellpadding="10">
+	<tr align="center">
+		<th>Place</th>
+		<th>Bib</th>
+		<th>Name</th>
+		<th>Time</th>
+		<th>Award</th>
+	</tr>
+{% for result in object.get_female_results %}
+<tr>
+	{% if not result.dq %}
+	<td>{{ forloop.counter }}</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td>{{ result.time|replace_char:",:" }}</td>
+	<td>{{ result.place }}</td>
+	{% else %}
+	<td>DQ</td>
+	<td>{{ result.bib_number }}</td>
+	<td>{{ result.racer.name }}</td>
+	<td></td>
+	<td></td>
+	{% endif %}
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

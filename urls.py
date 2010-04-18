@@ -16,12 +16,14 @@ urlpatterns = patterns('',
                                  'extra_context': get_latest(),
                                 }),
     (r'^about/$', direct_to_template, {'template': 'about.html'}),
-    (r'^events/', include('lawrencetrailhawks.races.urls.events') ),
+    (r'^events/', include('lawrencetrailhawks.events.urls.events') ),
     (r'^faq/', include('lawrencetrailhawks.faq.urls.faq') ),
     (r'^links/', include('lawrencetrailhawks.links.urls.links') ),
     (r'^runs/', include('lawrencetrailhawks.runs.urls.runs') ),
     (r'^members/', include('lawrencetrailhawks.members.urls.members') ),
     (r'^sponsors/', include('lawrencetrailhawks.sponsors.urls.sponsors') ),
-    (r'^results/', include('lawrencetrailhawks.races.urls.results') ),
+    #(r'^results/', include('lawrencetrailhawks.races.urls.results') ),
+    (r'^races/', include('lawrencetrailhawks.races.urls.races') ),
+    
 )
 

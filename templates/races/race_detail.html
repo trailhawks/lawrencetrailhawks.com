@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 {% load races_extras %}
-{% block title %}{{object.title}}{% endblock %}
 
+{% block title %}{{object.title}}{% if object.is_finished %} Results{% endif %}{% endblock %}
 {% block race_detail %}
-<h2>{{ object.title }} Results</h2>
+
+<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.is_finished %} Results{% endif %}</h2>
+<h4>{{ object.slogan }}</h4>
+
 
 <p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
 <p><b>Start time:</b> {{ object.start_datetime|time:"H:i A" }}</p>
-<p><b>Race details:</b> {{object.description}}</a>
+<p><b>Race details:</b> {{object.description}}</p>
+{% if object.cut_off %}<p><b>Cut off time:</b> {{ object.cut_off }}</p>{% endif %}
+<p><b>Location:</b> {{ object.location }}<br />
+	{% if object.map_link %}For directions click <a href="{{object.map_link}}">here.<a/>{% endif %}
+</p>
+
 <p><b>Race distance:</b> {{ object.distance }}
 	{% ifequal object.unit 1 %}
 	km
@@ -15,110 +23,32 @@
 	mi
 	{% endifequal %}
 	</p>
-{% if object.get_race_reports %}
-<h3>Race Reports</h3>
-<ul>
-	{% for report in object.get_race_reports %}
-	<li><a href="{{ report.report }}">{{ report.title }}</a> by {{report.racer.name}}</li>
-	{% endfor %}
-</ul>
+<p><b>Contact:</b>{{ object.contact.username.first_name }} {{ object.contact.username.last_name }}<br/>
+Phone: {{ object.contact.phone }}<br />
+Email: {{ object.contact.username.email }}</p>
+
+{% if not object.is_finished %}
+<p><b>Registration:</b> {{ object.reg_description }}<br />
+	{% if object.reg_url %}
+	For online registration click <a href="{{object.reg_url}}">here</a>.<br />
+	{% endif %}
+	{% if object.entry_form %}
+	<br />For a printable entry form click <a href="{{ object.entry_form }}">here</a>.<br />
+	{% endif %}
+</p>
+<p><b>Packet Pickup:</b> {{ object.packet_pickup }}</p>
 {% endif %}
-<h3>Overall Results</h3>
-<table border="1" cellpadding="10">
-	<tr align="center">
-		<th>Place</th>
-		<th>Bib</th>
-		<th>Name</th>
-		<th>Gender</th>
-		<th>Time</th>
-		<th>Award</th>
-	</tr>
-{% for result in object.get_overall_results %}
-<tr>
-	{% if not result.dq %}
-	<td>{{ forloop.counter }}</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.name }}</td>
-	<td>{% ifequal result.racer.gender 1 %}
-		Male
-		{% else %}
-		Female
-		{% endifequal %}
-	</td>
-	<td>{{ result.time|replace_char:",:" }}</td>
-	<td>{{ result.place }}</td>
-	{% else %}
-	<td>DQ</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.name }}</td>
-	<td>{% ifequal result.racer.gender 1 %}
-		Male
-		{% else %}
-		Female
-		{% endifequal %}
-	</td>
-	<td></td>
-	<td></td>
-	{% endif %}
-</tr>
-{% endfor %}
-</table>
 
-<h3>Male Results</h3>
-<table border="1" cellpadding="10">
-	<tr align="center">
-		<th>Place</th>
-		<th>Bib</th>
-		<th>Name</th>
-		<th>Time</th>
-		<th>Award</th>
-	</tr>
-{% for result in object.get_male_results %}
-<tr>
-	{% if not result.dq %}
-	<td>{{ forloop.counter }}</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.name }}</td>
-	<td>{{ result.time|replace_char:",:" }}</td>
-	<td>{{ result.place }}</td>
-	{% else %}
-	<td>DQ</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.name }}</td>
-	<td></td>
-	<td></td>
-	{% endif %}
-</tr>
-{% endfor %}
-</table>
+{% if object.lodging %}
+<p><b>Lodging:</b> Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
+{% endif %}
 
-<h3>Female Results</h3>
-<table border="1" cellpadding="10">
-	<tr align="center">
-		<th>Place</th>
-		<th>Bib</th>
-		<th>Name</th>
-		<th>Time</th>
-		<th>Award</th>
-	</tr>
-{% for result in object.get_female_results %}
-<tr>
-	{% if not result.dq %}
-	<td>{{ forloop.counter }}</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.name }}</td>
-	<td>{{ result.time|replace_char:",:" }}</td>
-	<td>{{ result.place }}</td>
-	{% else %}
-	<td>DQ</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.name }}</td>
-	<td></td>
-	<td></td>
-	{% endif %}
-</tr>
-{% endfor %}
-</table>
+{% if object.get_race_reports %}
+  {% include "races/includes/race_reports.html" %}
+{% endif %}
 
+{% if object.get_overall_results %}
+  {% include "races/includes/results.html" %}
+{% endif %}
 
 {% endblock %}

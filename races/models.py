@@ -75,6 +75,13 @@ class Race(models.Model):
     @property
     def get_race_reports(self):
         return self.report_set.all()
+        
+    @property
+    def is_finished(self):
+        if self.result_set.count == 0:
+            return False
+        else:
+            return True
     
 
 class RaceNews(models.Model):

@@ -9,12 +9,17 @@
 <p><em><strong>See you on the trails!</strong></em></p></p>
 
 <div id="latest_event">
-	<h2>Up Coming Event</h2>
+	<h2>Up Coming Events</h2>
 {% if latest_event %}
-  <p><h3>{{ latest_event.title }}</h3></p>
-  <p><b>Where:</b> {{latest_event.location}}</p>
-  <p><b>When:</b> {{latest_event.date|date:"D d M, Y"}}</p>
-  <p><b>Register:</b> <a href="{{latest_event.registration}}">Click here to signup.</a></p>
+  {% for race in latest_event|slice:":2" %}
+  <p><h3>{{ race.title }}</h3></p>
+  <p><b>Where:</b> {{race.location}}</p>
+  <p><b>When:</b> {{race.start_datetime|date:"D d M, Y"}}</p>
+  <p><b>Register:</b> <a href="{{latest_event.reg_url}}">Click here to signup.</a></p>
+  {% if latest_event.count > 2 %}
+  <p><a href="/races/">More</a></p>
+  {% endif %}
+  {% endfor %}
 {% else %}
   <p>No Events</p>
 {% endif %}
@@ -33,9 +38,10 @@
 </div>
 
 <div id="tweets">
-	<h2>Hawk Tweets</h2>
+	{% load twitterfy %}
+	<h2><a href="http://twitter.com/trailhawks">Hawk Tweets</a></h2>
     {% for tweet in tweets|slice:":5" %}
-    <p>{{ tweet.text }}</p>
+    <p>{{ tweet.text|twitterfy }}</p>
     {% endfor %}
 </div>
 
