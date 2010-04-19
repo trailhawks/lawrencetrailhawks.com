@@ -1,0 +1,7 @@
+
+{% load oembed_tags %}
+
+{% for set in latest %}
+ {{set}}
+  <a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a>
+{% endfor %}

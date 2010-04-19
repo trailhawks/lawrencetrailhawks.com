@@ -90,6 +90,7 @@ INSTALLED_APPS = (
     'runs',
     'sponsors',
     'races',
+    'oembed',
     'tagging',
     'syncr.flickr',
     'syncr.twitter',
