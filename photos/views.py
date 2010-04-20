@@ -1,13 +1,12 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from syncr.flickr.models import PhotoSet
+from syncr.flickr.models import Photo
 
 def photo_test1(request):
-    sets = PhotoSet.objects.all()
-    print sets
+    photos = Photo.objects.all()
     t = loader.get_template('photos.html')
     c = Context({
-        "sets" : sets,
+        "photos" : photos,
     })
     
     return HttpResponse(t.render(c))

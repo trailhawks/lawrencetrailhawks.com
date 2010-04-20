@@ -7,9 +7,9 @@ import datetime, csv
 
 def get_latest():
     latest_event = Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime')
-    todays_run =[]# Run.objects.filter(run_date=datetime.datetime.now().strftime("%A")).latest('run_date')
+    todays_run = Run.objects.filter(run_date=datetime.datetime.now().strftime("%A")).latest('run_date')
     other_news = ""
-    tweets = Tweet.objects.all()
+    tweets = Tweet.objects.all().order_by('-pub_time')
     return {"latest_event": latest_event,
             "todays_run": todays_run,
             "other_news": other_news,

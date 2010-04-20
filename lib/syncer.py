@@ -17,3 +17,4 @@ def sync_flickr():
     username = settings.FLICKR['username']
     fs = FlickrSyncr(key, secret)
     fs.syncRecentPhotos(username)
+    fs.syncAllPhotoSets(username)

@@ -1,8 +1,26 @@
+{% extends "base.html" %}
 {% load oembed_tags %}
 
-{% for set in sets %}
- {{set.}}
+{% block title %}Photos{% endblock %}
 
-
-  <a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a>
-{% endfor %}
+{% block photos %}
+<h2>Trail Hawk Photos</h2>
+<table>
+	<tr>
+      {% for photo in photos|slice:":4" %}
+        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for photo in photos|slice:"4:8" %}
+        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for photo in photos|slice:"8:12" %}
+        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
+      {% endfor %}
+    </tr>
+</table>
+<p>Check out more photos at our <a href="http://www.flickr.com/photos/trailhawks">flickr page</a>.</p>
+{% endblock %}

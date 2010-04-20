@@ -41,7 +41,7 @@
 	{% load twitterfy %}
 	<h2><a href="http://twitter.com/trailhawks">Hawk Tweets</a></h2>
     {% for tweet in tweets|slice:":5" %}
-    <p>{{ tweet.text|twitterfy }}</p>
+    <p>{{ tweet.text|twitterfy }} - <a href="{{tweet.url}}">tweet</a></p>
     {% endfor %}
 </div>
 
