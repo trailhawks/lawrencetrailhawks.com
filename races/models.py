@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from members.models import Member
-
+    
+    
 class Race(models.Model):
     KM = 1
     MI = 2
@@ -30,7 +31,7 @@ class Race(models.Model):
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     loops = models.IntegerField(default=1,
                                 help_text="Number of loops for the race. If a Point-to-Point set loops = 0.")
-    start_datetime = models.DateTimeField()
+    start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
     course_map = models.URLField(default="http://", blank=True, null=True,
                                  help_text="Link to course map if avail.")
@@ -75,6 +76,10 @@ class Race(models.Model):
     @property
     def get_race_reports(self):
         return self.report_set.all()
+    
+    @property
+    def get_reg_dates(self):
+        return self.registration_set.all().order_by('reg_date')
         
     @property
     def is_finished(self):
@@ -82,7 +87,18 @@ class Race(models.Model):
             return False
         else:
             return True
+
+
+class Registration(models.Model):
+    reg_date = models.DateField(verbose_name="Registration Date")
+    reg_cost = models.IntegerField(verbose_name="Registration Cost")
+    race = models.ForeignKey(Race)
     
+    class Meta:
+            verbose_name_plural = "Registration Dates"
+
+    def __unicode__(self):
+        return "%s %s"%(self.race.title, self.reg_date)
 
 class RaceNews(models.Model):
     title = models.CharField(max_length=40)
@@ -91,7 +107,7 @@ class RaceNews(models.Model):
 
     def __unicode__(self):
         return self.title
-
+    
 class Racer(models.Model):
     MALE = 1
     FEMALE = 2

@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 from django.views.generic.simple import direct_to_template, redirect_to
 from lawrencetrailhawks.lib.Extras import get_latest
 from django.contrib import admin
@@ -25,6 +26,8 @@ urlpatterns = patterns('',
     (r'^members/', include('lawrencetrailhawks.members.urls.members') ),
     (r'^sponsors/', include('lawrencetrailhawks.sponsors.urls.sponsors') ),
     (r'^races/', include('lawrencetrailhawks.races.urls.races') ),
+    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.STATIC_DOC_ROOT}),
 
 )
 

@@ -1,11 +1,17 @@
 from django.contrib import admin
-from lawrencetrailhawks.races.models import Race, Racer, Result, Report
+from lawrencetrailhawks.races.models import Race, Racer, Result, Report, Registration
 
-
+class RegistrationInline(admin.TabularInline):
+    model = Registration
+    
+class RegistrationAdmin(admin.ModelAdmin):
+    pass
+    
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title', 'annual'] }
     list_display = ('title', 'annual', 'start_datetime', )
     list_filter = ('start_datetime', 'annual',)
+    inlines = [RegistrationInline]
     
 class ResultAdmin(admin.ModelAdmin):
     list_display = ('race', 'time', 'racer', 'bib_number', 'place')
@@ -23,5 +29,5 @@ admin.site.register(Race, RaceAdmin)
 admin.site.register(Racer, RacerAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Result, ResultAdmin)
-
+admin.site.register(Registration, RegistrationAdmin)
 
