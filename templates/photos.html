@@ -1,26 +1,77 @@
 {% extends "base.html" %}
 {% load oembed_tags %}
+{% load flickr %}
 
 {% block title %}Photos{% endblock %}
 
+{% block header %}
+	<div id="header">
+		<div id="top">
+			<div class="left" id="logo">
+				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+			</div>
+			<div class="left navigation" id="main-nav">
+				<ul class="tabbed">
+					<li><a href="/">Home</a></li>
+					<li><a href="/races/">Races</a></li>
+					<li><a href="/runs/">Runs</a></li>
+					<li class="current-tab"><a href="/photos/">Photos</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+				</ul>
+				<div class="clearer">&nbsp;</div>
+			</div>
+			<div class="clearer">&nbsp;</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+
 {% block photos %}
-<h2>Trail Hawk Photos</h2>
-<table>
-	<tr>
-      {% for photo in photos|slice:":4" %}
-        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
-      {% endfor %}
-    </tr>
-    <tr>
-      {% for photo in photos|slice:"4:8" %}
-        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
-      {% endfor %}
-    </tr>
-    <tr>
-      {% for photo in photos|slice:"8:12" %}
-        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
-      {% endfor %}
-    </tr>
-</table>
-<p>Check out more photos at our <a href="http://www.flickr.com/photos/trailhawks">flickr page</a>.</p>
+<div class="main">
+
+	<div class="section">
+
+		<div class="section-content">
+
+			<div class="post">
+
+				<div class="post-title"><h2><a href="#">Trail Hawk Photos</a></h2></div>
+
+				<div class="post-date"></div>
+
+				<div class="post-body">
+
+					<table>
+						<tr>
+					      {% for photo in photos|slice:":4" %}
+					        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
+					      {% endfor %}
+					    </tr>
+					    <tr>
+					      {% for photo in photos|slice:"4:8" %}
+					        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
+					      {% endfor %}
+					    </tr>
+					    <tr>
+					      {% for photo in photos|slice:"8:12" %}
+					        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></td>
+					      {% endfor %}
+					    </tr>
+					</table>
+
+				</div>
+			
+			</div>
+
+			<div class="content-separator"></div>
+			<p>Check out our <a href="http://www.flickr.com/photos/trailhawks">Flickr</a> page for more photos.</p>
+			<div class="clearer">&nbsp;</div>
+
+		</div>
+
+	</div>
+
+</div>
+
 {% endblock %}

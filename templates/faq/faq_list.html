@@ -1,13 +1,54 @@
 {% extends "base.html" %}
+{% load oembed_tags %}
+{% load flickr %}
 
 {% block title %}FAQ{% endblock %}
 
-{% block weekly_runs %}
-<h2>Frequently Asked Questions</h2>
-  <ul>
-  {% for faq in object_list %}
-    <p><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></p>
-    <p>{{ faq.answer }}</p>
-  {% endfor %}
+{% block header %}
+	<div id="header">
+		<div id="top">
+			<div class="left" id="logo">
+				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+			</div>
+			<div class="left navigation" id="main-nav">
+				<ul class="tabbed">
+					<li><a href="/">Home</a></li>
+					<li><a href="/races/">Races</a></li>
+					<li><a href="/runs/">Runs</a></li>
+					<li><a href="/photos/">Photos</a></li>
+					<li class="current-tab"><a href="/faq/">FAQ</a></li>
+				</ul>
+				<div class="clearer">&nbsp;</div>
+			</div>
+			<div class="clearer">&nbsp;</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block faq %}
+<div class="main" id="main-two-columns">
+
+	<div class="left" id="main-content">
+		<ul>
+		  {% for faq in object_list %}
+		    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></h3>
+		    <p>{{ faq.answer }}</p>
+		  {% endfor %}
+		  </ul>	
+		{% block faq_detail %}{% endblock %}	
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+
+		{% get_random_photos 7 as random_photos %}
+		{% for photo in random_photos %}
+		    <p><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></p>
+		{% endfor %}
+		
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
 {% endblock %}
 

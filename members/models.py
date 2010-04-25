@@ -23,13 +23,14 @@ class Member(models.Model):
     avatar = models.ImageField(upload_to="members/avatars", blank=True,null=True)
     active = models.BooleanField()
     date_paid = models.DateField()
+    member_since = models.DateField(null=True, blank=True)
     position = models.IntegerField(choices=POSITION_CHOICES, null=True, blank=True)
     
     # class Meta:
     #     verbose_name_plural = "Members"
     
     def __unicode__(self):
-           return "%s %s" % (self.username.first_name, self.username.last_name)
+           return "%s \"%s\" %s" % (self.username.first_name, self.hawk_name, self.username.last_name)
    
         
     @models.permalink   

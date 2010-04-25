@@ -93,4 +93,5 @@ INSTALLED_APPS = (
     'tagging',
     'syncr.flickr',
     'syncr.twitter',
+    'south',
 )

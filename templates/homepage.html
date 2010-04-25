@@ -1,112 +1,56 @@
 {% extends "base.html" %}
 
 {% block home_page %}
-<div id="site-wrapper">
-
-	<div id="header">
-
-		<div id="top">
-
-			<div class="left" id="logo">
-				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-
-			<div class="left navigation" id="main-nav">
-
-				<ul class="tabbed">
-					<li class="current-tab"><a href="index.html">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/faq/">FAQ</a></li>
-
-				</ul>
-
-				<div class="clearer">&nbsp;</div>
-
-			</div>
-
-			<div class="clearer">&nbsp;</div>
-
-		</div>
-
-	
-
-	</div>
-
 	<div id="splash">
-
 		<div class="col3 left">
-			
-			<h2 class="label label-green">Mission Statement</h2>
-
-			<p class="quiet large">Why we run</p>
-			<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.<br/>
-			We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.<br/>
-			We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.<br/>
-			We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
-
+			<h2 class="label label-green">Latest Hawk News</h2>
+			<p class="quiet large">What's happening</p>
+			<p>Hawk 50 Entrant list is up!</p>
+			<p>Blah Blah</p>
+			<p>More blah news blah The hawk 50 is coming up soon!! better get ready!!!!!!</p>
 		</div>
-
 		<div class="col3-mid left">
-			
 			<h2 class="label label-orange">Today's Run</h2>
-
-			<p class="quiet large"><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
-
-			<p><em><strong>Where: </strong></em>{{ todays_run.location}}<br />
-				Click <a href="{{ todays_run.map_link}}">here</a> for directions.</p>
-			<p><em><strong>When: </strong></em>{{ todays_run.run_time }}</p>
-			<p><em><strong>What: </strong></em>{{ todays_run.details }}</a></p>
-			<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.member_email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
-
+			{% load run_extras %}
+			{% get_todays_run %}
+			{% if todays_run %}
+				<p class="quiet large"><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
+				<p><em><strong>Where: </strong></em>{{ todays_run.location}}<br />
+					Click <a href="{{ todays_run.map_link}}">here</a> for directions.</p>
+				<p><em><strong>When: </strong></em>{{ todays_run.run_time }}</p>
+				<p><em><strong>What: </strong></em>{{ todays_run.details }}</a></p>
+				<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.member_email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
+			{% else %}
+				<p class="quiet large">No run scheduled for today</p>
+			{% endif %}
 		</div>
-
 		<div class="col3 right">
 			{% load twitterfy %}
 			<h2 class="label label-blue">Follow Us</h2>
-
 			<p class="quiet large"><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
-
-			{% for tweet in tweets|slice:":5" %}
+			{% for tweet in tweets|slice:":3" %}
 		    <p>{{ tweet.text|twitterfy }} - <a href="{{tweet.url}}">({{ tweet.pub_time|timesince }} ago)</a></p>
 		    {% endfor %}
-
 		</div>
-
 		<div class="clearer">&nbsp;</div>
-
 	</div>
-
 	<div class="main" id="main-two-columns">
-
 		<div class="left" id="main-content">
-
 			<div class="section">
 				{% load race_extras %}
 				{% get_latest_race %}
 				<div class="section-title">Upcoming Event</div>
-
 				<div class="section-content">
-
 					<div class="post">
-
-						<div class="post-title"><h2><a href="#">{{ latest_race.title }}</a></h2></div>
-
+						<div class="post-title"><h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2></div>
 						<div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
-
 						<div class="post-body">
-							
 							<p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
-
 							<p class="large">{{ latest_race.slogan }}</p>
-										
 							<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
 								<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
-
 							<p><strong><em>Course: </em></strong>{{ latest_race.description }}<br />
 								Click <a href="latest_race.course_map">here</a> for course map.</p>
-
 							<p><strong><em>Entry fee:</em></strong></p>
 								<ul>
 									{% for reg in latest_race.get_reg_dates %}
@@ -114,88 +58,47 @@
 									{% endfor %}
 								</ul>
 							<p>{{ latest_event.discount }}</p>
-							
-
 						</div>
-					
 					</div>
-
 					<div class="clearer">&nbsp;</div>
-
 				</div>
-
 			</div>
-
-			<div class="clearer">&nbsp;</div>
-			
+			<div class="clearer">&nbsp;</div>	
 		</div>
-
 		<div class="right sidebar" id="sidebar">
-
 			<div class="section">
-
 				<div class="section-title">Search</div>
-
 				<div class="section-content">
 					<form method="post" action="">
 						<input type="text" class="text" size="28" /> &nbsp; <input type="submit" class="button" value="Submit" />
 					</form>
 				</div>
-
 			</div>
-
 			<div class="section">
-				{% block faq %}
+				{% block faq_preview %}
+				{% load faq_extras %}
+				{% get_latest faq.FAQ 5 as recent_faqs %}
 				<div class="section-title">FAQ</div>
-
 				<div class="section-content">
-
 					<ul class="nice-list">
+						{% for faq in recent_faqs %}
 						<li>
-							<div class="left"><a href="#">What are the Lawrence Trail Hawks?</a></div>
-							<div class="right">Oct 12</div>
+							<div class="left">{{ faq.question }}</div>
+							<div class="right"><a href="{{faq.get_absolute_url}}">answer</a></div>
 							<div class="clearer">&nbsp;</div>
 						</li>
-						<li>
-							<div class="left"><a href="#">Do you guys run in the Winter?</a></div>
-							<div class="right">Sep 15</div>
-							<div class="clearer">&nbsp;</div>
-						</li>
-						<li>
-							<div class="left"><a href="#">What is "screwing your shoes"?</a></div>
-							<div class="right">Sep 12</div>
-							<div class="clearer">&nbsp;</div>
-						</li>
-						<li>
-							<div class="left"><a href="#">How far do you run?</a></div>
-							<div class="right">Sep 6</div>
-							<div class="clearer">&nbsp;</div>
-						</li>
-						<li>
-							<div class="left"><a href="#">How fast do you run?</a></div>
-							<div class="right">Aug 27</div>
-							<div class="clearer">&nbsp;</div>
-						</li>
-						<li>
-							<div class="left"><a href="#">Are you a not for profit group?</a></div>
-							<div class="right">Aug 21</div>
-							<div class="clearer">&nbsp;</div>
-						</li>
-						<li><a href="#" class="more">Browse Archives &#187;</a></li>
+						{% endfor %}
+						<li><a href="/faq/" class="more">Browse all FAQ &#187;</a></li>
 					</ul>
-
 				</div>
 				{% endblock %}
 			</div>
-
 			<div class="section">
 				{% block officers %}
 				<div class="section-title">Officers</div>
-
 				<div class="section-content">
 					{% load officers %}
 					{% get_officers as officers %}
-
 					<ul class="nice-list">
 						<li><a href="#">{{ officers.president }}</a> <span class="quiet">- President</span></li>
 						<li><a href="#">{{ officers.vice_president }}</a> <span class="quiet">- Vice President</span></li>
@@ -203,53 +106,19 @@
 						<li><a href="#">{{ officers.secretary }}</a> <span class="quiet">- Secretary</span></li>
 						<li><a href="#">{{ officers.web_master }}</a> <span class="quiet">- Webmaster</span></li>
 					</ul>
-					
 				</div>
 				{% endblock %}
 			</div>
-
 			<div class="section">
-
-				<div class="section-title">Topics</div>
-
+				<div class="section-title">About Us</div>
 				<div class="section-content">
-					<div class="quiet">
-						<a href="#" style="font-size: 120%">vestibulum</a> <a href="#" style="font-size: 120%">ante</a> <a href="#" style="font-size: 150%">ipsum</a> <a href="#" style="font-size: 120%">faucibus</a> <a href="#" style="font-size: 90%">orci luctus</a> <a href="#" style="font-size: 80%">ultrices</a> <a href="#" style="font-size: 220%">posuere cubilia</a> <a href="#" style="font-size: 100%">curae</a> <a href="#" style="font-size: 110%">quisque</a> <a href="#" style="font-size: 150%">ut arcu</a> <a href="#" style="font-size: 140%">eros</a> <a href="#" style="font-size: 100%">vestibulum</a> <a href="#" style="font-size: 90%">dapibus</a> <a href="#" style="font-size: 120%">volutpat</a> <a href="#" style="font-size: 200%">elementum</a> 
-					</div>
+						<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.<br/>
+						We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.<br/>
+						We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.<br/>
+						We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p> 
 				</div>
-			
 			</div>
-
 		</div>
-
 		<div class="clearer">&nbsp;</div>
-
 	</div>
-
-	<div id="footer">
-
-		<div class="left" id="footer-left">
-			
-			<img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" width="90" height="65" alt="" class="left" />
-			
-			<p>&copy; 2009-2010 Lawrence Trail Hawks. All rights Reserved</p>
-
-			<p class="quiet"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></p>
-			
-			<div class="clearer">&nbsp;</div>
-
-		</div>
-
-		<div class="right" id="footer-right">
-
-			<p class="large"><a href="#">Blog</a> <span class="text-separator">|</span> <a href="#">Events</a> <span class="text-separator">|</span> <a href="#">About</a> <span class="text-separator">|</span> <a href="#">Archives</a> <span class="text-separator">|</span> <strong><a href="#">Join Us!</a></strong> <span class="text-separator">|</span> <a href="#top" class="quiet">Page Top &uarr;</a></p>
-
-		</div>
-
-		<div class="clearer">&nbsp;</div>
-
-	</div>
-
-</div>
-
 {% endblock %}

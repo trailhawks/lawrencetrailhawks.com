@@ -27,15 +27,13 @@ class Race(models.Model):
                             help_text="Suggested value automatically generated from title and annual. Must be unique.")
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     awards = models.CharField(max_length=300)
-    distance = models.IntegerField()
+    distance = models.CommaSeparatedIntegerField(max_length=10, help_text="eg 26,2")
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
-    loops = models.IntegerField(default=1,
-                                help_text="Number of loops for the race. If a Point-to-Point set loops = 0.")
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
     course_map = models.URLField(default="http://", blank=True, null=True,
                                  help_text="Link to course map if avail.")
-    cut_off = models.CharField(max_length=75,
+    cut_off = models.CharField(max_length=75, null=True, blank=True,
                                help_text="eg: 13 hours")
     contact = models.ForeignKey(Member)
     location = models.TextField()
@@ -47,7 +45,7 @@ class Race(models.Model):
     entry_form = models.FileField(upload_to="races/entry_forms",null=True, blank=True)
     discounts = models.TextField(blank=True, null=True,
                                  help_text="Describe discounts for the race if they exist.")
-    lodging = models.URLField(default="http://",
+    lodging = models.URLField(default="http://", blank=True, null=True,
                               help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
     
@@ -100,14 +98,28 @@ class Registration(models.Model):
     def __unicode__(self):
         return "%s %s"%(self.race.title, self.reg_date)
 
-class RaceNews(models.Model):
+class News(models.Model):
     title = models.CharField(max_length=40)
-    news_itme = models.TextField()
+    news_item = models.TextField()
     race = models.ForeignKey(Race)
 
+    class Meta:
+        verbose_name_plural = "Latest race news"
+    
     def __unicode__(self):
         return self.title
-    
+
+class EmergencyContact(models.Model):
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)
+    phone = models.CharField(max_length=13)
+    address = models.TextField()
+    relationship = models.CharField(max_length=40)
+
+    def __unicode__(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
+
 class Racer(models.Model):
     MALE = 1
     FEMALE = 2
@@ -116,28 +128,53 @@ class Racer(models.Model):
         (FEMALE,"Female"),
     )
     
-    name = models.CharField(max_length=40, help_text="Name of racer")
-    trailhawk = models.ForeignKey(User, unique=True, null=True, blank=True,
+    SMALL = 1
+    MEDIUM = 2
+    LARGE = 3
+    XLARGE = 4
+    SIZE_CHOICES = (
+        (SMALL,"S"),
+        (MEDIUM,"M"),
+        (LARGE,"L"),
+        (XLARGE,"XL"),
+    )
+    
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)    
+    trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True,
                              help_text="If racer is a trailhawk select profile.")
     email = models.CharField(max_length=50)
+    phone = models.CharField(max_length=13)
     gender = models.IntegerField(choices=GENDER_CHOICES)
+    shirt_size = models.IntegerField(choices=SIZE_CHOICES, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    city = models.CharField(max_length=40, null=True, blank=True)
+    state = models.CharField(max_length=40, null=True, blank=True)
+    country = models.CharField(max_length=40, null=True, blank=True)
+    contact = models.ForeignKey(EmergencyContact, verbose_name="Emergency Contact", blank=True, null=True)
+    
     
     def __unicode__(self):
-        return self.name
+        return "%s %s" % (self.first_name, self.last_name)
+        
+    @property
+    def full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
+    
 
 class Result(models.Model):
-    race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)
+    race = models.ForeignKey(Race)
     bib_number = models.IntegerField()
-    time = models.CommaSeparatedIntegerField(max_length=20)
+    time = models.CommaSeparatedIntegerField(max_length=20, null=True, blank=True)
     place = models.CharField(max_length=25, null=True, blank=True, 
                              help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
-    dq = models.BooleanField()
+    dq = models.BooleanField(verbose_name="Disqualified")
                              
     def __unicode__(self):
-        return "%s - %s - %s"%(self.racer.name,self.race.title, self.time)
+        return "%s - %s - %s"%(self.racer, self.race.title, self.time)
     
 class Report(models.Model):
     

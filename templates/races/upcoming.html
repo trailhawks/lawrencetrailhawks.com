@@ -30,7 +30,7 @@
 <div class="navigation" id="sub-nav">
 	<ul class="tabbed">
 		<li><a href="/races/results/">Race Results</a></li>
-		<li><a href="/races/upcoming/">Upcoming Races</a></li>
+		<li class="current-tab"><a href="/races/upcoming/">Upcoming Races</a></li>
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
@@ -43,16 +43,10 @@
 	<div class="left" id="main-content">
 		<h2>Upcoming Races</h2>
 		  <ul>
-			{% for race in upcoming_races %}
+			{% for race in latest %}
 			<li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</li>
 			{% endfor %}
 		  </ul>
-		<h2>Results</h2>
-		  <ul>
-		  {% for race in completed_races %}
-		    <li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</li>
-		  {% endfor %}
-		  </ul>	
 	</div>
 
 	<div class="right sidebar" id="sidebar">

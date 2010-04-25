@@ -1,13 +1,47 @@
-{% extends "base.html" %}
-
+{% extends "runs/run_list.html" %}
 {% block title %}{{object.name}}{% endblock %}
 
+{% block sub_nav %}
+
+<div class="navigation" id="sub-nav">
+	<ul class="tabbed">
+		{% ifequal object.slug "beginners-run" %}
+		<li class="current-tab"><a href="/runs/beginners-run/">Monday's Beginner's Run</a></li>
+		{% else %}
+		<li><a href="/runs/beginners-run/">Monday's Beginner's Run</a></li>
+		{% endifequal %}
+		
+		{% ifequal object.slug "humpday-run" %}
+		<li class="current-tab"><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
+		{% else %}
+		<li><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
+		{% endifequal %}
+		
+		{% ifequal object.slug "gal-gallop" %}
+		<li class="current-tab"><a href="/runs/gal-gallop/">Thursday's Gal Gallop</a></li>
+		{% else %}
+		<li><a href="/runs/gal-gallop/">Thursday's Gal Gallop</a></li>
+		{% endifequal %}
+		
+		{% ifequal object.slug "saturday-long-run" %}
+		<li class="current-tab"><a href="/runs/saturday-long-run/">Saturday's Long Run</a></li>
+		{% else %}
+		<li><a href="/runs/saturday-long-run/">Saturday's Long Run</a></li>
+		{% endifequal %}
+	</ul>
+	<div class="clearer">&nbsp;</div>
+</div>
+
+{% endblock %}
+
 {% block run_detail %}
+
 <h2>{{ object.name }}</h2>
 <p><b>When:</b> {{ object.run_date }} at {{ object.run_time }}</p>
 <p><b>Where:</b> {{ object.location }}</p>
 <p><b>Details:</b> {{ object.details }}</p>
 <p><b>Contact:</b> {{ object.contact.username.first_name }} {{ object.contact.username.last_name }} at {{ object.contact.username.email }}
+	
 {% endblock %}
 
 

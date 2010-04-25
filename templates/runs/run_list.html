@@ -1,12 +1,70 @@
 {% extends "base.html" %}
+{% load flickr %}
+{% load oembed_tags %}
 
 {% block title %}Weekly Runs{% endblock %}
 
+{% block header %}
+<div id="header">
+	<div id="top">
+		<div class="left" id="logo">
+			<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+		</div>
+		<div class="left navigation" id="main-nav">
+			<ul class="tabbed">
+				<li><a href="/">Home</a></li>
+				<li><a href="/races/">Races</a></li>
+				<li class="current-tab"><a href="/runs/">Runs</a></li>
+				<li><a href="/photos/">Photos</a></li>
+				<li><a href="/faq/">FAQ</a></li>
+			</ul>
+			<div class="clearer">&nbsp;</div>
+		</div>
+		<div class="clearer">&nbsp;</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block sub_nav %}
+
+<div class="navigation" id="sub-nav">
+	<ul class="tabbed">
+		<li><a href="/runs/beginners-run/">Monday's Beginner's Run</a></li>
+		<li><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
+		<li><a href="/runs/gal-gallop/">Thursday's Gal Gallop</a></li>
+		<li><a href="/runs/saturday-long-run/">Saturday's Long Run</a></li>
+	</ul>
+	<div class="clearer">&nbsp;</div>
+</div>
+
+{% endblock %}
+
 {% block weekly_runs %}
-<h2>Weekly Runs</h2>
-  <ul>
-  {% for run in object_list %}
-    <li><a href="{{run.get_absolute_url}}">{{run.name}}</a> on {{ run.run_date }} at {{ run.run_time }}</li>
-  {% endfor %}
+<div class="main" id="main-two-columns">
+
+	<div class="left" id="main-content">
+		{% block run_detail %}
+		<p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
+		<p>We welcome runners of all abilities. So come join us for a run.</p>
+		Weekly runs:<ul>
+			{% for object in object_list %}
+			<li><a href={{ object.get_absolute_url }}>{{ object.name }}</a></li>
+			{% endfor %}
+		</ul>	
+		{% endblock %}
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+
+		{% get_random_photos 7 as random_photos %}
+		{% for photo in random_photos %}
+		    <p><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></p>
+		{% endfor %}
+		
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
 {% endblock %}
 
