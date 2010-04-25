@@ -10,7 +10,7 @@ class Sponsor(models.Model):
     phone = models.PositiveIntegerField()
     email = models.EmailField()
     logo = models.URLField()
-    discount_detail = models.TextField(help_text="Supports Textile markup for examples see http://textile.thresholdstate.com/")
+    discount_detail = models.TextField()
     
     class Meta:
         verbose_name_plural = "Sponsors"

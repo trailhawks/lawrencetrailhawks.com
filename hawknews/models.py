@@ -10,7 +10,7 @@ class HawkNews(models.Model):
     pub_date = models.DateTimeField()
     title = models.CharField(max_length=250)
     slug = models.SlugField(unique=True)
-    body = models.TextField(help_text="Supports Textile markup for examples see http://textile.thresholdstate.com/")
+    body = models.TextField()
     draft = models.IntegerField(choices=DRAFT_CHOICES)
     
     class Meta:

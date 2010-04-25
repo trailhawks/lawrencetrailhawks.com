@@ -30,7 +30,7 @@ class Race(models.Model):
     distance = models.CommaSeparatedIntegerField(max_length=10, help_text="eg 26,2")
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
-    description = models.TextField(help_text="Supports Textile markup for examples see http://textile.thresholdstate.com/")
+    description = models.TextField()
     course_map = models.URLField(default="http://", blank=True, null=True,
                                  help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True,
@@ -41,14 +41,13 @@ class Race(models.Model):
                                help_text="Link to google maps or other mapping software pointing towards the start location")
     reg_url = models.URLField(default="http://", blank=True, null=True,
                               help_text="Link to registartion flyer or to registration URL for online signup.")
-    reg_description = models.TextField(help_text="Supports Textile markup for examples see http://textile.thresholdstate.com/")
+    reg_description = models.TextField()
     entry_form = models.FileField(upload_to="races/entry_forms",null=True, blank=True)
     discounts = models.TextField(blank=True, null=True,
                                  help_text="Describe discounts for the race if they exist.")
     lodging = models.URLField(default="http://", blank=True, null=True,
                               help_text="link to lodging information.")
-    packet_pickup = models.TextField(help_text="Supports Textile markup for examples see http://textile.thresholdstate.com/", 
-                                     blank=True, null=True)
+    packet_pickup = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
         return self.slug
