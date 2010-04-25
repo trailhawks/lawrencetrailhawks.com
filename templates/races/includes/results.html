@@ -11,7 +11,15 @@
 		<th>Award</th>
 	</tr>
 {% for result in object.get_overall_results %}
+{% if result.course_record %}
+  {% ifequal result.racer.gender 1 %}
+    <tr bgcolor="CCFFFF">
+  {% else %}
+    <tr bgcolor="#FFCCCC">
+  {% endifequal %}
+{% else %}
 <tr>
+{% endif %}
 	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
@@ -24,6 +32,9 @@
 	</td>
 	<td>{{ result.time|replace_char:",:" }}</td>
 	<td>{{ result.place }}</td>
+	{% if result.course_record %}
+	<td>CR</td>
+	{% endif %}
 	{% else %}
 	<td>DQ</td>
 	<td>{{ result.bib_number }}</td>
@@ -51,13 +62,20 @@
 		<th>Award</th>
 	</tr>
 {% for result in object.get_male_results %}
-<tr>
+{% if result.course_record %}
+    <tr bgcolor="CCFFFF">
+{% else %}
+    <tr>
+{% endif %}
 	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
 	<td>{{ result.racer.full_name }}</td>
 	<td>{{ result.time|replace_char:",:" }}</td>
 	<td>{{ result.place }}</td>
+	{% if result.course_record %}
+	<td>CR</td>
+	{% endif %}
 	{% else %}
 	<td>DQ</td>
 	<td>{{ result.bib_number }}</td>
@@ -79,13 +97,20 @@
 		<th>Award</th>
 	</tr>
 {% for result in object.get_female_results %}
-<tr>
+{% if result.course_record %}
+    <tr bgcolor="#FFCCCC">
+{% else %}
+    <tr>
+{% endif %}
 	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
 	<td>{{ result.racer.full_name }}</td>
 	<td>{{ result.time|replace_char:",:" }}</td>
 	<td>{{ result.place }}</td>
+	{% if result.course_record %}
+	<td>CR</td>
+	{% endif %}
 	{% else %}
 	<td>DQ</td>
 	<td>{{ result.bib_number }}</td>

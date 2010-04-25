@@ -1,7 +1,7 @@
 from django.contrib import admin
-from lawrencetrailhawks.sponsors.models import Sponsors
+from lawrencetrailhawks.sponsors.models import Sponsor
 
-class SponsorsAdmin(admin.ModelAdmin):
+class SponsorAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['name'] }
 
-admin.site.register(Sponsors, SponsorsAdmin)
+admin.site.register(Sponsor, SponsorAdmin)

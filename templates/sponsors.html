@@ -1,14 +1,52 @@
 {% extends "base.html" %}
+{% load oembed_tags %}
+{% load flickr %}
 
 {% block title %}Sponsors{% endblock %}
 
-{% block members %}
-<h2>Sponsors</h2>
+{% block header %}
+	<div id="header">
+		<div id="top">
+			<div class="left" id="logo">
+				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+			</div>
+			<div class="left navigation" id="main-nav">
+				<ul class="tabbed">
+					<li><a href="/">Home</a></li>
+					<li><a href="/races/">Races</a></li>
+					<li><a href="/runs/">Runs</a></li>
+					<li><a href="/photos/">Photos</a></li>
+					<li class="current-tab"><a href="/sponsors/">Sponsors</a></li>
+				</ul>
+				<div class="clearer">&nbsp;</div>
+			</div>
+			<div class="clearer">&nbsp;</div>
+		</div>
+	</div>
+{% endblock %}
 
-<ul>
-	{% for sponsor in sponsors %}
-	<li>{{sponsor.name}}</li>
-	{% endfor %}
-</ul>
+{% block sponsors %}
+<div class="main" id="main-two-columns">
 
+	<div class="left" id="main-content">
+		{% for sponsor in sponsors %}
+			<p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo }}" /></a></p>
+			<p><strong>Address: </strong>{{ sponsor.address }}
+			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}
+		{% endfor %}
+		{% block sponsor_detail %}{% endblock %}	
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+
+		{% get_random_photos 7 as random_photos %}
+		{% for photo in random_photos %}
+		    <p><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></p>
+		{% endfor %}
+		
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
 {% endblock %}

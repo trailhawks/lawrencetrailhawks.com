@@ -1,6 +1,6 @@
 from django.db import models
 
-class Sponsors(models.Model):
+class Sponsor(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True,
                             help_text="Suggested value automatically generated from name. Must be unique.")
@@ -9,7 +9,7 @@ class Sponsors(models.Model):
     address = models.TextField()
     phone = models.PositiveIntegerField()
     email = models.EmailField()
-    logo = models.ImageField(upload_to="sponsors/logos", blank=True, null=True)
+    logo = models.URLField()
     discount_detail = models.TextField()
     
     class Meta:

@@ -1,13 +1,16 @@
 {% extends "base.html" %}
+{% load hawknews %}
+{% load markup %}
 
 {% block home_page %}
 	<div id="splash">
 		<div class="col3 left">
 			<h2 class="label label-green">Latest Hawk News</h2>
 			<p class="quiet large">What's happening</p>
-			<p>Hawk 50 Entrant list is up!</p>
-			<p>Blah Blah</p>
-			<p>More blah news blah The hawk 50 is coming up soon!! better get ready!!!!!!</p>
+			{% get_latest hawknews.HawkNews 5 as latest_news %}
+			{% for item in latest_news %}
+			{{ item.body|textile }}
+			{% endfor %}
 		</div>
 		<div class="col3-mid left">
 			<h2 class="label label-orange">Today's Run</h2>
@@ -66,14 +69,7 @@
 			<div class="clearer">&nbsp;</div>	
 		</div>
 		<div class="right sidebar" id="sidebar">
-			<div class="section">
-				<div class="section-title">Search</div>
-				<div class="section-content">
-					<form method="post" action="">
-						<input type="text" class="text" size="28" /> &nbsp; <input type="submit" class="button" value="Submit" />
-					</form>
-				</div>
-			</div>
+			
 			<div class="section">
 				{% block faq_preview %}
 				{% load faq_extras %}
@@ -100,11 +96,11 @@
 					{% load officers %}
 					{% get_officers as officers %}
 					<ul class="nice-list">
-						<li><a href="#">{{ officers.president }}</a> <span class="quiet">- President</span></li>
-						<li><a href="#">{{ officers.vice_president }}</a> <span class="quiet">- Vice President</span></li>
-						<li><a href="#">{{ officers.treasurer }}</a> <span class="quiet">- Treasurer</span></li>
-						<li><a href="#">{{ officers.secretary }}</a> <span class="quiet">- Secretary</span></li>
-						<li><a href="#">{{ officers.web_master }}</a> <span class="quiet">- Webmaster</span></li>
+						<li><a href="{{ officers.president.get_absolute_url }}">{{ officers.president }}</a> <span class="quiet">- President</span></li>
+						<li><a href="{{ officers.vice_president.get_absolute_url }}">{{ officers.vice_president }}</a> <span class="quiet">- Vice President</span></li>
+						<li><a href="{{ officers.treasurer.get_absolute_url }}">{{ officers.treasurer }}</a> <span class="quiet">- Treasurer</span></li>
+						<li><a href="{{ officers.secretary.get_absolute_url }}">{{ officers.secretary }}</a> <span class="quiet">- Secretary</span></li>
+						<li><a href="{{ officers.web_master.get_absolute_url }}">{{ officers.web_master }}</a> <span class="quiet">- Webmaster</span></li>
 					</ul>
 				</div>
 				{% endblock %}

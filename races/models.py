@@ -175,6 +175,8 @@ class Result(models.Model):
                              
     def __unicode__(self):
         return "%s - %s - %s"%(self.racer, self.race.title, self.time)
+
+        
     
 class Report(models.Model):
     

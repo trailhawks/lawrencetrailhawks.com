@@ -1,12 +1,53 @@
 {% extends "base.html" %}
+{% load oembed_tags %}
+{% load flickr %}
 
 {% block title %}Trail Hawk Members{% endblock %}
 
+{% block header %}
+	<div id="header">
+		<div id="top">
+			<div class="left" id="logo">
+				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+			</div>
+			<div class="left navigation" id="main-nav">
+				<ul class="tabbed">
+					<li><a href="/">Home</a></li>
+					<li><a href="/races/">Races</a></li>
+					<li><a href="/runs/">Runs</a></li>
+					<li><a href="/photos/">Photos</a></li>
+					<li><a href="/sponsors/">Sponsors</a></li>
+				</ul>
+				<div class="clearer">&nbsp;</div>
+			</div>
+			<div class="clearer">&nbsp;</div>
+		</div>
+	</div>
+{% endblock %}
+
 {% block members %}
-<h2>Trail Hawk Members</h2>
-  <ul>
-  {% for member in object_list %}
-    <li><a href="{{member.get_absolute_url}}">{{ member.username.first_name }} "{{ member.hawk_name }}" {{ member.username.last_name}}</a></li>
-  {% endfor %}
+<div class="main" id="main-two-columns">
+
+	<div class="left" id="main-content">
+		<ul>
+		  	{% for member in object_list %}
+			    <li><a href="{{member.get_absolute_url}}">{{ member.username.first_name }} "{{ member.hawk_name }}" {{ member.username.last_name}}</a></li>
+			  {% endfor %}
+		  </ul>	
+		{% block member_detail %}{% endblock %}	
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+
+		{% get_random_photos 7 as random_photos %}
+		{% for photo in random_photos %}
+		    <p><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></p>
+		{% endfor %}
+		
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
 {% endblock %}
 

@@ -89,6 +89,8 @@ INSTALLED_APPS = (
     'runs',
     'sponsors',
     'races',
+    'hawknews',
+    'django.contrib.markup',
     'oembed',
     'tagging',
     'syncr.flickr',
