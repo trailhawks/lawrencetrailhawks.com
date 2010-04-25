@@ -12,7 +12,7 @@ class Run(models.Model):
     location = models.TextField()
     map_link = models.URLField(default="http://",
                                help_text="Link to google maps location")
-    details = models.TextField()
+    details = models.TextField(help_text="Supports Textile markup for examples see http://textile.thresholdstate.com/")
     contact = models.ForeignKey(Member)
     
     class Meta:
