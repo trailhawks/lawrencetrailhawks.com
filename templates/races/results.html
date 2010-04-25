@@ -42,12 +42,9 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		<h2>Results</h2>
-		  <ul>
 		  {% for race in latest %}
-		    <li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</li>
+		    &nbsp;&nbsp;<p<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</p>
 		  {% endfor %}
-		  </ul>	
 	</div>
 
 	<div class="right sidebar" id="sidebar">
