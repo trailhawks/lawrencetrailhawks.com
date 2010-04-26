@@ -23,7 +23,7 @@
 	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.full_name }}</td>
+	<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
 	<td>{% ifequal result.racer.gender 1 %}
 		Male
 		{% else %}
@@ -105,7 +105,7 @@
 	{% if not result.dq %}
 	<td>{{ forloop.counter }}</td>
 	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.full_name }}</td>
+	<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
 	<td>{{ result.time|replace_char:",:" }}</td>
 	<td>{{ result.place }}</td>
 	{% if result.course_record %}

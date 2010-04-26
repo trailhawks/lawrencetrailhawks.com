@@ -1,0 +1,13 @@
+{% extends "blog/post_archive.html" %}
+
+{% block title %}{{object.title}}{% endblock %}
+
+{% block blog_detail %}
+<div class="post-title"><h2>{{ object.title }}</h2></div>
+
+<div class="post-date">{{ object.publish|date}} by {{ object.author}}</div>
+
+<div class="post-body">
+<p>{{ object.body }}</p>
+</div>
+{% endblock %}

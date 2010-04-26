@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from lawrencetrailhawks.races.models import Race
+from lawrencetrailhawks.races.models import Race, Racer
 from django.views.generic.date_based import object_detail, archive_index
 import datetime
 
@@ -15,3 +15,5 @@ def results(request):
     a = archive_index(request, queryset, "start_datetime", template_name="races/results.html")
     return HttpResponse(a)
     
+def get_racer(request):
+    queryset = Racer.objects.filter()

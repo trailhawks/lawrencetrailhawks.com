@@ -161,6 +161,9 @@ class Racer(models.Model):
     def full_name(self):
         return "%s %s" % (self.first_name, self.last_name)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return "/racer/%i" % self.pk
     
 
 class Result(models.Model):

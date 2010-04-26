@@ -2,7 +2,7 @@
 {% load oembed_tags %}
 {% load flickr %}
 
-{% block title %}FAQ{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block header %}
 	<div id="header">
@@ -25,18 +25,27 @@
 	</div>
 {% endblock %}
 
-{% block faq %}
+{% block sub_nav %}
+
+<div class="navigation" id="sub-nav">
+	<ul class="tabbed">
+		<li class="current-tab"><a href="/races/">All Races</a></li>
+		<li><a href="/races/results/">Race Results</a></li>
+		<li><a href="/races/upcoming/">Upcoming Races</a></li>
+	</ul>
+	<div class="clearer">&nbsp;</div>
+</div>
+
+{% endblock %}
+
+{% block blog_index %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		<ul>
-		  {% for faq in object_list %}
-		    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></h3>
-		    <p>{{ faq.answer }}</p>
-		  {% endfor %}
-		  </ul>	
-		<p>For more questions email Gary Henry at <a href="mailto:unews@ultrastory.com">unews@ultrastory.com</a></p>
-		{% block faq_detail %}{% endblock %}	
+		{% for post in latest %}
+		  {{ post }}
+		{% endfor %}
+		{% block blog_detail %}{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
@@ -51,5 +60,8 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
 
+
+
+
+{% endblock %}

@@ -90,17 +90,15 @@
 				{% endblock %}
 			</div>
 			<div class="section">
-				{% block officers %}
-				<div class="section-title">Officers</div>
+				{% block blog_preview %}
+				{% load blog_extras %}
+				{% get_latest blog.Post 5 as posts %}
+				<div class="section-title">Hawk Talk</div>
 				<div class="section-content">
-					{% load officers %}
-					{% get_officers as officers %}
 					<ul class="nice-list">
-						<li><a href="{{ officers.president.get_absolute_url }}">{{ officers.president }}</a> <span class="quiet">- President</span></li>
-						<li><a href="{{ officers.vice_president.get_absolute_url }}">{{ officers.vice_president }}</a> <span class="quiet">- Vice President</span></li>
-						<li><a href="{{ officers.treasurer.get_absolute_url }}">{{ officers.treasurer }}</a> <span class="quiet">- Treasurer</span></li>
-						<li><a href="{{ officers.secretary.get_absolute_url }}">{{ officers.secretary }}</a> <span class="quiet">- Secretary</span></li>
-						<li><a href="{{ officers.web_master.get_absolute_url }}">{{ officers.web_master }}</a> <span class="quiet">- Webmaster</span></li>
+						{% for post in posts %}
+						<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by {{ post.author }}</span></li>
+						{% endfor %}
 					</ul>
 				</div>
 				{% endblock %}
