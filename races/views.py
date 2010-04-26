@@ -15,5 +15,6 @@ def results(request):
     a = archive_index(request, queryset, "start_datetime", template_name="races/results.html")
     return HttpResponse(a)
     
-def get_racer(request):
-    queryset = Racer.objects.filter()
+ 
+    
+    

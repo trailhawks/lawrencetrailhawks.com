@@ -26,7 +26,6 @@ urlpatterns = patterns('',
     (r'^members/', include('lawrencetrailhawks.members.urls.members') ),
     (r'^sponsors/', 'lawrencetrailhawks.sponsors.views.get_sponsors' ),
     (r'^races/', include('lawrencetrailhawks.races.urls.races') ),
-    (r'^racer/', include('lawrencetrailhawks.races.urls.racer')),
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.STATIC_DOC_ROOT}),
 

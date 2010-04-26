@@ -1,9 +1,9 @@
-from races.models import Race	 	
-from django.template import Library, Node	 	
-import datetime	 	
-register = Library()	 		 	
-@register.filter(name="replace_char")	 	
+from races.models import Race
+from django.template import Library, Node
+import datetime
+register = Library()
 
+@register.filter(name="replace_char")	 	
 def replace_char(value, arg):
     """
     Replaces a character with another char

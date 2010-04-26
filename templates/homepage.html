@@ -97,8 +97,9 @@
 				<div class="section-content">
 					<ul class="nice-list">
 						{% for post in posts %}
-						<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by {{ post.author }}</span></li>
+						<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></span></li>
 						{% endfor %}
+						<li><a href="/blog/" class="more">Read more &#187;</a></li>
 					</ul>
 				</div>
 				{% endblock %}

@@ -56,21 +56,22 @@ class Member(models.Model):
         return self.username.email
     
     @property
-    def president(self):
-        return self.objects.get(positon=1)
-
-    @property   
-    def vice_president(self):
-        return self.objects.get(position=2)
-
-    @property        
-    def secretary(self):
-        return self.objects.get(position=4)
-
+    def get_position(self):
+        for pos, title in self.POSITION_CHOICES:
+            if self.position == pos:
+                return title
+    
+    @property
+    def get_blog_posts(self):
+        from blog.models import Post
+        return Post.objects.filter(author=self)
+    
     @property    
-    def treasurer(self):
-        return self.objects.get(position=3)
-        
-    @property        
-    def web_master(self):
-        return self.objects.get(position=5)
+    def get_race_results(self):
+        from races.models import Result
+        return Result.objects.filter(racer__trailhawk=self)
+    
+    @property
+    def get_race_reports(self):
+        from races.models import Report
+        return Report.objects.filter(racer__trailhawk=self)

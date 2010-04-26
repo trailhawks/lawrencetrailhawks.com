@@ -15,6 +15,7 @@
 					<li><a href="/">Home</a></li>
 					<li><a href="/races/">Races</a></li>
 					<li><a href="/runs/">Runs</a></li>
+					<li class="current-tab"><a href="/blog/">Blog</a></li>
 					<li><a href="/photos/">Photos</a></li>
 					<li><a href="/sponsors/">Sponsors</a></li>
 				</ul>
@@ -29,9 +30,7 @@
 
 <div class="navigation" id="sub-nav">
 	<ul class="tabbed">
-		<li class="current-tab"><a href="/races/">All Races</a></li>
-		<li><a href="/races/results/">Race Results</a></li>
-		<li><a href="/races/upcoming/">Upcoming Races</a></li>
+		<li class="current-tab"><a href="/blog/">All Blog Posts</a></li>
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
@@ -43,7 +42,7 @@
 
 	<div class="left" id="main-content">
 		{% for post in latest %}
-		  {{ post }}
+		  <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a> on {{ post.publish|date }}
 		{% endfor %}
 		{% block blog_detail %}{% endblock %}
 	</div>

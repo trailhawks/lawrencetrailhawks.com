@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% load oembed_tags %}
 {% load flickr %}
+{% load oembed_tags %}
 
-{% block title %}Races{% endblock %}
+{% block title %}Racers Index{% endblock %}
 
 {% block header %}
 	<div id="header">
@@ -15,6 +15,7 @@
 					<li><a href="/">Home</a></li>
 					<li class="current-tab"><a href="/races/">Races</a></li>
 					<li><a href="/runs/">Runs</a></li>
+					<li><a href="/blog/">Blog</a></li>
 					<li><a href="/photos/">Photos</a></li>
 					<li><a href="/sponsors/">Sponsors</a></li>
 				</ul>
@@ -30,22 +31,25 @@
 <div class="navigation" id="sub-nav">
 	<ul class="tabbed">
 		<li><a href="/races/">All Races</a></li>
-		<li class="current-tab"><a href="/races/results/">Race Results</a></li>
+		<li><a href="/races/results/">Race Results</a></li>
 		<li><a href="/races/upcoming/">Upcoming Races</a></li>
-		<li><a href="/races/racers/">Racers</a></li>
+		<li class="current-tab"><a href="/races/racers/">Racers</a></li>
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
 
 {% endblock %}
 
-{% block race_index %}
+{% block racer_index %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		  {% for race in latest %}
-		    &nbsp;&nbsp;<p<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</p>
-		  {% endfor %}
+		<ul>
+		  	{% for racer in object_list %}
+				<li><a href="{{ racer.get_absolute_url }}">{{racer}}</a></li>
+			  {% endfor %}
+		  </ul>	
+		{% block racer_detail %}{% endblock %}	
 	</div>
 
 	<div class="right sidebar" id="sidebar">
@@ -60,8 +64,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-
-
-
-
 {% endblock %}

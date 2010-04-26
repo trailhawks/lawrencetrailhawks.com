@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 import datetime
-from lawrencetrailhawks.races.models import Race
+from lawrencetrailhawks.races.models import Race, Racer
 
 
 race_info_dict = {
@@ -11,8 +11,12 @@ race_info_dict = {
                       'completed_races': Race.objects.filter(start_datetime__lte=datetime.datetime.today()),},
 }
 
+racer_info_dict = {
+    'queryset': Racer.objects.all(),
+}
+
 urlpatterns = patterns('',
-     (r'^$',
+    (r'^$',
      'django.views.generic.date_based.archive_index',
      race_info_dict,
      'race_archive_index'),
@@ -32,6 +36,14 @@ urlpatterns = patterns('',
      'django.views.generic.date_based.object_detail',
      race_info_dict,
      'race_detail'),
-     (r'^results/', 'races.views.results'),
-     (r'^upcoming/', 'races.views.upcoming_races'),
+    (r'^results/', 'races.views.results'),
+    (r'^upcoming/', 'races.views.upcoming_races'),
+    (r'^racers/$',
+      'django.views.generic.list_detail.object_list',
+      racer_info_dict,
+      'racer_list'),
+     (r'^racers/(?P<object_id>[-\w]+)/$',
+      'django.views.generic.list_detail.object_detail',
+      racer_info_dict,
+      'racer_detail'),
 )

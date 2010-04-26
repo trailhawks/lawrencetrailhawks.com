@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from members.models import Member
+import datetime
     
     
 class Race(models.Model):
@@ -163,8 +164,24 @@ class Racer(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return "/racer/%i" % self.pk
+        """docstring for get_absolute_url"""
+        return ('racer_detail', (), { 'object_id': self.pk } )
+        
+    @property
+    def get_results(self):
+        return Result.objects.filter(racer=self)
+        
+    @property
+    def age(self):
+        TODAY = datetime.date.today()
+        return  (TODAY.year - self.birth_date.year)
     
+    @property
+    def get_gender(self):
+        for num, gender in self.GENDER_CHOICES:
+            if num == self.gender:
+                return gender
+       
 
 class Result(models.Model):
     racer = models.ForeignKey(Racer)
