@@ -81,6 +81,10 @@ class Race(models.Model):
         return self.registration_set.all().order_by('reg_date')
         
     @property
+    def get_race_news(self):
+        return News.objects.filter(race=self, draft=2).order_by('-pub_date')
+    
+    @property
     def is_finished(self):
         if self.result_set.count == 0:
             return False
@@ -100,15 +104,31 @@ class Registration(models.Model):
         return "%s %s"%(self.race.title, self.reg_date)
 
 class News(models.Model):
-    title = models.CharField(max_length=40)
-    news_item = models.TextField()
+    DRAFT = 1
+    PUBLIC = 2
+    DRAFT_CHOICES = (
+        (DRAFT,"Draft",),
+        (PUBLIC,"Public",),
+    )
+    pub_date = models.DateTimeField()
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(unique=True)
     race = models.ForeignKey(Race)
-
+    body = models.TextField()
+    draft = models.IntegerField(choices=DRAFT_CHOICES)
+    
     class Meta:
-        verbose_name_plural = "Latest race news"
+        verbose_name_plural="Latest Race Updates"
     
     def __unicode__(self):
-        return self.title
+        return self.slug
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('news_detail', (), { 'year': self.start_datetime.strftime("%Y"),
+                                      'month': self.start_datetime.strftime("%b").lower(),
+                                      'day': self.start_datetime.strftime("%d"),
+                                      'slug': self.slug } )
 
 class EmergencyContact(models.Model):
     first_name = models.CharField(max_length=40)

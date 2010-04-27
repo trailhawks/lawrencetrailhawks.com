@@ -37,6 +37,13 @@
 {% block run_detail %}
 
 <h2>{{ object.name }}</h2>
+{% if object.get_run_news %}
+<p><strong>Latest News:</strong><br />
+	{% for item in object.get_run_news|slice:":3" %}
+	&nbsp;&nbsp;{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
+	{% endfor %}
+</p>
+{% endif %}
 <p><b>When:</b> {{ object.run_date }} at {{ object.run_time }}</p>
 <p><b>Where:</b> {{ object.location }}</p>
 <p><b>Details:</b> {{ object.details }}</p>

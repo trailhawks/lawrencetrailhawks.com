@@ -51,6 +51,13 @@
 			<h4>{{ object.slogan }}</h4>
 
 			<br />
+			{% if object.get_race_news %}
+			<p><strong>Latest News:</strong><br />
+				{% for item in object.get_race_news|slice:":3" %}
+				&nbsp;&nbsp;{{ item.body }}
+				{% endfor %}
+			</p>
+			{% endif %}
 			<p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
 			<p><b>Start time:</b> {{ object.start_datetime|time:"H:i A" }}</p>
 			<p><b>Race details:</b> {{object.description}}<br />

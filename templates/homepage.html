@@ -16,13 +16,20 @@
 			<h2 class="label label-orange">Today's Run</h2>
 			{% load run_extras %}
 			{% get_todays_run %}
-			{% if todays_run %}
+			{% if todays_run|slice:":1" %}
 				<p class="quiet large"><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
+				{% if todays_run.get_run_news %}
+				<p><strong>Latest News:</strong><br />
+					{% for item in todays_run.get_run_news|slice:":3" %}
+					&nbsp;&nbsp;{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
+					{% endfor %}
+				</p>
+				{% endif %}
 				<p><em><strong>Where: </strong></em>{{ todays_run.location}}<br />
 					Click <a href="{{ todays_run.map_link}}">here</a> for directions.</p>
 				<p><em><strong>When: </strong></em>{{ todays_run.run_time }}</p>
 				<p><em><strong>What: </strong></em>{{ todays_run.details }}</a></p>
-				<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.member_email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
+				<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.username.email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
 			{% else %}
 				<p class="quiet large">No run scheduled for today</p>
 			{% endif %}
@@ -50,6 +57,13 @@
 						<div class="post-body">
 							<p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
 							<p class="large">{{ latest_race.slogan }}</p>
+							{% if latest_race.get_race_news %}
+							<p><strong>Latest News:</strong><br />
+								{% for item in latest_race.get_race_news|slice:":3" %}
+								&nbsp;&nbsp;{{ item.body }}
+								{% endfor %}
+							</p>
+							{% endif %}
 							<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
 								<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
 							<p><strong><em>Course: </em></strong>{{ latest_race.description }}<br />

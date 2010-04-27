@@ -5,7 +5,7 @@ register = Library()
     
 class TodaysRunNode(Node):
     def render(self, context):
-        context['todays_run'] = Run.objects.filter(run_date=datetime.datetime.now().strftime("%A"))[:0]
+        context['todays_run'] = Run.objects.filter(run_date=datetime.datetime.now().strftime("%A"))
         return ''
 
 @register.tag

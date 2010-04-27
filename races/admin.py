@@ -4,14 +4,14 @@ from lawrencetrailhawks.races.models import Race, Racer, Result, Report, Registr
 class RegistrationInline(admin.TabularInline):
     model = Registration
 
-class NewsInline(admin.TabularInline):
+class NewsInline(admin.StackedInline):
     model = News
         
 class RegistrationAdmin(admin.ModelAdmin):
     pass
     
 class NewsAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = { 'slug': ['title',] }
     
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ['title', 'annual'] }
