@@ -5,10 +5,10 @@
 
 {% block member_detail %}
 <h2>Member info for {{ object.full_hawk_name }}</h2>
-<table>
+<table border="1">
 <tr>
 <td><img src="/site_media/{{ object.avatar }}" /></td>
-<td><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
+<td align="left"><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
 {% if object.position %}
 <p><strong>Position:</strong> {{ object.get_position }}
 {% endif %}
