@@ -16,10 +16,10 @@ class Member(models.Model):
         (WEB_MASTER, "Web Master"),
     )
     
-    username = models.ForeignKey(User)
+    username = models.ForeignKey(User, null=True, blank=True)
     hawk_name = models.CharField(max_length=50)
     phone = models.PositiveIntegerField()
-    email = models.EmailField()
+    email = models.CharField(max_length=75)
     address = models.TextField()
     avatar = models.ImageField(upload_to="members/avatars", blank=True,null=True)
     active = models.BooleanField()
