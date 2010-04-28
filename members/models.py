@@ -17,6 +17,8 @@ class Member(models.Model):
     )
     
     username = models.ForeignKey(User, null=True, blank=True)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
     hawk_name = models.CharField(max_length=50)
     phone = models.PositiveIntegerField()
     email = models.EmailField()
@@ -46,11 +48,11 @@ class Member(models.Model):
         
     @property
     def full_hawk_name(self):
-        return "%s \"%s\" %s" % (self.username.first_name, self.hawk_name, self.username.last_name)
+        return "%s \"%s\" %s" % (self.first_name, self.hawk_name, self.last_name)
     
     @property
     def full_name(self):
-        return "%s %s" % (self.username.first_name, self.username.last_name)
+        return "%s %s" % (self.first_name, self.last_name)
     
     @property
     def get_position(self):
