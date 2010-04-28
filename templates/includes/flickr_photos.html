@@ -1,0 +1,6 @@
+{% load flickr %}
+{% load oembed_tags %}
+{% get_random_photos 7 as random_photos %}
+{% for photo in random_photos %}
+    <p><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></p>
+{% endfor %}

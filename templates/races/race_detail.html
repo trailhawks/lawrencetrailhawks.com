@@ -109,10 +109,7 @@
 		</div>
 
 		<div class="right sidebar" id="sidebar">
-			{% get_random_photos 7 as random_photos %}
-			{% for photo in random_photos %}
-			    <p><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></p>
-			{% endfor %}
+				{% include "includes/flickr_photos.html" %}
 
 		</div>
 
