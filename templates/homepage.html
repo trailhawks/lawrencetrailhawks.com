@@ -58,9 +58,9 @@
 							<p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
 							<p class="large">{{ latest_race.slogan }}</p>
 							{% if latest_race.get_race_news %}
-							<p><strong>Latest News:</strong><br />
+							<p><strong>Latest News:</strong>
 								{% for item in latest_race.get_race_news|slice:":3" %}
-								&nbsp;&nbsp;{{ item.body|textile }}
+								{{ item.body|textile }}
 								{% endfor %}
 							</p>
 							{% endif %}
