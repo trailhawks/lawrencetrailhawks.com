@@ -67,7 +67,7 @@
 							<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
 								<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
 							<p><strong><em>Course: </em></strong>{{ latest_race.description }}<br />
-								Click <a href="latest_race.course_map">here</a> for course map.</p>
+								Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
 							<p><strong><em>Entry fee:</em></strong></p>
 								<ul>
 									{% for reg in latest_race.get_reg_dates %}
