@@ -60,7 +60,7 @@
 							{% if latest_race.get_race_news %}
 							<p><strong>Latest News:</strong><br />
 								{% for item in latest_race.get_race_news|slice:":3" %}
-								&nbsp;&nbsp;{{ item.body }}
+								&nbsp;&nbsp;{{ item.body|textile }}
 								{% endfor %}
 							</p>
 							{% endif %}
