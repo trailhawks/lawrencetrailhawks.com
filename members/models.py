@@ -19,7 +19,7 @@ class Member(models.Model):
     username = models.ForeignKey(User, null=True, blank=True)
     hawk_name = models.CharField(max_length=50)
     phone = models.PositiveIntegerField()
-    email = models.CharField(max_length=75)
+    email = models.EmailField()
     address = models.TextField()
     avatar = models.ImageField(upload_to="members/avatars", blank=True,null=True)
     active = models.BooleanField()
