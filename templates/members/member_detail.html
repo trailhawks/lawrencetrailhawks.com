@@ -5,6 +5,7 @@
 
 {% block member_detail %}
 <h2>Member info for {{ object.username.first_name }} {{ object.username.last_name}}</h2>
+<p><img src="{{ object.avatar }}" /></p>
 <p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
 {% if object.position %}
 <p><strong>Position:</strong> {{ object.get_position }}
