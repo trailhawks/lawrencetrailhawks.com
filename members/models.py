@@ -53,10 +53,6 @@ class Member(models.Model):
         return "%s %s" % (self.username.first_name, self.username.last_name)
     
     @property
-    def email(self):
-        return self.username.email
-    
-    @property
     def get_position(self):
         for pos, title in self.POSITION_CHOICES:
             if self.position == pos:
