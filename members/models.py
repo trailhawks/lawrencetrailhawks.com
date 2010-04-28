@@ -33,7 +33,7 @@ class Member(models.Model):
     #     verbose_name_plural = "Members"
     
     def __unicode__(self):
-           return "%s \"%s\" %s" % (self.username.first_name, self.hawk_name, self.username.last_name)
+           return "%s" % self.full_hawk_name()
    
         
     @models.permalink   
