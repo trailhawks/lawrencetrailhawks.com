@@ -16,7 +16,7 @@
 			<h2 class="label label-orange">Today's Run</h2>
 			{% load run_extras %}
 			{% get_todays_run %}
-			{% if todays_run|slice:":1" %}
+			{% if todays_run %}
 				<p class="quiet large"><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
 				{% if todays_run.get_run_news %}
 				<p><strong>Latest News:</strong><br />
