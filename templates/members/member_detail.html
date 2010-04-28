@@ -4,7 +4,7 @@
 {% block title %}{{object.name}}{% endblock %}
 
 {% block member_detail %}
-<h2>Member info for {{ object.username.first_name }} {{ object.username.last_name}}</h2>
+<h2>Member info for {{ object.full_hawk_name }}</h2>
 <p><img src="/site_media/{{ object.avatar }}" /></p>
 <p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
 {% if object.position %}
