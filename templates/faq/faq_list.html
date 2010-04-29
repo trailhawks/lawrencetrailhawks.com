@@ -34,7 +34,7 @@
 		<ul>
 		  {% for faq in object_list %}
 		    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></h3>
-		    <p>{{ faq.answer }}</p>
+		    <p>{{ faq.answer|textile }}</p>
 		  {% endfor %}
 		  </ul>	
 		{% block faq_detail %}{% endblock %}
