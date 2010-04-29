@@ -2,6 +2,7 @@
 {% load race_extras %}
 {% load oembed_tags %}
 {% load flickr %}
+{% load markup %}
 
 {% block header %}
 	<div id="header">
@@ -55,7 +56,7 @@
 			{% if object.get_race_news %}
 			<p><strong>Latest News:</strong><br />
 				{% for item in object.get_race_news|slice:":3" %}
-				&nbsp;&nbsp;{{ item.body }}
+				&nbsp;&nbsp;{{ item.body|textile }}
 				{% endfor %}
 			</p>
 			{% endif %}
