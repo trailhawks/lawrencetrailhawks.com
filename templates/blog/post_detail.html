@@ -6,7 +6,7 @@
 {% block blog_detail %}
 <div class="post-title"><h2>{{ object.title }}</h2></div>
 
-<div class="post-date">{{ object.publish|date}} by {{ object.author}}</div>
+<div class="post-date">{{ object.publish|date}} by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></div>
 
 <div class="post-body">
 <p>{{ object.body|textile }}</p>
