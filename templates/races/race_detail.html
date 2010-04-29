@@ -7,7 +7,7 @@
 	<div id="header">
 		<div id="top">
 			<div class="left" id="logo">
-				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
 			</div>
 			<div class="left navigation" id="main-nav">
 				<ul class="tabbed">
@@ -79,9 +79,9 @@
 				mi
 				{% endifequal %}
 				</p>
-			<p><b>Contact:</b> {{ object.contact.username.first_name }} {{ object.contact.username.last_name }}<br/>
+			<p><b>Contact:</b> {{ object.contact.full_name }}<br/>
 			&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
-			&nbsp;&nbsp;Email: {{ object.contact.username.email }}</p>
+			&nbsp;&nbsp;Email: {{ object.contact.email }}</p>
 
 			{% if not object.get_overall_results %}
 			<p><b>Registration:</b> {{ object.reg_description }}<br />
