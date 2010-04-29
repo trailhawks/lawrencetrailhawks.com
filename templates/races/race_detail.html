@@ -54,7 +54,7 @@
 
 			<br />
 			{% if object.get_race_news %}
-			<p><strong>Latest News:</strong><br />
+			<p><strong>Latest News:</strong>
 				{% for item in object.get_race_news|slice:":3" %}
 				&nbsp;&nbsp;{{ item.body|textile }}
 				{% endfor %}
