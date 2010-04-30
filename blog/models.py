@@ -18,7 +18,7 @@ class Post(models.Model):
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
     author = models.ForeignKey(Member, blank=True, null=True)
-    body = models.TextField(_('body'), )
+    body = models.TextField(_('body'), help_text="The body supports Textile markup. Please use http://textile.thresholdstate.com/ to markup the blog post and get the right formatting.")
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=2)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
