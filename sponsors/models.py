@@ -7,9 +7,9 @@ class Sponsor(models.Model):
     url = models.URLField(default="http://",
                           help_text="URL to website")
     address = models.TextField()
-    phone = models.PositiveIntegerField()
+    phone = models.CharField(max_length=15)
     email = models.EmailField()
-    logo = models.URLField()
+    logo = models.ImageField(upload_to="sponsors/images")
     discount_detail = models.TextField()
     
     class Meta:
