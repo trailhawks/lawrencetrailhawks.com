@@ -41,9 +41,11 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
+	<ul>
 		{% for post in latest %}
-		  <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a> on {{ post.publish|date }}
+		  <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a> on {{ post.publish|date }}</li>
 		{% endfor %}
+    </ul>
 		{% block blog_detail %}{% endblock %}
 	</div>
 
