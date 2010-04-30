@@ -32,9 +32,11 @@
 	<div class="left" id="main-content">
 		{% for sponsor in sponsors %}
 			<p><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" /></a></p>
-			<p><strong>Address: </strong>{{ sponsor.address }}
-			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}
+			<p><strong>Address: </strong>{{ sponsor.address }}</p>
+			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+			<hr />
 		{% endfor %}
+		
 		{% block sponsor_detail %}{% endblock %}	
 	</div>
 
