@@ -5,8 +5,19 @@
 
 {% block blog_detail %}
 <div class="post-title"><h2>{{ object.title }}</h2></div>
-
 <div class="post-date">{{ object.publish|date}} by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></div>
+<p class="other_posts">
+    {% if object.get_previous_by_publish %}
+    <a class="previous" href="{{ object.get_previous_post.get_absolute_url }}" title="View previous post">&laquo; {{ object.get_previous_post }}</a>
+    {% endif %}
+    {% if object.get_next_by_publish %}
+      {% if object.get_previous_by_publish %}
+    	| <a class="next" href="{{ object.get_next_post.get_absolute_url }}" title="View next post">{{ object.get_next_post }} &raquo;</a>
+      {% else %}
+        <a class="next" href="{{ object.get_next_post.get_absolute_url }}" title="View next post">{{ object.get_next_post }} &raquo;</a>
+      {% endif %}
+	{% endif %}
+  </p>
 
 <div class="post-body">
 <p>{{ object.body|textile }}</p>
