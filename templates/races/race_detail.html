@@ -82,7 +82,7 @@
 				</p>
 			<p><b>Contact:</b> {{ object.contact.full_name }}<br/>
 			&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
-			&nbsp;&nbsp;Email: {{ object.contact.email }}</p>
+			&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
 
 			{% if not object.get_overall_results %}
 			<p><b>Registration:</b> {{ object.reg_description }}<br />
