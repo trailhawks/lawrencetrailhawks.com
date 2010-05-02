@@ -46,21 +46,21 @@
 					<table>
 						<tr>
 					      {% for photo in photos|slice:":4" %}
-					        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
+					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
 					        {{ photo.description }}
 					        </td>
 					      {% endfor %}
 					    </tr>
 					    <tr>
 					      {% for photo in photos|slice:"4:8" %}
-					        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
+					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
 					        {{ photo.description }}
 					        </td>
 					      {% endfor %}
 					    </tr>
 					    <tr>
 					      {% for photo in photos|slice:"8:12" %}
-					        <td><a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
+					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
 					        {{ photo.description }}
 					        </td>
 					      {% endfor %}
