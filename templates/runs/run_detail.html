@@ -47,7 +47,7 @@
 <p><b>When:</b> {{ object.run_date }} at {{ object.run_time }}</p>
 <p><b>Where:</b> {{ object.location }}</p>
 <p><b>Details:</b> {{ object.details }}</p>
-<p><b>Contact:</b> {{ object.contact.username.first_name }} {{ object.contact.username.last_name }} at {{ object.contact.username.email }}
+<p><b>Contact:</b> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
 	
 {% endblock %}
 
