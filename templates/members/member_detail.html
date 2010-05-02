@@ -7,7 +7,9 @@
 <h2>Member info for {{ object.full_hawk_name }}</h2>
 <table>
 <tr>
+	{% if object.avatar %}
 <td width="100"><img src="/site_media/{{ object.avatar }}" /></td>
+    {% endif %}
 <td align="left"><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
 {% if object.position %}
 <p><strong>Position:</strong> {{ object.get_position }}
