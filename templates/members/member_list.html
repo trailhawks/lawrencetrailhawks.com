@@ -32,7 +32,7 @@
 	<div class="left" id="main-content">
 		<ul>
 		  	{% for member in object_list %}
-			    <li><a href="{{member.get_absolute_url}}">{{ member.username.first_name }} "{{ member.hawk_name }}" {{ member.username.last_name}}</a></li>
+			    <li><a href="{{member.get_absolute_url}}">{{ member.full_hawk_name }}</a></li>
 			  {% endfor %}
 		  </ul>	
 		{% block member_detail %}{% endblock %}	
