@@ -42,7 +42,7 @@ class Post(models.Model):
         return ('blog_detail', None, {
             'year': self.publish.year,
             'month': self.publish.strftime('%b').lower(),
-            'day': self.publish.day,
+            'day': self.publish.strftime('%d'),
             'slug': self.slug
         })
 
