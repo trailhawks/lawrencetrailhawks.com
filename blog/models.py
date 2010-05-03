@@ -25,6 +25,10 @@ class Post(models.Model):
     publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
+    repost_url = models.URLField(help_text="URL of original blog posting.", 
+                                 verbose_name='Original Post', null=True, blank=True)
+    repost_date = models.DateField(help_text="Date of original blog posting",
+                                   verbose_name="Original Post Date", null=True, blank=True)
     tags = TagField()
 
     class Meta:
