@@ -19,6 +19,12 @@
 	{% endif %}
   </p>
 
+{% if object.repost_url %}
+<div class='original-post'>
+	<p>Originally published on <a href="{{ object.repost_url }}">{{ object.repost_date|date }}</a></p>
+</div>
+{% endif %}
+
 <div class="post-body">
 <p>{{ object.body|textile }}</p>
 </div>
