@@ -111,7 +111,11 @@
 				<li><a href="{{ object.get_absolute_url }}results/#maleresults">Male Results</a></li>
 				<li><a href="{{ object.get_absolute_url }}results/#femaleresults">Female Results</a></li>
 			  {% block race_result %}{% endblock %}
+			</ul>
+			</p>
 			{% endif %}
+			
+			{% include "comments/comments.html" %}
 			
 		</div>
 
