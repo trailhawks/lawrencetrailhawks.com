@@ -105,7 +105,12 @@
 			{% endif %}
 
 			{% if object.get_overall_results %}
-			  {% include "races/includes/results.html" %}
+			  <p>Results:
+			  <ul>
+				<li><a href="{{ object.get_absolute_url }}results/#overallresults">Overall Results</a></li>
+				<li><a href="{{ object.get_absolute_url }}results/#maleresults">Male Results</a></li>
+				<li><a href="{{ object.get_absolute_url }}results/#femaleresults">Female Results</a></li>
+			  {% block race_result %}{% endblock %}
 			{% endif %}
 			
 		</div>

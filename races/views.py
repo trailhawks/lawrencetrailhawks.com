@@ -15,6 +15,16 @@ def results(request):
     a = archive_index(request, queryset, "start_datetime", template_name="races/results.html")
     return HttpResponse(a)
     
+def race_result(request, *args, **kwargs):
+    year = kwargs.get('year')
+    month = kwargs.get('month')
+    day = kwargs.get('day')
+    slug = kwargs.get('slug')
+    queryset = kwargs.get('queryset')
+    date_field=kwargs.get('date_field')
+    o = object_detail(request, year=year, month=month, day=day, queryset=queryset, date_field=date_field, slug=slug, template_name="races/race_result.html")
+    return HttpResponse(o)
+    
  
     
     
