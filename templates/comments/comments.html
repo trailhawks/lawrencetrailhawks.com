@@ -128,6 +128,7 @@
 								{{ form.security_hash }}
 								{{ form.content_type }}
 								{{ form.timestamp }}
+								{{ form.honeypot }}
 								<input type="hidden" name="next" value="{{ object.get_absolute_url }}" />
 								<input type="submit" class="button" value="Post Comment" />
 								<input type="submit" name="preview" class="button" value="Preview Comment" />
