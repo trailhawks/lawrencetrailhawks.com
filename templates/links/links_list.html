@@ -1,12 +1,61 @@
 {% extends "base.html" %}
+{% load oembed_tags %}
+{% load flickr %}
 
-{% block title %}Trail Hawk Links{% endblock %}
+{% block title %}Sponsors{% endblock %}
 
-{% block link_list %}
-<h2>Links</h2>
-  {% for link in object_list %}
-    <p><a href="{{ link.link }}">{{ link.name }}</a>
-    <p>{{ link.description }}</p>
-  {% endfor %}
+{% block header %}
+	<div id="header">
+		<div id="top">
+			<div class="left" id="logo">
+				<a href="/home"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+			</div>
+			<div class="left navigation" id="main-nav">
+				<ul class="tabbed">
+					<li><a href="/">Home</a></li>
+					<li><a href="/races/">Races</a></li>
+					<li><a href="/runs/">Runs</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/photos/">Photos</a></li>
+					<li class="current-tab"><a href="/links/">Links</a></li>
+				</ul>
+				<div class="clearer">&nbsp;</div>
+			</div>
+			<div class="clearer">&nbsp;</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block sub_nav %}
+
+<div class="navigation" id="sub-nav">
+	<ul class="tabbed">
+		<li class="current-tab"><a href="/links/">Links</a></li>
+		<li><a href="/sponsors/">Sponsors</a></li>
+	</ul>
+	<div class="clearer">&nbsp;</div>
+</div>
+
+{% endblock %}
+
+{% block sponsors %}
+<div class="main" id="main-two-columns">
+	<div class="left" id="main-content">
+		{% for link in object_list %}
+			<p><h3><a href="{{ link.url }}">{{ link.name }}</a></h3>
+				{{ link.description }}
+			</p>
+		{% endfor %}
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+
+			{% include "includes/flickr_photos.html" %}
+		
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
 {% endblock %}
 
