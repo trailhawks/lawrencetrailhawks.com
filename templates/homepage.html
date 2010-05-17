@@ -29,7 +29,7 @@
 					Click <a href="{{ todays_run.map_link}}">here</a> for directions.</p>
 				<p><em><strong>When: </strong></em>{{ todays_run.run_time }}</p>
 				<p><em><strong>What: </strong></em>{{ todays_run.details }}</a></p>
-				<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.username.email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
+				<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
 			{% else %}
 				<p class="quiet large">No run scheduled for today</p>
 			{% endif %}
