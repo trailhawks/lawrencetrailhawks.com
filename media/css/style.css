@@ -609,6 +609,7 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 .col3-mid {margin-left: 3%;}
 
 /* Live Coverage */
+#content{width:860px;padding:10px;background:#FFF;margin:0 auto;position:relative;}
 #content #juitter{width:800px;float:left;}
 
 /* Sections */
