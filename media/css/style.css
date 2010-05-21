@@ -12,6 +12,30 @@ http://templates.arcsin.se/license/
 */
 
 
+/*start Juitter CSS */
+#juitterContainer{} /*Juitter container*/
+
+#juitterContainer .twittList{margin:0;padding:0;} /* UL that will contain the list of tweets */
+
+/* Bellow the list of tweets "<li>" */
+
+#juitterContainer .twittLI{list-style:none;background:#FFF;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #CAF8C9;padding:3px;clear:both;height:25px;} 
+#juitterContainer .twittList SPAN.time{color:#777;font-size:0.9em}
+#juitterContainer .twittList A{color:#006600;} /*Links inside the tweets list */
+
+/* Bellow the CSS for the avatar image  */
+
+#juitterContainer .juitterAvatar{float:left;border:solid 1px #D3EECA;background:#FFF;margin-right:5px;padding:2px;width:48px;;height:48px;}
+
+#juitterContainer .jRM{float:right;clear:both} /*read it on twitter link*/
+
+#juitterContainer .extLink{} /*CSS for the external links*/
+
+#juitterContainer .hashLink{} /*CSS for the hash links*/
+
+/*end of Juitter CSS*/
+
+
 /* 
    Reset
 ------------------------------------------------------------------- */
@@ -583,6 +607,9 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 /* Columns */
 .col3, .col3-mid {width: 31%;}
 .col3-mid {margin-left: 3%;}
+
+/* Live Coverage */
+#content #juitter{width:800px;float:left;}
 
 /* Sections */
 .section {margin-bottom: 24px;}
