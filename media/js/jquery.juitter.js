@@ -135,8 +135,8 @@ The Juitter developer shall have no responsability for data loss or damage of an
                                 	return date.substr(0, 11)+' • ' + hour +":"+ date.substr(13) + ampm;
                                 }
 								
-								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+parseTwitterDate(item.created_at)+"</span>";
-								else mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+parseTwitterDate(item.created_at)+"</span>";
+								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)/*+" - <span class='time'>"+parseTwitterDate(item.created_at)+"</span>"*/;
+								else mHTML=$.Juitter.textFormat(tweet)/*+" - <span class='time'>"+parseTwitterDate(item.created_at)+"</span>"*/;
 								
 								$("<li></li>") 
 									.html(mHTML)  
