@@ -120,9 +120,12 @@ The Juitter developer shall have no responsability for data loss or damage of an
 								var link =  "http://twitter.com/"+item.from_user+"/status/"+item.id;  
 								
 								var tweet = $.Juitter.filter(item.text);
+								var time_posted = function(time){
+								    return item;
+								} 
 								
-								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+item.created_at+"</span>";
-								else mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+item.created_at+"</span>";
+								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+time_posted(time.created_at)+"</span>";
+								else mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+time_posted(time.created_at)+"</span>";
 								
 								$("<li></li>") 
 									.html(mHTML)  
