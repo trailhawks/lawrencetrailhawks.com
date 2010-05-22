@@ -120,20 +120,23 @@ The Juitter developer shall have no responsability for data loss or damage of an
 								var link =  "http://twitter.com/"+item.from_user+"/status/"+item.id;  
 								
 								var tweet = $.Juitter.filter(item.text);
-								var time_posted = function(time){
-								    var day = time.getDate();
-								    var month = time.getMonth();
-								    var year = time.getFullYear();
-								    var min = time.getMinutes();
-								    var hour = time.getHours();
-								    var sec = time.getSeconds();
-								    
-								    post_time = hour + ":" + min + ":" + sec " " + day + "/" + month + "/" + year
-								    return post_time;
-								} 
 								
-								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+time_posted(time.created_at)+"</span>";
-								else mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+time_posted(time.created_at)+"</span>";
+								function parseTwitterDate($stamp)
+                                {		
+                                // convert to local string and remove seconds and year //		
+                                	var date = new Date(Date.parse($stamp)).toLocaleString().substr(0, 16);
+                                // get the two digit hour //
+                                	var hour = date.substr(-5, 2);
+                                // convert to AM or PM //
+                                	var ampm = hour<12 ? ' AM' : ' PM';
+                                	if (hour>12) hour-= 12;
+                                	if (hour==0) hour = 12;
+                                // return the formatted string //
+                                	return date.substr(0, 11)+' • ' + hour +":"+ date.substr(13) + ampm;
+                                }
+								
+								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+parseTwitterDate(item.created_at)+"</span>";
+								else mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+parseTwitterDate(item.created_at)+"</span>";
 								
 								$("<li></li>") 
 									.html(mHTML)  
