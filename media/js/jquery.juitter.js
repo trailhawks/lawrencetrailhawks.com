@@ -121,7 +121,15 @@ The Juitter developer shall have no responsability for data loss or damage of an
 								
 								var tweet = $.Juitter.filter(item.text);
 								var time_posted = function(time){
-								    return item;
+								    var day = time.getDate();
+								    var month = time.getMonth();
+								    var year = time.getFullYear();
+								    var min = time.getMinutes();
+								    var hour = time.getHours();
+								    var sec = time.getSeconds();
+								    
+								    post_time = hour + ":" + min + ":" + sec " " + day + "/" + month + "/" + year
+								    return post_time;
 								} 
 								
 								if(fromID=="image") mHTML=$.Juitter.textFormat(tweet)+" - <span class='time'>"+time_posted(time.created_at)+"</span>";
