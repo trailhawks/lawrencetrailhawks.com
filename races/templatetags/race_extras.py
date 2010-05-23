@@ -1,4 +1,5 @@
 from races.models import Race
+from blog.models import Post
 from django.template import Library, Node
 import datetime
 register = Library()
@@ -15,7 +16,10 @@ def replace_char(value, arg):
     
 class LatestRaceNode(Node):
     def render(self, context):
-        context['latest_race'] = Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime').latest('start_datetime')
+        try:
+            context['latest_race'] = Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime').latest('start_datetime')
+        except:
+            context['latest_post'] = Post.objects.all().order_by('-publish')[0]
         return ''
 
 @register.tag

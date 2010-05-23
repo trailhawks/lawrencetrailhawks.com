@@ -49,36 +49,50 @@
 			<div class="section">
 				{% load race_extras %}
 				{% get_latest_race %}
-				<div class="section-title">Upcoming Event</div>
-				<div class="section-content">
-					<div class="post">
-						<div class="post-title"><h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2></div>
-						<div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
-						<div class="post-body">
-							<p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
-							<p class="large">{{ latest_race.slogan }}</p>
-							{% if latest_race.get_race_news %}
-							<p><strong>Latest News:</strong>
-								{% for item in latest_race.get_race_news|slice:":3" %}
-								{{ item.body|textile }}
-								{% endfor %}
-							</p>
-							{% endif %}
-							<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
-								<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
-							<p><strong><em>Course: </em></strong>{{ latest_race.description }}<br />
-								Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
-							<p><strong><em>Entry fee:</em></strong></p>
-								<ul>
-									{% for reg in latest_race.get_reg_dates %}
-									<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+				{% if latest_race %}
+					<div class="section-title">Upcoming Event</div>
+					<div class="section-content">
+						<div class="post">
+							<div class="post-title"><h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2></div>
+							<div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
+							<div class="post-body">
+								<p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
+								<p class="large">{{ latest_race.slogan }}</p>
+								{% if latest_race.get_race_news %}
+								<p><strong>Latest News:</strong>
+									{% for item in latest_race.get_race_news|slice:":3" %}
+									{{ item.body|textile }}
 									{% endfor %}
-								</ul>
-							<p>{{ latest_event.discount }}</p>
+								</p>
+								{% endif %}
+								<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
+									<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
+								<p><strong><em>Course: </em></strong>{{ latest_race.description }}<br />
+									Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
+								<p><strong><em>Entry fee:</em></strong></p>
+									<ul>
+										{% for reg in latest_race.get_reg_dates %}
+										<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+										{% endfor %}
+									</ul>
+								<p>{{ latest_event.discount }}</p>
+							</div>
 						</div>
+						<div class="clearer">&nbsp;</div>
 					</div>
-					<div class="clearer">&nbsp;</div>
-				</div>
+				{% else %}
+					<div class="section-title">Latest Post</div>
+					<div class="section-content">
+						<div class="post">
+							<div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
+							<div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
+							<div class="post-body">
+								{{ latest_post.body|textile }}
+							</div>
+						</div>
+						<div class="clearer">&nbsp;</div>
+					</div>
+				{% endif %}
 			</div>
 			<div class="clearer">&nbsp;</div>	
 		</div>
