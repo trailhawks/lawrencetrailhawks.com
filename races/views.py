@@ -11,7 +11,7 @@ def upcoming_races(request):
     return HttpResponse(a)
     
 def results(request):
-    queryset = Race.objects.filter(start_datetime__lte=datetime.datetime.now()).order_by('-start_datetime')
+    queryset = Race.objects.filter(start_datetime__lte=datetime.datetime.now()).order_by('start_datetime')
     a = archive_index(request, queryset, "start_datetime", template_name="races/results.html")
     return HttpResponse(a)
     
