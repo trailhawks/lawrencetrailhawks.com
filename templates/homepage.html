@@ -87,7 +87,8 @@
 							<div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
 							<div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
 							<div class="post-body">
-								{{ latest_post.body|textile }}
+								{{ latest_post.body|textile|truncatewords:"400" }}
+								<p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
 							</div>
 						</div>
 						<div class="clearer">&nbsp;</div>
