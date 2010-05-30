@@ -12,20 +12,23 @@ def upcoming_races(request):
     a = archive_index(request, queryset, "start_datetime", template_name="races/upcoming.html", allow_future=True)
     return HttpResponse(a)
     
-def results(request, slug):
-    photos = Photo.objects.filter(tags__contains=slug.replace("-","")).order_by('?')[0:7]
+def results(request):
     queryset = Race.objects.filter(start_datetime__lte=datetime.datetime.now()).order_by('start_datetime')
-    a = archive_index(request, queryset, "start_datetime", template_name="races/results.html", extra_context={'photos': photos})
+    a = archive_index(request, queryset, "start_datetime", template_name="races/results.html")
     return HttpResponse(a)
     
 def race_result(request, *args, **kwargs):
+    photos = Photo.objects.filter(tags__contains=slug.replace("-","")).order_by('?')[0:7]
+    
     year = kwargs.get('year')
     month = kwargs.get('month')
     day = kwargs.get('day')
     slug = kwargs.get('slug')
     queryset = kwargs.get('queryset')
     date_field=kwargs.get('date_field')
-    o = object_detail(request, year=year, month=month, day=day, queryset=queryset, date_field=date_field, slug=slug, template_name="races/race_result.html")
+    o = object_detail(request, year=year, month=month, 
+                              day=day, queryset=queryset, date_field=date_field, slug=slug, 
+                              template_name="races/race_result.html", extra_context= {'photos': photos})
     return HttpResponse(o)
     
 def race_detail(request, slug, year, month, day, allow_future, queryset, date_field, extra_context):
