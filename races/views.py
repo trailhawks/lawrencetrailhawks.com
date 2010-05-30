@@ -18,6 +18,7 @@ def results(request):
     return HttpResponse(a)
     
 def race_result(request, *args, **kwargs):
+    slug = kwargs.get('slug')
     photos = Photo.objects.filter(tags__contains=slug.replace("-","")).order_by('?')[0:7]
     
     year = kwargs.get('year')
