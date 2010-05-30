@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.template import Context, loader
 from lawrencetrailhawks.races.models import Race, Racer
+from syncr.flickr.models import Photo
 from django.views.generic.date_based import object_detail, archive_index
+from django.views.generic.list_detail import object_detail as obj_detail
 import datetime
 
 
@@ -25,6 +27,28 @@ def race_result(request, *args, **kwargs):
     o = object_detail(request, year=year, month=month, day=day, queryset=queryset, date_field=date_field, slug=slug, template_name="races/race_result.html")
     return HttpResponse(o)
     
+def race_detail(request, slug, year, month, day, allow_future, queryset, date_field, extra_context):
+    photos = Photo.objects.filter(tags__contains=slug.replace("-","")).order_by('?')[0:7]
+    
+    return object_detail(request,
+                         year=year,
+                         month=month,
+                         day=day,
+                         slug=slug,
+                         queryset= queryset,
+                         date_field = date_field,
+                         allow_future = allow_future,
+                         extra_context= {'photos': photos}
+                         )
  
+def racer_detail(request, object_id, queryset):
+    person = Racer.objects.get(pk=object_id)
+    photos = Photo.objects.filter(tags__icontains=person.first_name).filter(tags__icontains=person.last_name).order_by('?')[0:7]
+    return obj_detail(request,
+                         queryset= queryset,
+                         object_id = object_id,
+                         extra_context= {'photos': photos}
+                         )
+
     
     

@@ -11,6 +11,7 @@ race_info_dict = {
                       'completed_races': Race.objects.filter(start_datetime__lte=datetime.datetime.today()),},
 }
 
+
 racer_info_dict = {
     'queryset': Racer.objects.all(),
 }
@@ -33,7 +34,7 @@ urlpatterns = patterns('',
      race_info_dict,
      'race_archive_day'),
     (r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
-     'django.views.generic.date_based.object_detail',
+     'lawrencetrailhawks.races.views.race_detail',
      race_info_dict,
      'race_detail'),
     (r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/results', 'races.views.race_result', race_info_dict),
@@ -44,7 +45,7 @@ urlpatterns = patterns('',
       racer_info_dict,
       'racer_list'),
      (r'^racers/(?P<object_id>[-\w]+)/$',
-      'django.views.generic.list_detail.object_detail',
+     'lawrencetrailhawks.races.views.racer_detail',
       racer_info_dict,
       'racer_detail'),
 )

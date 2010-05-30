@@ -1,8 +1,16 @@
 {% load flickr %}
 {% load oembed_tags %}
-{% get_random_photos 7 as random_photos %}
-{% for photo in random_photos %}
+{% if photos %}
+  {% for photo in photos %}
     <p><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
     {{ photo.description }}
     </p>
-{% endfor %}
+  {% endfor %}
+{% else %}
+  {% get_random_photos 7 as random_photos %}
+  {% for photo in random_photos %}
+    <p><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
+    {{ photo.description }}
+    </p>
+  {% endfor %}
+{% endif %}
