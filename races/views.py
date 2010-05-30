@@ -15,7 +15,7 @@ def upcoming_races(request):
 def results(request, slug):
     photos = Photo.objects.filter(tags__contains=slug.replace("-","")).order_by('?')[0:7]
     queryset = Race.objects.filter(start_datetime__lte=datetime.datetime.now()).order_by('start_datetime')
-    a = archive_index(request, queryset, "start_datetime", template_name="races/results.html", extra_context{'photos': photos})
+    a = archive_index(request, queryset, "start_datetime", template_name="races/results.html", extra_context={'photos': photos})
     return HttpResponse(a)
     
 def race_result(request, *args, **kwargs):
