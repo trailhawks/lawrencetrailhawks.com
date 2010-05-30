@@ -7,7 +7,7 @@ members_info_dict = {
     'queryset': Member.objects.all(),
 }
 
-urlpatterns = patterns('django.views.generic.list_detail',
-    (r'^$', 'object_list', members_info_dict, 'member_list'),
+urlpatterns = patterns('',
+    (r'^$', 'django.views.generic.list_detail.object_list', members_info_dict, 'member_list'),
     (r'^(?P<object_id>[-\w]+)/$', 'lawrencetrailhawks.members.member_detail', members_info_dict, 'member_detail'),
 )
