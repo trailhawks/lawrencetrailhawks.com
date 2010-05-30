@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from lawrencetrailhawks.members.models import Member
 from syncr.flickr.models import Photo
+from django.views.generic.list_detail import object_detail as obj_detail
+
 import datetime
 
 def get_members(request):
