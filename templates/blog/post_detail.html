@@ -28,7 +28,9 @@
 <div class="post-body">
 <p>{{ object.body|textile }}</p>
 </div>
-
+<div id="fb-root">
+<fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
+</div>
 {% include "comments/comments.html" %}
 
 {% endblock %}

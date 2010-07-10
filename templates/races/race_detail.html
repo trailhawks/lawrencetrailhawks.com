@@ -61,8 +61,8 @@
 			</p>
 			{% endif %}
 			<p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
-			<p><b>Start time:</b> {{ object.start_datetime|time:"H:i A" }}</p>
-			<p><b>Race details:</b> {{object.description}}<br />
+			<p><b>Start time:</b> {{ object.start_datetime|time:"h:i A" }}</p>
+			<p><b>Race details:</b> {{object.description|textile}}<br />
 				{% if object.course_map %}
 					Click <a href="{{object.course_map}}">here</a> for a course map.
 				{% endif %}
@@ -114,7 +114,9 @@
 			</ul>
 			</p>
 			{% endif %}
-			
+	                <div id="fb-root">
+                        <fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
+                        </div>		
 			{% include "comments/comments.html" %}
 			
 		</div>

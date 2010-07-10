@@ -56,8 +56,10 @@
 							<div class="post-title"><h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2></div>
 							<div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
 							<div class="post-body">
-								<p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
-								<p class="large">{{ latest_race.slogan }}</p>
+								{% if latest_race.logo %}
+                                                                  <p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
+								{% endif %}
+                                                                <p class="large">{{ latest_race.slogan }}</p>
 								{% if latest_race.get_race_news %}
 								<p><strong>Latest News:</strong>
 									{% for item in latest_race.get_race_news|slice:":3" %}
@@ -67,7 +69,7 @@
 								{% endif %}
 								<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
 									<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
-								<p><strong><em>Course: </em></strong>{{ latest_race.description }}<br />
+								<p><strong><em>Course: </em></strong>{{ latest_race.description|textile }}<br />
 									Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
 								<p><strong><em>Entry fee:</em></strong></p>
 									<ul>
