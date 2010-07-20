@@ -42,7 +42,7 @@
 <div class="main" id="main-two-columns">
 	<div class="left" id="main-content">
 		{% for link in object_list %}
-			<p><h3><a href="{{ link.url }}">{{ link.name }}</a></h3>
+			<p><h3><a href="{{ link.link }}">{{ link.name }}</a></h3>
 				{{ link.description }}
 			</p>
 		{% endfor %}
