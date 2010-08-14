@@ -57,7 +57,7 @@
 							<div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
 							<div class="post-body">
 								{% if latest_race.logo %}
-                                                                  <p><a href="#"><img src="/site_media/{{latest_race.logo}}" alt="" class="bordered" /></a></p>
+                                                                  <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
 								{% endif %}
                                                                 <p class="large">{{ latest_race.slogan }}</p>
 								{% if latest_race.get_race_news %}

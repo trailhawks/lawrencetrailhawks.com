@@ -51,7 +51,9 @@
 		<div class="left" id="main-content">
 			<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
 			<h4>{{ object.slogan }}</h4>
-
+                        {% if object.logo %}
+                          <img src="/site_media/{{object.logo}}" width="400" />
+                        {% endif %}
 			<br />
 			{% if object.get_race_news %}
 			<p><strong>Latest News:</strong>
@@ -90,11 +92,20 @@
 				For online registration click <a href="{{object.reg_url}}">here</a>.<br />
 				{% endif %}
 				{% if object.entry_form %}
-				For a printable entry form click <a href="{{ object.entry_form }}">here</a>.<br />
+				<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
 				{% endif %}
 			</p>
+                        <p><strong><em>Entry fee:</em></strong></p>
+                          <ul>
+                            {% for reg in object.get_reg_dates %}
+                              <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+                            {% endfor %}
+                          </ul>
+                        <p>{{ object.discounts }}</p>
+                        {% if object.packet_pickup %}
 			<p><b>Packet Pickup:</b> {{ object.packet_pickup }}</p>
 			{% endif %}
+                        {% endif %}
 
 			{% if object.lodging %}
 			<p><b>Lodging:</b> Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
