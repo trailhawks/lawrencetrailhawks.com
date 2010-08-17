@@ -10,6 +10,7 @@ class Run(models.Model):
     run_time = models.CharField(max_length=25,
                                 help_text="Time of run (ex. 6:30 PM)")
     location = models.TextField()
+    map_iframe = models.TextField(blank=True, null=True)
     map_link = models.URLField(default="http://",
                                help_text="Link to google maps location")
     details = models.TextField()
