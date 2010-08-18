@@ -64,17 +64,7 @@
 			{% endif %}
 			<p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
 			<p><b>Start time:</b> {{ object.start_datetime|time:"h:i A" }}</p>
-			<p><b>Race details:</b> {{object.description|textile}}<br />
-				{% if object.course_map %}
-					Click <a href="{{object.course_map}}">here</a> for a course map.
-				{% endif %}
-			<p><b>Awards:</b> {{ object.awards }}
-
-			{% if object.cut_off %}<p><b>Cut off time:</b> {{ object.cut_off }}</p>{% endif %}
-			<p><b>Location:</b> {{ object.location }}<br />
-			{% if object.map_link %}For directions click <a href="{{object.map_link}}">here.</a>{% endif %}
-			</p>
-
+			
 			<p><b>Race distance:</b> {{ object.distance }}
 				{% ifequal object.unit 1 %}
 				km
@@ -82,6 +72,17 @@
 				mi
 				{% endifequal %}
 				</p>
+                        <p><b>Race details:</b> {{object.description|textile}}<br />
+				{% if object.course_map %}
+					Click <a href="{{object.course_map}}">here</a> for a course map.
+				{% endif %}
+			<p><b>Awards:</b> {{ object.awards }}
+
+			{% if object.cut_off %}<p><b>Cut off time:</b> {{ object.cut_off }}</p>{% endif %}
+			<p><b>Location:</b> 
+			{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
+			{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
+
 			<p><b>Contact:</b> {{ object.contact.full_name }}<br/>
 			&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
 			&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>

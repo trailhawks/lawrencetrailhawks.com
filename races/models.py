@@ -38,6 +38,7 @@ class Race(models.Model):
                                help_text="eg: 13 hours")
     contact = models.ForeignKey(Member)
     location = models.TextField()
+    location_iframe = models.TextField(blank=True, null=True)
     map_link = models.URLField(default="http://",
                                help_text="Link to google maps or other mapping software pointing towards the start location")
     reg_url = models.URLField(default="http://", blank=True, null=True,
