@@ -11,7 +11,13 @@
 		<li><a href="/runs/beginners-run/">Monday's Beginner's Run</a></li>
 		{% endifequal %}
 		
-		{% ifequal object.slug "humpday-run" %}
+		{% ifequal object.slug "tuesday-tour-de-stad" %}
+		<li class="current-tab"><a href="/runs/tuesday-tour-de-stad/">Tuesday's Tour de Stad</a></li>
+		{% else %}
+		<li><a href="/runs/tuesday-tour-de-stad/">Tuesday's Tour de Stad</a></li>
+		{% endifequal %}
+		
+                {% ifequal object.slug "humpday-run" %}
 		<li class="current-tab"><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
 		{% else %}
 		<li><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
