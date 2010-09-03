@@ -46,7 +46,7 @@
 		{% for sponsor in sponsors %}
 		  <tr>
 			<td><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" /></a></td>
-			<td><p><strong>Address: </strong>{{ sponsor.address }}</p>
+		       	<td>{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
 			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
 			<td />
 		  </tr>
