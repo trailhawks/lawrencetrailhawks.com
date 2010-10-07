@@ -26,7 +26,7 @@ class Member(models.Model):
     address = models.TextField(blank=True, null=True)
     avatar = models.ImageField(upload_to="members/avatars", blank=True,null=True)
     active = models.BooleanField()
-    date_paid = models.DateField()
+    date_paid = models.DateField(null=True, blank=True)
     member_since = models.DateField(null=True, blank=True)
     position = models.IntegerField(choices=POSITION_CHOICES, null=True, blank=True)
     

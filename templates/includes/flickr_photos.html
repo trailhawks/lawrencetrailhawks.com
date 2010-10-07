@@ -3,14 +3,14 @@
 {% if photos %}
   {% for photo in photos %}
     <p><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
-    {{ photo.description }}
+    {{ photo.description|safe }}
     </p>
   {% endfor %}
 {% else %}
   {% get_random_photos 7 as random_photos %}
   {% for photo in random_photos %}
     <p><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
-    {{ photo.description }}
+    {{ photo.description|safe }}
     </p>
   {% endfor %}
 {% endif %}

@@ -33,4 +33,7 @@ urlpatterns = patterns('',
     #(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
     #        {'document_root': settings.STATIC_DOC_ROOT}),
 )
-
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DOC_ROOT}),
+    )

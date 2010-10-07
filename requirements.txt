@@ -1,0 +1,12 @@
+Django==1.2.1
+PIL==1.1.7
+South==0.7.2
+django-registration==0.7
+django-tagging==0.3.1
+flickrapi==1.4.2
+httplib2==0.6.0
+ipython==0.10
+psycopg2==2.2.2
+simplejson==2.1.1
+textile==2.1.4
+wsgiref==0.1.2

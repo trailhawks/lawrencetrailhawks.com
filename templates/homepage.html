@@ -70,8 +70,10 @@
 								<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
 									<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
 								<p><strong><em>Course: </em></strong>{{ latest_race.description|textile }}<br />
-									Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
-								<p><strong><em>Entry fee:</em></strong></p>
+									{% if latest_race.course_map %}
+                                                                          Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
+								        {% endif %}
+									<p><strong><em>Entry fee:</em></strong></p>
 									<ul>
 										{% for reg in latest_race.get_reg_dates %}
 										<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>

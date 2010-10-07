@@ -4,6 +4,6 @@ from lawrencetrailhawks.lib.syncer import sync_flickr
 class Command(NoArgsCommand):
     
     def handle(self, **options):
-        print "Syncing flickr..."
+        print "Syncing flickr BITCHES!!..."
         sync_flickr()
         print "Done!"

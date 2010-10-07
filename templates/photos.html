@@ -47,21 +47,21 @@
 						<tr>
 					      {% for photo in photos|slice:":4" %}
 					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
-					        {{ photo.description }}
+					        {{ photo.description|safe }}
 					        </td>
 					      {% endfor %}
 					    </tr>
 					    <tr>
 					      {% for photo in photos|slice:"4:8" %}
 					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
-					        {{ photo.description }}
+					        {{ photo.description|safe }}
 					        </td>
 					      {% endfor %}
 					    </tr>
 					    <tr>
 					      {% for photo in photos|slice:"8:12" %}
 					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
-					        {{ photo.description }}
+					        {{ photo.description|safe }}
 					        </td>
 					      {% endfor %}
 					    </tr>

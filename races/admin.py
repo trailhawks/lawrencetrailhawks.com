@@ -18,11 +18,12 @@ class RaceAdmin(admin.ModelAdmin):
     list_display = ('title', 'annual', 'start_datetime', )
     list_filter = ('start_datetime', 'annual',)
     inlines = (RegistrationInline, NewsInline,)
-    
+        
 class ResultAdmin(admin.ModelAdmin):
     list_display = ('time', 'racer', 'race', 'bib_number', 'place')
     list_filter = ('racer', 'race',)
-    
+    raw_id_fields = ('racer', 'race',)
+
 class RacerAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'gender', 'email', )
     list_filter = ('gender',)
