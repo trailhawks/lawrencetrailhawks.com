@@ -6,7 +6,7 @@ import datetime
 
 
 def get_sponsors(request):
-	sponsors = Sponsor.objects.all()
+	sponsors = Sponsor.objects.active()
 	t = loader.get_template('sponsors.html')
 	c = Context({
 		"sponsors" : sponsors,
