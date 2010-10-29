@@ -208,7 +208,7 @@ class Result(models.Model):
     racer = models.ForeignKey(Racer)
     race = models.ForeignKey(Race)
     bib_number = models.IntegerField()
-    time = models.CommaSeparatedIntegerField(max_length=20, null=True, blank=True)
+    time = models.CharField(max_length=20, null=True, blank=True)
     place = models.CharField(max_length=25, null=True, blank=True, 
                              help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
