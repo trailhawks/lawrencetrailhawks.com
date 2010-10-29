@@ -39,9 +39,10 @@
 			{% load twitterfy %}
 			<h2 class="label label-blue">Follow Us</h2>
 			<p class="quiet large"><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
-			{% for tweet in tweets|slice:":3" %}
-		    <p>{{ tweet.text|twitterfy }} - <a href="{{tweet.url}}">({{ tweet.pub_time|timesince }} ago)</a></p>
-		    {% endfor %}
+		    {% get_latest_tweets %}
+                    {% for t in stweets %}
+                    <p>{{ t.text|twitterfy }} - <a href="{{t.url}}">({{ t.pub_time|timesince }} ago)</a></p> 
+                    {% endfor %}	
 		</div>
 		<div class="clearer">&nbsp;</div>
 	</div>
