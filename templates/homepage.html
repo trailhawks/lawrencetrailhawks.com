@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load hawknews %}
 {% load markup %}
+{% load lth %}
 
 {% block home_page %}
 	<div id="splash">
@@ -122,6 +123,17 @@
 				</div>
 				{% endblock %}
 			</div>
+                        <div class="section">
+                            <div class="section-title">RRCA Syndicated News</div>
+                            <div class="section-content">
+                                <ul class="nice-list">
+                                  {% get_rrca_news %}
+                                    {% for item in rrca_news %}
+                                    <li><a href="{{item.link}}">{{item.title}}</a></li>
+                                  {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
 			<div class="section">
 				{% block blog_preview %}
 				{% load blog_extras %}
