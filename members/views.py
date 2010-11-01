@@ -1,10 +1,14 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
+from django.template import RequestContext
 from lawrencetrailhawks.members.models import Member
 from syncr.flickr.models import Photo
+from django.shortcuts import render_to_response
 from django.views.generic.list_detail import object_detail as obj_detail
-
+from lawrencetrailhawks.members.forms import ContactForm
 import datetime
+
+
 
 def get_members(request):
     members = Member.objects.all()
@@ -23,4 +27,33 @@ def member_detail(request, object_id, queryset):
                          object_id = object_id,
                          extra_context= {'photos': photos}
                          )
+
+
+def officer_list(request):
+    officers = Member.objects.filter(position__isnull=False)
     
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            cc_myself = form.cleaned_data['cc_myself']
+            recipients = [officer.email for officer in officers]
+            if cc_myself:
+                recipients.append(sender)
+
+            from django.core.mail import send_mail
+            send_mail(subject, message, sender, recipients)
+            return HttpResponseRedirect('/thanks/')
+    else:
+        form = ContactForm()
+
+    return render_to_response('contact.html', {
+        'officers': officers,
+        'form': form,
+            },
+        context_instance=RequestContext(request),
+    )
+
+        
