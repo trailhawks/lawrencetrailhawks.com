@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load oembed_tags %}
+{% load flickr %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block header %}
+	<div id="header">
+		<div id="top">
+			<div class="left" id="logo">
+				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
+			</div>
+			<div class="left navigation" id="main-nav">
+				<ul class="tabbed">
+					<li><a href="/">Home</a></li>
+					<li><a href="/races/">Races</a></li>
+					<li><a href="/runs/">Runs</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/photos/">Photos</a></li>
+					<li><a href="/links/">Links</a></li>
+				</ul>
+				<div class="clearer">&nbsp;</div>
+			</div>
+			<div class="clearer">&nbsp;</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block contact %}
+<div class="main" id="main-two-columns">
+
+	<div class="left" id="main-content">
+          <h2>OH NOES!!! 404 - Page not found!</h2>
+          <p>I'm really really sorry. I'm just a simple computer. I don't know what happened but I can't get you the page you're looking for. Please try a different link.</p>
+        </div>
+
+	<div class="right sidebar" id="sidebar">
+
+			{% include "includes/flickr_photos.html" %}
+
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
+{% endblock %}
+
+
