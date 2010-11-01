@@ -46,6 +46,11 @@ class Member(models.Model):
         return ('member_detail', (), { 'object_id': self.pk } )
     
     @property
+    def position_name(self):
+        if self.position:
+            return dict(Member.POSITION_CHOICES)[self.position]
+
+    @property
     def date_expires(self):
         date_expires = datetime.date(self.date_paid.year+1, self.date_paid.month, self.date_paid.day)
         return date_expires
