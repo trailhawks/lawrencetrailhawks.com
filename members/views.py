@@ -35,7 +35,7 @@ def officer_list(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
+            subject = "[Trailhawks]: %s" % form.cleaned_data['subject']
             message = form.cleaned_data['message']
             sender = form.cleaned_data['sender']
             cc_myself = form.cleaned_data['cc_myself']
