@@ -32,6 +32,8 @@ urlpatterns = patterns('',
     (r'^races/', include('lawrencetrailhawks.races.urls.races') ),
     #(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
     #        {'document_root': settings.STATIC_DOC_ROOT}),
+    (r'^contact/$', 'lawrencetrailhawks.members.views.officer_list'),
+    (r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
 )
 if settings.DEBUG:
     urlpatterns += patterns('',
