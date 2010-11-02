@@ -6,6 +6,7 @@ from syncr.flickr.models import Photo
 from django.shortcuts import render_to_response
 from django.views.generic.list_detail import object_detail as obj_detail
 from lawrencetrailhawks.members.forms import ContactForm
+from django.core.mail import EmailMultiAlternatives
 import datetime
 
 
@@ -43,8 +44,13 @@ def officer_list(request):
             if cc_myself:
                 recipients.append(sender)
 
-            from django.core.mail import send_mail
-            send_mail(subject, message, sender, recipients)
+            message_html = loader.render_to_string('message.html', { 'body':message, 'sender':sender, 'subject':subject})
+            message_text = loader.render_to_string('message.txt', { 'body':message, 'sender':sender, 'subject':subject})
+
+            msg = EmailMultiAlternatives(subject, message_text, "no-reply@lawrencetrailhawks.com", recipients)
+            msg.attach_alternative(message_html, "text/html")
+            msg.send()
+
             return HttpResponseRedirect('/thanks/')
     else:
         form = ContactForm()
