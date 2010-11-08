@@ -34,6 +34,7 @@ urlpatterns = patterns('',
     #        {'document_root': settings.STATIC_DOC_ROOT}),
     (r'^contact/$', 'lawrencetrailhawks.members.views.officer_list'),
     (r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
+    (r'^member_list/$', 'lawrencetrailhawks.lth.views.member_list'),
 )
 if settings.DEBUG:
     urlpatterns += patterns('',
