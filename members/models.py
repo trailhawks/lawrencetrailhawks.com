@@ -16,7 +16,12 @@ class Member(models.Model):
         (SECRETARY, "Secretary"),
         (WEB_MASTER, "Web Master"),
     )
-    
+
+    GENDER_CHOICES = (
+        (1, "Male"),
+        (2, "Female"),
+    )    
+
     username = models.ForeignKey(User, null=True, blank=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
@@ -29,6 +34,7 @@ class Member(models.Model):
     date_paid = models.DateField(null=True, blank=True)
     member_since = models.DateField(null=True, blank=True)
     position = models.IntegerField(choices=POSITION_CHOICES, null=True, blank=True)
+    gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)
     
     # class Meta:
     #     verbose_name_plural = "Members"
