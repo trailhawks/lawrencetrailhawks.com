@@ -75,7 +75,7 @@
 									{% if latest_race.course_map %}
                                                                           Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
 								        {% endif %}
-									<p><strong><em>Entry fee:</em></strong></p>
+                                        <p><strong><em>Entry fee:</em>{% if not latest_race.get_reg_dates %} FREE{% endif %}</strong></p>
 									<ul>
 										{% for reg in latest_race.get_reg_dates %}
 										<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
@@ -124,6 +124,16 @@
 				</div>
 				{% endblock %}
 			</div>
+
+            <div class="section">
+                <div class="section-title">Trailhawk Calendar</div>
+                <div class="section-content">
+                    <p>Subscribe to our calendar to keep upto date on
+                    all Trailhawk events, not just our races.</p>
+                    <p><a
+                        href="http://www.google.com/calendar/ical/lawrencetrailhawks.com_bddkn7p2cj1olabb59vdqh9t1g%40group.calendar.google.com/public/basic.ics">Subscribe</a></p>
+                </div>
+            </div>
                         <div class="section">
                             <div class="section-title">RRCA Syndicated News</div>
                             <div class="section-content">

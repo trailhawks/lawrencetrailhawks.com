@@ -4,6 +4,7 @@ from django.db.models import permalink
 from members.models import Member
 from django.conf import settings
 
+from lawrencetrailhawks.blog import listeners
 
 import datetime
 import tagging
@@ -25,7 +26,7 @@ class Post(models.Model):
     publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
-    repost_url = models.URLField(help_text="URL of original blog posting.", 
+    repost_url = models.URLField(help_text="URL of original blog posting.",
                                  verbose_name='Original Post', null=True, blank=True)
     repost_date = models.DateField(help_text="Date of original blog posting",
                                    verbose_name="Original Post Date", null=True, blank=True)

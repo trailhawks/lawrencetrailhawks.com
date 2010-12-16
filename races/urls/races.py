@@ -7,7 +7,7 @@ race_info_dict = {
     'queryset': Race.objects.all(),
     'date_field': 'start_datetime',
     'allow_future': True,
-    'extra_context': {'upcoming_races': Race.objects.filter(start_datetime__gt=datetime.datetime.today()),
+    'extra_context': {'upcoming_races': Race.objects.filter(start_datetime__gt=datetime.datetime.today()).order_by('start_datetime'),
                       'completed_races': Race.objects.filter(start_datetime__lte=datetime.datetime.today()).order_by('-start_datetime'),},
 }
 

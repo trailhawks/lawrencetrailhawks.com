@@ -30,7 +30,7 @@ def member_list(request):
 
     members = Member.objects.filter(active=True)
     member_list = csv.writer(response)
-    member_list.writerow(["First Name", "Last Name", "Gender", "Club Officer Title", "Address", "Email Address","Date paid", "Member Since",  "Dues Due"])
+    member_list.writerow(["First Name", "Last Name", "Gender", "Club Officer Title", "Address", "Address2", "City", "State", "Zip", "Email Address","Date paid", "Member Since",  "Dues Due"])
 
     for member in members:
         member_list.writerow([member.first_name,
@@ -38,6 +38,10 @@ def member_list(request):
                              dict(GENDER_CHOICES).get(member.gender, None),
                              dict(POSITION_CHOICES).get(member.position, None),
                              member.address,
+                             member.address2,
+                             member.city,
+                             member.state,
+                             member.zip,
                              member.email,
                              member.date_paid,
                              member.member_since,
