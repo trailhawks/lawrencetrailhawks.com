@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from members.models import Member
 import datetime
-    
-    
+
+
 class Race(models.Model):
     KM = 1
     MI = 2
@@ -11,7 +11,7 @@ class Race(models.Model):
         (KM,"km"),
         (MI,"mi"),
     )
-    
+
     RUN = 1
     BIKE = 2
     SWIM = 3
@@ -28,7 +28,7 @@ class Race(models.Model):
                             help_text="Suggested value automatically generated from title and annual. Must be unique.")
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     awards = models.CharField(max_length=300)
-    distance = models.CommaSeparatedIntegerField(max_length=10, help_text="eg 26,2")
+    distance = models.CharField(max_length=10, help_text="eg 26.2")
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
@@ -50,41 +50,41 @@ class Race(models.Model):
     lodging = models.URLField(default="http://", blank=True, null=True,
                               help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
-    
+
     def __unicode__(self):
         return self.slug
-    
+
     @models.permalink
     def get_absolute_url(self):
         return ('race_detail', (), { 'year': self.start_datetime.strftime("%Y"),
                                       'month': self.start_datetime.strftime("%b").lower(),
                                       'day': self.start_datetime.strftime("%d"),
                                       'slug': self.slug } )
-    
+
     @property
     def get_overall_results(self):
         return self.result_set.all().order_by('time')
-    
+
     @property
     def get_male_results(self):
         return self.result_set.filter(racer__gender=1).order_by('time')
-        
+
     @property
     def get_female_results(self):
         return self.result_set.filter(racer__gender=2).order_by('time')
-        
+
     @property
     def get_race_reports(self):
         return self.report_set.all()
-    
+
     @property
     def get_reg_dates(self):
         return self.registration_set.all().order_by('reg_date')
-        
+
     @property
     def get_race_news(self):
         return News.objects.filter(race=self, draft=2).order_by('-pub_date')
-    
+
     @property
     def is_finished(self):
         if self.result_set.count == 0:
@@ -97,7 +97,7 @@ class Registration(models.Model):
     reg_date = models.DateField(verbose_name="Registration Date")
     reg_cost = models.IntegerField(verbose_name="Registration Cost")
     race = models.ForeignKey(Race)
-    
+
     class Meta:
             verbose_name_plural = "Registration Dates"
 
@@ -117,13 +117,13 @@ class News(models.Model):
     race = models.ForeignKey(Race)
     body = models.TextField()
     draft = models.IntegerField(choices=DRAFT_CHOICES)
-    
+
     class Meta:
         verbose_name_plural="Latest Race Updates"
-    
+
     def __unicode__(self):
         return self.slug
-    
+
     @models.permalink
     def get_absolute_url(self):
         return ('news_detail', (), { 'year': self.start_datetime.strftime("%Y"),
@@ -149,7 +149,7 @@ class Racer(models.Model):
         (MALE,"Male"),
         (FEMALE,"Female"),
     )
-    
+
     SMALL = 1
     MEDIUM = 2
     LARGE = 3
@@ -160,9 +160,9 @@ class Racer(models.Model):
         (LARGE,"L"),
         (XLARGE,"XL"),
     )
-    
+
     first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)    
+    last_name = models.CharField(max_length=40)
     trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True,
                              help_text="If racer is a trailhawk select profile.")
     email = models.CharField(max_length=50)
@@ -174,11 +174,11 @@ class Racer(models.Model):
     state = models.CharField(max_length=40, null=True, blank=True)
     country = models.CharField(max_length=40, null=True, blank=True)
     contact = models.ForeignKey(EmergencyContact, verbose_name="Emergency Contact", blank=True, null=True)
-    
-    
+
+
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
-        
+
     @property
     def full_name(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -187,45 +187,45 @@ class Racer(models.Model):
     def get_absolute_url(self):
         """docstring for get_absolute_url"""
         return ('racer_detail', (), { 'object_id': self.pk } )
-        
+
     @property
     def get_results(self):
         return Result.objects.filter(racer=self)
-        
+
     @property
     def age(self):
         TODAY = datetime.date.today()
         return  (TODAY.year - self.birth_date.year)
-    
+
     @property
     def get_gender(self):
         for num, gender in self.GENDER_CHOICES:
             if num == self.gender:
                 return gender
-       
+
 
 class Result(models.Model):
     racer = models.ForeignKey(Racer)
     race = models.ForeignKey(Race)
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
-    place = models.CharField(max_length=25, null=True, blank=True, 
+    place = models.CharField(max_length=25, null=True, blank=True,
                              help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
     dq = models.BooleanField(verbose_name="Disqualified")
-                             
+
     def __unicode__(self):
         return "%s - %s - %s"%(self.racer, self.race.title, self.time)
 
-        
-    
+
+
 class Report(models.Model):
-    
+
     report = models.URLField(default="http://",
                              help_text="Link to race report")
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)
-    
+
     def __unicode__(self):
         return self.title
