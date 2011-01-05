@@ -27,7 +27,7 @@ def notify_commenters(sender, **kwargs):
 
 def notify_admins(sender, **kwargs):
     comment = kwargs.get('comment')
-    subject = "[lth-admin]: %s commented on %s" % (comment.user_name, comment.content_type.title)
+    subject = "[lth-admin]: %s commented on %s" % (comment.user_name, comment.content_object.title)
     c = Context({"comment":comment})
     t = loader.get_template("admin_body.txt")
     txt_body = "%s said:\n\n %s" % (comment.user_name, comment.comment)
