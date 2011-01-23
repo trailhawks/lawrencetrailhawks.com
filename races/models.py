@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from members.models import Member
+from sponsors.models import Sponsor
 import datetime
 
 
@@ -27,6 +28,7 @@ class Race(models.Model):
     slug = models.SlugField(unique=True,
                             help_text="Suggested value automatically generated from title and annual. Must be unique.")
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
+    sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     awards = models.CharField(max_length=300)
     distance = models.CharField(max_length=10, help_text="eg 26.2")
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)

@@ -75,8 +75,15 @@
                         <p><b>Race details:</b> {{object.description|textile}}<br />
 				{% if object.course_map %}
 					Click <a href="{{object.course_map}}">here</a> for a course map.
-				{% endif %}
-			<p><b>Awards:</b> {{ object.awards }}
+                {% endif %}
+            
+            <p>
+            {% for sponsor in object.sponsors.all %}
+            <a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width=90></a>
+            {% endfor %}
+            </p>
+            
+            <p><b>Awards:</b> {{ object.awards }}
 
 			{% if object.cut_off %}<p><b>Cut off time:</b> {{ object.cut_off }}</p>{% endif %}
 			<p><b>Location:</b> 
