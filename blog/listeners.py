@@ -1,9 +1,38 @@
 from django.contrib.comments.signals import comment_was_posted
 from django.contrib.comments.models import Comment
-from django.core.mail import send_mail
 from django.template import loader, Context
 from django.core.mail import EmailMultiAlternatives
 from lawrencetrailhawks.members.models import Member
+
+from django.utils.encoding import smart_str
+from lawrencetrailhawks.lth import akismet
+from django.conf import settings
+from django.contrib.sites.models import Site
+
+AKISMET_API_KEY = getattr(settings, "AKISMENT_API_KEY", "f9c9f57988a4")
+
+def moderate_comment(sender, comment, request, **kwargs):
+    ak = akismet.Akismet(
+        key = AKISMET_API_KEY,
+            blog_url = 'http://%s/' % Site.objects.get_current().domain
+)
+    data = {
+        'user_ip': request.META.get('REMOTE_ADDR', ''),
+        'user_agent': request.META.get('HTTP_USER_AGENT', ''),
+        'referrer': request.META.get('HTTP_REFERRER', ''),
+        'comment_type': 'comment',
+        'comment_author': smart_str(comment.user_name),
+    }
+    if ak.comment_check(smart_str(comment.comment), data=data, build_data=True):
+        comment.is_public = False
+        comment.save()
+
+    if comment.is_public:
+        notify_commenters(sender, **kwargs)
+        notify_admins(sender, **kwargs)
+
+comment_was_posted.connect(moderate_comment)
+
 
 
 
@@ -40,52 +69,5 @@ def notify_admins(sender, **kwargs):
     email.attach_alternative(t.render(c), "text/html")
     email.send()
 
-from django.contrib.comments.signals import comment_was_posted
-
-def on_comment_was_posted(sender, comment, request, *args, **kwargs):
-    # spam checking can be enabled/disabled per the comment's target
-    # Model
-    #if comment.content_type.model_class() != Entry:
-    #    return
-
-    from django.contrib.sites.models import Site
-    from django.conf import settings
-
-    try:
-        from lawrencetrailhawks.lth.akismet import Akismet
-    except:
-        return
-
-    # use TypePad's
-    # AntiSpam if
-    # the key is
-    # specified in
-    # settings.py
-    if hasattr(settings, 'TYPEPAD_ANTISPAM_API_KEY'):
-        ak = Akismet(key=settings.TYPEPAD_ANTISPAM_API_KEY,
-                  blog_url='http://%s/' % Site.objects.get(pk=settings.SITE_ID).domain)
-        ak.baseurl = 'api.antispam.typepad.com/1.1/'
-    else:
-        ak = Akismet(key=settings.AKISMET_API_KEY,
-                     blog_url='http://%s/' % Site.objects.get(pk=settings.SITE_ID).domain )
-
-    if ak.verify_key():
-         data = {
-             'user_ip': request.META.get('REMOTE_ADDR', '127.0.0.1'),
-             'user_agent': request.META.get('HTTP_USER_AGENT', ''),
-             'referrer': request.META.get('HTTP_REFERER', ''),
-             'comment_type': 'comment',
-             'comment_author': comment.user_name.encode('utf-8'),
-             }
-
-    if ak.comment_check(comment.comment.encode('utf-8'), data=data, build_data=True):
-        comment.flags.create(
-            user=comment.content_object.author,
-            flag='spam')
-        comment.is_public = False
-        comment.save()
 
 
-comment_was_posted.connect(on_comment_was_posted)
-comment_was_posted.connect(notify_admins)
-comment_was_posted.connect(notify_commenters)
