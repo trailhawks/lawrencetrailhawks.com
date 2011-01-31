@@ -1,48 +1,13 @@
-{% extends "runs/run_list.html" %}
+{% extends "runs/run_base.html" %}
 {% block title %}{{object.name}}{% endblock %}
+ 
 
-{% block sub_nav %}
+{% block weekly_runs %}
+<div class="main" id="main-two-columns">
 
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		{% ifequal object.slug "beginners-run" %}
-		<li class="current-tab"><a href="/runs/beginners-run/">Monday's Beginner's Run</a></li>
-		{% else %}
-		<li><a href="/runs/beginners-run/">Monday's Beginner's Run</a></li>
-		{% endifequal %}
-		
-		{% ifequal object.slug "tuesday-tour-de-stad" %}
-		<li class="current-tab"><a href="/runs/tuesday-tour-de-stad/">Tuesday's Tour de Stad</a></li>
-		{% else %}
-		<li><a href="/runs/tuesday-tour-de-stad/">Tuesday's Tour de Stad</a></li>
-		{% endifequal %}
-		
-                {% ifequal object.slug "humpday-run" %}
-		<li class="current-tab"><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
-		{% else %}
-		<li><a href="/runs/humpday-run/">Wednesday's Humpday Run</a></li>
-		{% endifequal %}
-		
-		{% ifequal object.slug "gal-gallop" %}
-		<li class="current-tab"><a href="/runs/gal-gallop/">Thursday's Gal Gallop</a></li>
-		{% else %}
-		<li><a href="/runs/gal-gallop/">Thursday's Gal Gallop</a></li>
-		{% endifequal %}
-		
-		{% ifequal object.slug "saturday-long-run" %}
-		<li class="current-tab"><a href="/runs/saturday-long-run/">Saturday's Long Run</a></li>
-		{% else %}
-		<li><a href="/runs/saturday-long-run/">Saturday's Long Run</a></li>
-		{% endifequal %}
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-
-{% endblock %}
-
-{% block run_detail %}
-
-<h2>{{ object.name }}</h2>
+	<div class="left" id="main-content">
+		{% block run_detail %}
+		<h2>{{ object.name }}</h2>
 {% if object.get_run_news %}
 <p><strong>Latest News:</strong><br />
 	{% for item in object.get_run_news|slice:":3" %}
@@ -54,7 +19,22 @@
 <p><b>Where:</b> {{ object.location }}</p>
 <p><b>Details:</b> {{ object.details }}</p>
 <p><b>Contact:</b> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
-{{ object.map_iframe|safe}}	
-{% endblock %}
+{{ object.map_iframe|safe}}
+		{% endblock %}
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+
+		{% include "includes/flickr_photos.html" %}
+		
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
+{% endblock %}  
+
+
+	
 
 

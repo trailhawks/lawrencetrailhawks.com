@@ -5,7 +5,7 @@ runs_info_dict = {
     'queryset': Run.objects.all(),
 }
 
-urlpatterns = patterns('django.views.generic.list_detail',
-    (r'^$', 'object_list', runs_info_dict, 'run_object_list'),
-    (r'^(?P<slug>[-\w]+)/$', 'object_detail', runs_info_dict, 'run_detail'),
+urlpatterns = patterns('lawrencetrailhawks.runs.views',
+    (r'^$', 'run_list'),
+    (r'^(?P<slug>[-\w]+)/$', 'run_detail'),
 )

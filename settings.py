@@ -78,9 +78,9 @@ TEMPLATE_DIRS = (
 TWITTER={'username':'', 'password':''}
 FLICKR={'key':'', 'secret':''}
 
-CARROT_BACKEND = "ghettoq.taproot.Database"  
+CARROT_BACKEND = "ghettoq.taproot.Database"
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -104,4 +104,4 @@ INSTALLED_APPS = (
     'south',
    # 'djcelery',
     'ghettoq',
-)
+]
