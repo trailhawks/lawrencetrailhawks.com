@@ -28,22 +28,24 @@ def moderate_comment(sender, comment, request, **kwargs):
         comment.save()
 
     if comment.is_public:
-        notify_commenters(sender, **kwargs)
-        notify_admins(sender, **kwargs)
+        notify_commenters(sender, comment, **kwargs)
+        notify_admins(sender, comment, **kwargs)
 
 comment_was_posted.connect(moderate_comment)
 
 
 
 
-def notify_commenters(sender, **kwargs):
-    comment = kwargs.get('comment')
+def notify_commenters(sender, comment, **kwargs):
     subject = "[lawrencetrailhawks.com]: %s commented on %s" % (comment.user_name, comment.content_object.title)
     c = Context({'comment': comment})
     t = loader.get_template("email_body.txt")
     txt_body = "%s said:\n\n %s" % (comment.user_name, comment.comment)
     notify_list = list(set([x.email for x in Comment.objects.filter(object_pk=comment.content_object.pk)]))
-    notify_list.remove(comment.user_email)
+    try:
+        notify_list.remove(comment.user_email)
+    except:
+        pass
 
     email = EmailMultiAlternatives(subject,
             txt_body,
@@ -54,8 +56,7 @@ def notify_commenters(sender, **kwargs):
     email.send()
 
 
-def notify_admins(sender, **kwargs):
-    comment = kwargs.get('comment')
+def notify_admins(sender, comment, **kwargs):
     subject = "[lth-admin]: %s commented on %s" % (comment.user_name, comment.content_object.title)
     c = Context({"comment":comment})
     t = loader.get_template("admin_body.txt")
