@@ -111,7 +111,7 @@
                           </ul>
                         <p>{{ object.discounts }}</p>
                         {% if object.packet_pickup %}
-			<p><b>Packet Pickup:</b> {{ object.packet_pickup }}</p>
+			<p><b>Packet Pickup:</b> {{ object.packet_pickup|textile }}</p>
 			{% endif %}
                         {% endif %}
 
