@@ -28,7 +28,7 @@ def member_list(request):
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename=member_list.csv'
 
-    members = Member.objects.filter(active=True)
+    members = Member.objects.active()
     member_list = csv.writer(response)
     member_list.writerow(["First Name", "Last Name", "Gender", "Club Officer Title", "Address", "Address2", "City", "State", "Zip", "Email Address","Date paid", "Member Since",  "Dues Due"])
 
@@ -46,8 +46,8 @@ def member_list(request):
                              member.date_paid,
                              member.member_since,
                              member.date_expires])
-    
+
     return response
-    
+
 
 
