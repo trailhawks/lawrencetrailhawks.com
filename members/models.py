@@ -43,6 +43,7 @@ class Member(models.Model):
     member_since = models.DateField(null=True, blank=True)
     position = models.IntegerField(choices=POSITION_CHOICES, null=True, blank=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
 
     objects = MemberManager()
 
