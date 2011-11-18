@@ -1,7 +1,8 @@
-from django.db import models
+import datetime
 
 from django.contrib.auth.models import User
-import datetime
+from django.db import models
+
 
 class MemberManager(models.Manager):
     def active(self):
@@ -13,12 +14,17 @@ class Member(models.Model):
     TREASURER = 3
     SECRETARY = 4
     WEB_MASTER = 5
+    MEMBERSHIP_DIRECTOR = 6
+    PR = 7
+
     POSITION_CHOICES = (
         (PRESIDENT, "President"),
         (VICE_PRESIDENT, "Vice President"),
         (TREASURER, "Treasurer"),
         (SECRETARY, "Secretary"),
         (WEB_MASTER, "Web Master"),
+        (MEMBERSHIP_DIRECTOR, "Membership Director"),
+        (PR, "PR Director"),
     )
 
     GENDER_CHOICES = (
@@ -37,7 +43,7 @@ class Member(models.Model):
     city = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=2, blank=True, null=True)
     zip = models.CharField(max_length=25, blank=True, null=True)
-    avatar = models.ImageField(upload_to="members/avatars", blank=True,null=True)
+    avatar = models.ImageField(upload_to="members/avatars", blank=True, null=True)
     #active = models.BooleanField()
     date_paid = models.DateField(null=True, blank=True)
     member_since = models.DateField(null=True, blank=True)
@@ -57,11 +63,10 @@ class Member(models.Model):
         else:
             return "%s %s" % (self.first_name, self.last_name)
 
-
     @models.permalink
     def get_absolute_url(self):
         """docstring for get_absolute_url"""
-        return ('member_detail', (), { 'object_id': self.pk } )
+        return ('member_detail', (), {'object_id': self.pk})
 
     @property
     def active(self):
@@ -77,7 +82,7 @@ class Member(models.Model):
 
     @property
     def date_expires(self):
-        date_expires = datetime.date(self.date_paid.year+1, self.date_paid.month, self.date_paid.day)
+        date_expires = datetime.date(self.date_paid.year + 1, self.date_paid.month, self.date_paid.day)
         return date_expires
 
     @property
