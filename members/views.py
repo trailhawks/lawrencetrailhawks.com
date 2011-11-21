@@ -11,7 +11,7 @@ from lawrencetrailhawks.members.models import Member
 
 
 def get_members(request):
-    members = Member.objects.all()
+    members = Member.objects.all().order_by('last_name', 'first_name')
     t = loader.get_template('members.html')
     c = Context({
         "members": members,
