@@ -34,14 +34,14 @@
 		  	{% for member in object_list %}
 			    <li><a href="{{member.get_absolute_url}}">{{ member.full_hawk_name }}</a></li>
 			  {% endfor %}
-		  </ul>	
-		{% block member_detail %}{% endblock %}	
+		  </ul>
+		{% block member_detail %}{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
 
 			{% include "includes/flickr_photos.html" %}
-		
+
 	</div>
 
 	<div class="clearer">&nbsp;</div>

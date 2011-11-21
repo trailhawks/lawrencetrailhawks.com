@@ -14,7 +14,10 @@
 {% if object.position %}
 <p><strong>Position:</strong> {{ object.get_position }}
 {% endif %}
+<!--
 <p><strong>Paid date:</strong> {{ object.date_paid }}</p>
+-->
+<p><strong>Member since:</strong> {{ object.member_since }}</p>
 <p><strong>Expires:</strong> {{ object.date_expires }}</p>
 <p><strong>Active:</strong> {{ object.active }}</p>
 </td>
@@ -51,5 +54,3 @@
 {% endif %}
 
 {% endblock %}
-
-
