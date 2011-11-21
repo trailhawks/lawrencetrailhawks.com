@@ -1,38 +1,36 @@
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.template import Context, loader
 from django.template import RequestContext
-from lawrencetrailhawks.members.models import Member
-from syncr.flickr.models import Photo
-from django.shortcuts import render_to_response
 from django.views.generic.list_detail import object_detail as obj_detail
-from lawrencetrailhawks.members.forms import ContactForm
-from django.core.mail import EmailMultiAlternatives
-import datetime
+from syncr.flickr.models import Photo
 
+from lawrencetrailhawks.members.forms import ContactForm
+from lawrencetrailhawks.members.models import Member
 
 
 def get_members(request):
     members = Member.objects.all()
     t = loader.get_template('members.html')
     c = Context({
-        "members" : members,
+        "members": members,
     })
-    
+
     return HttpResponse(t.render(c))
-    
+
 def member_detail(request, object_id, queryset):
     person = Member.objects.get(pk=object_id)
     photos = Photo.objects.filter(tags__icontains=person.first_name).filter(tags__icontains=person.last_name).order_by('?')[0:7]
     return obj_detail(request,
-                         queryset= queryset,
-                         object_id = object_id,
-                         extra_context= {'photos': photos}
+                         queryset=queryset,
+                         object_id=object_id,
+                         extra_context={'photos': photos}
                          )
-
 
 def officer_list(request):
     officers = Member.objects.filter(position__isnull=False)
-    
+
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -44,8 +42,8 @@ def officer_list(request):
             if cc_myself:
                 recipients.append(sender)
 
-            message_html = loader.render_to_string('message.html', { 'body':message, 'sender':sender, 'subject':subject})
-            message_text = loader.render_to_string('message.txt', { 'body':message, 'sender':sender, 'subject':subject})
+            message_html = loader.render_to_string('message.html', {'body': message, 'sender': sender, 'subject': subject})
+            message_text = loader.render_to_string('message.txt', {'body': message, 'sender': sender, 'subject': subject})
 
             msg = EmailMultiAlternatives(subject, message_text, "no-reply@lawrencetrailhawks.com", recipients)
             msg.attach_alternative(message_html, "text/html")
@@ -61,5 +59,3 @@ def officer_list(request):
             },
         context_instance=RequestContext(request),
     )
-
-        
