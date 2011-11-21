@@ -22,7 +22,7 @@ class Run(models.Model):
     @models.permalink
     def get_absolute_url(self):
         """docstring for get_absolute_url"""
-        return ('lawrencetrailhawks.runs.views.run_detail', (), { 'slug': self.slug } )
+        return ('lawrencetrailhawks.runs.views.run_detail', (), {'slug': self.slug})
 
     def __unicode__(self):
         return self.name
@@ -36,8 +36,8 @@ class News(models.Model):
     DRAFT = 1
     PUBLIC = 2
     DRAFT_CHOICES = (
-        (DRAFT,"Draft",),
-        (PUBLIC,"Public",),
+        (DRAFT, "Draft",),
+        (PUBLIC, "Public",),
     )
     pub_date = models.DateTimeField()
     title = models.CharField(max_length=250)
@@ -47,14 +47,14 @@ class News(models.Model):
     draft = models.IntegerField(choices=DRAFT_CHOICES)
 
     class Meta:
-        verbose_name_plural="Latest Run Updates"
+        verbose_name_plural = "Latest Run Updates"
 
     def __unicode__(self):
         return self.slug
 
     @models.permalink
     def get_absolute_url(self):
-        return ('news_detail', (), { 'year': self.start_datetime.strftime("%Y"),
-                                      'month': self.start_datetime.strftime("%b").lower(),
-                                      'day': self.start_datetime.strftime("%d"),
-                                      'slug': self.slug } )
+        return ('news_detail', (), {'year': self.start_datetime.strftime("%Y"),
+                                    'month': self.start_datetime.strftime("%b").lower(),
+                                    'day': self.start_datetime.strftime("%d"),
+                                    'slug': self.slug})

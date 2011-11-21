@@ -1,8 +1,11 @@
-from runs.models import Run
-from django.template import Library, Node
 import datetime
+
+from django.template import Library, Node
+
+from runs.models import Run
+
 register = Library()
-    
+
 class TodaysRunNode(Node):
     def render(self, context):
         todays_run = Run.objects.filter(run_date=datetime.datetime.now().strftime("%A"))
