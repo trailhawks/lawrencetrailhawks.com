@@ -58,10 +58,7 @@ class Member(models.Model):
         ordering = ["-date_paid"]
 
     def __unicode__(self):
-        if self.hawk_name:
-            return "%s \"%s\" %s" % (self.first_name, self.hawk_name, self.last_name)
-        else:
-            return "%s %s" % (self.first_name, self.last_name)
+        return self.full_hawk_name
 
     @models.permalink
     def get_absolute_url(self):
@@ -87,10 +84,10 @@ class Member(models.Model):
 
     @property
     def full_hawk_name(self):
-        if self.hawk_name in [" ", "a"]:
-            return "%s %s" % (self.first_name, self.last_name)
+        if self.hawk_name:
+            return '%s "%s" %s' % (self.first_name, self.hawk_name, self.last_name)
         else:
-            return "%s \"%s\" %s" % (self.first_name, self.hawk_name, self.last_name)
+            return '%s %s' % (self.first_name, self.last_name)
 
     @property
     def full_name(self):
