@@ -4,7 +4,7 @@ from lawrencetrailhawks.members.models import Member
 
 
 members_info_dict = {
-    'queryset': Member.objects.all().order_by('last_name', 'first_name'),
+    'queryset': Member.objects.active().order_by('last_name', 'first_name'),
 }
 
 urlpatterns = patterns('',
