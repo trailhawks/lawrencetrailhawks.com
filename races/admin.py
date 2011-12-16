@@ -1,5 +1,17 @@
 from django.contrib import admin
-from lawrencetrailhawks.races.models import Race, Racer, Result, Report, Registration, News, EmergencyContact
+
+from lawrencetrailhawks.races.models import EmergencyContact
+from lawrencetrailhawks.races.models import News
+from lawrencetrailhawks.races.models import Race
+from lawrencetrailhawks.races.models import Racer
+from lawrencetrailhawks.races.models import Registration
+from lawrencetrailhawks.races.models import Report
+from lawrencetrailhawks.races.models import Result
+
+
+#class MemberInline(admin.TabularInline):
+#    model = Race.contacts.through
+#    #model = Member
 
 class RegistrationInline(admin.TabularInline):
     model = Registration
@@ -14,14 +26,16 @@ class RegistrationAdmin(admin.ModelAdmin):
     pass
 
 class NewsAdmin(admin.ModelAdmin):
-    prepopulated_fields = { 'slug': ['title',] }
+    prepopulated_fields = {'slug': ['title']}
 
 class RaceAdmin(admin.ModelAdmin):
-    prepopulated_fields = { 'slug': ['title', 'annual'] }
-    list_display = ('title', 'annual', 'start_datetime', )
+    prepopulated_fields = {'slug': ['title', 'annual']}
+    list_display = ('title', 'annual', 'start_datetime')
     list_filter = ('start_datetime', 'annual',)
-    ordering = ['start_datetime',]
+    ordering = ['start_datetime']
     inlines = (SponsorsInline, RegistrationInline, NewsInline,)
+    #inlines = [MemberInline, SponsorsInline, RegistrationInline, NewsInline]
+    #inlines = [SponsorsInline, RegistrationInline, NewsInline]
     exclude = ('sponsors',)
 
 class ResultAdmin(admin.ModelAdmin):
@@ -30,8 +44,9 @@ class ResultAdmin(admin.ModelAdmin):
     raw_id_fields = ('racer', 'race',)
 
 class RacerAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'gender', 'email', )
+    list_display = ('__unicode__', 'gender', 'email')
     list_filter = ('gender',)
+    search_fields = ('first_name', 'last_name', 'trailhawk')
 
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('title', 'racer',)
