@@ -55,7 +55,7 @@ class Member(models.Model):
 
     class Meta:
         verbose_name_plural = "Members"
-        ordering = ["-date_paid"]
+        ordering = ["first_name"]
 
     def __unicode__(self):
         return self.full_hawk_name
