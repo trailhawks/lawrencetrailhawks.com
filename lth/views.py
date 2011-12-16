@@ -11,7 +11,7 @@ def member_list(request):
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename=member_list.csv'
 
-    members = Member.objects.active()
+    members = Member.objects.active().order_by('-date_paid')
     member_list = csv.writer(response)
     member_list.writerow(["First Name",
                          "Last Name",
