@@ -15,7 +15,7 @@ race_info_dict = {
 }
 
 racer_info_dict = {
-    'queryset': Racer.objects.all(),
+    'queryset': Racer.objects.all().order_by('lastname'),
 }
 
 urlpatterns = patterns('',
