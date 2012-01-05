@@ -5,8 +5,8 @@
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 	<link rel="stylesheet" type="text/css" href="/site_media/css/style.css" media="screen" />
-	<script type="text/javascript" src="/site_media/js/jquery-1.3.1.min.js"></script> 
-        <script type="text/javascript" src="/site_media/js/jquery.juitter.js"></script> 
+	<script type="text/javascript" src="/site_media/js/jquery-1.3.1.min.js"></script>
+        <script type="text/javascript" src="/site_media/js/jquery.juitter.js"></script>
         <script type="text/javascript" src="/site_media/js/system.js"></script>
         <div id="fb-root"></div>
         <script>
@@ -47,7 +47,7 @@
 		</div>
 	{% endblock %}
 
-        {% block contact %}{% endblock %}	
+        {% block contact %}{% endblock %}
 	{% block sub_nav %}{% endblock %}
 	{% block home_page %}{% endblock %}
 	{% block race_index %}{% endblock %}
@@ -59,19 +59,18 @@
 	{% block sponsors %}{% endblock %}
 	{% block blog_index %}{% endblock %}
 	{% block racer_index %}{% endblock %}
-	
+
 	{% block footer %}
 	<div id="footer">
 		<div class="left" id="footer-left">
 			<a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." class="left"/></a>
 			<a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-                        <p>&copy; 2009-2010 Lawrence Trail Hawks.<br />All rights Reserved</p>
+                        <p>&copy; 2009-{% now "Y" %} Lawrence Trail Hawks.<br />All rights Reserved</p>
 			<p class="quiet"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></p>
                         <div class="clearer">&nbsp;</div>
 		</div>
 		<div class="right" id="footer-right">
-			<p class="large"><strong><a
-                    href="http://ultrasignup.com/register.aspx?did=12155">Join Us</a></strong> <span class="text-separator">|</span> <a href="/contact/">Contact us</a> <span class="text-separator">|</span> <a href="http://www.flickr.com/photos/trailhawks">Flickr</a> <span class="text-separator">|</span> <a href="http://www.twitter.com/trailhawks">Twitter</a> <span class="text-separator">|</span> <a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a> <span class="text-separator">|</span> <a href="#top" class="quiet">Page Top &uarr;</a></p>
+			<p class="large"><strong><a href="http://ultrasignup.com/register.aspx?did=15763">Join Us</a></strong> <span class="text-separator">|</span> <a href="/contact/">Contact us</a> <span class="text-separator">|</span> <a href="http://www.flickr.com/photos/trailhawks">Flickr</a> <span class="text-separator">|</span> <a href="http://www.twitter.com/trailhawks">Twitter</a> <span class="text-separator">|</span> <a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a> <span class="text-separator">|</span> <a href="#top" class="quiet">Page Top &uarr;</a></p>
 		</div>
 		<div class="clearer">&nbsp;</div>
 	</div>
