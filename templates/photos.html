@@ -26,8 +26,6 @@
 	</div>
 {% endblock %}
 
-
-
 {% block photos %}
 <div class="main">
 
@@ -45,21 +43,28 @@
 
 					<table>
 						<tr>
-					      {% for photo in photos|slice:":4" %}
+					      {% for photo in photos|slice:":2" %}
 					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
 					        {{ photo.description|safe }}
 					        </td>
 					      {% endfor %}
 					    </tr>
 					    <tr>
-					      {% for photo in photos|slice:"4:8" %}
+					      {% for photo in photos|slice:"2:4" %}
 					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
 					        {{ photo.description|safe }}
 					        </td>
 					      {% endfor %}
 					    </tr>
 					    <tr>
-					      {% for photo in photos|slice:"8:12" %}
+					      {% for photo in photos|slice:"4:6" %}
+					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
+					        {{ photo.description|safe }}
+					        </td>
+					      {% endfor %}
+					    </tr>
+					    <tr>
+					      {% for photo in photos|slice:"6:8" %}
 					        <td><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a><br />
 					        {{ photo.description|safe }}
 					        </td>
@@ -68,7 +73,7 @@
 					</table>
 
 				</div>
-			
+
 			</div>
 
 			<div class="content-separator"></div>
