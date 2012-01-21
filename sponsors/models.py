@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class SponsorManager(models.Manager):
 
     def active(self):
@@ -17,11 +18,12 @@ class Sponsor(models.Model):
     email = models.EmailField()
     logo = models.ImageField(upload_to="sponsors/images")
     discount_detail = models.TextField()
-    active = models.BooleanField()    
+    active = models.BooleanField()
 
     objects = SponsorManager()
+
     class Meta:
         verbose_name_plural = "Sponsors"
-    
+
     def __unicode__(self):
         return self.name

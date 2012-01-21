@@ -75,18 +75,26 @@ TEMPLATE_DIRS = (
 
 
 #twitter and flickr details left blank, please use your own.
-TWITTER={'username':'', 'password':''}
-FLICKR={'key':'', 'secret':''}
+TWITTER = {'username': '', 'password': ''}
+FLICKR = {'key': '', 'secret': ''}
 
 CARROT_BACKEND = "ghettoq.taproot.Database"
 
 INSTALLED_APPS = [
-    'django.contrib.auth',
     'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.comments',
     'django.contrib.contenttypes',
+    'django.contrib.markup',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.comments',
+   # 'djcelery',
+    'ghettoq',
+    'oembed',
+    'south',
+    'syncr.flickr',
+    'syncr.twitter',
+    'tagging',
     'lth',
     'faq',
     'blog',
@@ -96,12 +104,4 @@ INSTALLED_APPS = [
     'sponsors',
     'races',
     'hawknews',
-    'django.contrib.markup',
-    'oembed',
-    'tagging',
-    'syncr.flickr',
-    'syncr.twitter',
-    'south',
-   # 'djcelery',
-    'ghettoq',
 ]

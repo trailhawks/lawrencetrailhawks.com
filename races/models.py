@@ -1,27 +1,27 @@
+import datetime
+
 from django.db import models
-from django.contrib.auth.models import User
+
 from members.models import Member
 from sponsors.models import Sponsor
-import datetime
 
 
 class Race(models.Model):
     KM = 1
     MI = 2
     UNIT_CHOICES = (
-        (KM,"km"),
-        (MI,"mi"),
+        (KM, "km"),
+        (MI, "mi"),
     )
-
     RUN = 1
     BIKE = 2
     SWIM = 3
     DISCIPLINE_CHOICES = (
-        (RUN,"Run"),
-        (BIKE,"Bike"),
-        (SWIM,"Swim"),
+        (RUN, "Run"),
+        (BIKE, "Bike"),
+        (SWIM, "Swim"),
     )
-    logo = models.ImageField(upload_to="races/logos", blank=True,null=True)
+    logo = models.ImageField(upload_to="races/logos", blank=True, null=True)
     slogan = models.CharField(max_length=300)
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
     annual = models.CharField(max_length=15)
@@ -38,7 +38,9 @@ class Race(models.Model):
                                  help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True,
                                help_text="eg: 13 hours")
-    contact = models.ForeignKey(Member)
+    #contact = models.ForeignKey(Member)
+    contacts = models.ManyToManyField(Member, related_name='contacts')
+
     location = models.TextField()
     location_iframe = models.TextField(blank=True, null=True)
     map_link = models.URLField(default="http://",
@@ -46,7 +48,7 @@ class Race(models.Model):
     reg_url = models.URLField(default="http://", blank=True, null=True,
                               help_text="Link to registartion flyer or to registration URL for online signup.")
     reg_description = models.TextField()
-    entry_form = models.FileField(upload_to="races/entry_forms",null=True, blank=True)
+    entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
     discounts = models.TextField(blank=True, null=True,
                                  help_text="Describe discounts for the race if they exist.")
     lodging = models.URLField(default="http://", blank=True, null=True,
@@ -58,10 +60,10 @@ class Race(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('race_detail', (), { 'year': self.start_datetime.strftime("%Y"),
-                                      'month': self.start_datetime.strftime("%b").lower(),
-                                      'day': self.start_datetime.strftime("%d"),
-                                      'slug': self.slug } )
+        return ('race_detail', (), {'year': self.start_datetime.strftime("%Y"),
+                                    'month': self.start_datetime.strftime("%b").lower(),
+                                    'day': self.start_datetime.strftime("%d"),
+                                    'slug': self.slug})
 
     @property
     def get_overall_results(self):
@@ -104,14 +106,14 @@ class Registration(models.Model):
             verbose_name_plural = "Registration Dates"
 
     def __unicode__(self):
-        return "%s %s"%(self.race.title, self.reg_date)
+        return "%s %s" % (self.race.title, self.reg_date)
 
 class News(models.Model):
     DRAFT = 1
     PUBLIC = 2
     DRAFT_CHOICES = (
-        (DRAFT,"Draft",),
-        (PUBLIC,"Public",),
+        (DRAFT, "Draft",),
+        (PUBLIC, "Public",),
     )
     pub_date = models.DateTimeField()
     title = models.CharField(max_length=250)
@@ -121,17 +123,17 @@ class News(models.Model):
     draft = models.IntegerField(choices=DRAFT_CHOICES)
 
     class Meta:
-        verbose_name_plural="Latest Race Updates"
+        verbose_name_plural = "Latest Race Updates"
 
     def __unicode__(self):
         return self.slug
 
     @models.permalink
     def get_absolute_url(self):
-        return ('news_detail', (), { 'year': self.start_datetime.strftime("%Y"),
-                                      'month': self.start_datetime.strftime("%b").lower(),
-                                      'day': self.start_datetime.strftime("%d"),
-                                      'slug': self.slug } )
+        return ('news_detail', (), {'year': self.start_datetime.strftime("%Y"),
+                                    'month': self.start_datetime.strftime("%b").lower(),
+                                    'day': self.start_datetime.strftime("%d"),
+                                    'slug': self.slug})
 
 class EmergencyContact(models.Model):
     first_name = models.CharField(max_length=40)
@@ -148,8 +150,8 @@ class Racer(models.Model):
     MALE = 1
     FEMALE = 2
     GENDER_CHOICES = (
-        (MALE,"Male"),
-        (FEMALE,"Female"),
+        (MALE, "Male"),
+        (FEMALE, "Female"),
     )
 
     SMALL = 1
@@ -157,10 +159,10 @@ class Racer(models.Model):
     LARGE = 3
     XLARGE = 4
     SIZE_CHOICES = (
-        (SMALL,"S"),
-        (MEDIUM,"M"),
-        (LARGE,"L"),
-        (XLARGE,"XL"),
+        (SMALL, "S"),
+        (MEDIUM, "M"),
+        (LARGE, "L"),
+        (XLARGE, "XL"),
     )
 
     first_name = models.CharField(max_length=40)
@@ -177,7 +179,6 @@ class Racer(models.Model):
     country = models.CharField(max_length=40, null=True, blank=True)
     contact = models.ForeignKey(EmergencyContact, verbose_name="Emergency Contact", blank=True, null=True)
 
-
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
@@ -188,7 +189,7 @@ class Racer(models.Model):
     @models.permalink
     def get_absolute_url(self):
         """docstring for get_absolute_url"""
-        return ('racer_detail', (), { 'object_id': self.pk } )
+        return ('racer_detail', (), {'object_id': self.pk})
 
     @property
     def get_results(self):
@@ -217,8 +218,7 @@ class Result(models.Model):
     dq = models.BooleanField(verbose_name="Disqualified")
 
     def __unicode__(self):
-        return "%s - %s - %s"%(self.racer, self.race.title, self.time)
-
+        return "%s - %s - %s" % (self.racer, self.race.title, self.time)
 
 
 class Report(models.Model):

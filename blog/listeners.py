@@ -1,21 +1,22 @@
-from django.contrib.comments.signals import comment_was_posted
+from django.conf import settings
 from django.contrib.comments.models import Comment
-from django.template import loader, Context
+from django.contrib.comments.signals import comment_was_posted
+from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
+from django.template import loader, Context
+from django.utils.encoding import smart_str
+
+from lawrencetrailhawks.lth import akismet
 from lawrencetrailhawks.members.models import Member
 
-from django.utils.encoding import smart_str
-from lawrencetrailhawks.lth import akismet
-from django.conf import settings
-from django.contrib.sites.models import Site
 
 AKISMET_API_KEY = getattr(settings, "AKISMENT_API_KEY", "f9c9f57988a4")
 
 def moderate_comment(sender, comment, request, **kwargs):
     ak = akismet.Akismet(
-        key = AKISMET_API_KEY,
-            blog_url = 'http://%s/' % Site.objects.get_current().domain
-)
+        key=AKISMET_API_KEY,
+        blog_url='http://%s/' % Site.objects.get_current().domain
+    )
     data = {
         'user_ip': request.META.get('REMOTE_ADDR', ''),
         'user_agent': request.META.get('HTTP_USER_AGENT', ''),
@@ -32,8 +33,6 @@ def moderate_comment(sender, comment, request, **kwargs):
         notify_admins(sender, comment, **kwargs)
 
 comment_was_posted.connect(moderate_comment)
-
-
 
 
 def notify_commenters(sender, comment, **kwargs):
@@ -58,7 +57,7 @@ def notify_commenters(sender, comment, **kwargs):
 
 def notify_admins(sender, comment, **kwargs):
     subject = "[lth-admin]: %s commented on %s" % (comment.user_name, comment.content_object.title)
-    c = Context({"comment":comment})
+    c = Context({"comment": comment})
     t = loader.get_template("admin_body.txt")
     txt_body = "%s said:\n\n %s" % (comment.user_name, comment.comment)
 
@@ -69,6 +68,3 @@ def notify_admins(sender, comment, **kwargs):
             to=officers)
     email.attach_alternative(t.render(c), "text/html")
     email.send()
-
-
-

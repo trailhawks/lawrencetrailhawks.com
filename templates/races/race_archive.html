@@ -47,6 +47,7 @@
 		<h2>Upcoming Races</h2>
 		  <p>
 			{% for race in upcoming_races %}
+			{% ifchanged %}<h3>{{race.start_datetime|date:"Y"}}</h3>{% endifchanged %}
 			&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
 			{% endfor %}
 		  </p>
@@ -55,13 +56,13 @@
 		  {% for race in completed_races %}
 		   &nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
 		  {% endfor %}
-		  </p>	
+		  </p>
 	</div>
 
 	<div class="right sidebar" id="sidebar">
 
 			{% include "includes/flickr_photos.html" %}
-		
+
 	</div>
 
 	<div class="clearer">&nbsp;</div>
