@@ -1,7 +1,8 @@
-from syncr.app.tweet import TwitterSyncr
-from syncr.app.flickr import FlickrSyncr
 from django.conf import settings
+from syncr.app.flickr import FlickrSyncr
+from syncr.app.tweet import TwitterSyncr
 from syncr.flickr.models import Photo
+
 
 def sync_twitter():
     username = settings.TWITTER['username']
@@ -22,4 +23,10 @@ def sync_flickr():
             fs.syncPhoto(photo.flickr_id)
         except:
             pass
-    
+
+def sync_flickr_all():
+    key = settings.FLICKR['key']
+    secret = settings.FLICKR['secret']
+    username = settings.FLICKR['username']
+    fs = FlickrSyncr(key, secret)
+    fs.syncAllPublic(username)
