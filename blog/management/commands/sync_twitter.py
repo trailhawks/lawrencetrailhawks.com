@@ -1,6 +1,15 @@
+from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
-from lawrencetrailhawks.lib.syncer import sync_twitter
+from syncr.app.tweet import TwitterSyncr
+
+
+def sync_twitter():
+    username = settings.TWITTER['username']
+    password = settings.TWITTER['password']
+    ts = TwitterSyncr(username, password)
+    ts.syncUser(username)
+    ts.syncTwitterUserTweets(username)
 
 
 class Command(NoArgsCommand):
