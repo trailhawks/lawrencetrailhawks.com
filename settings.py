@@ -1,4 +1,5 @@
 # Django settings for lawrencetrailhawks project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -89,15 +90,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
    # 'djcelery',
-    'ghettoq',
+    'haystack',
     'oembed',
     'south',
     'syncr.flickr',
     'syncr.twitter',
     'tagging',
+    'ghettoq',
+
     'lth',
     'faq',
     'blog',
+    'photos',
     'links',
     'members',
     'runs',
@@ -105,3 +109,10 @@ INSTALLED_APPS = [
     'races',
     'hawknews',
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
