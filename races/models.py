@@ -179,6 +179,9 @@ class Racer(models.Model):
     country = models.CharField(max_length=40, null=True, blank=True)
     contact = models.ForeignKey(EmergencyContact, verbose_name="Emergency Contact", blank=True, null=True)
 
+    class Meta:
+        ordering = ['first_name', 'last_name']
+
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
