@@ -46,7 +46,7 @@ class ResultAdmin(admin.ModelAdmin):
 class RacerAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'gender', 'email')
     list_filter = ('gender',)
-    search_fields = ('first_name', 'last_name', 'trailhawk')
+    search_fields = ('first_name', 'last_name')  # removed 'trailhawk' field but this might be fixed in a later version of Django
 
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('title', 'racer',)
