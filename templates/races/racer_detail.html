@@ -1,17 +1,19 @@
 {% extends "races/racer_list.html" %}
 
-{% block title %}{{ object.full_name }}{% endblock %}
+{% block title %}{{ object.full_name }}{% endblock title %}
 
-{% block racer_detail %}
+{% block page_header %}<h1>{{ object.full_name }}</h1>{% endblock page_header %}
+
+{% block content %}
   <p><strong>Name:</strong> {{ object.full_name }}</p>
   <p><strong>Age:</strong> {{ object.age }}</p>
   <p><strong>Gender:</strong> {{ object.get_gender }}</p>
   {% if object.get_results %}
-  <p><strong>Results:</strong> 
+  <p><strong>Results:</strong>
 	<ul>
 	{% for result in object.get_results %}
 		<li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> - in {{ result.time }} </li>
 	{% endfor %}
 	</ul></p>
   {% endif %}
-{% endblock %}
+{% endblock content %}

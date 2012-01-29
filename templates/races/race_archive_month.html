@@ -1,13 +1,14 @@
-{% extends "base.html" %}
+{% extends "races/base.html" %}
 
-{% block title %}Result Index{% endblock %}
+{% block title %}Results in {{ month|date:"F Y" }}{% endblock title %}
 
-{% block result_day_index %}
-<h2>Results in {{ month|date:"F Y" }}</h2>
+{% block page_header %}<h1>Results in {{ month|date:"F Y" }}</h1>{% endblock page_header %}
+
+{% block content %}
 <ul>
   {% for result in object_list %}
     <h3>{{ result.race_name }}</h3>
 	<p><a href="{{ result.get_absolute_url }}">{{ result.race_date|date:"F j, Y" }}</a></p>
   {% endfor %}
 </ul>
-{% endblock %}
+{% endblock content %}

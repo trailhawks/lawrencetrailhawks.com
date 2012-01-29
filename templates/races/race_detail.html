@@ -1,30 +1,13 @@
-{% extends "base.html" %}
-{% load race_extras %}
-{% load oembed_tags %}
+{% extends "races/base.html" %}
+
 {% load flickr %}
 {% load markup %}
+{% load oembed_tags %}
+{% load race_extras %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li class="current-tab"><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/sponsors/">Sponsors</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock %}
+
+{% block page_title %}<h1>{{object.title}}{% if object.get_overall_results %} Results{% endif %}</h1>{% endblock page_title %}
 
 {% block sub_nav %}
 <div class="navigation" id="sub-nav">
@@ -39,113 +22,99 @@
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
-
 {% endblock %}
 
-{% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock %}
+{% block content %}
 
+<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
+<h4>{{ object.slogan }}</h4>
+            {% if object.logo %}
+              <img src="/site_media/{{object.logo}}" width="400" />
+            {% endif %}
+<br />
+{% if object.get_race_news %}
+<p><strong>Latest News:</strong>
+	{% for item in object.get_race_news|slice:":3" %}
+	&nbsp;&nbsp;{{ item.body|textile }}
+	{% endfor %}
+</p>
+{% endif %}
+<p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
+<p><b>Start time:</b> {{ object.start_datetime|time:"h:i A" }}</p>
 
-{% block race_detail %}
-	<div class="main" id="main-two-columns">
+<p><b>Race distance:</b> {{ object.distance }}
+	{% ifequal object.unit 1 %}
+	km
+	{% else %}
+	mi
+	{% endifequal %}
+	</p>
+            <p><b>Race details:</b> {{object.description|textile}}<br />
+	{% if object.course_map %}
+		Click <a href="{{object.course_map}}">here</a> for a course map.
+    {% endif %}
 
-		<div class="left" id="main-content">
-			<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
-			<h4>{{ object.slogan }}</h4>
-                        {% if object.logo %}
-                          <img src="/site_media/{{object.logo}}" width="400" />
-                        {% endif %}
-			<br />
-			{% if object.get_race_news %}
-			<p><strong>Latest News:</strong>
-				{% for item in object.get_race_news|slice:":3" %}
-				&nbsp;&nbsp;{{ item.body|textile }}
-				{% endfor %}
-			</p>
-			{% endif %}
-			<p><b>Race date:</b> {{ object.start_datetime|date:"F j, Y" }}</p>
-			<p><b>Start time:</b> {{ object.start_datetime|time:"h:i A" }}</p>
-			
-			<p><b>Race distance:</b> {{ object.distance }}
-				{% ifequal object.unit 1 %}
-				km
-				{% else %}
-				mi
-				{% endifequal %}
-				</p>
-                        <p><b>Race details:</b> {{object.description|textile}}<br />
-				{% if object.course_map %}
-					Click <a href="{{object.course_map}}">here</a> for a course map.
-                {% endif %}
-            
-            <p>
-            {% for sponsor in object.sponsors.all %}
-            <a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width=90></a>
-            {% endfor %}
-            </p>
-            
-            <p><b>Awards:</b> {{ object.awards }}
+<p>
+{% for sponsor in object.sponsors.all %}
+<a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width=90></a>
+{% endfor %}
+</p>
 
-			{% if object.cut_off %}<p><b>Cut off time:</b> {{ object.cut_off }}</p>{% endif %}
-			<p><b>Location:</b> 
-			{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
-			{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
+<p><b>Awards:</b> {{ object.awards }}
 
-			<p><b>Contact:</b> {{ object.contact.full_name }}<br/>
-			&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
-			&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
+{% if object.cut_off %}<p><b>Cut off time:</b> {{ object.cut_off }}</p>{% endif %}
+<p><b>Location:</b>
+{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
+{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
 
-			{% if not object.get_overall_results %}
-			<p><b>Registration:</b> {{ object.reg_description }}<br />
-				{% if object.reg_url %}
-				For online registration click <a href="{{object.reg_url}}">here</a>.<br />
-				{% endif %}
-				{% if object.entry_form %}
-				<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
-				{% endif %}
-			</p>
-                        <p><strong><em>Entry fee:</em></strong></p>
-                          <ul>
-                            {% for reg in object.get_reg_dates %}
-                              <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-                            {% endfor %}
-                          </ul>
-                        <p>{{ object.discounts }}</p>
-                        {% if object.packet_pickup %}
-			<p><b>Packet Pickup:</b> {{ object.packet_pickup|textile }}</p>
-			{% endif %}
-                        {% endif %}
+<p><b>Contact:</b> {{ object.contact.full_name }}<br/>
+&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
+&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
 
-			{% if object.lodging %}
-			<p><b>Lodging:</b> Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
-			{% endif %}
+{% if not object.get_overall_results %}
+<p><b>Registration:</b> {{ object.reg_description }}<br />
+	{% if object.reg_url %}
+	For online registration click <a href="{{object.reg_url}}">here</a>.<br />
+	{% endif %}
+	{% if object.entry_form %}
+	<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
+	{% endif %}
+</p>
+            <p><strong><em>Entry fee:</em></strong></p>
+              <ul>
+                {% for reg in object.get_reg_dates %}
+                  <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+                {% endfor %}
+              </ul>
+            <p>{{ object.discounts }}</p>
+            {% if object.packet_pickup %}
+<p><b>Packet Pickup:</b> {{ object.packet_pickup|textile }}</p>
+{% endif %}
+            {% endif %}
 
-			{% if object.get_race_reports %}
-			  {% include "races/includes/race_reports.html" %}
-			{% endif %}
+{% if object.lodging %}
+<p><b>Lodging:</b> Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
+{% endif %}
 
-			{% if object.get_overall_results %}
-			  <p><h3>Results:</h3>
-			  <ul>
-				<li><a href="{{ object.get_absolute_url }}results/#overallresults">Overall Results</a></li>
-				<li><a href="{{ object.get_absolute_url }}results/#maleresults">Male Results</a></li>
-				<li><a href="{{ object.get_absolute_url }}results/#femaleresults">Female Results</a></li>
-			  {% block race_result %}{% endblock %}
-			</ul>
-			</p>
-			{% endif %}
-	                <div id="fb-root">
-                        <fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
-                        </div>		
-			{% include "comments/comments.html" %}
-			
-		</div>
+{% if object.get_race_reports %}
+  {% include "races/includes/race_reports.html" %}
+{% endif %}
 
-		<div class="right sidebar" id="sidebar">
-				{% include "includes/flickr_photos.html" %}
+{% if object.get_overall_results %}
+  <p><h3>Results:</h3>
+  <ul>
+	<li><a href="{{ object.get_absolute_url }}results/#overallresults">Overall Results</a></li>
+	<li><a href="{{ object.get_absolute_url }}results/#maleresults">Male Results</a></li>
+	<li><a href="{{ object.get_absolute_url }}results/#femaleresults">Female Results</a></li>
+  {% block race_result %}{% endblock %}
+</ul>
+</p>
+{% endif %}
 
-		</div>
+<div id="fb-root">
+    <fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
+ </div>
 
-		<div class="clearer">&nbsp;</div>
+{% include "comments/comments.html" %}
 
-	</div>
 {% endblock %}

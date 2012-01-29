@@ -1,11 +1,14 @@
-{% extends "base.html" %}
+{% extends "races/base.html" %}
 
-{% block title %}Result Index{% endblock %}
+{% block title %}Result Index{% endblock title %}
 
-{% block result_day_index %}
+{% block page_header %}<h1>Result Index</h1>{% endblock page_header %}
+
+{% block content %}
 <h2>Results</h2>
-  <ul>
+<ul>
   {% for race in latest %}
-    <li><a href="{{ race.get_absolute_url }}">{{ race.race_name }}</a> - {{race.race_date|date:"F j, Y"}}</li>
+    <li><a href="{{ race.get_absolute_url }}">{{ race.race_name }}</a> - {{ race.race_date|date:"F j, Y" }}</li>
   {% endfor %}
-{% endblock %}
+</ul>
+{% endblock content %}

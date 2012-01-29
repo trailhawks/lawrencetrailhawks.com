@@ -1,75 +1,24 @@
-{% extends "base.html" %}
-{% load oembed_tags %}
+{% extends "races/base.html" %}
+
 {% load flickr %}
+{% load oembed_tags %}
 
-{% block title %}Races{% endblock %}
+{% block title %}Upcoming Races{% endblock title %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li class="current-tab"><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block page_header %}<h1>Upcoming Races</h1>{% endblock page_header %}
 
-{% block sub_nav %}
+{% block content %}
+ <p>
+	{% for race in upcoming_races %}
+	{% ifchanged %}<h3>{{race.start_datetime|date:"Y"}}</h3>{% endifchanged %}
+	&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
+	{% endfor %}
+</p>
 
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		<li class="current-tab"><a href="/races/">All Races</a></li>
-		<li><a href="/races/results/">Race Results</a></li>
-		<li><a href="/races/upcoming/">Upcoming Races</a></li>
-		<li><a href="/races/racers/">Racers</a></li>
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-
-{% endblock %}
-
-{% block race_index %}
-<div class="main" id="main-two-columns">
-
-	<div class="left" id="main-content">
-		<h2>Upcoming Races</h2>
-		  <p>
-			{% for race in upcoming_races %}
-			{% ifchanged %}<h3>{{race.start_datetime|date:"Y"}}</h3>{% endifchanged %}
-			&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
-			{% endfor %}
-		  </p>
-		<h2>Results</h2>
-		  <p>
-		  {% for race in completed_races %}
-		   &nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
-		  {% endfor %}
-		  </p>
-	</div>
-
-	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-
-
-
-
-{% endblock %}
+<h2>Results</h2>
+<p>
+	{% for race in completed_races %}
+	&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
+	{% endfor %}
+</p>
+{% endblock content %}
