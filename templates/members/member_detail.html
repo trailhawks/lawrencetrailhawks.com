@@ -1,28 +1,31 @@
-{% extends "members/member_list.html" %}
+{% extends "members/base.html" %}
+
 {% load race_extras $}
 
-{% block title %}{{object.name}}{% endblock %}
+{% block title %}Member info for {{ object.full_hawk_name }}{% endblock title %}
 
-{% block member_detail %}
-<h2>Member info for {{ object.full_hawk_name }}</h2>
+{% block page_header %}<h1>Member info for {{ object.full_hawk_name }}</h1>{% endblock page_header %}
+
+{% block content %}
 <table>
-<tr>
-	{% if object.avatar %}
-<td width="100"><img src="/site_media/{{ object.avatar }}" /></td>
-    {% endif %}
-<td align="left"><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
-{% if object.position %}
-<p><strong>Position:</strong> {{ object.get_position }}
-{% endif %}
-<!--
-<p><strong>Paid date:</strong> {{ object.date_paid }}</p>
--->
-<p><strong>Member since:</strong> {{ object.member_since }}</p>
-<p><strong>Expires:</strong> {{ object.date_expires }}</p>
-<p><strong>Active:</strong> {{ object.active }}</p>
-</td>
-</tr>
+	<tr>
+		{% if object.avatar %}
+		<td width="100"><img src="/site_media/{{ object.avatar }}" /></td>
+	    {% endif %}
+		<td align="left"><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
+		{% if object.position %}
+		<p><strong>Position:</strong> {{ object.get_position }}
+		{% endif %}
+		<!--
+		<p><strong>Paid date:</strong> {{ object.date_paid }}</p>
+		-->
+		<p><strong>Member since:</strong> {{ object.member_since }}</p>
+		<p><strong>Expires:</strong> {{ object.date_expires }}</p>
+		<p><strong>Active:</strong> {{ object.active }}</p>
+		</td>
+	</tr>
 </table>
+
 {% if object.get_blog_posts %}
 <p><strong>Blog Posts:</strong>
 	<ul>
@@ -52,5 +55,4 @@
 	</ul>
 </p>
 {% endif %}
-
-{% endblock %}
+{% endblock content %}

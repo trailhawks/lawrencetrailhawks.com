@@ -1,51 +1,16 @@
-{% extends "base.html" %}
+{% extends "members/base.html" %}
+
 {% load oembed_tags %}
 {% load flickr %}
 
 {% block title %}Trail Hawk Members{% endblock %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block page_header %}<h1>Trail Hawk Members</h1>{% endblock page_header %}
 
-{% block members %}
-<div class="main" id="main-two-columns">
-
-	<div class="left" id="main-content">
-		<ul>
-		  	{% for member in object_list %}
-			    <li><a href="{{member.get_absolute_url}}">{{ member.full_hawk_name }}</a></li>
-			  {% endfor %}
-		  </ul>
-		{% block member_detail %}{% endblock %}
-	</div>
-
-	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-{% endblock %}
-
+{% block content %}
+<ul>
+    {% for member in object_list %}
+    <li><a href="{{member.get_absolute_url}}">{{ member.full_hawk_name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}
