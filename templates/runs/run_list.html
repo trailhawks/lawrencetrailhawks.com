@@ -1,33 +1,23 @@
-{% extends "runs/run_base.html" %}
+{% extends "runs/base.html" %}
+
 {% load flickr %}
 {% load oembed_tags %}
 
-{% block title %}Weekly Runs{% endblock %}
+{% block title %}Weekly Runs{% endblock title %}
 
+{% block page_header %}<h1>Weekly Runs</h1>{% endblock page_header %}
 
-{% block weekly_runs %}
-<div class="main" id="main-two-columns">
+{% block content %}
 
-	<div class="left" id="main-content">
-		{% block run_detail %}
-		<p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
-		<p>We welcome runners of all abilities. So come join us for a run.</p>
-		Weekly runs:<ul>
-			{% for object in object_list %}
-			<li><a href={{ object.get_absolute_url }}>{{ object.name }}</a></li>
-			{% endfor %}
-		</ul>	
-		{% endblock %}
-	</div>
+{% block run_detail %}
+<p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
+<p>We welcome runners of all abilities. So come join us for a run.</p>
+Weekly runs:
+<ul>
+	{% for object in object_list %}
+	<li><a href={{ object.get_absolute_url }}>{{ object.name }}</a></li>
+	{% endfor %}
+</ul>
+{% endblock run_detail %}
 
-	<div class="right sidebar" id="sidebar">
-
-		{% include "includes/flickr_photos.html" %}
-		
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-{% endblock %}
-
+{% endblock content %}

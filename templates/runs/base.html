@@ -1,0 +1,13 @@
+{% extends "base_bootstrap.html" %}
+
+{% block sub_navigation %}
+<ul class="pills">
+{% for run in object_list %}
+    <li><a {% if object.slug == run.slug %} class="active"{% endif %} href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock sub_navigation %}
+
+{% block secondary_content %}
+{% include "includes/flickr_photos.html" %}
+{% endblock secondary_content %}
