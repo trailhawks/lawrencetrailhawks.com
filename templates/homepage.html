@@ -9,7 +9,7 @@
 		<div class="col3 left">
 			<h2 class="label label-green">Latest Hawk News</h2>
 			<p class="quiet large">What's happening</p>
-			{% get_latest hawknews.HawkNews 3 as latest_news %}
+			{% get_latest hawknews.HawkNews 1 as latest_news %}
 			{% for item in latest_news %}
 			{{ item.body|textile }}
 			{% endfor %}

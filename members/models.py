@@ -16,6 +16,8 @@ class Member(models.Model):
     WEB_MASTER = 5
     MEMBERSHIP_DIRECTOR = 6
     PR = 7
+    EX_PRESIDENT = 8
+    SOCIAL_MEDIA_DIRECTOR = 9
 
     POSITION_CHOICES = (
         (PRESIDENT, "President"),
@@ -25,6 +27,8 @@ class Member(models.Model):
         (WEB_MASTER, "Web Master"),
         (MEMBERSHIP_DIRECTOR, "Membership Director"),
         (PR, "PR Director"),
+        (EX_PRESIDENT, "Ex-President"),
+        (SOCIAL_MEDIA_DIRECTOR, "Social Media Director"),
     )
 
     GENDER_CHOICES = (
