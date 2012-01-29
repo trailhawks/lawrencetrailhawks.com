@@ -32,7 +32,7 @@ class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
     list_display = ('title', 'annual', 'start_datetime')
     list_filter = ('start_datetime', 'annual',)
-    ordering = ['start_datetime']
+    ordering = ['-start_datetime']
     inlines = (SponsorsInline, RegistrationInline, NewsInline,)
     #inlines = [MemberInline, SponsorsInline, RegistrationInline, NewsInline]
     #inlines = [SponsorsInline, RegistrationInline, NewsInline]
