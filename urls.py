@@ -1,42 +1,37 @@
 from django.conf import settings
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import include
+from django.conf.urls.defaults import patterns
+from django.conf.urls.defaults import url
 from django.contrib import admin
-from django.views.generic.simple import direct_to_template, redirect_to
+from django.views.generic.simple import direct_to_template
+
 from lawrencetrailhawks.lib.Extras import get_latest
-from syncr.flickr.models import Photo, PhotoSet
+
 
 admin.autodiscover()
 
-
-def redirect(url):
-    def inner(request):
-        return HttpResponseRedirect(url)
-    return inner
-
-
 urlpatterns = patterns('',
-    (r'^$', direct_to_template, {'template': 'homepage.html',
-                                 'extra_context': get_latest(),
-                                }),
-    (r'^live/$', direct_to_template, {'template': 'live_coverage.html'}),
-    (r'^photos/', include('lawrencetrailhawks.photos.urls.photos')),
-    (r'^about/$', direct_to_template, {'template': 'about.html'}),
-    (r'^faq/', include('lawrencetrailhawks.faq.urls.faq')),
-    (r'^blog/', include('lawrencetrailhawks.blog.urls.blog')),
-    (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^links/', include('lawrencetrailhawks.links.urls.links')),
-    (r'^runs/', include('lawrencetrailhawks.runs.urls.runs')),
-    (r'^members/', include('lawrencetrailhawks.members.urls.members')),
-    (r'^sponsors/', 'lawrencetrailhawks.sponsors.views.get_sponsors'),
-    (r'^races/', include('lawrencetrailhawks.races.urls')),
-    #(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-    #        {'document_root': settings.STATIC_DOC_ROOT}),
-    (r'^contact/$', 'lawrencetrailhawks.members.views.officer_list'),
-    (r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
-    (r'^member_list/$', 'lawrencetrailhawks.lth.views.member_list'),
-    (r'^admin/', include(admin.site.urls)),
+    url(r'^$', direct_to_template, {'template': 'homepage.html', 'extra_context': get_latest()}),
+    url(r'^blog/', include('lawrencetrailhawks.blog.urls.blog')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^contact/$', 'lawrencetrailhawks.members.views.officer_list'),
+    url(r'^faq/', include('lawrencetrailhawks.faq.urls.faq')),
+    url(r'^links/', include('lawrencetrailhawks.links.urls.links')),
+    url(r'^member_list/$', 'lawrencetrailhawks.lth.views.member_list'),
+    url(r'^members/', include('lawrencetrailhawks.members.urls.members')),
+    url(r'^photos/', include('lawrencetrailhawks.photos.urls.photos')),
+    url(r'^races/', include('lawrencetrailhawks.races.urls')),
+    url(r'^runs/', include('lawrencetrailhawks.runs.urls.runs')),
+    url(r'^sponsors/', 'lawrencetrailhawks.sponsors.views.get_sponsors'),
+
+    url(r'^about/$', direct_to_template, {'template': 'about.html'}),
+    url(r'^live/$', direct_to_template, {'template': 'live_coverage.html'}),
+    url(r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
+
+    url(r'^admin/', include(admin.site.urls)),
 )
+
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DOC_ROOT}),
+        url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DOC_ROOT}),
     )
