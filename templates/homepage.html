@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load hawknews %}
 {% load markup %}
 {% load lth %}
@@ -8,7 +9,7 @@
 		<div class="col3 left">
 			<h2 class="label label-green">Latest Hawk News</h2>
 			<p class="quiet large">What's happening</p>
-			{% get_latest hawknews.HawkNews 3 as latest_news %}
+			{% get_latest hawknews.HawkNews 1 as latest_news %}
 			{% for item in latest_news %}
 			{{ item.body|textile }}
 			{% endfor %}
@@ -41,8 +42,8 @@
 			<p class="quiet large"><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
 		    {% get_latest_tweets %}
                     {% for t in stweets %}
-                    <p>{{ t.text|twitterfy }} - <a href="{{t.url}}">({{ t.pub_time|timesince }} ago)</a></p> 
-                    {% endfor %}	
+                    <p>{{ t.text|twitterfy }} - <a href="{{t.url}}">({{ t.pub_time|timesince }} ago)</a></p>
+                    {% endfor %}
 		</div>
 		<div class="clearer">&nbsp;</div>
 	</div>
@@ -101,10 +102,10 @@
 					</div>
 				{% endif %}
 			</div>
-			<div class="clearer">&nbsp;</div>	
+			<div class="clearer">&nbsp;</div>
 		</div>
 		<div class="right sidebar" id="sidebar">
-			
+
 			<div class="section">
 				{% block faq_preview %}
 				{% load faq_extras %}
@@ -166,7 +167,7 @@
 						<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
 						<p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
 						<p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
-						<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p> 
+						<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
 				</div>
 			</div>
 		</div>
