@@ -29,7 +29,7 @@ def member_detail(request, object_id, queryset):
                          )
 
 def officer_list(request):
-    officers = Member.objects.filter(position__isnull=False)
+    officers = Member.objects.filter(position__isnull=False).order_by('position')
 
     if request.method == "POST":
         form = ContactForm(request.POST)
