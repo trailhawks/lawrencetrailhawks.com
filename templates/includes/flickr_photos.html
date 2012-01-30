@@ -1,16 +1,22 @@
 {% load flickr %}
 {% load oembed_tags %}
 {% if photos %}
+  <ul class="media-grid">
   {% for photo in photos %}
-    <p><a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />
-    {{ photo.description|safe }}
-    </p>
+    <li>
+      <a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />
+      {{ photo.description|safe }}
+    </li>
   {% endfor %}
+  </ul>
 {% else %}
   {% get_random_photos 7 as random_photos %}
+  <ul class="media-grid">
   {% for photo in random_photos %}
-    <p><a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />
-    {{ photo.description|safe }}
-    </p>
+    <li>
+      <a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />
+      {{ photo.description|safe }}
+    </li>
   {% endfor %}
+  </ul>
 {% endif %}
