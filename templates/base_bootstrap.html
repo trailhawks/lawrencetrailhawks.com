@@ -49,13 +49,15 @@
 
     <div class="container">
 
-      <!-- Example row of columns -->
+      {% block content_wrapper %}
       <div class="content">
+        {% block page_header_wrapper %}
         <div class="page-header">
           {% block page_header %}
             <h1>Page name <small>Supporting text or tagline</small></h1>
           {% endblock page_header %}
         </div>
+        {% endblock page_header_wrapper %}
         <div class="row">
           <div class="span10">
             {% block sub_navigation %}
@@ -72,6 +74,7 @@
           </div>
         </div>
       </div>
+      {% endblock content_wrapper %}
 
       <footer>
         <p>
@@ -79,13 +82,13 @@
           <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
           <p>&copy; 2009-{% now "Y" %} Lawrence Trail Hawks.<br />All rights Reserved
         </p>
-        <p>
-          <a href="http://ultrasignup.com/register.aspx?did=15763">Join Us</a>
-          <a href="/contact/">Contact us</a>
-          <a href="http://www.flickr.com/photos/trailhawks">Flickr</a>
-          <a href="http://www.twitter.com/trailhawks">Twitter</a>
-          <a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a>
-        </p>
+        <ul class="pills">
+          <li><a href="http://ultrasignup.com/register.aspx?did=15763">Join Us</a></li>
+          <li><a href="/contact/">Contact us</a></li>
+          <li><a href="http://www.flickr.com/photos/trailhawks">Flickr</a></li>
+          <li><a href="http://www.twitter.com/trailhawks">Twitter</a></li>
+          <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a></li>
+        </ul>
       </footer>
 
     </div> <!-- /container -->
