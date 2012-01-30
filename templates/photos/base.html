@@ -1,0 +1,23 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content_wrapper %}
+<div class="content">
+  {% block page_header_wrapper %}
+  <div class="page-header">
+    {% block page_header %}
+      <h1>Trail Hawk Photos</h1>
+    {% endblock page_header %}
+  </div>
+  {% endblock page_header_wrapper %}
+  <div class="row">
+    <div class="span14">
+      {% block sub_navigation %}
+      {% endblock sub_navigation %}
+
+      {% block content %}
+      content
+      {% endblock content %}
+    </div>
+  </div>
+</div>
+{% endblock content_wrapper %}

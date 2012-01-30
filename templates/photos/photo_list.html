@@ -1,4 +1,4 @@
-{% extends "base_bootstrap.html" %}
+{% extends "photos/base.html" %}
 
 {% load flickr %}
 {% load oembed_tags %}
@@ -10,10 +10,7 @@
 {% block content %}
 <ul class="media-grid">
 {% for photo in photos %}
-    <li>
-        <a href="{{ photo.photopage_url }}">{% oembed 330x330 %}{{ photo.photopage_url }}{% endoembed %}</a>
-        <p>{{ photo.description|safe }}</p>
-    </li>
+    <li><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></li>
 {% endfor %}
 </ul>
 
