@@ -25,7 +25,6 @@ urlpatterns = patterns('',
     url(r'^sponsors/', 'lawrencetrailhawks.sponsors.views.get_sponsors'),
 
     url(r'^about/$', direct_to_template, {'template': 'about.html'}),
-    url(r'^live/$', direct_to_template, {'template': 'live_coverage.html'}),
     url(r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
 
     url(r'^admin/', include(admin.site.urls)),

@@ -1,67 +1,32 @@
-{% extends "base.html" %}
-{% load oembed_tags %}
+{% extends "base_bootstrap.html" %}
+
 {% load flickr %}
+{% load oembed_tags %}
 
 {% block title %}Sponsors{% endblock %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li class="current-tab"><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block page_header %}<h1>Sponsors</h1>{% endblock page_header %}
 
-{% block sub_nav %}
+{% block sub_navigation %}
+<ul class="pills">
+	<li><a href="/links/">Links</a></li>
+	<li ><a href="/Sponsors/">Sponsors</a></li>
+</ul>
+{% endblock sub_navigation %}
 
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		<li><a href="/links/">Links</a></li>
-		<li class="current-tab"><a href="/Sponsors/">Sponsors</a></li>
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-
-{% endblock %}
-
-{% block sponsors %}
-<div class="main" id="main-two-columns">
-
-	<div class="left" id="main-content">
-		<table>
-		{% for sponsor in sponsors %}
-		  <tr>
-			<td><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" /></a></td>
-		       	<td>{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
+{% block content %}
+<table>
+	{% for sponsor in sponsors %}
+	<tr>
+		<td><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" /></a></td>
+		<td>{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
 			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
-			<td />
-		  </tr>
-		{% endfor %}
-		</table>
-		{% block sponsor_detail %}{% endblock %}	
-	</div>
-
-	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-		
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
 {% endblock %}
+
+{% block secondary_content %}
+{% include "includes/flickr_photos.html" %}
+{% endblock secondary_content %}

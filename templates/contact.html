@@ -1,46 +1,25 @@
-{% extends "base.html" %}
-{% load oembed_tags %}
+{% extends "base_bootstrap.html" %}
+
 {% load flickr %}
+{% load oembed_tags %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}Contact Us{% endblock title %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block page_header %}Contact Us{% endblock page_header %}
 
-{% block contact %}
-<div class="main" id="main-two-columns">
+{% block content %}
+<h2>Trailhawk Officers</h2>
 
-	<div class="left" id="main-content">
-		<h2>Trailhawk Officers</h2>
-                <br />
-                {% for officer in officers %}
-		    <p><strong>{{ officer.position_name }}</strong> - {{ officer }}</p>
-		{% endfor %}
-	
-    <hr />
-    <h2>Contact us</h2>
-    <br />
-    <p>You can get in contact with the trail hawks by joining our <a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/">Yahoo mailing list</a> or by filling out the form below.<br />
-    We look forward to running with you soon.</p>
+{% for officer in officers %}
+    <p><strong>{{ officer.position_name }}</strong> - {{ officer }}</p>
+{% endfor %}
+
+<h2>Contact us</h2>
+
+<p>You can get in contact with the trail hawks by joining our <a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/">Yahoo mailing list</a> or by filling out the form below.</p>
+
+<p>We look forward to running with you soon.</p>
+
 <form action="/contact/" method="post">
   {% csrf_token %}
   <div class="form-row comment-input-email">
@@ -61,17 +40,8 @@
   <input type="checkbox" name="cc_myself" id="id_cc_myself" /></p>
   <input type="submit" value="Submit" class="button"/>
 </form>
-        </div>
+{% endblock content %}
 
-	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-{% endblock %}
-
-
+{% block secondary_content %}
+{% include "includes/flickr_photos.html" %}
+{% endblock secondary_content %}
