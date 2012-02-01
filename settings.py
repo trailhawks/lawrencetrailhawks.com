@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls'
@@ -81,12 +82,15 @@ FLICKR={'key':'', 'secret':''}
 CARROT_BACKEND = "ghettoq.taproot.Database"
 
 INSTALLED_APPS = [
-    'django.contrib.auth',
     'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.comments',
     'django.contrib.contenttypes',
+    'django.contrib.flatpages',
+    'django.contrib.markup',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.comments',
+
     'lth',
     'faq',
     'blog',
@@ -96,7 +100,6 @@ INSTALLED_APPS = [
     'sponsors',
     'races',
     'hawknews',
-    'django.contrib.markup',
     'oembed',
     'tagging',
     'syncr.flickr',
