@@ -1,13 +1,10 @@
 import datetime
-import tagging
 
-from django.conf import settings
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 
-from lawrencetrailhawks.blog import listeners
 from members.models import Member
 
 
@@ -36,8 +33,8 @@ class Post(models.Model):
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
-        db_table  = 'blog_posts'
-        ordering  = ('-publish',)
+        db_table = 'blog_posts'
+        ordering = ('-publish',)
         get_latest_by = 'publish'
 
     def __unicode__(self):
