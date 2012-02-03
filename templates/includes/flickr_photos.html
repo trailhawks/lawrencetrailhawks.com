@@ -7,7 +7,9 @@
     <li class="span4">
       <div class="thumbnail">
         <a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"500x500" }}</a>
-        <p>{{ photo.description|safe }}</p>
+        <div class="caption">
+          <h5>{{ photo.description|safe }}</h5>
+        </div>
       </div>
     </li>
   {% endfor %}
@@ -19,7 +21,9 @@
     <li class="span4">
       <div class="thumbnail">
         <a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"500x500" }}</a>
-        <p>{{ photo.description|safe }}</p>
+        <div class="caption">
+          <h5>{{ photo.description|safe }}</h5>
+        </div>
       </div>
     </li>
   {% endfor %}
