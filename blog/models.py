@@ -1,14 +1,15 @@
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import permalink
-from members.models import Member
-from django.conf import settings
-
-from lawrencetrailhawks.blog import listeners
-
 import datetime
 import tagging
+
+from django.conf import settings
+from django.db import models
+from django.db.models import permalink
+from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
+
+from lawrencetrailhawks.blog import listeners
+from members.models import Member
+
 
 class Post(models.Model):
     """Post model."""

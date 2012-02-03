@@ -56,7 +56,7 @@ class Race(models.Model):
     packet_pickup = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
-        return self.slug
+        return u'%s  - %s' % (self.title, self.annual)
 
     @models.permalink
     def get_absolute_url(self):

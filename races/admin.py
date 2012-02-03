@@ -1,4 +1,5 @@
 from django.contrib import admin
+from reversion import VersionAdmin
 
 from lawrencetrailhawks.races.models import EmergencyContact
 from lawrencetrailhawks.races.models import News
@@ -22,37 +23,39 @@ class NewsInline(admin.StackedInline):
 class SponsorsInline(admin.TabularInline):
     model = Race.sponsors.through
 
-class RegistrationAdmin(admin.ModelAdmin):
+class RegistrationAdmin(VersionAdmin):
     pass
 
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(VersionAdmin):
     prepopulated_fields = {'slug': ['title']}
 
-class RaceAdmin(admin.ModelAdmin):
+class RaceAdmin(VersionAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
     list_display = ('title', 'annual', 'start_datetime')
     list_filter = ('start_datetime', 'annual',)
     ordering = ['-start_datetime']
-    inlines = (SponsorsInline, RegistrationInline, NewsInline,)
+    inlines = [RegistrationInline, NewsInline]
+    #inlines = (SponsorsInline, RegistrationInline, NewsInline,)
     #inlines = [MemberInline, SponsorsInline, RegistrationInline, NewsInline]
     #inlines = [SponsorsInline, RegistrationInline, NewsInline]
-    exclude = ('sponsors',)
+    #exclude = ('sponsors',)
 
-class ResultAdmin(admin.ModelAdmin):
+class ResultAdmin(VersionAdmin):
     list_display = ('time', 'racer', 'race', 'bib_number', 'place')
     list_filter = ('racer', 'race',)
     raw_id_fields = ('racer', 'race',)
 
-class RacerAdmin(admin.ModelAdmin):
+class RacerAdmin(VersionAdmin):
     list_display = ('__unicode__', 'gender', 'email')
     list_filter = ('gender',)
-    search_fields = ('first_name', 'last_name')  # removed 'trailhawk' field but this might be fixed in a later version of Django
+    raw_id_fields = ('trailhawk',)
+    search_fields = ('first_name', 'last_name', 'trailhawk__hawk_name',)  # removed 'trailhawk' field but this might be fixed in a later version of Django
 
-class ReportAdmin(admin.ModelAdmin):
+class ReportAdmin(VersionAdmin):
     list_display = ('title', 'racer',)
     list_filter = ('racer',)
 
-class EmergencyContactAdmin(admin.ModelAdmin):
+class EmergencyContactAdmin(VersionAdmin):
     pass
 
 admin.site.register(Race, RaceAdmin)
