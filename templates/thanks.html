@@ -1,48 +1,17 @@
-{% extends "base.html" %}
-{% load oembed_tags %}
+{% extends "base_bootstrap.html" %}
+
 {% load flickr %}
+{% load oembed_tags %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}Thank you for contacting us!{% endblock title %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block page_header %}<h1>Thank you for contacting us!</h1>{% endblock page_header %}
 
-{% block contact %}
-<div class="main" id="main-two-columns">
+{% block content %}
+<p>One of our offices will answer your questions soon.</p>
+<p>- The Lawrence Trailhawks</p>
+{% endblock content %}
 
-	<div class="left" id="main-content">
-          <h3>Thank you for contacting us. <br />One of our offices will answer your questions soon.</h3>
-          <p>- The Lawrence Trailhawks</p>        
-        </div>
-
-	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-{% endblock %}
-
-
+{% block secondary_content %}
+{% include "includes/flickr_photos.html" %}
+{% endblock secondary_content %}

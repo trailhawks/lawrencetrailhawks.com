@@ -8,10 +8,16 @@
 {% block page_header %}<h1>Trail Hawk Photos</h1>{% endblock page_header %}
 
 {% block content %}
-<ul class="media-grid">
-{% for photo in photos %}
-    <li><a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a></li>
-{% endfor %}
+<ul class="thumbnails">
+  {% for photo in photos %}
+  <li class="span6">
+    <div class="thumbnail">
+      <a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a>
+      <h5>{{ photo.photo }}</h5>
+      <p>{{ photo.description }}</p>
+    </div>
+  </li>
+  {% endfor %}
 </ul>
 
 <p>Check out our <a href="http://www.flickr.com/photos/trailhawks">Flickr</a> page for more photos.</p>

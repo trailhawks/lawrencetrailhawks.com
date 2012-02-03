@@ -12,10 +12,9 @@
 	{% endfor %}
 	</p>
 {% endif %}
-<p><b>When:</b> {{ object.run_date }} at {{ object.run_time }}</p>
-<p><b>Where:</b> {{ object.location }}</p>
-<p><b>Details:</b> {{ object.details }}</p>
-<p><b>Contact:</b> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
+<p><strong>When:</strong> {{ object.run_date }} at {{ object.run_time }}</p>
+<p><strong>Where:</strong> {{ object.location }}</p>
+<p><strong>Details:</strong> {{ object.details }}</p>
+<p><strong>Contact:</strong> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
 {{ object.map_iframe|safe}}
-
 {% endblock content %}

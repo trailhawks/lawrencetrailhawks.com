@@ -11,7 +11,7 @@ from lawrencetrailhawks.lib.Extras import get_latest
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, {'template': 'homepage.html', 'extra_context': get_latest()}),
+    url(r'^$', direct_to_template, {'template': 'homepage/homepage.html', 'extra_context': get_latest()}),
     url(r'^blog/', include('lawrencetrailhawks.blog.urls.blog')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^contact/$', 'lawrencetrailhawks.members.views.officer_list'),

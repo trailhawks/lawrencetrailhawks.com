@@ -8,8 +8,6 @@
 {% block page_header %}<h1>Weekly Runs</h1>{% endblock page_header %}
 
 {% block content %}
-
-{% block run_detail %}
 <p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
 <p>We welcome runners of all abilities. So come join us for a run.</p>
 Weekly runs:
@@ -18,6 +16,4 @@ Weekly runs:
 	<li><a href={{ object.get_absolute_url }}>{{ object.name }}</a></li>
 	{% endfor %}
 </ul>
-{% endblock run_detail %}
-
 {% endblock content %}

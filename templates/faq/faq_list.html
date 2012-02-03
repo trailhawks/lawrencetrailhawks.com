@@ -4,52 +4,15 @@
 {% load markup %}
 {% load oembed_tags %}
 
-{% block title %}FAQ{% endblock %}
+{% block title %}FAQ{% endblock title %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block page_header %}<h1>FAQ</h1>{% endblock page_header %}
 
-{% block faq %}
-<div class="main" id="main-two-columns">
-
-	<div class="left" id="main-content">
-		<ul>
-		  {% for faq in object_list %}
-		    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></h3>
-		    <p>{{ faq.answer|textile }}</p>
-		  {% endfor %}
-		  </ul>
-		{% block faq_detail %}{% endblock %}
-		<p>For more questions email Gary Henry at <a href="mailto:unews@ultrastory.com">unews@ultrastory.com</a></p>
-
-	</div>
-
-	<div class="right sidebar" id="sidebar">
-
-		{% include "includes/flickr_photos.html" %}
-
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-{% endblock %}
+{% block content %}
+<ul>
+  {% for faq in object_list %}
+    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question }}</a></h3>
+    <p>{{ faq.answer|textile }}</p>
+  {% endfor %}
+</ul>
+{% endblock content %}

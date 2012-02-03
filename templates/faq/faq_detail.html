@@ -1,9 +1,12 @@
-{% extends "faq/faq_list.html" %}
+{% extends "faq/base.html" %}
+
 {% load markup %}
 
-{% block title %}FAQ{% endblock %}
+{% block title %}FAQ{% endblock title %}
 
-{% block faq_detail %}
+{% block page_header %}<h1>FAQ</h1>{% endblock page_header %}
+
+{% block content %}
 <h2>{{ object.question }}</h2>
 <p>{{ object.answer|textile }}</p>
-{% endblock %}
+{% endblock content %}

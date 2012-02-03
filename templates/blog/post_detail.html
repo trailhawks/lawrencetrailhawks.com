@@ -1,11 +1,16 @@
-{% extends "blog/post_archive.html" %}
+{% extends "blog/base.html" %}
+
 {% load markup %}
 
-{% block title %}{{object.title}}{% endblock %}
+{% block title %}{{ object.title }}{% endblock title %}
 
-{% block blog_detail %}
-<div class="post-title"><h2>{{ object.title }}</h2></div>
-<div class="post-date">{{ object.publish|date}} by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></div>
+{% block page_header %}<h1>{{ object.title }}</h1>{% endblock page_header %}
+
+{% block content %}
+<h2>{{ object.title }}</h2>
+
+<p>{{ object.publish|date }} by <a href="{{ object.author.get_absolute_url }}">{{ object.author }}</a></p>
+
 <p class="other_posts">
     {% if object.get_previous_by_publish %}
     <a class="previous" href="{{ object.get_previous_post.get_absolute_url }}" title="View previous post">&laquo; {{ object.get_previous_post }}</a>
@@ -20,17 +25,17 @@
   </p>
 
 {% if object.repost_url %}
-<div class='original-post'>
-	<p>Originally published on <a href="{{ object.repost_url }}">{{ object.repost_date|date }}</a></p>
-</div>
+<p>Originally published on <a href="{{ object.repost_url }}">{{ object.repost_date|date }}</a></p>
 {% endif %}
 
 <div class="post-body">
 <p>{{ object.body|textile }}</p>
 </div>
+
 <div id="fb-root">
 <fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
 </div>
+
 {% include "comments/comments.html" %}
 
-{% endblock %}
+{% endblock content %}

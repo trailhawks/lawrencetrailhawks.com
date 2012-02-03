@@ -1,81 +1,26 @@
-{% extends "base.html" %}
-{% load oembed_tags %}
+{% extends "blog/base.html" %}
+
 {% load flickr %}
+{% load oembed_tags %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}Blog{% endblock title %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li class="current-tab"><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
+{% block page_header %}<h1>Blog</h1>{% endblock page_header %}
+
+{% block content %}
+<ul>
+	{% for post in latest %}
+    <div class="post">
+		<div class="archive-post-date">
+			<div class="archive-post-day">{{ post.publish|date:"j" }}</div>
+			<div class="archive-post-month">{{ post.publish|date:"M" }}</div>
+		</div>
+
+		<div class="archive-post-title">
+			<h3><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h3>
+			<div class="post-date">{{ post.publish|date }} by <a href="{{ post.author.get_absolute_url }}">{{ post.author.full_hawk_name }}</a></div>
 		</div>
 	</div>
-{% endblock %}
-
-{% block sub_nav %}
-
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		<li class="current-tab"><a href="/blog/">All Blog Posts</a></li>
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-
-{% endblock %}
-
-{% block blog_index %}
-<div class="main" id="main-two-columns">
-
-	<div class="left" id="main-content">
-	<ul>
-		{% for post in latest %}
-                  <div class="post"> 
- 
-				<div class="archive-post-date"> 
-					<div class="archive-post-day">{{post.publish|date:"j"}}</div> 
-					<div class="archive-post-month">{{post.publish|date:"M"}}</div> 
-				</div> 
- 
-				<div class="archive-post-title"> 
-					<h3><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h3> 
-					<div class="post-date">{{ post.publish|date }} by <a href="{{post.author.get_absolute_url}}">{{post.author.full_hawk_name}}</a></div> 
-				</div> 
- 
-				<div class="clearer">&nbsp;</div> 
- 
-			</div> 
- 
-			<div class="archive-separator"></div> 
-		{% endfor %}
-    </ul>
-		{% block blog_detail %}{% endblock %}
-	</div>
-
-	<div class="right sidebar" id="sidebar">
-
-		{% include "includes/flickr_photos.html" %}
-		
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
-</div>
-
-
-
-
-{% endblock %}
+	{% endfor %}
+</ul>
+{% endblock content %}

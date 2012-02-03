@@ -15,12 +15,14 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/site_media/css/bootstrap.css" rel="stylesheet">
+   <link href="/site_media/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
+        padding-bottom: 40px;
       }
     </style>
+    <link href="/site_media/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -30,19 +32,28 @@
   </head>
 
   <body>
-
-    <div class="topbar">
-      <div class="fill">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="i-bar"></span>
+            <span class="i-bar"></span>
+            <span class="i-bar"></span>
+            <span class="i-bar"></span>
+            <span class="i-bar"></span>
+            <span class="i-bar"></span>
+          </a>
           <a class="brand" href="#">Lawrence Trail Hawks</a>
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="/races/">Races</a></li>
-            <li><a href="/runs/">Runs</a></li>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/photos/">Photos</a></li>
-            <li><a href="/links/">Links</a></li>
-          </ul>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="/races/">Races</a></li>
+              <li><a href="/runs/">Runs</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/photos/">Photos</a></li>
+              <li><a href="/links/">Links</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
@@ -59,7 +70,7 @@
         </div>
         {% endblock page_header_wrapper %}
         <div class="row">
-          <div class="span10">
+          <div class="span8">
             {% block sub_navigation %}
             {% endblock sub_navigation %}
 
@@ -77,49 +88,47 @@
       {% endblock content_wrapper %}
 
       <footer>
-        <p>
+        <div class="span1">
           <a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." class="left"/></a>
+        </div>
+        <div class="span4">
+          <p>&copy; 2009-{% now "Y" %} Lawrence Trail Hawks.<br />All rights Reserved</p>
+        </div>
+        <div class="span1">
           <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-          <p>&copy; 2009-{% now "Y" %} Lawrence Trail Hawks.<br />All rights Reserved
-        </p>
-        <ul class="pills">
-          <li><a href="http://ultrasignup.com/register.aspx?did=15763">Join Us</a></li>
-          <li><a href="/contact/">Contact us</a></li>
-          <li><a href="http://www.flickr.com/photos/trailhawks">Flickr</a></li>
-          <li><a href="http://www.twitter.com/trailhawks">Twitter</a></li>
-          <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a></li>
-        </ul>
+        </div>
+        <div class="span4">
+          <ul class="nav nav-pills">
+            <li><a href="http://ultrasignup.com/register.aspx?did=15763">Join Us</a></li>
+            <li><a href="/contact/">Contact us</a></li>
+            <li><a href="http://www.flickr.com/photos/trailhawks">Flickr</a></li>
+            <li><a href="http://www.twitter.com/trailhawks">Twitter</a></li>
+            <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a></li>
+          </ul>
+        </div>
       </footer>
 
     </div> <!-- /container -->
 
+    <div id="fb-root"></div>
+
   </body>
 
-<script type="text/javascript" src="/site_media/js/jquery-1.3.1.min.js"></script>
-<script type="text/javascript" src="/site_media/js/jquery.juitter.js"></script>
-<script type="text/javascript" src="/site_media/js/system.js"></script>
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({appId: 'your app id', status: true, cookie: true,
-             xfbml: true});
-    };
-    (function() {
-         var e = document.createElement('script'); e.async = true;
-         e.src = document.location.protocol +
-             '//connect.facebook.net/en_US/all.js';
-         document.getElementById('fb-root').appendChild(e);
-  }());
-</script>
-<script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
+  <script type="text/javascript" src="/site_media/js/jquery.juitter.js"></script>
+  <script type="text/javascript" src="/site_media/js/system.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery.js"></script>
+  <script type="text/javascript" src="/site_media/js/bootstrap-transition.js"></script>
+  <script type="text/javascript" src="/site_media/js/bootstrap-collapse.js"></script>
+
   <script type="text/javascript">
-  try {
-  var pageTracker = _gat._getTracker("UA-16156214-1");
-  pageTracker._trackPageview();
-  } catch(err) {}
-</script>
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-16156214-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
 
 </html>

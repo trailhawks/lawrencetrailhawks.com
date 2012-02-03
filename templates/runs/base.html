@@ -1,7 +1,7 @@
 {% extends "base_bootstrap.html" %}
 
 {% block sub_navigation %}
-<ul class="pills">
+<ul class="nav nav-pills">
 {% for run in object_list %}
     <li><a {% if object.slug == run.slug %} class="active"{% endif %} href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
 {% endfor %}
