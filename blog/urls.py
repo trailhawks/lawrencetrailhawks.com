@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from django.conf.urls.defaults import patterns
 from django.conf.urls.defaults import url
 
-from lawrencetrailhawks.blog.models import Post
+from .models import Post
 
 
 blog_info_dict = {

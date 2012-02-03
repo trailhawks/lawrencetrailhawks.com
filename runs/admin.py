@@ -1,8 +1,10 @@
+from __future__ import absolute_import
+
 from django.contrib import admin
 from reversion import VersionAdmin
 
-from lawrencetrailhawks.runs.models import News
-from lawrencetrailhawks.runs.models import Run
+from .models import News
+from .models import Run
 
 
 class NewsAdmin(VersionAdmin):

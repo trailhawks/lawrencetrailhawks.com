@@ -1,8 +1,10 @@
+from __future__ import absolute_import
+
 from django.conf.urls.defaults import patterns
 from django.conf.urls.defaults import url
 
+from .models import Run
 
-from lawrencetrailhawks.runs.models import Run
 
 runs_info_dict = {
     'queryset': Run.objects.all(),

@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from django.conf import settings
 from django.contrib.comments.models import Comment
 from django.contrib.comments.signals import comment_was_posted
@@ -6,8 +8,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template import loader, Context
 from django.utils.encoding import smart_str
 
-from lawrencetrailhawks.lth import akismet
-from lawrencetrailhawks.members.models import Member
+from lth import akismet
+from members.models import Member
 
 
 AKISMET_API_KEY = getattr(settings, "AKISMENT_API_KEY", "f9c9f57988a4")

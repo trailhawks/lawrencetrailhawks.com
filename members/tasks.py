@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+
 import datetime
 
 from celery.decorators import periodic_task
 from celery.task.schedules import crontab
 from django.core.mail import send_mail
 
-from lawrencetrailhawks.members.models import Member
+from .models import Member
 
 
 # this will run every minute, see http://celeryproject.org/docs/reference/celery.task.schedules.html#celery.task.schedules.crontab

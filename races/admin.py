@@ -1,13 +1,15 @@
+from __future__ import absolute_import
+
 from django.contrib import admin
 from reversion import VersionAdmin
 
-from lawrencetrailhawks.races.models import EmergencyContact
-from lawrencetrailhawks.races.models import News
-from lawrencetrailhawks.races.models import Race
-from lawrencetrailhawks.races.models import Racer
-from lawrencetrailhawks.races.models import Registration
-from lawrencetrailhawks.races.models import Report
-from lawrencetrailhawks.races.models import Result
+from .models import EmergencyContact
+from .models import News
+from .models import Race
+from .models import Racer
+from .models import Registration
+from .models import Report
+from .models import Result
 
 
 #class MemberInline(admin.TabularInline):

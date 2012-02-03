@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from django.contrib import admin
 from reversion import VersionAdmin
 
-from lawrencetrailhawks.members.models import Member
+from .models import Member
 
 
 class MemberInline(admin.TabularInline):

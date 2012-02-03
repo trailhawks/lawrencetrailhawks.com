@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from haystack import indexes
 
 from syncr.flickr.models import Photo

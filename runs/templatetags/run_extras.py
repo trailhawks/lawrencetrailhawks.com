@@ -1,8 +1,11 @@
+from __future__ import absolute_import
+
 import datetime
 
 from django.template import Library, Node
 
-from runs.models import Run
+from ..models import Run
+
 
 register = Library()
 

@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -6,8 +8,8 @@ from django.template import RequestContext
 from django.views.generic.list_detail import object_detail as obj_detail
 from syncr.flickr.models import Photo
 
-from lawrencetrailhawks.members.forms import ContactForm
-from lawrencetrailhawks.members.models import Member
+from .forms import ContactForm
+from .models import Member
 
 
 def get_members(request):

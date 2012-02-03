@@ -1,9 +1,11 @@
+from __future__ import absolute_import
+
 import csv
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-from lawrencetrailhawks.members.models import Member
+from members.models import Member
 
 
 @login_required

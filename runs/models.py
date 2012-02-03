@@ -1,6 +1,8 @@
+from __future__ import absolute_import
+
 from django.db import models
 
-from lawrencetrailhawks.members.models import Member
+from members.models import Member
 
 
 class Run(models.Model):

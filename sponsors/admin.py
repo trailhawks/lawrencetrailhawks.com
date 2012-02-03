@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from django.contrib import admin
 from reversion import VersionAdmin
 
-from lawrencetrailhawks.sponsors.models import Sponsor
+from .models import Sponsor
 
 
 class SponsorAdmin(VersionAdmin):

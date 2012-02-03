@@ -1,6 +1,9 @@
-from django.conf.urls.defaults import *
+from __future__ import absolute_import
 
-from lawrencetrailhawks.faq.models import FAQ
+from django.conf.urls.defaults import patterns
+from django.conf.urls.defaults import url
+
+from .models import FAQ
 
 
 faq_info_dict = {
@@ -8,12 +11,6 @@ faq_info_dict = {
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
-     (r'^$',
-     'object_list',
-     faq_info_dict,
-     'faq_list'),
-    (r'^(?P<object_id>[-\w]+)/$',
-     'object_detail',
-     faq_info_dict,
-     'faq_detail'),
+    url(r'^$', 'object_list', faq_info_dict, 'faq_list'),
+    url(r'^(?P<object_id>[-\w]+)/$', 'object_detail', faq_info_dict, 'faq_detail'),
 )

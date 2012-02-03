@@ -1,8 +1,11 @@
+from __future__ import absolute_import
+
 import datetime
 
 from django.conf.urls.defaults import patterns, url
 
-from lawrencetrailhawks.races.models import Race, Racer
+from .models import Race
+from .models import Racer
 
 
 race_info_dict = {

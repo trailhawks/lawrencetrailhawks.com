@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from django.contrib import admin
 from reversion import VersionAdmin
 
-from lawrencetrailhawks.hawknews.models import HawkNews
+from .models import HawkNews
 
 
 class HawkNewsAdmin(VersionAdmin):

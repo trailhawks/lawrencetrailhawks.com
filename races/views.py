@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import datetime
 
 from django.http import HttpResponse
@@ -5,7 +7,8 @@ from django.views.generic.date_based import object_detail, archive_index
 from django.views.generic.list_detail import object_detail as obj_detail
 from syncr.flickr.models import Photo
 
-from lawrencetrailhawks.races.models import Race, Racer
+from .models import Race
+from .models import Racer
 
 
 def upcoming_races(request):

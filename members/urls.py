@@ -1,6 +1,8 @@
+from __future__ import absolute_import
+
 from django.conf.urls.defaults import url, patterns
 
-from lawrencetrailhawks.members.models import Member
+from .models import Member
 
 
 members_info_dict = {

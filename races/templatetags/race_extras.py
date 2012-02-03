@@ -1,8 +1,10 @@
+from __future__ import absolute_import
+
 import datetime
 
 from django.template import Library, Node
 
-from races.models import Race
+from ..models import Race
 from blog.models import Post
 
 
