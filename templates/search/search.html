@@ -1,0 +1,22 @@
+{% extends "search/base.html" %}
+
+{% block title %}Search{% endblock title %}
+
+{% block page_header %}<h1>Search</h1>{% endblock page_header %}
+
+{% block content %}
+<form method="get" action=".">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if query %}
+    <ul>
+    {% for result in page.object_list %}
+        <li>{{ result.text|safe }}</li>
+    {% empty %}
+        <li>No results found.</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock content %}

@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^photos/', include('lawrencetrailhawks.photos.urls')),
     url(r'^races/', include('lawrencetrailhawks.races.urls')),
     url(r'^runs/', include('lawrencetrailhawks.runs.urls')),
+    url(r'^search/', include('haystack.urls')),
 
     url(r'^contact/$', 'lawrencetrailhawks.members.views.officer_list'),
     url(r'^member_list/$', 'lawrencetrailhawks.lth.views.member_list'),
