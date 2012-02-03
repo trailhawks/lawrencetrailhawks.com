@@ -4,7 +4,6 @@
 {% load markup %}
 {% load race_extras %}
 {% load run_extras %}
-{% load twitterfy %}
 
 {% block content %}
 <div class="row">
@@ -41,9 +40,10 @@
     <div class="span4">
       <h2>Follow Us</h2>
       <p><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
+      {% load twitterfy %}
       {% get_latest_tweets %}
-      {% for t in stweets %}
-      <p>{{ t.text|twitterfy }} - <a href="{{t.url}}">({{ t.pub_time|timesince }} ago)</a></p>
+      {% for tweet in stweets %}
+      <p>{{ tweet.text|twitterfy }} - <a href="{{ tweet.url }}">({{ tweet.pub_time|timesince }} ago)</a></p>
       {% endfor %}
     </div>
 </div>
