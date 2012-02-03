@@ -1,4 +1,4 @@
-{% extends "base_bootstrap.html" %}
+{% extends "sponsors/base.html" %}
 
 {% load flickr %}
 {% load oembed_tags %}
@@ -26,7 +26,3 @@
 	{% endfor %}
 </table>
 {% endblock %}
-
-{% block secondary_content %}
-{% include "includes/flickr_photos.html" %}
-{% endblock secondary_content %}
