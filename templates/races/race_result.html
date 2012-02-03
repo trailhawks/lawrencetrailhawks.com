@@ -1,13 +1,9 @@
 {% extends "races/base.html" %}
 
-{% block title %}{{ object.annual|capfirst }} {{ object.title }} Results{% endblock %}
+{% block title %}{{ object.annual|capfirst }} {{ object.title }} Results{% endblock title %}
 
-{% block page_title %}<h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>{% endblock page_title %}
+{% block page_header %}<h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>{% endblock page_header %}
 
 {% block content %}
-
-{% block race_result %}
 {% include "races/includes/results.html" %}
-{% endblock %}
-
 {% endblock content%}

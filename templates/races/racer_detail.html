@@ -10,12 +10,14 @@
   <p><strong>Name:</strong> {{ object.full_name }}</p>
   <p><strong>Age:</strong> {{ object.age }}</p>
   <p><strong>Gender:</strong> {{ object.get_gender }}</p>
+
   {% if object.get_results %}
-  <p><strong>Results:</strong>
-	<ul>
+  <h3>Results:</h3>
+	<dl>
 	{% for result in object.get_results %}
-		<li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> - in {{ result.time }} </li>
+		{% ifchanged %}<dt>{{ result.race.start_datetime|date:"Y" }}</dt>{% endifchanged %}
+    <dd><a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> in {{ result.time }}</dd>
 	{% endfor %}
-	</ul></p>
+	</dl>
   {% endif %}
 {% endblock content %}

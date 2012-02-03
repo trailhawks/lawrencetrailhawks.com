@@ -5,94 +5,107 @@
 {% load oembed_tags %}
 {% load race_extras %}
 
-{% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock %}
+{% block title %}{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}{% endblock %}
 
-{% block page_title %}<h1>{{object.title}}{% if object.get_overall_results %} Results{% endif %}</h1>{% endblock page_title %}
+{% block page_header %}<h1>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h1>{% endblock page_header %}
 
 {% block nav_races_races_class %}class="active"{% endblock nav_races_races_class %}
 
-{% block sub_nav %}
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		{% if object.get_overall_results %}
-		<li class="current-tab"><a href="/races/results/">Race Results</a></li>
-		<li><a href="/races/upcoming/">Upcoming Races</a></li>
-		{% else %}
-		<li><a href="/races/results/">Race Results</a></li>
-		<li class="current-tab"><a href="/races/upcoming/">Upcoming Races</a></li>
-		{% endif %}
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-{% endblock %}
-
 {% block content %}
 
-<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
 <h4>{{ object.slogan }}</h4>
-            {% if object.logo %}
-              <img src="/site_media/{{object.logo}}" width="400" />
-            {% endif %}
-<br />
-{% if object.get_race_news %}
-<p><strong>Latest News:</strong>
-	{% for item in object.get_race_news|slice:":3" %}
-	&nbsp;&nbsp;{{ item.body|textile }}
-	{% endfor %}
-</p>
+{% if object.logo %}
+<img src="/site_media/{{ object.logo }}" width="400" />
 {% endif %}
-<p><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</p>
-<p><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</p>
 
-<p><strong>Race distance:</strong> {{ object.distance }}
-	{% ifequal object.unit 1 %}
-	km
-	{% else %}
-	mi
-	{% endifequal %}
-	</p>
-            <p><strong>Race details:</strong> {{object.description|textile}}<br />
-	{% if object.course_map %}
-		Click <a href="{{object.course_map}}">here</a> for a course map.
+{% if object.get_race_news %}
+<h3>Latest News:</h3>
+<dl>
+{% for item in object.get_race_news|slice:":3" %}
+    <dt>{{ item.pub_date|date }}</dt>
+    <dd>{% oembed %}{{ item.body }}{% endoembed %}</dd>
+{% endfor %}
+</dl>
+{% endif %}
+
+<dl>
+    <dt>Race date:</dt>
+    <dd>{{ object.start_datetime|date:"F j, Y" }}</dd>
+    <dt>Start time:</dt>
+    <dd>{{ object.start_datetime|time:"h:i A" }}</dd>
+
+    <dt>Race distance:</dt>
+    <dd>{{ object.distance }} {{ object.get_unit_display }}</dd>
+
+    <dt>Race details:</dt>
+    <dd>{{ object.description|textile }}</dd>
+
+    {% if object.course_map %}
+    <dt>Course Map:</dt>
+    <dd>Click <a href="{{ object.course_map }}">here</a> for a course map.</dd>
     {% endif %}
 
-<p>
+    <dt>Awards:</dt>
+    <dd>{{ object.awards }}</dd>
+
+    {% if object.cut_off %}
+    <dt>Cut off time:</dt>
+    <dd>{{ object.cut_off }}</dd>
+    {% endif %}
+
+    <dt>Location:</dt>
+    <dd>{% if object.map_link %}<a href="{{ object.map_link }}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}</dd>
+    <dd>{% if object.location_iframe %}{{ object.location_iframe|safe }}{% endif %}</dd>
+
+    <dt>Contact:</dt>
+    <dd>{{ object.contact.full_name }}
+        <ul>
+            <li>Phone: {{ object.contact.phone }}</li>
+            <li>Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></li>
+        </ul>
+    </dd>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+</dl>
+
+{% if object.sponsors.count %}
+<h3>Sponsors</h3>
+<ul>
 {% for sponsor in object.sponsors.all %}
-<a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width=90></a>
+    <li><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width=90></a></li>
 {% endfor %}
-</p>
-
-<p><strong>Awards:</strong> {{ object.awards }}
-
-{% if object.cut_off %}<p><strong>Cut off time:</strong> {{ object.cut_off }}</p>{% endif %}
-<p><strong>Location:</strong>
-{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
-{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
-
-<p><strong>Contact:</strong> {{ object.contact.full_name }}<br/>
-&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
-&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
+</ul>
+{% endif %}
 
 {% if not object.get_overall_results %}
-<p><strong>Registration:</strong> {{ object.reg_description }}<br />
-	{% if object.reg_url %}
-	For online registration click <a href="{{object.reg_url}}">here</a>.<br />
-	{% endif %}
-	{% if object.entry_form %}
-	<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
-	{% endif %}
-</p>
-            <p><strong><em>Entry fee:</em></strong></p>
-              <ul>
-                {% for reg in object.get_reg_dates %}
-                  <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-                {% endfor %}
-              </ul>
-            <p>{{ object.discounts }}</p>
-            {% if object.packet_pickup %}
-<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|textile }}</p>
+    <p><strong>Registration:</strong> {{ object.reg_description }}<br />
+    {% if object.reg_url %}
+        For online registration click <a href="{{object.reg_url}}">here</a>.<br />
+    {% endif %}
+
+    {% if object.entry_form %}
+        <p>For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.</p>
+    {% endif %}
+
+    <p><strong><em>Entry fee:</em></strong></p>
+    <ul>
+    {% for reg in object.get_reg_dates %}
+        <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+    {% endfor %}
+    </ul>
+
+    <p>{{ object.discounts }}</p>
+    {% if object.packet_pickup %}
+        <p><strong>Packet Pickup:</strong> {{ object.packet_pickup|textile }}</p>
+    {% endif %}
 {% endif %}
-            {% endif %}
 
 {% if object.lodging %}
 <p><strong>Lodging:</strong> Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
@@ -103,14 +116,13 @@
 {% endif %}
 
 {% if object.get_overall_results %}
-  <p><h3>Results:</h3>
+  <h3>Race Results:</h3>
   <ul>
 	<li><a href="{{ object.get_absolute_url }}results/#overallresults">Overall Results</a></li>
 	<li><a href="{{ object.get_absolute_url }}results/#maleresults">Male Results</a></li>
 	<li><a href="{{ object.get_absolute_url }}results/#femaleresults">Female Results</a></li>
   {% block race_result %}{% endblock %}
 </ul>
-</p>
 {% endif %}
 
 <div id="fb-root">
