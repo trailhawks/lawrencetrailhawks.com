@@ -8,9 +8,8 @@
 {% block page_header %}<h1>Weekly Runs</h1>{% endblock page_header %}
 
 {% block content %}
-<p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
-<p>We welcome runners of all abilities. So come join us for a run.</p>
-Weekly runs:
+<p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty. We welcome runners of all abilities. So come join us for a run.</p>
+<h3>Weekly runs:</h3>
 <ul>
 	{% for object in object_list %}
 	<li><a href={{ object.get_absolute_url }}>{{ object.name }}</a></li>

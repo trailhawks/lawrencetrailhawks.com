@@ -1,20 +1,30 @@
 {% extends "runs/base.html" %}
 
+{% load oembed_tags %}
+
 {% block title %}{{ object.name }}{% endblock title %}
 
 {% block page_header %}<h1>{{ object.name }}</h1>{% endblock page_header %}
 
 {% block content %}
-	{% if object.get_run_news %}
-	<p><strong>Latest News:</strong><br />
+{% if object.get_run_news %}
+	<h3>Latest News:</h3>
+    <dl>
 	{% for item in object.get_run_news|slice:":3" %}
-		&nbsp;&nbsp;{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
+        <dt>{{ item.pub_date|date }}</dt>
+		<dd>{% oembed %}{{ item.body }}{% endoembed %}</dd>
 	{% endfor %}
-	</p>
+	</dl>
 {% endif %}
-<p><strong>When:</strong> {{ object.run_date }} at {{ object.run_time }}</p>
-<p><strong>Where:</strong> {{ object.location }}</p>
-<p><strong>Details:</strong> {{ object.details }}</p>
-<p><strong>Contact:</strong> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
-{{ object.map_iframe|safe}}
+<dl>
+    <dt>When:</dt>
+    <dd>{{ object.run_date }} at {{ object.run_time }}</dd>
+    <dt>Where:</dt>
+    <dd>{{ object.location }}</dd>
+    <dt>Details:</dt>
+    <dd>{{ object.details }}</dd>
+    <dt>Contact:</dt>
+    <dd>{{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a</dd>
+</dl>
+<div>{{ object.map_iframe|safe }}</div>
 {% endblock content %}
