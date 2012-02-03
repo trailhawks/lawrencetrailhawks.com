@@ -1,11 +1,9 @@
 {% extends "base_bootstrap.html" %}
 
-{% block secondary_content %}
-{% include "includes/flickr_photos.html" %}
-{% endblock secondary_content %}
+{% block nav_blog_class %}class="active"{% endblock nav_blog_class %}
 
 {% block sub_navigation %}
 <ul class="nav nav-pills">
-    <li class="active"><a href="/blog/">All Blog Posts</a></li>
+  <li class="active"><a href="/blog/">All Blog Posts</a></li>
 </ul>
 {% endblock sub_navigation %}

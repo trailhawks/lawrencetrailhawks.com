@@ -1,5 +1,7 @@
 {% extends "base_bootstrap.html" %}
 
+{% block nav_runs_class %}class="active"{% endblock nav_runs_class %}
+
 {% block sub_navigation %}
 <ul class="nav nav-pills">
 {% for run in object_list %}

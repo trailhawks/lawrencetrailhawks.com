@@ -46,12 +46,12 @@
           <a class="brand" href="#">Lawrence Trail Hawks</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="/races/">Races</a></li>
-              <li><a href="/runs/">Runs</a></li>
-              <li><a href="/blog/">Blog</a></li>
-              <li><a href="/photos/">Photos</a></li>
-              <li><a href="/links/">Links</a></li>
+              <li {% block nav_home_class %}{% endblock nav_home_class %}><a href="/">Home</a></li>
+              <li {% block nav_race_class %}{% endblock nav_race_class %}><a href="/races/">Races</a></li>
+              <li {% block nav_runs_class %}{% endblock nav_runs_class %}><a href="/runs/">Runs</a></li>
+              <li {% block nav_blog_class %}{% endblock nav_blog_class %}><a href="/blog/">Blog</a></li>
+              <li {% block nav_photos_class %}{% endblock nav_photos_class %}><a href="/photos/">Photos</a></li>
+              <li {% block nav_links_class %}{% endblock nav_links_class %}><a href="/links/">Links</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -80,7 +80,7 @@
           </div>
           <div class="span4">
             {% block secondary_content %}
-            <h3>Secondary content</h3>
+            {% include "includes/flickr_photos.html" %}
             {% endblock secondary_content %}
           </div>
         </div>

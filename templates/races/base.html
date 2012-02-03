@@ -1,11 +1,13 @@
 {% extends "base_bootstrap.html" %}
 
+{% block nav_race_class %}class="active"{% endblock nav_race_class %}
+
 {% block sub_navigation %}
 <ul class="nav nav-pills">
-    <li class="active"><a href="/races/">All Races</a></li>
-    <li><a href="/races/results/">Race Results</a></li>
-    <li><a href="/races/upcoming/">Upcoming Races</a></li>
-    <li><a href="/races/racers/">Racers</a></li>
+  <li {% block nav_races_races_class %}{% endblock nav_races_races_class %}><a href="/races/">All Races</a></li>
+  <li {% block nav_races_results_class %}{% endblock nav_races_results_class %}><a href="/races/results/">Race Results</a></li>
+  <li {% block nav_races_upcoming_class %}{% endblock nav_races_upcoming_class %}><a href="/races/upcoming/">Upcoming Races</a></li>
+  <li {% block nav_races_racers_class %}{% endblock nav_races_racers_class %}><a href="/races/racers/">Racers</a></li>
 </ul>
 {% endblock sub_navigation %}
 

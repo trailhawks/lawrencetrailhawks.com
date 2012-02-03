@@ -4,6 +4,8 @@
 
 {% block page_header %}<h1>Results in {{ year }}</h1>{% endblock page_header %}
 
+{% block nav_races_races_class %}class="active"{% endblock nav_races_races_class %}
+
 {% block content %}
   <ul>
   {% for month in date_list %}

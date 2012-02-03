@@ -1,8 +1,10 @@
-{% extends "races/racer_list.html" %}
+{% extends "races/base.html" %}
 
 {% block title %}{{ object.full_name }}{% endblock title %}
 
 {% block page_header %}<h1>{{ object.full_name }}</h1>{% endblock page_header %}
+
+{% block nav_races_racers_class %}class="active"{% endblock nav_races_racers_class %}
 
 {% block content %}
   <p><strong>Name:</strong> {{ object.full_name }}</p>
