@@ -10,17 +10,18 @@
 {% block nav_races_races_class %}class="active"{% endblock nav_races_races_class %}
 
 {% block content %}
- <p>
-	{% for race in upcoming_races %}
-	{% ifchanged %}<h3>{{race.start_datetime|date:"Y"}}</h3>{% endifchanged %}
-	&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
-	{% endfor %}
-</p>
+<dl>
+{% for race in upcoming_races %}
+    {% ifchanged %}<dt>{{ race.start_datetime|date:"Y" }}</dt>{% endifchanged %}
+    <dd><a href="{{ race.get_absolute_url }}">{{ race.title }} ({{ race.annual }})</a> - {{ race.start_datetime|date:"F j, Y" }}<dd>
+{% endfor %}
+<dl>
 
 <h2>Results</h2>
-<p>
-	{% for race in completed_races %}
-	&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
-	{% endfor %}
-</p>
+<dl>
+{% for race in completed_races %}
+    {% ifchanged %}<dt>{{ race.start_datetime|date:"Y" }}</dt>{% endifchanged %}
+	<dd><a href="{{ race.get_absolute_url }}">{{ race.title }} ({{ race.annual }})</a> - {{ race.start_datetime|date:"F j, Y" }}<dd>
+{% endfor %}
+<dl>
 {% endblock content %}

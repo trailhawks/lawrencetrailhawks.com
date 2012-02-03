@@ -10,9 +10,10 @@
 {% block nav_races_results_class %}class="active"{% endblock nav_races_results_class %}
 
 {% block content %}
-<ul>
-	{% for race in latest %}
-		<li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{ race.start_datetime|date:"F j, Y" }}</li>
-	{% endfor %}
-</ul>
+<dl>
+{% for race in latest %}
+    {% ifchanged %}<dt>{{ race.start_datetime|date:"Y" }}</dt>{% endifchanged %}
+    <dd><a href="{{ race.get_absolute_url }}">{{ race.title }} ({{ race.annual }})</a> - {{ race.start_datetime|date:"F j, Y" }}<dd>
+{% endfor %}
+<dl>
 {% endblock content %}
