@@ -1,10 +1,13 @@
 from django.db import models
+
 from lawrencetrailhawks.members.models import Member
+
 
 class Run(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(unique=True,
                             help_text="Suggested value automatically generated from title. Must be unique.")
+    order = models.IntegerField(default=10)
     run_date = models.CharField(max_length=25,
                                 help_text="Day of run (ex. Monday)")
     run_time = models.CharField(max_length=25,
@@ -19,13 +22,16 @@ class Run(models.Model):
     class Meta:
         verbose_name_plural = "Runs"
 
+    class Meta:
+        ordering = ['order']
+
+    def __unicode__(self):
+        return self.name
+
     @models.permalink
     def get_absolute_url(self):
         """docstring for get_absolute_url"""
         return ('lawrencetrailhawks.runs.views.run_detail', (), {'slug': self.slug})
-
-    def __unicode__(self):
-        return self.name
 
     @property
     def get_run_news(self):

@@ -14,7 +14,7 @@ class NewsInline(admin.StackedInline):
 
 class RunAdmin(VersionAdmin):
     prepopulated_fields = {'slug': ['name']}
-    list_display = ('run_date', 'name', 'run_time',)
+    list_display = ('order', 'run_date', 'name', 'run_time',)
     list_filter = ('run_date', 'run_time',)
     inlines = [NewsInline]
 
