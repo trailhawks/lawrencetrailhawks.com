@@ -1,0 +1,9 @@
+{{ object.slogan }}
+{{ object.title }}
+{{ object.annual }}
+{{ object.slug }}
+{{ object.awards }}
+{{ object.description }}
+{{ object.location }}
+{{ object.reg_description }}
+{{ object.packet_pickup }}
