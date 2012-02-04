@@ -1,11 +1,12 @@
 {% extends "homepage/base.html" %}
 
 {% load url from future %}
+{% load content_tags %}
 {% load lth %}
 {% load markup %}
+{% load oembed_tags %}
 {% load race_extras %}
 {% load run_extras %}
-{% load content_tags %}
 
 {% block content %}
   <div class="row">
@@ -22,13 +23,15 @@
         <h2>Today's Run</h2>
         {% get_todays_run %}
         {% if todays_run %}
-          <p><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
+          <h3><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></h3>
           {% if todays_run.get_run_news %}
-          <p><strong>Latest News:</strong>
-              {% for item in todays_run.get_run_news|slice:":3" %}
-              &nbsp;&nbsp;{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
-              {% endfor %}
-          </p>
+            <h3>Latest News:</h3>
+            <dl>
+            {% for item in todays_run.get_run_news|slice:":3" %}
+              <dt>{{ item.pub_date|date }}</dt>
+              <dd>{% oembed %}{{ item.body }}{% endoembed %}</dd>
+            {% endfor %}
+            </dl>
           {% endif %}
           <dl>
             <dt>Where:</dt>
