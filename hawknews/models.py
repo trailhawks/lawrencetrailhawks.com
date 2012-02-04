@@ -3,6 +3,9 @@ from __future__ import absolute_import
 from django.db import models
 
 
+# TODO: Add a default manager to only show Public docs.... Mostly needed
+# for content_tags.py
+
 class HawkNews(models.Model):
     DRAFT = 1
     PUBLIC = 2
@@ -17,6 +20,7 @@ class HawkNews(models.Model):
     draft = models.IntegerField(choices=DRAFT_CHOICES)
 
     class Meta:
+        ordering = ['-pub_date']
         verbose_name = "Hawk News"
         verbose_name_plural = "Hawk News"
 
