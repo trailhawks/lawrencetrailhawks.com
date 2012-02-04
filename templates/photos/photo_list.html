@@ -14,7 +14,7 @@
     <div class="thumbnail">
       <a href="{{ photo.photopage_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a>
       <h5>{{ photo.photo }}</h5>
-      <p>{{ photo.description }}</p>
+      <p>{{ photo.description|safe }}</p>
     </div>
   </li>
   {% endfor %}
