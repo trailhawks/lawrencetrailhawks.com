@@ -7,52 +7,51 @@
 {% block page_header %}<h1>Member info for {{ object.full_hawk_name }}</h1>{% endblock page_header %}
 
 {% block content %}
-<table>
-	<tr>
-		{% if object.avatar %}
-		<td width="100"><img src="/site_media/{{ object.avatar }}" /></td>
-	    {% endif %}
-		<td align="left"><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
-		{% if object.position %}
-		<p><strong>Position:</strong> {{ object.get_position }}
-		{% endif %}
-		<!--
-		<p><strong>Paid date:</strong> {{ object.date_paid }}</p>
-		-->
-		<p><strong>Member since:</strong> {{ object.member_since }}</p>
-		<p><strong>Expires:</strong> {{ object.date_expires }}</p>
-		<p><strong>Active:</strong> {{ object.active }}</p>
-		</td>
-	</tr>
-</table>
+<dl>
+	{% if object.avatar %}
+	<dt><img src="/site_media/{{ object.avatar }}" /></dt>
+	{% endif %}
+	<dt>Hawk Name:</dt>
+	<dd>{{ object.hawk_name }}</dd>
+	{% if object.position %}
+	<dt>Position:</dt>
+	<dd>{{ object.get_position }}</dd>
+	{% endif %}
+	<dt>Member since:</dt>
+	<dd>{{ object.member_since }}</dd>
+	<dt>Expires:</dt>
+	<dd>{{ object.date_expires }}</dd>
+	<dt>Active:</dt>
+	<dd> {{ object.active }}</dd>
+</dl>
 
 {% if object.get_blog_posts %}
 <p><strong>Blog Posts:</strong>
-	<ul>
-		{% for post in object.get_blog_posts %}
-			<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> on {{ post.publish|date }}</li>
-		{% endfor %}
-	</ul>
+<ul>
+	{% for post in object.get_blog_posts %}
+		<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> on {{ post.publish|date }}</li>
+	{% endfor %}
+</ul>
 </p>
 {% endif %}
 
 {% if object.get_race_results %}
 <p><strong>Race Results:</strong>
-	<ul>
-		{% for result in object.get_race_results %}
-			<li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> in {{ result.time }} on {{ result.race.start_datetime|date }}</li>
-		{% endfor %}
-	</ul>
+<ul>
+	{% for result in object.get_race_results %}
+		<li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> in {{ result.time }} on {{ result.race.start_datetime|date }}</li>
+	{% endfor %}
+</ul>
 </p>
 {% endif %}
 
 {% if object.get_race_reports %}
 <p><strong>Race Reports:</strong>
-	<ul>
-		{% for result in object.get_race_reports %}
-			<li><a href="{{ result.report }}">{{ result.title }}</a> for <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> on {{ result.race.start_datetime|date }}</li>
-		{% endfor %}
-	</ul>
+<ul>
+	{% for result in object.get_race_reports %}
+		<li><a href="{{ result.report }}">{{ result.title }}</a> for <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> on {{ result.race.start_datetime|date }}</li>
+	{% endfor %}
+</ul>
 </p>
 {% endif %}
 {% endblock content %}

@@ -10,9 +10,12 @@
 {% block content %}
 {% if officers %}
   <h2>Trailhawk Officers</h2>
+  <dl>
   {% for officer in officers %}
-    <p><strong>{{ officer.position_name }}</strong> - {{ officer }}</p>
+    <dt>{{ officer.position_name }}</dt>
+    <dd><a href="{{ officer.get_absolute_url }}">{{ officer }}</a></dd>
   {% endfor %}
+  </dl>
 {% endif %}
 
 <h2>Contact us</h2>
