@@ -11,6 +11,6 @@ link_info_dict = {
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', link_info_dict, 'link_list'),
-    url(r'^(?P<object_id>[-\w]+)/$', 'object_detail', link_info_dict, 'link_detail'),
+    url(r'^$', 'object_list', link_info_dict, name='link_index'),
+    url(r'^(?P<object_id>[-\w]+)/$', 'object_detail', link_info_dict, name='link_detail'),
 )

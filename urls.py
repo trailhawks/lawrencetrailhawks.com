@@ -9,7 +9,7 @@ from django.views.generic.simple import direct_to_template
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, {'template': 'homepage/homepage.html'}),
+    url(r'^$', direct_to_template, {'template': 'homepage/homepage.html'}, name='homepage'),
     url(r'^blog/', include('blog.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^faq/', include('faq.urls')),
@@ -20,9 +20,9 @@ urlpatterns = patterns('',
     url(r'^runs/', include('runs.urls')),
     url(r'^search/', include('haystack.urls')),
 
-    url(r'^contact/$', 'members.views.officer_list'),
-    url(r'^member_list/$', 'lth.views.member_list'),
-    url(r'^sponsors/', 'sponsors.views.sponsor_list'),
+    url(r'^contact/$', 'members.views.officer_list', name='officer_list'),
+    url(r'^member_list/$', 'lth.views.member_list', name='member_download_list'),
+    url(r'^sponsors/', 'sponsors.views.sponsor_list', name='sponsor_list'),
 
     url(r'^about/$', direct_to_template, {'template': 'about.html'}),
     url(r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),

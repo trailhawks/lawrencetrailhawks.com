@@ -1,5 +1,6 @@
 {% extends "homepage/base.html" %}
 
+{% load url from future %}
 {% load lth %}
 {% load markup %}
 {% load race_extras %}
@@ -55,23 +56,26 @@
       <div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
       <div class="post-body">
           {% if latest_race.logo %}
-                                            <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
+            <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
           {% endif %}
-                                          <p class="large">{{ latest_race.slogan }}</p>
+
+          <p class="large">{{ latest_race.slogan }}</p>
           {% if latest_race.get_race_news %}
           <p><strong>Latest News:</strong>
-              {% for item in latest_race.get_race_news|slice:":3" %}
-              {{ item.body|textile }}
-              {% endfor %}
+          {% for item in latest_race.get_race_news|slice:":3" %}
+            {{ item.body|textile }}
+          {% endfor %}
           </p>
           {% endif %}
+
           <p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
               <a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
           <p><strong><em>Course: </em></strong>{{ latest_race.description|textile }}<br />
               {% if latest_race.course_map %}
-                                                    Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
-                  {% endif %}
-                  <p><strong><em>Entry fee:</em>{% if not latest_race.get_reg_dates %} FREE{% endif %}</strong></p>
+                Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
+              {% endif %}
+
+              <p><strong><em>Entry fee:</em></strong></p>
               <ul>
                   {% for reg in latest_race.get_reg_dates %}
                   <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
@@ -112,7 +116,7 @@
           <div class="right"><a href="{{faq.get_absolute_url}}">answer</a></div>
       </li>
       {% endfor %}
-      <li><a href="/faq/" class="more">Browse all FAQ &#187;</a></li>
+      <li><a href="{% url 'faq_index' %}" class="more">Browse all FAQ &#187;</a></li>
   </ul>
   {% endblock %}
 
@@ -126,7 +130,7 @@
   <ul>
     {% get_rrca_news %}
       {% for item in rrca_news %}
-      <li><a href="{{item.link}}">{{item.title}}</a></li>
+      <li><a href="{{ item.link }}">{{ item.title }}</a></li>
     {% endfor %}
   </ul>
 
@@ -138,7 +142,7 @@
       {% for post in posts %}
       <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></span></li>
       {% endfor %}
-      <li><a href="/blog/" class="more">Read more &#187;</a></li>
+      <li><a href="{% url 'blog_index' %}" class="more">Read more &#187;</a></li>
   </ul>
   {% endblock %}
 

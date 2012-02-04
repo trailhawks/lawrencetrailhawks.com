@@ -22,7 +22,7 @@ racer_info_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^$', 'django.views.generic.date_based.archive_index', race_info_dict, 'race_archive_index'),
+    url(r'^$', 'django.views.generic.date_based.archive_index', race_info_dict, 'race_index'),
     url(r'^(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', race_info_dict, 'race_archive_year'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$', 'django.views.generic.date_based.archive_month', race_info_dict, 'race_archive_month'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', race_info_dict, 'race_archive_day'),

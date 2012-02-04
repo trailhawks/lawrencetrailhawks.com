@@ -1,3 +1,4 @@
+{% load url from future %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,12 +47,12 @@
           <a class="brand" href="#">Lawrence Trail Hawks</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li {% block nav_home_class %}{% endblock nav_home_class %}><a href="/">Home</a></li>
-              <li {% block nav_race_class %}{% endblock nav_race_class %}><a href="/races/">Races</a></li>
-              <li {% block nav_runs_class %}{% endblock nav_runs_class %}><a href="/runs/">Runs</a></li>
-              <li {% block nav_blog_class %}{% endblock nav_blog_class %}><a href="/blog/">Blog</a></li>
-              <li {% block nav_photos_class %}{% endblock nav_photos_class %}><a href="/photos/">Photos</a></li>
-              <li {% block nav_links_class %}{% endblock nav_links_class %}><a href="/links/">Links</a></li>
+              <li {% block nav_home_class %}{% endblock nav_home_class %}><a href="{% url 'homepage' %}">Home</a></li>
+              <li {% block nav_race_class %}{% endblock nav_race_class %}><a href="{% url 'race_index' %}">Races</a></li>
+              <li {% block nav_runs_class %}{% endblock nav_runs_class %}><a href="{% url 'run_index' %}">Runs</a></li>
+              <li {% block nav_blog_class %}{% endblock nav_blog_class %}><a href="{% url 'blog_index' %}">Blog</a></li>
+              <li {% block nav_photos_class %}{% endblock nav_photos_class %}><a href="{% url 'photo_index' %}">Photos</a></li>
+              <li {% block nav_links_class %}{% endblock nav_links_class %}><a href="{% url 'link_index' %}">Links</a></li>
               <li>
                 <form class="navbar-search pull-left" method="GET" action="/search/">
                   <input type="text" class="search-query" name="q" placeholder="Search">
@@ -69,7 +70,7 @@
         {% block breadcrumb_wrapper %}
         <div class="row">
           <ul class="breadcrumb">
-            <li><a href="#">Home</a> <span class="divider">/</span></li>
+            <li><a href="{% url 'homepage' %}">Home</a> <span class="divider">/</span></li>
             {% block breadcrumb %}{% endblock breadcrumb %}
           </ul>
         </div>
@@ -114,7 +115,7 @@
         <div class="span4">
           <ul class="nav nav-pills">
             <li><a href="http://ultrasignup.com/register.aspx?did=15763">Join Us</a></li>
-            <li><a href="/contact/">Contact us</a></li>
+            <li><a href="{% url 'officer_list' %}">Contact us</a></li>
             <li><a href="http://www.flickr.com/photos/trailhawks">Flickr</a></li>
             <li><a href="http://www.twitter.com/trailhawks">Twitter</a></li>
             <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a></li>
@@ -123,9 +124,7 @@
       </footer>
 
     </div> <!-- /container -->
-
     <div id="fb-root"></div>
-
   </body>
 
   <script type="text/javascript" src="/site_media/js/jquery.juitter.js"></script>
@@ -133,7 +132,6 @@
   <script type="text/javascript" src="/site_media/js/jquery.js"></script>
   <script type="text/javascript" src="/site_media/js/bootstrap-transition.js"></script>
   <script type="text/javascript" src="/site_media/js/bootstrap-collapse.js"></script>
-
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -144,5 +142,4 @@
     pageTracker._trackPageview();
     } catch(err) {}
   </script>
-
 </html>
