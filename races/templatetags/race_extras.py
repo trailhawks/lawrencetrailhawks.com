@@ -23,6 +23,7 @@ def replace_char(value, arg):
 class LatestRaceNode(Node):
     def render(self, context):
         try:
+            # TODO: Clean this up to look at a default manager
             latest_race = Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime').latest('start_datetime')
             context['latest_race'] = latest_race
         except Race.DoesNotExist:

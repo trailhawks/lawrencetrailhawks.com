@@ -4,7 +4,8 @@ import feedparser
 
 from dateutil.parser import parse
 from dateutil.tz import *
-from django.template import Library, Node
+from django.template import Library
+from django.template import Node
 
 
 register = Library()

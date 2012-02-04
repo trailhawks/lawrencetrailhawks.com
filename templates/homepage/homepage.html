@@ -4,26 +4,28 @@
 {% load markup %}
 {% load race_extras %}
 {% load run_extras %}
+{% load content_tags %}
+
 
 {% block breadcrumb_wrapper %}
 {% endblock breadcrumb_wrapper %}
 
 {% block content %}
-<div class="row">
-    <div class="span4">
-      <h2>Latest Hawk News</h2>
-      <p>What's happening</p>
-      {% load hawknews %}
-      {% get_latest hawknews.HawkNews 1 as latest_news %}
-      {% for item in latest_news %}
-      {{ item.body|textile }}
-      {% endfor %}
-    </div>
-    <div class="span4">
-      <h2>Today's Run</h2>
-      {% get_todays_run %}
-      {% if todays_run %}
-          <p class="quiet large"><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
+  <div class="row">
+      <div class="span4">
+        <h2>Latest Hawk News</h2>
+
+        {% get_latest_content hawknews.HawkNews 1 as latest_news %}
+        {% for item in latest_news %}
+          <h3>{{ item.title }}</h3>
+          {{ item.body|textile }}
+        {% endfor %}
+      </div>
+      <div class="span4">
+        <h2>Today's Run</h2>
+        {% get_todays_run %}
+        {% if todays_run %}
+          <p><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
           {% if todays_run.get_run_news %}
           <p><strong>Latest News:</strong>
               {% for item in todays_run.get_run_news|slice:":3" %}
@@ -31,81 +33,84 @@
               {% endfor %}
           </p>
           {% endif %}
-          <p><em><strong>Where: </strong></em>{{ todays_run.location }}<br />
-              Click <a href="{{ todays_run.map_link }}">here</a> for directions.</p>
-          <p><em><strong>When: </strong></em>{{ todays_run.run_time }}</p>
-          <p><em><strong>What: </strong></em>{{ todays_run.details }}</a></p>
-          <p><em><strong>Contact: </strong></em><a href="mailto:{{ todays_run.contact.email }}">{{ todays_run.contact.full_hawk_name }}</a></p>
-      {% else %}
-          <p class="quiet large">No run scheduled for today</p>
-      {% endif %}
-    </div>
-    <div class="span4">
-      <h2>Follow Us</h2>
-      <p><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
-      {% load twitterfy %}
-      {% get_latest_tweets %}
-      {% for tweet in stweets %}
-      <p>{{ tweet.text|twitterfy }} - <a href="{{ tweet.url }}">({{ tweet.pub_time|timesince }} ago)</a></p>
-      {% endfor %}
-    </div>
-</div>
-<div class="row">
-    <div class="span8">
-    </div>
-    <div class="span4">
-    </div>
-</div>
+          <dl>
+            <dt>Where:</dt>
+            <dd>{{ todays_run.location }}<br/>Click <a href="{{ todays_run.map_link }}">here</a> for directions.</dd>
+            <dt>When:</dt>
+            <dd>{{ todays_run.run_time }}</dd>
+            <dt>What:</dt>
+            <dd>{{ todays_run.details }}</dd>
+            <dt>Contact:</dt>
+            <dd><a href="mailto:{{ todays_run.contact.email }}">{{ todays_run.contact.full_hawk_name }}</a></dd>
+          </dl>
+        {% else %}
+            <p>No run scheduled for today</p>
+        {% endif %}
+      </div>
+  </div>
 {% endblock content %}
 
+
 {% block secondary_content %}
-    {% get_latest_race %}
-    {% if latest_race %}
-        <h2>Upcoming Event</h2>
-        <div class="post-title"><h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2></div>
-        <div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
-        <div class="post-body">
-            {% if latest_race.logo %}
-                                              <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
-            {% endif %}
-                                            <p class="large">{{ latest_race.slogan }}</p>
-            {% if latest_race.get_race_news %}
-            <p><strong>Latest News:</strong>
-                {% for item in latest_race.get_race_news|slice:":3" %}
-                {{ item.body|textile }}
-                {% endfor %}
-            </p>
-            {% endif %}
-            <p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
-                <a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
-            <p><strong><em>Course: </em></strong>{{ latest_race.description|textile }}<br />
-                {% if latest_race.course_map %}
-                                                      Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
-                    {% endif %}
-                    <p><strong><em>Entry fee:</em>{% if not latest_race.get_reg_dates %} FREE{% endif %}</strong></p>
-                <ul>
-                    {% for reg in latest_race.get_reg_dates %}
-                    <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-                    {% endfor %}
-                </ul>
-            <p>{{ latest_event.discount }}</p>
-        </div>
-    {% else %}
-        <h2>Latest Post</h2>
-        <div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
-        <div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
-        <div class="post-body">
-            {{ latest_post.body|textile|truncatewords:"400" }}
-            <p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
-        </div>
-    {% endif %}
+
+  {% get_latest_race %}
+  {% if latest_race %}
+      <h2>Upcoming Event</h2>
+      <div class="post-title"><h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2></div>
+      <div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
+      <div class="post-body">
+          {% if latest_race.logo %}
+                                            <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
+          {% endif %}
+                                          <p class="large">{{ latest_race.slogan }}</p>
+          {% if latest_race.get_race_news %}
+          <p><strong>Latest News:</strong>
+              {% for item in latest_race.get_race_news|slice:":3" %}
+              {{ item.body|textile }}
+              {% endfor %}
+          </p>
+          {% endif %}
+          <p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
+              <a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
+          <p><strong><em>Course: </em></strong>{{ latest_race.description|textile }}<br />
+              {% if latest_race.course_map %}
+                                                    Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
+                  {% endif %}
+                  <p><strong><em>Entry fee:</em>{% if not latest_race.get_reg_dates %} FREE{% endif %}</strong></p>
+              <ul>
+                  {% for reg in latest_race.get_reg_dates %}
+                  <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+                  {% endfor %}
+              </ul>
+          <p>{{ latest_event.discount }}</p>
+      </div>
+  {% else %}
+      <h2>Latest Post</h2>
+      <div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
+      <div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
+      <div class="post-body">
+          {{ latest_post.body|textile|truncatewords:"400" }}
+          <p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
+      </div>
+  {% endif %}
 {% endblock secondary_content %}
 
+
 {% block sidebar_content %}
+
+  <h2>Follow Us</h2>
+
+  <p><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
+  {% load twitterfy %}
+  {% get_latest_tweets %}
+  {% for tweet in stweets %}
+    <p>{{ tweet.text|twitterfy }} - <a href="{{ tweet.url }}">({{ tweet.pub_time|timesince }} ago)</a></p>
+  {% endfor %}
+
   {% block faq_preview %}
-  {% load faq_extras %}
-  {% get_latest faq.FAQ 5 as recent_faqs %}
-  <h4>FAQ</h4>
+  <h2>FAQ</h2>
+
+  {% get_latest_content faq.FAQ 5 as recent_faqs %}
   <ul>
       {% for faq in recent_faqs %}
       <li>
@@ -117,13 +122,12 @@
   </ul>
   {% endblock %}
 
-  <h4>Trailhawk Calendar</h4>
+  <h2>Trailhawk Calendar</h2>
 
-  <p>Subscribe to our calendar to keep upto date on
-  all Trailhawk events, not just our races.</p>
+  <p>Subscribe to our calendar to keep upto date on all Trailhawk events, not just our races.</p>
   <p><a href="http://www.google.com/calendar/ical/lawrencetrailhawks.com_bddkn7p2cj1olabb59vdqh9t1g%40group.calendar.google.com/public/basic.ics">Subscribe</a></p>
 
-  <h4>RRCA Syndicated News</h4>
+  <h2>RRCA Syndicated News</h2>
 
   <ul>
     {% get_rrca_news %}
@@ -133,9 +137,9 @@
   </ul>
 
   {% block blog_preview %}
-  {% load blog_extras %}
-  {% get_latest blog.Post 5 as posts %}
-  <h4>Hawk Talk</h4>
+  <h2>Hawk Talk</h2>
+
+  {% get_latest_content blog.Post 5 as posts %}
   <ul>
       {% for post in posts %}
       <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></span></li>
@@ -144,7 +148,8 @@
   </ul>
   {% endblock %}
 
-  <h4>About Us</h4>
+  <h2>About Us</h2>
+
   <p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
   <p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
   <p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
