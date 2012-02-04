@@ -5,13 +5,11 @@ from django.conf.urls.defaults import url
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
 
-from lib.Extras import get_latest
-
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, {'template': 'homepage/homepage.html', 'extra_context': get_latest()}),
+    url(r'^$', direct_to_template, {'template': 'homepage/homepage.html'}),
     url(r'^blog/', include('blog.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^faq/', include('faq.urls')),
