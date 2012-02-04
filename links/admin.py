@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from django.contrib import admin
 from reversion import VersionAdmin
 
-from lawrencetrailhawks.links.models import Links
+from .models import Links
 
 
 class LinkAdmin(VersionAdmin):

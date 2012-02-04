@@ -10,7 +10,7 @@ runs_info_dict = {
     'queryset': Run.objects.all(),
 }
 
-urlpatterns = patterns('lawrencetrailhawks.runs.views',
+urlpatterns = patterns('runs.views',
+    url(r'^(?P<slug>[-\w]+)/$', 'run_detail', name='run_detail'),
     url(r'^$', 'run_list'),
-    url(r'^(?P<slug>[-\w]+)/$', 'run_detail'),
 )

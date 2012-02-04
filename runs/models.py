@@ -32,8 +32,7 @@ class Run(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        """docstring for get_absolute_url"""
-        return ('lawrencetrailhawks.runs.views.run_detail', (), {'slug': self.slug})
+        return ('run_detail', (), {'slug': self.slug})
 
     @property
     def get_run_news(self):

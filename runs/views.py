@@ -2,9 +2,10 @@ from __future__ import absolute_import
 
 from django.http import HttpResponse
 from django.template import Context, loader
-from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.list_detail import object_detail
+from django.views.generic.list_detail import object_list
 
-from .runs.models import Run
+from .models import Run
 
 
 def run_list(request):
