@@ -52,6 +52,11 @@
               <li {% block nav_blog_class %}{% endblock nav_blog_class %}><a href="/blog/">Blog</a></li>
               <li {% block nav_photos_class %}{% endblock nav_photos_class %}><a href="/photos/">Photos</a></li>
               <li {% block nav_links_class %}{% endblock nav_links_class %}><a href="/links/">Links</a></li>
+              <li>
+                <form class="navbar-search pull-left" method="GET" action="/search/">
+                  <input type="text" class="search-query" name="q" placeholder="Search">
+                </form>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -61,23 +66,23 @@
     <div class="container">
       {% block content_wrapper %}
       <div class="content">
+        {% block breadcrumb_wrapper %}
+        <div class="row">
+          <ul class="breadcrumb">
+            <li><a href="#">Home</a> <span class="divider">/</span></li>
+            {% block breadcrumb %}{% endblock breadcrumb %}
+          </ul>
+        </div>
+        {% endblock breadcrumb_wrapper %}
+
         {% block page_header_wrapper %}
         <div class="page-header">
           {% block page_header %}
             <h1>Page name <small>Supporting text or tagline</small></h1>
           {% endblock page_header %}
         </div>
-
-        {% block breadcrumb_wrapper %}
-          <div class="row">
-            <ul class="breadcrumb">
-              <li><a href="#">Home</a> <span class="divider">/</span></li>
-              {% block breadcrumb %}{% endblock breadcrumb %}
-            </ul>
-          </div>
-        {% endblock breadcrumb_wrapper %}
-
         {% endblock page_header_wrapper %}
+
         <div class="row">
           <div class="span8">
             {% block sub_navigation %}

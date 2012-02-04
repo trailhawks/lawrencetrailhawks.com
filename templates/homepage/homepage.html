@@ -6,10 +6,6 @@
 {% load run_extras %}
 {% load content_tags %}
 
-
-{% block breadcrumb_wrapper %}
-{% endblock breadcrumb_wrapper %}
-
 {% block content %}
   <div class="row">
       <div class="span4">
@@ -52,7 +48,6 @@
 
 
 {% block secondary_content %}
-
   {% get_latest_race %}
   {% if latest_race %}
       <h2>Upcoming Event</h2>
@@ -97,7 +92,6 @@
 
 
 {% block sidebar_content %}
-
   <h2>Follow Us</h2>
 
   <p><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
