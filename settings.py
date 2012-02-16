@@ -63,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls'
@@ -88,6 +89,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.flatpages',
     'django.contrib.markup',
+    'django.contrib.redirects',
     'django.contrib.sessions',
     'django.contrib.sites',
 
