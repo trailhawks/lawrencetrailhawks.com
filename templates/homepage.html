@@ -6,15 +6,16 @@
 
 {% block home_page %}
 	<div id="splash">
-            <div class="col3 left">
-	            <h2 class="label label-green">Latest Hawk News</h2>
-	            <p class="quiet large">What's happening</p>
-	            {% get_latest hawknews.HawkNews 3 as latest_news %}
-	            {% for item in latest_news %}
-	            <h4>{{ item.pub_date|date }}</h4>
-	            {{ item.body|textile|truncatewords_html:"60" }}
-	            {% endfor %}
-            </div>		<div class="col3-mid left">
+        <div class="col3 left">
+            <h2 class="label label-green">Latest Hawk News</h2>
+            <p class="quiet large">What's happening</p>
+            {% get_latest hawknews.HawkNews 3 as latest_news %}
+            {% for item in latest_news %}
+            <h4>{{ item.pub_date|date }}</h4>
+            {{ item.body|textile|truncatewords_html:"60" }}
+            {% endfor %}
+        </div>
+        <div class="col3-mid left">
 			<h2 class="label label-orange">Today's Run</h2>
 			{% load run_extras %}
 			{% get_todays_run %}
