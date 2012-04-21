@@ -19,6 +19,7 @@ def get_members(request):
 
     return HttpResponse(t.render(c))
 
+
 def member_detail(request, object_id, queryset):
     person = Member.objects.get(pk=object_id)
     photos = Photo.objects.filter(tags__icontains=person.first_name).filter(tags__icontains=person.last_name).order_by('?')[0:7]
@@ -27,6 +28,7 @@ def member_detail(request, object_id, queryset):
                          object_id=object_id,
                          extra_context={'photos': photos}
                          )
+
 
 def officer_list(request):
     officers = Member.objects.filter(position__isnull=False).order_by('position')
