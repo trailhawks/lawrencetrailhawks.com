@@ -8,6 +8,7 @@ class MemberManager(models.Manager):
     def active(self):
         return self.filter(date_paid__lte=datetime.date.today())
 
+
 class Member(models.Model):
     PRESIDENT = 1
     VICE_PRESIDENT = 2
@@ -58,6 +59,7 @@ class Member(models.Model):
     objects = MemberManager()
 
     class Meta:
+        verbose_name = "Member"
         verbose_name_plural = "Members"
         ordering = ["first_name"]
 
@@ -83,7 +85,7 @@ class Member(models.Model):
 
     @property
     def date_expires(self):
-        date_expires = datetime.date(self.date_paid.year + 1, self.date_paid.month, self.date_paid.day)
+        date_expires = self.date_paid + datetime.timedelta(weeks=52)
         return date_expires
 
     @property
