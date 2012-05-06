@@ -77,7 +77,6 @@
 									{% if latest_race.course_map %}
                                                                           Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
 								        {% endif %}
-                                        <p><strong><em>Entry fee:</em>{% if not latest_race.get_reg_dates %} FREE{% endif %}</strong></p>
 									<ul>
 										{% for reg in latest_race.get_reg_dates %}
 										<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
