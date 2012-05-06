@@ -12,7 +12,7 @@
             {% get_latest hawknews.HawkNews 3 as latest_news %}
             {% for item in latest_news %}
             <h4>{{ item.pub_date|date }}</h4>
-            {{ item.body|textile|truncatewords_html:"60" }}
+            {{ item.body|textile|truncatewords_html:"100" }}
             {% endfor %}
         </div>
         <div class="col3-mid left">
