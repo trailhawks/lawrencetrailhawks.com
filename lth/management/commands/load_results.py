@@ -36,6 +36,7 @@ class Command(BaseCommand):
         result_data = self.load_csv(_csv)
 
         for row in result_data:
+
             if row[4] == "M":
                 gender = 1
             else:
@@ -44,9 +45,9 @@ class Command(BaseCommand):
             racer, created = Racer.objects.get_or_create(first_name=row[2], last_name=row[3], gender=gender)
             print "Found Racer: %s" % racer
             try:
-                result = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0], place=row[5])
+                result, _ = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0], place=row[5])
             except IndexError:
-                result = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0])
+                result, _ = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0])
             print "Result for %s for race: %s" % (racer, race)
             print result
         print "results loaded"
