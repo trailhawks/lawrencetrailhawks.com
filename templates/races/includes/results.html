@@ -16,6 +16,7 @@
 				<th>Gender</th>
 				<th>Time</th>
 				<th>Award</th>
+				<th></th>
 			</tr>
 		  {% for result in race_type.list %}
 				{% if result.course_record %}
@@ -27,7 +28,23 @@
 				{% else %}
 				<tr>
 				{% endif %}
-					{% if not result.dq %}
+					{% if result.dq or result.dns or result.dnf %}
+						{% if result.dns %}
+							<td>DNS</td>
+						{% else %}
+							{% if result.dnf %}
+								<td>DNF</td>
+							{% else %}
+								<td>DQ</td>
+							{% endif %}
+						{% endif %}
+						<td>{{ result.bib_number }}</td>
+						<td>{{ result.racer.full_name }}</td>
+						<td>{{ result.racer.get_gender_display }}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					{% else %}
 						<td>{{ forloop.counter }}</td>
 						<td>{{ result.bib_number }}</td>
 						<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
@@ -37,13 +54,6 @@
 						{% if result.course_record %}
 							<td>CR</td>
 						{% endif %}
-					{% else %}
-						<td>DQ</td>
-						<td>{{ result.bib_number }}</td>
-						<td>{{ result.racer.full_name }}</td>
-						<td>{{ result.racer.get_gender_display }}</td>
-						<td></td>
-						<td></td>
 					{% endif %}
 				</tr>
 			{% endfor %}
