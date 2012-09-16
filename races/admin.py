@@ -46,9 +46,10 @@ class RaceAdmin(admin.ModelAdmin):
 
 
 class ResultAdmin(admin.ModelAdmin):
-    list_display = ('time', 'racer', 'race', 'race_type', 'bib_number', 'place')
-    list_filter = ('race', 'race_type')
+    list_display = ('race', 'race_type', 'racer', 'time', 'bib_number', 'place', 'course_record', 'dq')
+    list_filter = ('race_type', 'course_record', 'dq', 'race')
     raw_id_fields = ('racer', 'race')
+    search_fields = ('time', 'place')
 
 
 class RacerAdmin(admin.ModelAdmin):
