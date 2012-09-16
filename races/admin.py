@@ -54,6 +54,7 @@ class ResultAdmin(admin.ModelAdmin):
 class RacerAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'gender', 'email')
     list_filter = ('gender',)
+    raw_id_fields = ('trailhawk', 'contact')
     search_fields = ('first_name', 'last_name')
 
 
