@@ -35,6 +35,11 @@ class Command(BaseCommand):
         result_data = self.load_csv(_csv)
 
         for row in result_data:
+            defaults = {}
+            race_type = None
+            time = row[1]
+            place = row[5]
+
             if row[4] == "M":
                 gender = 1
             else:
@@ -42,15 +47,23 @@ class Command(BaseCommand):
 
             racer, created = Racer.objects.get_or_create(first_name=row[2], last_name=row[3], gender=gender)
 
-            race_type = None
             if len(row[6]):
                 race_type, created = RaceType.objects.get_or_create(name=row[6])
 
+            if 'DNS' in time:
+                defaults['dns'] = True
+
+            if 'DNF' in time:
+                defaults['dnf'] = True
+
+            if 'CR' in place:
+                defaults['course_record'] = True
+
             print "Found Racer: %s" % racer
             try:
-                result, _ = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0], place=row[5])
+                result, _ = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0], place=place, defaults=defaults)
             except IndexError:
-                result, _ = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0])
+                result, _ = Result.objects.get_or_create(race=race, racer=racer, time=row[1], bib_number=row[0], defaults=defaults)
 
             if race_type:
                 result.race_type = race_type
