@@ -68,7 +68,7 @@ class Race(models.Model):
     packet_pickup = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
-        return self.slug
+        return self.title
 
     @models.permalink
     def get_absolute_url(self):
@@ -208,7 +208,6 @@ class Racer(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        """docstring for get_absolute_url"""
         return ('racer_detail', (), {'object_id': self.pk})
 
     @property
@@ -237,6 +236,8 @@ class Result(models.Model):
                              help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
     dq = models.BooleanField(verbose_name="Disqualified")
+    dns = models.BooleanField(verbose_name="Did not Start")
+    dnf = models.BooleanField(verbose_name="Did not Finish")
 
     def __unicode__(self):
         return "%s - %s - %s" % (self.racer, self.race.title, self.time)
