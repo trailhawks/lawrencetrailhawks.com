@@ -29,7 +29,7 @@
 				<tr>
 				{% endif %}
 					{% if result.dq or result.dns or result.dnf %}
-						<td>&ndash;</td>
+						<td>&mdash;</td>
 						<td>{{ result.bib_number }}</td>
 						<td>{{ result.racer.full_name }}</td>
 						<td>{{ result.racer.get_gender_display }}</td>
@@ -43,7 +43,7 @@
 						<td></td>
 						<td></td>
 					{% else %}
-						<td>{{ forloop.counter }}</td>
+						<td>{% ifchanged result.time %}{{ forloop.counter }}{% else %}&ndash;{% endifchanged %}</td>
 						<td>{{ result.bib_number }}</td>
 						<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
 						<td>{{ result.racer.get_gender_display }}</td>
