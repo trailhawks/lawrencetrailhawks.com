@@ -13,10 +13,12 @@ def upcoming_races(request):
     a = archive_index(request, queryset, "start_datetime", template_name="races/upcoming.html", allow_future=True)
     return HttpResponse(a)
 
+
 def results(request):
     queryset = Race.objects.filter(start_datetime__lte=datetime.datetime.now()).order_by('start_datetime')
     a = archive_index(request, queryset, "start_datetime", template_name="races/results.html")
     return HttpResponse(a)
+
 
 def race_result(request, *args, **kwargs):
     slug = kwargs.get('slug')
@@ -33,6 +35,7 @@ def race_result(request, *args, **kwargs):
                               template_name="races/race_result.html", extra_context={'photos': photos})
     return HttpResponse(o)
 
+
 def race_detail(request, slug, year, month, day, allow_future, queryset, date_field, extra_context):
     photos = Photo.objects.filter(tags__contains=slug.replace("-", "")).order_by('?')[0:7]
 
@@ -46,6 +49,7 @@ def race_detail(request, slug, year, month, day, allow_future, queryset, date_fi
                          allow_future=allow_future,
                          extra_context={'photos': photos}
                          )
+
 
 def racer_detail(request, object_id, queryset):
     person = Racer.objects.get(pk=object_id)

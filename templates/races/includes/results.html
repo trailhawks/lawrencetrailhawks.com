@@ -1,124 +1,56 @@
 {% block results %}
 {% load race_extras %}
-<h3><a name="overallresults">Overall Results</a></h3>
-<table border="1" cellpadding="10">
-	<tr align="center">
-		<th>Place</th>
-		<th>Bib</th>
-		<th>Name</th>
-		<th>Gender</th>
-		<th>Time</th>
-		<th>Award</th>
-	</tr>
-{% for result in object.get_overall_results %}
-{% if result.course_record %}
-  {% ifequal result.racer.gender 1 %}
-    <tr bgcolor="CCFFFF">
-  {% else %}
-    <tr bgcolor="#FFCCCC">
-  {% endifequal %}
-{% else %}
-<tr>
-{% endif %}
-	{% if not result.dq %}
-	<td>{{ forloop.counter }}</td>
-	<td>{{ result.bib_number }}</td>
-	<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
-	<td>{% ifequal result.racer.gender 1 %}
-		Male
-		{% else %}
-		Female
-		{% endifequal %}
-	</td>
-	<td>{{ result.time|replace_char:",:" }}</td>
-	<td>{{ result.place }}</td>
-	{% if result.course_record %}
-	<td>CR</td>
-	{% endif %}
-	{% else %}
-	<td>DQ</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.full_name }}</td>
-	<td>{% ifequal result.racer.gender 1 %}
-		Male
-		{% else %}
-		Female
-		{% endifequal %}
-	</td>
-	<td></td>
-	<td></td>
-	{% endif %}
-</tr>
-{% endfor %}
-</table>
 
-<h3><a name="maleresults">Male Results</a></h3>
-<table border="1" cellpadding="10">
-	<tr align="center">
-		<th>Place</th>
-		<th>Bib</th>
-		<th>Name</th>
-		<th>Time</th>
-		<th>Award</th>
-	</tr>
-{% for result in object.get_male_results %}
-{% if result.course_record %}
-    <tr bgcolor="CCFFFF">
-{% else %}
-    <tr>
-{% endif %}
-	{% if not result.dq %}
-	<td>{{ forloop.counter }}</td>
-	<td>{{ result.bib_number }}</td>
-	<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
-        <td>{{ result.time|replace_char:",:" }}</td>
-	<td>{{ result.place }}</td>
-	{% if result.course_record %}
-	<td>CR</td>
-	{% endif %}
-	{% else %}
-	<td>DQ</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.full_name }}</td>
-	<td></td>
-	<td></td>
-	{% endif %}
-</tr>
-{% endfor %}
-</table>
+{% with object.get_race_type_results as race_type_results %}
+{% if race_type_results|length %}
 
-<h3><a name="femaleresults">Female Results</a></h3>
-<table border="1" cellpadding="10">
-	<tr align="center">
-		<th>Place</th>
-		<th>Bib</th>
-		<th>Name</th>
-		<th>Time</th>
-		<th>Award</th>
-	</tr>
-{% for result in object.get_female_results %}
-{% if result.course_record %}
-    <tr bgcolor="#FFCCCC">
-{% else %}
-    <tr>
+	{% regroup object.get_overall_results by race_type as race_type_list %}
+	{% for race_type in race_type_list %}
+		<h3><a name="{{ race_type.grouper }}">{% if race_type.grouper %}{{ race_type.grouper }}{% endif %} Results</a></h3>
+
+		<table border="1" cellpadding="10">
+			<tr align="center">
+				<th>Place</th>
+				<th>Bib</th>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Time</th>
+				<th>Award</th>
+			</tr>
+		  {% for result in race_type.list %}
+				{% if result.course_record %}
+				  {% ifequal result.racer.gender 1 %}
+				    <tr bgcolor="CCFFFF">
+				  {% else %}
+				    <tr bgcolor="#FFCCCC">
+				  {% endifequal %}
+				{% else %}
+				<tr>
+				{% endif %}
+					{% if not result.dq %}
+						<td>{{ forloop.counter }}</td>
+						<td>{{ result.bib_number }}</td>
+						<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
+						<td>{{ result.racer.get_gender_display }}</td>
+						<td>{{ result.time|replace_char:",:" }}</td>
+						<td>{{ result.place }}</td>
+						{% if result.course_record %}
+							<td>CR</td>
+						{% endif %}
+					{% else %}
+						<td>DQ</td>
+						<td>{{ result.bib_number }}</td>
+						<td>{{ result.racer.full_name }}</td>
+						<td>{{ result.racer.get_gender_display }}</td>
+						<td></td>
+						<td></td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+	</table>
 {% endif %}
-	{% if not result.dq %}
-	<td>{{ forloop.counter }}</td>
-	<td>{{ result.bib_number }}</td>
-	<td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
-	<td>{{ result.time|replace_char:",:" }}</td>
-	<td>{{ result.place }}</td>
-	{% if result.course_record %}
-	<td>CR</td>
-	{% endif %}
-	{% else %}
-	<td>DQ</td>
-	<td>{{ result.bib_number }}</td>
-	<td>{{ result.racer.full_name }}</td>
-	<td></td>
-	<td></td>
-	{% endif %}
-</tr>
-{% endfor %}
-</table>
+{% endwith %}
+
 {% endblock %}

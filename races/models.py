@@ -1,9 +1,23 @@
 import datetime
 
 from django.db import models
+from django.template.defaultfilters import slugify
 
 from members.models import Member
 from sponsors.models import Sponsor
+
+
+class RaceType(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super(RaceType, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Race(models.Model):
@@ -66,7 +80,7 @@ class Race(models.Model):
 
     @property
     def get_overall_results(self):
-        return self.result_set.all().order_by('time')
+        return self.result_set.all().order_by('race_type', 'time')
 
     @property
     def get_male_results(self):
@@ -83,6 +97,10 @@ class Race(models.Model):
     @property
     def get_reg_dates(self):
         return self.registration_set.all().order_by('reg_date')
+
+    @property
+    def get_race_type_results(self):
+        return self.result_set.values_list('race_type__name', flat=True).distinct()
 
     @property
     def get_race_news(self):
@@ -200,7 +218,7 @@ class Racer(models.Model):
     @property
     def age(self):
         TODAY = datetime.date.today()
-        return  (TODAY.year - self.birth_date.year)
+        return (TODAY.year - self.birth_date.year)
 
     @property
     def get_gender(self):
@@ -212,9 +230,10 @@ class Racer(models.Model):
 class Result(models.Model):
     racer = models.ForeignKey(Racer)
     race = models.ForeignKey(Race)
+    race_type = models.ForeignKey(RaceType, null=True, blank=True, help_text='For races with multiple race types.')
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
-    place = models.CharField(max_length=25, null=True, blank=True,
+    place = models.CharField(max_length=200, null=True, blank=True,
                              help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
     dq = models.BooleanField(verbose_name="Disqualified")

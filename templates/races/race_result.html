@@ -4,14 +4,13 @@
 
 	<div class="left" id="main-content">
 		<h2>{{ object.annual|capfirst }} {{ object.title }} Results</h2>
-	{% block race_result %}
-		{% include "races/includes/results.html" %}
-	{% endblock %}
+		{% block race_result %}
+			{% include "races/includes/results.html" %}
+		{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
 			{% include "includes/flickr_photos.html" %}
-
 	</div>
 
 	<div class="clearer">&nbsp;</div>
