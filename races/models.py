@@ -233,7 +233,7 @@ class Result(models.Model):
     race_type = models.ForeignKey(RaceType, null=True, blank=True, help_text='For races with multiple race types.')
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
-    place = models.CharField(max_length=200, null=True, blank=True,
+    place = models.TextField(null=True, blank=True,
                              help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
     dq = models.BooleanField(verbose_name="Disqualified")
