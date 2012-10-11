@@ -1,27 +1,44 @@
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import permalink
-from members.models import Member
-from django.conf import settings
-
-from lawrencetrailhawks.blog import listeners
-
 import datetime
 import tagging
+
+from django.conf import settings
+from django.db import models
+from django.db.models import permalink
+from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
+
+from members.models import Member
+from lawrencetrailhawks.blog import listeners
+
+
+class DraftManager(models.Manager):
+
+    def get_query_set(self):
+        queryset = super(DraftManager, self).get_query_set().filter(status__exact=Post.STATUS_DRAFT)
+        return queryset
+
+
+class PublicManager(models.Manager):
+
+    def get_query_set(self):
+        queryset = super(PublicManager, self).get_query_set().filter(status__exact=Post.STATUS_PUBLIC)
+        return queryset
+
 
 class Post(models.Model):
     """Post model."""
+    STATUS_DRAFT = 1
+    STATUS_PUBLIC = 2
     STATUS_CHOICES = (
-        (1, _('Draft')),
-        (2, _('Public')),
+        (STATUS_DRAFT, _('Draft')),
+        (STATUS_PUBLIC, _('Public')),
     )
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
     author = models.ForeignKey(Member, blank=True, null=True)
     body = models.TextField(_('body'), help_text="The body supports Textile markup. Please use http://textile.thresholdstate.com/ to markup the blog post and get the right formatting.")
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
-    status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=2)
+    status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
     publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
@@ -32,11 +49,15 @@ class Post(models.Model):
                                    verbose_name="Original Post Date", null=True, blank=True)
     tags = TagField()
 
+    objects = models.Manager()
+    published_objects = PublicManager()
+    draft_objects = DraftManager()
+
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
-        db_table  = 'blog_posts'
-        ordering  = ('-publish',)
+        db_table = 'blog_posts'
+        ordering = ('-publish',)
         get_latest_by = 'publish'
 
     def __unicode__(self):
