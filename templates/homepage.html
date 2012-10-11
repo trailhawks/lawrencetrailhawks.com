@@ -149,7 +149,7 @@
 			<div class="section">
 				{% block blog_preview %}
 				{% load blog_extras %}
-				{% get_latest blog.Post 5 as posts %}
+				{% get_latest_posts 5 as posts %}
 				<div class="section-title">Hawk Talk</div>
 				<div class="section-content">
 					<ul class="nice-list">
