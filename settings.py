@@ -95,6 +95,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
 
+    #'djcelery',
+    'django_gravatar',
+    'ghettoq',
+    'oembed',
+    'south',
+    'syncr.flickr',
+    'syncr.twitter',
+    'tagging',
+
     'lth',
     'faq',
     'blog',
@@ -104,11 +113,4 @@ INSTALLED_APPS = [
     'sponsors',
     'races',
     'hawknews',
-    'oembed',
-    'tagging',
-    'syncr.flickr',
-    'syncr.twitter',
-    'south',
-   # 'djcelery',
-    'ghettoq',
 ]

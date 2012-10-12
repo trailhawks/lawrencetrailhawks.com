@@ -1,4 +1,6 @@
 {% load comments %}
+{% load gravatar %}
+
 {% get_comment_count for object as comment_count %}
 {% get_comment_list for object as comment_list %}
 {% get_comment_form for object as form %}
@@ -23,8 +25,10 @@
 
 				<div class="comment-profile-wrapper left">
 
-					<div class="comment-profile">				
-						<div class="comment-gravatar"><img src="/site_media/img/sample-gravatar.gif" width="40" height="40" alt="" /></div>
+					<div class="comment-profile">
+						<div class="comment-gravatar">
+							{% gravatar comment.email 40 %}
+						</div>
 						<div class="comment-author"><a href="{{ comment.user_url }}">{{ comment.user_name }}</a></div>
 					</div>
 
@@ -34,10 +38,9 @@
 					<div class="comment-content-wrapper-2">
 
 						<div class="comment-body">
-						
+
 							<div class="comment-arrow"></div>
 
-							
 							<div class="post-date">
 
 								<div class="left">{{ comment.submit_date|date }}<span class="text-separator">|</span> <a href="#respond">Reply &#187;</a></div>
@@ -46,15 +49,14 @@
 								<div class="clearer">&nbsp;</div>
 							</div>
 
-
 							<div class="comment-text">
 								<p>{{ comment.comment }}</p>
-							</div>					
+							</div>
 
 							<div class="clearer">&nbsp;</div>
 
 						</div>
-					
+
 					</div>
 				</div>
 
@@ -77,7 +79,7 @@
 
 			<div class="comment-profile-wrapper left">
 
-				<div class="comment-profile">				
+				<div class="comment-profile">
 					<div class="comment-gravatar"><img src="/site_media/img/sample-gravatar.gif" width="40" height="40" alt="Your gravatar" /></div>
 					<div class="comment-author">Your Name</div>
 				</div>
@@ -85,44 +87,38 @@
 			</div>
 
 			<div class="comment-content-wrapper">
-					
+
 				<div class="comment-body">
-				
+
 					<div class="comment-arrow"></div>
-						
+
 					<form action="{% comment_form_target %}" method="post" id="commentform">
 						{% csrf_token %}
 						<fieldset>
-							
+
 							<div class="form-row comment-input-text"><textarea name="comment" id="comment" cols="10" rows="10" tabindex="4"></textarea></div>
 
 							<div class="form-row comment-input-name">
 								{{ form.name.errors }}
 								<div class="form-property required"><label for="name">Name *</label></div>
 								<div class="form-value"><input type="text" name="name" id="name" value="" size="28" tabindex="1" class="text" /></div>
-
 								<div class="clearer">&nbsp;</div>
-
 							</div>
 
 							<div class="form-row comment-input-email">
 								{{ form.email.errors }}
 								<div class="form-property required"><label for="email">Email *</label></div>
 								<div class="form-value"><input type="text" name="email" id="email" value="" size="28" tabindex="2" class="text" /></div>
-								
 								<div class="clearer">&nbsp;</div>
-
 							</div>
 
 							<div class="form-row comment-input-website">
 								{{ form.url.errors }}
-								<div class="form-property"><label for="url">Website</label></div>					
+								<div class="form-property"><label for="url">Website</label></div>
 								<div class="form-value"><input type="text" name="url" id="url" value="" size="28" tabindex="3" class="text" /></div>
-
 								<div class="clearer">&nbsp;</div>
-
 							</div>
-				
+
 							<div class="form-row form-row-submit">
 								{{ form.object_pk }}
 								{{ form.security_hash }}
@@ -138,17 +134,16 @@
 
 					</form>
 
-				</div>				
-			
+				</div>
+
 				<div class="clearer">&nbsp;</div>
 
 			</div>
 
 			<div class="clearer">&nbsp;</div>
-			
+
 		</li>
 
 	</ul>
-
 
 </div>
