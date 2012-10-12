@@ -5,6 +5,7 @@ flickrapi==1.4.2
 ghettoq==0.4.5
 httplib2
 ipython==0.13
+Markdown==2.2.0
 PIL==1.1.7
 psycopg2==2.4.5
 raven
