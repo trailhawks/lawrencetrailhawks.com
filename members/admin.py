@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from lawrencetrailhawks.members.models import Member
+from members.models import Member
 
 
 class MemberInline(admin.TabularInline):

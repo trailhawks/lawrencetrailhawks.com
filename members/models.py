@@ -4,9 +4,11 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class MemberManager(models.Manager):
-    def active(self):
-        return self.filter(date_paid__lte=datetime.date.today())
+class ActiveMemberManager(models.Manager):
+
+    def get_query_set(self):
+        queryset = super(ActiveMemberManager, self).get_query_set().filter(date_paid__lte=datetime.date.today())
+        return queryset
 
 
 class Member(models.Model):
@@ -56,7 +58,8 @@ class Member(models.Model):
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
 
-    objects = MemberManager()
+    objects = models.Manager()
+    active_objects = ActiveMemberManager()
 
     class Meta:
         verbose_name = "Member"
@@ -71,12 +74,12 @@ class Member(models.Model):
         """docstring for get_absolute_url"""
         return ('member_detail', (), {'object_id': self.pk})
 
-    @property
     def active(self):
         try:
             return self.date_expires >= datetime.date.today()
         except:
             return False
+    active.boolean = True
 
     @property
     def position_name(self):
