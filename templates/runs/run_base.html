@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load flickr %}
 {% load oembed_tags %}
 
@@ -29,13 +30,16 @@
 {% block sub_nav %}
     <div class="navigation" id="sub-nav">
         <ul class="tabbed">
-        {% for run in object_list %}
+            {% for run in object_list %}
+            {% ifchanged %}
+            <li{% if object.slug %}{% else %} class="current-tab"{% endif %}><a href="{% url run_list %}">All</a></li>
+            {% endifchanged %}
             {% ifequal object.slug run.slug %}
                 <li class="current-tab"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
             {% else %}
             <li><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
             {% endifequal %}
-        {% endfor %}
+            {% endfor %}
         </ul>
         <div class="clearer">&nbsp;</div>
     </div>

@@ -1,9 +1,9 @@
 {% extends "runs/run_base.html" %}
+
 {% load flickr %}
 {% load oembed_tags %}
 
 {% block title %}Weekly Runs{% endblock %}
-
 
 {% block weekly_runs %}
 <div class="main" id="main-two-columns">
@@ -14,16 +14,14 @@
 		<p>We welcome runners of all abilities. So come join us for a run.</p>
 		Weekly runs:<ul>
 			{% for object in object_list %}
-			<li><a href={{ object.get_absolute_url }}>{{ object.name }}</a></li>
+			<li><a href={{ object.get_absolute_url }}>{{ object.get_day_of_week_display }}: {{ object.name }} at {{ object.run_time }}</a></li>
 			{% endfor %}
-		</ul>	
+		</ul>
 		{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
-
 		{% include "includes/flickr_photos.html" %}
-		
 	</div>
 
 	<div class="clearer">&nbsp;</div>

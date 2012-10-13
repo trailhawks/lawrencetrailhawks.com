@@ -1,6 +1,6 @@
 {% extends "runs/run_base.html" %}
-{% block title %}{{object.name}}{% endblock %}
- 
+
+{% block title %}{{ object.name }}{% endblock %}
 
 {% block weekly_runs %}
 <div class="main" id="main-two-columns">
@@ -8,33 +8,27 @@
 	<div class="left" id="main-content">
 		{% block run_detail %}
 		<h2>{{ object.name }}</h2>
-{% if object.get_run_news %}
-<p><strong>Latest News:</strong><br />
-	{% for item in object.get_run_news|slice:":3" %}
-	&nbsp;&nbsp;{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
-	{% endfor %}
-</p>
-{% endif %}
-<p><b>When:</b> {{ object.run_date }} at {{ object.run_time }}</p>
-<p><b>Where:</b> {{ object.location }}</p>
-<p><b>Details:</b> {{ object.details }}</p>
-<p><b>Contact:</b> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
-{{ object.map_iframe|safe}}
+		{% if object.get_run_news %}
+			<h3>Latest News</h3>
+			{% for item in object.get_run_news|slice:":3" %}
+				<h4 class="quiet">{{ item.pub_date|date }}</h4>
+				<p>{{ item.body }}</p>
+			{% endfor %}
+		</p>
+		{% endif %}
+		<p><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</p>
+		<p><strong>Where:</strong> {{ object.location }}</p>
+		<p><strong>Details:</strong> {{ object.details }}</p>
+		<p><strong>Contact:</strong> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
+		{{ object.map_iframe|safe}}
 		{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
-
 		{% include "includes/flickr_photos.html" %}
-		
 	</div>
 
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}  
-
-
-	
-
-
+{% endblock %}
