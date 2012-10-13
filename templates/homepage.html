@@ -12,7 +12,7 @@
             {% get_latest_hawknews 3 as latest_news %}
             {% for item in latest_news %}
             <h4>{{ item.pub_date|date }}</h4>
-            {{ item.body|textile|truncatewords_html:"100" }}
+            {{ item.body|markdown|truncatewords_html:"100" }}
             {% endfor %}
         </div>
         <div class="col3-mid left">
@@ -67,13 +67,13 @@
 								{% if latest_race.get_race_news %}
 								<p><strong>Latest News:</strong>
 									{% for item in latest_race.get_race_news|slice:":3" %}
-									{{ item.body|textile }}
+                                    {{ item.body|markdown }}
 									{% endfor %}
 								</p>
 								{% endif %}
 								<p><strong><em>Where: </em></strong>{{ latest_race.location }}<br />
 									<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
-								<p><strong><em>Course: </em></strong>{{ latest_race.description|textile }}<br />
+								<p><strong><em>Course: </em></strong>{{ latest_race.description|markdown }}<br />
 									{% if latest_race.course_map %}
                                                                           Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
 								        {% endif %}
@@ -94,7 +94,7 @@
 							<div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
 							<div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
 							<div class="post-body">
-								{{ latest_post.body|textile|truncatewords:"400" }}
+								{{ latest_post.body|markdown|truncatewords:"400" }}
 								<p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
 							</div>
 						</div>
