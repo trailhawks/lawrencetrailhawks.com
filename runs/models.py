@@ -1,31 +1,38 @@
 from django.db import models
+
 from lawrencetrailhawks.members.models import Member
 
+
 class Run(models.Model):
+    DAY_OF_WEEK = (
+        (0, 'Sunday'),
+        (1, 'Monday'),
+        (2, 'Tuesday'),
+        (3, 'Wednesday'),
+        (4, 'Thursday'),
+        (5, 'Friday'),
+        (6, 'Saturday'),
+    )
     name = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True,
-                            help_text="Suggested value automatically generated from title. Must be unique.")
-    run_date = models.CharField(max_length=25,
-                                help_text="Day of run (ex. Monday)")
-    run_time = models.CharField(max_length=25,
-                                help_text="Time of run (ex. 6:30 PM)")
+    slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title. Must be unique.")
+    day_of_week = models.IntegerField(choices=DAY_OF_WEEK, default=0)
+    run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
     location = models.TextField()
     map_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(default="http://",
-                               help_text="Link to google maps location")
+    map_link = models.URLField(default="http://", help_text="Link to google maps location")
     details = models.TextField()
     contact = models.ForeignKey(Member)
 
     class Meta:
         verbose_name_plural = "Runs"
-
-    @models.permalink
-    def get_absolute_url(self):
-        """docstring for get_absolute_url"""
-        return ('lawrencetrailhawks.runs.views.run_detail', (), {'slug': self.slug})
+        ordering = ['day_of_week']
 
     def __unicode__(self):
         return self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('lawrencetrailhawks.runs.views.run_detail', (), {'slug': self.slug})
 
     @property
     def get_run_news(self):
@@ -50,7 +57,7 @@ class News(models.Model):
         verbose_name_plural = "Latest Run Updates"
 
     def __unicode__(self):
-        return self.slug
+        return self.title
 
     @models.permalink
     def get_absolute_url(self):
