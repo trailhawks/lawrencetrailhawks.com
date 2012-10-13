@@ -10,6 +10,7 @@ class RaceFeed(ICalFeed):
     """
     product_id = '-//lawrencetrailhawks.com//Races//EN'
     timezone = 'CST'
+    title = 'Lawrence Trail Hawks Race Calendar'
 
     def items(self):
         return Race.objects.all().order_by('-start_datetime')
