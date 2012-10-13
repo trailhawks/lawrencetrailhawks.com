@@ -120,7 +120,7 @@ class Registration(models.Model):
     race = models.ForeignKey(Race)
 
     class Meta:
-            verbose_name_plural = "Registration Dates"
+        verbose_name_plural = "Registration Dates"
 
     def __unicode__(self):
         return "%s %s" % (self.race.title, self.reg_date)
@@ -189,8 +189,8 @@ class Racer(models.Model):
     last_name = models.CharField(max_length=40)
     trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True,
                              help_text="If racer is a trailhawk select profile.")
-    email = models.CharField(max_length=50)
-    phone = models.CharField(max_length=13)
+    email = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=13, blank=True, null=True)
     gender = models.IntegerField(choices=GENDER_CHOICES)
     shirt_size = models.IntegerField(choices=SIZE_CHOICES, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
@@ -198,6 +198,9 @@ class Racer(models.Model):
     state = models.CharField(max_length=40, null=True, blank=True)
     country = models.CharField(max_length=40, null=True, blank=True)
     contact = models.ForeignKey(EmergencyContact, verbose_name="Emergency Contact", blank=True, null=True)
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -244,7 +247,6 @@ class Result(models.Model):
 
 
 class Report(models.Model):
-
     report = models.URLField(default="http://",
                              help_text="Link to race report")
     title = models.CharField(max_length=200)
