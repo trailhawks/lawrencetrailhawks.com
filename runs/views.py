@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.views.generic.list_detail import object_list, object_detail
 
-from lawrencetrailhawks.runs.models import Run
+from runs.models import Run
 
 
 def run_list(request):

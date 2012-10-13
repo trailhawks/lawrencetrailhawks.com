@@ -1,6 +1,7 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
-from lawrencetrailhawks.members.models import Member
+from members.models import Member
 
 
 class Run(models.Model):
@@ -39,19 +40,37 @@ class Run(models.Model):
         return News.objects.filter(run=self, draft=2).order_by('-pub_date')
 
 
+class DraftManager(models.Manager):
+
+    def get_query_set(self):
+        queryset = super(DraftManager, self).get_query_set().filter(status__exact=News.STATUS_DRAFT)
+        return queryset
+
+
+class PublicManager(models.Manager):
+
+    def get_query_set(self):
+        queryset = super(PublicManager, self).get_query_set().filter(status__exact=News.STATUS_PUBLIC)
+        return queryset
+
+
 class News(models.Model):
-    DRAFT = 1
-    PUBLIC = 2
-    DRAFT_CHOICES = (
-        (DRAFT, "Draft",),
-        (PUBLIC, "Public",),
+    STATUS_DRAFT = 1
+    STATUS_PUBLIC = 2
+    STATUS_CHOICES = (
+        (STATUS_DRAFT, _('Draft')),
+        (STATUS_PUBLIC, _('Public')),
     )
     pub_date = models.DateTimeField()
     title = models.CharField(max_length=250)
     slug = models.SlugField(unique=True)
     run = models.ForeignKey(Run)
     body = models.TextField()
-    draft = models.IntegerField(choices=DRAFT_CHOICES)
+    status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
+
+    objects = models.Manager()
+    published_objects = PublicManager()
+    draft_objects = DraftManager()
 
     class Meta:
         verbose_name_plural = "Latest Run Updates"

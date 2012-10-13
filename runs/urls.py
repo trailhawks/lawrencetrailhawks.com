@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-from lawrencetrailhawks.runs.models import Run
+from runs.models import Run
 
 
 runs_info_dict = {
