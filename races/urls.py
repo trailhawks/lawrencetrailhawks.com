@@ -2,7 +2,8 @@ import datetime
 
 from django.conf.urls.defaults import patterns, url
 
-from lawrencetrailhawks.races.models import Race, Racer
+from races.feeds import RaceFeed
+from races.models import Race, Racer
 
 
 race_info_dict = {
@@ -25,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', race_info_dict, 'race_archive_day'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', 'lawrencetrailhawks.races.views.race_detail', race_info_dict, 'race_detail'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/results', 'races.views.race_result', race_info_dict),
+    url(r'^ical/$', RaceFeed(), name='race_ical'),
     url(r'^results/', 'races.views.results'),
     url(r'^upcoming/', 'races.views.upcoming_races'),
     url(r'^racers/$', 'django.views.generic.list_detail.object_list', racer_info_dict, 'racer_list'),
