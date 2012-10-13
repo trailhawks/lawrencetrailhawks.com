@@ -44,24 +44,38 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
+		{% if upcoming_races %}
 		<h2>Upcoming Races</h2>
-		  <p>
-			{% for race in upcoming_races %}
-			&nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
-			{% endfor %}
-		  </p>
+		{% regroup upcoming_races by start_datetime|date:"Y" as race_list %}
+		{% for race in race_list %}
+		    <h3>{{ race.grouper }}</h3>
+		    <ul>
+		        {% for item in race.list %}
+				<li><a href="{{ race.get_absolute_url }}">{{ item.start_datetime|date:"F j" }}: {{ item.title }}</a></li>
+		        {% endfor %}
+		    </ul>
+		{% endfor %}
+		{% endif %}
+
+		{% if completed_races %}
 		<h2>Results</h2>
-		  <p>
-		  {% for race in completed_races %}
-		   &nbsp;&nbsp;<a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}<br />
-		  {% endfor %}
-		  </p>	
+		{% regroup completed_races by start_datetime|date:"Y" as race_list %}
+		{% for race in race_list %}
+		    <h3>{{ race.grouper }}</h3>
+		    <ul>
+		        {% for item in race.list %}
+				<li><a href="{{ race.get_absolute_url }}">{{ item.start_datetime|date:"F j" }}: {{ item.title }}</a></li>
+		        {% endfor %}
+		    </ul>
+		{% endfor %}
+		{% endif %}
+
 	</div>
 
 	<div class="right sidebar" id="sidebar">
 
 			{% include "includes/flickr_photos.html" %}
-		
+
 	</div>
 
 	<div class="clearer">&nbsp;</div>
