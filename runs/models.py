@@ -37,7 +37,7 @@ class Run(models.Model):
 
     @property
     def get_run_news(self):
-        return News.objects.filter(run=self, draft=2).order_by('-pub_date')
+        return News.published_objects.filter(run=self).order_by('-pub_date')
 
 
 class DraftManager(models.Manager):
