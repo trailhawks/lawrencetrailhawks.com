@@ -20,7 +20,7 @@ class LatestBlogNode(Node):
 def get_latest_posts(parser, token):
     bits = token.contents.split()
     if len(bits) != 4:
-        raise TemplateSyntaxError("get_latest tag takes exactly three arguments")
+        raise TemplateSyntaxError("get_latest_posts tag takes exactly three arguments")
     if bits[2] != 'as':
-        raise TemplateSyntaxError("second argument to get_latest tag must be 'as'")
+        raise TemplateSyntaxError("second argument to get_latest_posts tag must be 'as'")
     return LatestBlogNode(bits[1], bits[3])
