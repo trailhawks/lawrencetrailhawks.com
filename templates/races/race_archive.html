@@ -51,7 +51,7 @@
 		    <h3>{{ race.grouper }}</h3>
 		    <ul>
 		        {% for item in race.list %}
-				<li><a href="{{ race.get_absolute_url }}">{{ item.start_datetime|date:"F j" }}: {{ item.title }}</a></li>
+				<li><a href="{{ race.get_absolute_url }}">{{ item.title }}</a> ({{ item.start_datetime|date:"F j" }})</li>
 		        {% endfor %}
 		    </ul>
 		{% endfor %}
@@ -64,7 +64,7 @@
 		    <h3>{{ race.grouper }}</h3>
 		    <ul>
 		        {% for item in race.list %}
-				<li><a href="{{ race.get_absolute_url }}">{{ item.start_datetime|date:"F j" }}: {{ item.title }}</a></li>
+				<li><a href="{{ race.get_absolute_url }}">{{ item.title }}</a> ({{ item.start_datetime|date:"F j" }})</li>
 		        {% endfor %}
 		    </ul>
 		{% endfor %}
