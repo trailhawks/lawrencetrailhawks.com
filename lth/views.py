@@ -3,7 +3,7 @@ import csv
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-from lawrencetrailhawks.members.models import Member
+from members.models import Member
 
 
 @login_required
@@ -11,7 +11,7 @@ def member_list(request):
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename=member_list.csv'
 
-    members = Member.objects.active().order_by('-date_paid')
+    members = Member.active_objects.all().order_by('-date_paid')
     member_list = csv.writer(response)
     member_list.writerow(["First Name",
                          "Last Name",
@@ -32,8 +32,8 @@ def member_list(request):
         member_list.writerow([member.first_name,
                              member.last_name,
                              member.hawk_name,
-                             dict(Member.GENDER_CHOICES).get(member.gender, None),
-                             dict(Member.POSITION_CHOICES).get(member.position, None),
+                             member.get_gender_display(),
+                             member.get_position_display(),
                              member.address,
                              member.address2,
                              member.city,
