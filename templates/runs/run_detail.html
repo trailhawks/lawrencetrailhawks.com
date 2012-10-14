@@ -22,6 +22,11 @@
 		<p><strong>Contact:</strong> {{ object.contact.full_name}} at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
 		{{ object.map_iframe|safe}}
 		{% endblock %}
+
+		<div id="fb-root">
+			<fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
+		</div>
+		{% include "comments/comments.html" %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
