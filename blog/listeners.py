@@ -37,7 +37,7 @@ comment_was_posted.connect(moderate_comment)
 
 
 def notify_commenters(sender, comment, **kwargs):
-    subject = "[lawrencetrailhawks.com]: %s commented on %s" % (comment.user_name, comment.content_object.title)
+    subject = "[lawrencetrailhawks.com]: %s commented on %s" % (comment.user_name, comment.content_object)
     c = Context({'comment': comment})
     t = loader.get_template("email_body.txt")
     txt_body = "%s said:\n\n %s" % (comment.user_name, comment.comment)
@@ -60,11 +60,21 @@ def notify_commenters(sender, comment, **kwargs):
 
 
 def notify_admins(sender, comment, **kwargs):
-    subject = "[lth-admin]: %s commented on %s" % (comment.user_name, comment.content_object.title)
+    subject = "[lth-admin]: %s commented on %s" % (comment.user_name, comment.content_object)
     c = Context({"comment": comment})
     t = loader.get_template("admin_body.txt")
     txt_body = "%s said:\n\n %s" % (comment.user_name, comment.comment)
-    notify_list = Member.comment_email_objects.values_list('email', flat=True)
+    notify_list = set(Member.comment_email_objects.values_list('email', flat=True))
+
+    try:
+        maintainer = comment.content_object.contact.email
+        notify_list.add(maintainer)
+    except:
+        # Add race leaders and run leaders to notification list
+        pass
+
+    notify_list = list(notify_list)
+
     email = EmailMultiAlternatives(subject,
             txt_body,
             from_email="no-reply@lawrencetrailhawks.com",
