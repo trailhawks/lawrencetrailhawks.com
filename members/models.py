@@ -11,6 +11,13 @@ class ActiveMemberManager(models.Manager):
         return queryset
 
 
+class ReceiveCommentEmailsManager(models.Manager):
+
+    def get_query_set(self):
+        queryset = super(ReceiveCommentEmailsManager, self).get_query_set().filter(email__isnull=False, receive_comment_emails__exact=True)
+        return queryset
+
+
 class Member(models.Model):
     PRESIDENT = 1
     VICE_PRESIDENT = 2
@@ -57,9 +64,11 @@ class Member(models.Model):
     position = models.IntegerField(choices=POSITION_CHOICES, null=True, blank=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
+    receive_comment_emails = models.BooleanField(default=False, help_text='Should this member be notified when a comment is left on the website?')
 
     objects = models.Manager()
     active_objects = ActiveMemberManager()
+    comment_email_objects = ReceiveCommentEmailsManager()
 
     class Meta:
         verbose_name = "Member"
