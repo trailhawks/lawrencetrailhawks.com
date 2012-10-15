@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load oembed_tags %}
+
 {% load flickr %}
 {% load markup %}
+{% load oembed_tags %}
 
 {% block title %}FAQ{% endblock %}
 
@@ -34,18 +35,18 @@
 		<ul>
 		  {% for faq in object_list %}
 		    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></h3>
-		    <p>{{ faq.answer|textile }}</p>
+		    <p>{{ faq.answer|markdown }}</p>
 		  {% endfor %}
-		  </ul>	
+		  </ul>
 		{% block faq_detail %}{% endblock %}
 		<p>For more questions email Gary Henry at <a href="mailto:unews@ultrastory.com">unews@ultrastory.com</a></p>
-			
+
 	</div>
 
 	<div class="right sidebar" id="sidebar">
 
 		{% include "includes/flickr_photos.html" %}
-		
+
 	</div>
 
 	<div class="clearer">&nbsp;</div>

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-{% load race_extras %}
-{% load oembed_tags %}
+
 {% load flickr %}
 {% load markup %}
+{% load oembed_tags %}
+{% load race_extras %}
 
 {% block header %}
 	<div id="header">
@@ -58,7 +59,7 @@
 			{% if object.get_race_news %}
 			<p><strong>Latest News:</strong>
 				{% for item in object.get_race_news|slice:":3" %}
-				&nbsp;&nbsp;{{ item.body|textile }}
+				&nbsp;&nbsp;{{ item.body|markdown }}
 				{% endfor %}
 			</p>
 			{% endif %}
@@ -72,7 +73,7 @@
 				mi
 				{% endifequal %}
 				</p>
-                        <p><strong>Race details:</strong> {{object.description|textile}}<br />
+                        <p><strong>Race details:</strong> {{object.description|markdown}}<br />
 				{% if object.course_map %}
 					Click <a href="{{object.course_map}}">here</a> for a course map.
                 {% endif %}
@@ -91,7 +92,6 @@
 			{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
 
 			<p><strong>Contact:</strong> {{ object.contact.full_name }}<br/>
-			&nbsp;&nbsp;Phone: {{ object.contact.phone }}<br />
 			&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
 
 			{% if not object.get_overall_results %}
@@ -117,7 +117,7 @@
 	            <p>{{ object.discounts }}</p>
 
 	            {% if object.packet_pickup %}
-				<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|textile }}</p>
+				<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|markdown }}</p>
 				{% endif %}
 
             {% endif %}

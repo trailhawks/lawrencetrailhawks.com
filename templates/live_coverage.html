@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load hawknews %}
+
+{% load hawknews_tags %}
 {% load markup %}
 
 {% block home_page %}
@@ -28,7 +29,7 @@
     							{% if latest_race.get_race_news %}
     							<p><strong>Latest News:</strong>
     								{% for item in latest_race.get_race_news|slice:":3" %}
-    								{{ item.body|textile }}
+    								{{ item.body|markdown }}
     								{% endfor %}
     							</p>
     							{% endif %}
@@ -54,7 +55,7 @@
 							<div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
 							<div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
 							<div class="post-body">
-								{{ latest_post.body|textile|truncatewords:"400" }}
+								{{ latest_post.body|markdown|truncatewords:"400" }}
 								<p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
 							</div>
 						</div>
@@ -62,10 +63,10 @@
 					</div>
 				{% endif %}
 			</div>
-			<div class="clearer">&nbsp;</div>	
+			<div class="clearer">&nbsp;</div>
 		</div>
 		<div class="right sidebar" id="sidebar">
-			
+
 			<div class="section">
 				{% block faq_preview %}
 				{% load faq_extras %}
@@ -103,10 +104,10 @@
 			<div class="section">
 				<div class="section-title">About Us</div>
 				<div class="section-content">
-						<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
-						<p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
-						<p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
-						<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p> 
+					<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
+					<p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
+					<p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
+					<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
 				</div>
 			</div>
 		</div>

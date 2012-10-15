@@ -1,11 +1,12 @@
 {% extends "faq/faq_list.html" %}
+
 {% load markup %}
 
 {% block title %}FAQ{% endblock %}
 
 {% block faq_detail %}
 <h2>{{ object.question }}</h2>
-<p>{{ object.answer|textile }}</p>
+<p>{{ object.answer|markdown }}</p>
 {% endblock %}
 
 
