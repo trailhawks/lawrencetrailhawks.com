@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding M2M table for field sponsors on 'Race'
         db.create_table('races_race_sponsors', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
@@ -16,12 +17,10 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('races_race_sponsors', ['race_id', 'sponsor_id'])
 
-
     def backwards(self, orm):
-        
+
         # Removing M2M table for field sponsors on 'Race'
         db.delete_table('races_race_sponsors')
-
 
     models = {
         'auth.group': {

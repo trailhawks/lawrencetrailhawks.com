@@ -18,14 +18,12 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
-
     def backwards(self, orm):
         # Deleting field 'Result.dns'
         db.delete_column('races_result', 'dns')
 
         # Deleting field 'Result.dnf'
         db.delete_column('races_result', 'dnf')
-
 
     models = {
         'auth.group': {

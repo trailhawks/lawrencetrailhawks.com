@@ -34,7 +34,7 @@ class HawkNews(models.Model):
     draft_objects = DraftManager()
 
     class Meta:
-        ordering = ('-pub_date',)
+        ordering = ('-pub_date', )
         verbose_name = _('hawk news')
         verbose_name_plural = _('hawk news')
 

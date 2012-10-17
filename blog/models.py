@@ -57,7 +57,7 @@ class Post(models.Model):
         verbose_name = _('post')
         verbose_name_plural = _('posts')
         db_table = 'blog_posts'
-        ordering = ('-publish',)
+        ordering = ('-publish', )
         get_latest_by = 'publish'
 
     def __unicode__(self):

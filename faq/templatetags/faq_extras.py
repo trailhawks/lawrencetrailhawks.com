@@ -1,15 +1,17 @@
 from django.template import Library, Node
 from django.db.models import get_model
 register = Library()
-    
+
+
 class RandomFaqNode(Node):
     def __init__(self, model, num, varname):
         self.num, self.varname = num, varname
         self.model = get_model(*model.split('.'))
-        
+
     def render(self, context):
         context[self.varname] = self.model._default_manager.all()[:self.num]
         return ''
+
 
 @register.tag
 def get_latest(parser, token):

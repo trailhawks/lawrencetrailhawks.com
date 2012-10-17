@@ -5,7 +5,6 @@ from django.conf.urls.defaults import patterns, url
 from races.feeds import RaceFeed
 from races.models import Race, Racer
 
-
 race_info_dict = {
     'queryset': Race.objects.all().order_by('last_name', 'first_name'),
     'date_field': 'start_datetime',

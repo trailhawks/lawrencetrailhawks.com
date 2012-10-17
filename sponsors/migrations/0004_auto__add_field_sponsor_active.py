@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'Sponsor.active'
         db.add_column('sponsors_sponsor', 'active', self.gf('django.db.models.fields.BooleanField')(default=False, blank=True), keep_default=False)
     
-    
     def backwards(self, orm):
-        
+
         # Deleting field 'Sponsor.active'
         db.delete_column('sponsors_sponsor', 'active')
-    
     
     models = {
         'sponsors.sponsor': {
@@ -33,5 +32,5 @@ class Migration(SchemaMigration):
             'url': ('django.db.models.fields.URLField', [], {'default': "'http://'", 'max_length': '200'})
         }
     }
-    
+
     complete_apps = ['sponsors']

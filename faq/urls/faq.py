@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 
 from lawrencetrailhawks.faq.models import FAQ
 
-
 faq_info_dict = {
     'queryset': FAQ.objects.all(),
 }

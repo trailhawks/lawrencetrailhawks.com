@@ -4,7 +4,6 @@ from django.template import Library, Node
 
 from runs.models import Run
 
-
 register = Library()
 
 

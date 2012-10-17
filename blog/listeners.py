@@ -9,7 +9,6 @@ from django.utils.encoding import smart_str
 from lth import akismet
 from members.models import Member
 
-
 AKISMET_API_KEY = getattr(settings, 'AKISMET_API_KEY', '')
 
 

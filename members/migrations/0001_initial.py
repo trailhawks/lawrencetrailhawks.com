@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'Member'
         db.create_table('members_member', (
             ('username', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
@@ -26,12 +27,10 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('members', ['Member'])
     
-    
     def backwards(self, orm):
-        
+
         # Deleting model 'Member'
         db.delete_table('members_member')
-    
     
     models = {
         'auth.group': {
@@ -87,5 +86,5 @@ class Migration(SchemaMigration):
             'username': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
         }
     }
-    
+
     complete_apps = ['members']

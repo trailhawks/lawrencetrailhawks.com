@@ -19,11 +19,9 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('hawknews', ['HawkNews'])
 
-
     def backwards(self, orm):
         # Deleting model 'HawkNews'
         db.delete_table('hawknews_hawknews')
-
 
     models = {
         'hawknews.hawknews': {

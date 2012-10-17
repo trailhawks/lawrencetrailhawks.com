@@ -13,11 +13,9 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
-
     def backwards(self, orm):
         # Deleting field 'Member.receive_comment_emails'
         db.delete_column('members_member', 'receive_comment_emails')
-
 
     models = {
         'auth.group': {

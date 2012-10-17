@@ -3,7 +3,6 @@ from django.template import TemplateSyntaxError
 
 from hawknews.models import HawkNews
 
-
 register = Library()
 
 

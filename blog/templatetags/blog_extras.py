@@ -3,7 +3,6 @@ from django.template import TemplateSyntaxError
 
 from blog.models import Post
 
-
 register = Library()
 
 

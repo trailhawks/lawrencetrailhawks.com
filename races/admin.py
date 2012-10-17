@@ -9,7 +9,6 @@ from lawrencetrailhawks.races.models import Registration
 from lawrencetrailhawks.races.models import Report
 from lawrencetrailhawks.races.models import Result
 
-
 #class MemberInline(admin.TabularInline):
 #    model = Race.contacts.through
 #    #model = Member
@@ -37,12 +36,12 @@ class NewsAdmin(admin.ModelAdmin):
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
     list_display = ('title', 'annual', 'start_datetime')
-    list_filter = ('start_datetime', 'annual',)
+    list_filter = ('start_datetime', 'annual', )
     ordering = ['-start_datetime']
-    inlines = (SponsorsInline, RegistrationInline, NewsInline,)
+    inlines = (SponsorsInline, RegistrationInline, NewsInline, )
     #inlines = [MemberInline, SponsorsInline, RegistrationInline, NewsInline]
     #inlines = [SponsorsInline, RegistrationInline, NewsInline]
-    exclude = ('sponsors',)
+    exclude = ('sponsors', )
 
 
 class ResultAdmin(admin.ModelAdmin):
@@ -54,14 +53,14 @@ class ResultAdmin(admin.ModelAdmin):
 
 class RacerAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'gender', 'email', 'trailhawk')
-    list_filter = ('gender',)
+    list_filter = ('gender', )
     raw_id_fields = ('trailhawk', 'contact')
     search_fields = ('first_name', 'last_name')
 
 
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ('title', 'racer',)
-    list_filter = ('racer',)
+    list_display = ('title', 'racer', )
+    list_filter = ('racer', )
 
 
 class EmergencyContactAdmin(admin.ModelAdmin):
@@ -70,7 +69,6 @@ class EmergencyContactAdmin(admin.ModelAdmin):
 
 class RaceTypeAdmin(admin.ModelAdmin):
     pass
-
 
 admin.site.register(Race, RaceAdmin)
 admin.site.register(RaceType, RaceTypeAdmin)

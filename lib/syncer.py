@@ -3,6 +3,7 @@ from syncr.app.flickr import FlickrSyncr
 from django.conf import settings
 from syncr.flickr.models import Photo
 
+
 def sync_twitter():
     username = settings.TWITTER['username']
     password = settings.TWITTER['password']
@@ -22,4 +23,3 @@ def sync_flickr():
             fs.syncPhoto(photo.flickr_id)
         except:
             pass
-    

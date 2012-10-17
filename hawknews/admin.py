@@ -8,5 +8,4 @@ class HawkNewsAdmin(admin.ModelAdmin):
     list_display = ('title', 'pub_date', 'status')
     list_filter = ('pub_date', 'status')
 
-
 admin.site.register(HawkNews, HawkNewsAdmin)

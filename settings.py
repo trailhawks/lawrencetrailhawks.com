@@ -77,10 +77,9 @@ TEMPLATE_DIRS = (
     'templates',
 )
 
-
 #twitter and flickr details left blank, please use your own.
-TWITTER={'username':'', 'password':''}
-FLICKR={'key':'', 'secret':''}
+TWITTER = {'username': '', 'password': ''}
+FLICKR = {'key': '', 'secret': ''}
 
 CARROT_BACKEND = "ghettoq.taproot.Database"
 

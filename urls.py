@@ -5,7 +5,6 @@ from django.views.generic.simple import direct_to_template
 
 from lawrencetrailhawks.lib.Extras import get_latest
 
-
 admin.autodiscover()
 
 
@@ -13,7 +12,6 @@ def redirect(url):
     def inner(request):
         return HttpResponseRedirect(url)
     return inner
-
 
 urlpatterns = patterns('',
     (r'^$', direct_to_template, {'template': 'homepage.html', 'extra_context': get_latest()}),

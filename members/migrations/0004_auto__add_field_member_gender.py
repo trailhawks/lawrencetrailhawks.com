@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Member.gender'
         db.add_column('members_member', 'gender', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'Member.gender'
         db.delete_column('members_member', 'gender')
-
 
     models = {
         'auth.group': {

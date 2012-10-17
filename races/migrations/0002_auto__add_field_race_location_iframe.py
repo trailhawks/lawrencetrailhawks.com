@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'Race.location_iframe'
         db.add_column('races_race', 'location_iframe', self.gf('django.db.models.fields.TextField')(null=True, blank=True), keep_default=False)
     
-    
     def backwards(self, orm):
-        
+
         # Deleting field 'Race.location_iframe'
         db.delete_column('races_race', 'location_iframe')
-    
     
     models = {
         'auth.group': {
@@ -160,5 +159,5 @@ class Migration(SchemaMigration):
             'time': ('django.db.models.fields.CommaSeparatedIntegerField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         }
     }
-    
+
     complete_apps = ['races']

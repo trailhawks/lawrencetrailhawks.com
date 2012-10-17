@@ -130,8 +130,8 @@ class News(models.Model):
     DRAFT = 1
     PUBLIC = 2
     DRAFT_CHOICES = (
-        (DRAFT, "Draft",),
-        (PUBLIC, "Public",),
+        (DRAFT, "Draft", ),
+        (PUBLIC, "Public", ),
     )
     pub_date = models.DateTimeField()
     title = models.CharField(max_length=250)

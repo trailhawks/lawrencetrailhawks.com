@@ -12,5 +12,4 @@ class MemberAdmin(admin.ModelAdmin):
     list_filter = ('date_paid', 'receive_comment_emails')
     search_fields = ('first_name', 'last_name')
 
-
 admin.site.register(Member, MemberAdmin)

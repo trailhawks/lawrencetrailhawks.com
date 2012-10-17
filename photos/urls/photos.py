@@ -22,6 +22,6 @@ urlpatterns = patterns('',
      'django.views.generic.date_based.archive_day',
      photo_info_dict,
      'race_archive_day'),
-    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/$', photo_detail, 
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/$', photo_detail,
      name='photo_detail'),
 )

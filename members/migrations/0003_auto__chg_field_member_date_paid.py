@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Changing field 'Member.date_paid'
         db.alter_column('members_member', 'date_paid', self.gf('django.db.models.fields.DateField')(null=True, blank=True))
     
-    
     def backwards(self, orm):
-        
+
         # Changing field 'Member.date_paid'
         db.alter_column('members_member', 'date_paid', self.gf('django.db.models.fields.DateField')())
-    
     
     models = {
         'auth.group': {
@@ -72,5 +71,5 @@ class Migration(SchemaMigration):
             'username': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
         }
     }
-    
+
     complete_apps = ['members']

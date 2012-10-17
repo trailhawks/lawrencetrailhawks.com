@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Changing field 'Race.distance'
         db.alter_column('races_race', 'distance', self.gf('django.db.models.fields.CharField')(max_length=10))
 
-
     def backwards(self, orm):
-        
+
         # Changing field 'Race.distance'
         db.alter_column('races_race', 'distance', self.gf('django.db.models.fields.CommaSeparatedIntegerField')(max_length=10))
-
 
     models = {
         'auth.group': {

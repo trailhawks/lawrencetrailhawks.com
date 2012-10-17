@@ -21,14 +21,12 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.related.ForeignKey')(to=orm['races.RaceType'], null=True, blank=True),
                       keep_default=False)
 
-
     def backwards(self, orm):
         # Deleting model 'RaceType'
         db.delete_table('races_racetype')
 
         # Deleting field 'Result.race_type'
         db.delete_column('races_result', 'race_type_id')
-
 
     models = {
         'auth.group': {

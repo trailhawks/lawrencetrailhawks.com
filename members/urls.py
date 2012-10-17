@@ -2,7 +2,6 @@ from django.conf.urls.defaults import url, patterns
 
 from members.models import Member
 
-
 members_info_dict = {
     'queryset': Member.active_objects.all().order_by('last_name', 'first_name'),
 }

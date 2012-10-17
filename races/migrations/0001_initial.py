@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'Race'
         db.create_table('races_race', (
             ('cut_off', self.gf('django.db.models.fields.CharField')(max_length=75, null=True, blank=True)),
@@ -109,9 +110,8 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('races', ['Report'])
     
-    
     def backwards(self, orm):
-        
+
         # Deleting model 'Race'
         db.delete_table('races_race')
 
@@ -132,7 +132,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Report'
         db.delete_table('races_report')
-    
     
     models = {
         'auth.group': {
@@ -275,5 +274,5 @@ class Migration(SchemaMigration):
             'time': ('django.db.models.fields.CommaSeparatedIntegerField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         }
     }
-    
+
     complete_apps = ['races']

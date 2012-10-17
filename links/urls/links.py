@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 
 from lawrencetrailhawks.links.models import Links
 
-
 link_info_dict = {
     'queryset': Links.objects.all(),
 }

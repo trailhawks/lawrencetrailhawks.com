@@ -4,25 +4,24 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Changing field 'Sponsor.phone'
         db.alter_column('sponsors_sponsor', 'phone', self.gf('django.db.models.fields.CharField')(max_length=15, null=True, blank=True))
 
         # Changing field 'Sponsor.address'
         db.alter_column('sponsors_sponsor', 'address', self.gf('django.db.models.fields.TextField')(null=True, blank=True))
     
-    
     def backwards(self, orm):
-        
+
         # Changing field 'Sponsor.phone'
         db.alter_column('sponsors_sponsor', 'phone', self.gf('django.db.models.fields.CharField')(max_length=15))
 
         # Changing field 'Sponsor.address'
         db.alter_column('sponsors_sponsor', 'address', self.gf('django.db.models.fields.TextField')())
-    
     
     models = {
         'sponsors.sponsor': {
@@ -38,5 +37,5 @@ class Migration(SchemaMigration):
             'url': ('django.db.models.fields.URLField', [], {'default': "'http://'", 'max_length': '200'})
         }
     }
-    
+
     complete_apps = ['sponsors']

@@ -16,7 +16,6 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.IntegerField')(default=0),
                       keep_default=False)
 
-
     def backwards(self, orm):
         # Adding field 'Run.run_date'
         db.add_column('runs_run', 'run_date',
@@ -25,7 +24,6 @@ class Migration(SchemaMigration):
 
         # Deleting field 'Run.day_of_week'
         db.delete_column('runs_run', 'day_of_week')
-
 
     models = {
         'auth.group': {

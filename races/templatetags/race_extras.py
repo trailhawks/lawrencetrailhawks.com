@@ -5,7 +5,6 @@ from django.template import Library, Node
 from blog.models import Post
 from races.models import Race
 
-
 register = Library()
 
 

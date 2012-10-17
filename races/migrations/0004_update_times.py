@@ -5,6 +5,7 @@ from south.v2 import DataMigration
 from django.db import models
 from lawrencetrailhawks.races.models import Result
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
@@ -13,7 +14,7 @@ class Migration(DataMigration):
         for r in results:
             try:
                 print "Changing time for %s" % r
-                r.time = r.time.replace(",",":")
+                r.time = r.time.replace(",", ":")
                 r.save()
             except:
                 pass
@@ -24,11 +25,10 @@ class Migration(DataMigration):
         for r in results:
             try:
                 print "Changing time for %s" % r
-                r.time = r.time.replace(":",",")
+                r.time = r.time.replace(":", ",")
                 r.save()
             except:
                 pass
-
 
     models = {
         'auth.group': {

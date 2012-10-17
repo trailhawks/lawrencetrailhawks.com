@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 
 from runs.models import Run
 
-
 runs_info_dict = {
     'queryset': Run.objects.all(),
 }

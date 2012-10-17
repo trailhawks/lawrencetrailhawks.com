@@ -2,7 +2,6 @@ from django.template import Library, Node
 
 from members.models import Member
 
-
 register = Library()
 
 

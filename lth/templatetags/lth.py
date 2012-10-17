@@ -5,15 +5,18 @@ from dateutil.tz import *
 from dateutil.parser import *
 
 register = Library()
-     
+
+
 class RRCANewsNode(Node):
     def render(self, context):
         d = feedparser.parse("http://feeds.feedburner.com/RRCA-News?format=xml")
         context['rrca_news'] = d['entries'][:4]
         return ''
-    
+
+
 def get_rrca_news(parser, token):
     return RRCANewsNode()
+
 
 class TwitterNode(Node):
     def render(self, context):
@@ -28,10 +31,11 @@ class TwitterNode(Node):
             tweet['url'] = t['link']
             tweet['pub_time'] = date.astimezone(gettz())
             tweets.append(tweet)
-         
+
         context['stweets'] = tweets
         return ''
-        
+
+
 def get_latest_tweets(parser, token):
     return TwitterNode()
 

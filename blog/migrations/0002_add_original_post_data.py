@@ -4,25 +4,24 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'Post.repost_date'
         db.add_column('blog_posts', 'repost_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True), keep_default=False)
 
         # Adding field 'Post.repost_url'
         db.add_column('blog_posts', 'repost_url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True), keep_default=False)
     
-    
     def backwards(self, orm):
-        
+
         # Deleting field 'Post.repost_date'
         db.delete_column('blog_posts', 'repost_date')
 
         # Deleting field 'Post.repost_url'
         db.delete_column('blog_posts', 'repost_url')
-    
     
     models = {
         'auth.group': {
@@ -95,5 +94,5 @@ class Migration(SchemaMigration):
             'username': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
         }
     }
-    
+
     complete_apps = ['blog']
