@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% load hawknews_tags %}
-{% load markup %}
 {% load lth %}
+{% load markup %}
+{% load run_extras %}
 
 {% block home_page %}
 	<div id="splash">
@@ -15,47 +16,47 @@
             {{ item.body|markdown|truncatewords_html:"100" }}
             {% endfor %}
         </div>
+
         <div class="col3-mid left">
 			<h2 class="label label-orange">Today's Run</h2>
-			{% load run_extras %}
 			{% get_todays_run %}
             {% for run in todays_run %}
-				<p class="quiet large"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></p>
-				{% if run.get_run_news %}
-				<p><strong>Latest News:</strong><br />
-					{% for item in run.get_run_news|slice:":3" %}
-					{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
-					{% endfor %}
-				</p>
-				{% endif %}
+				<h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
+                {% if run.get_run_news %}
+                    <h4>Latest News:</h4>
+                    {% for item in run.get_run_news|slice:":3" %}
+                        <h4 class="quiet">{{ item.pub_date|date }}</h4>
+                        <div>{{ item.body|markdown }}</div>
+                    {% endfor %}
+                {% endif %}
 				<p><em><strong>Where: </strong></em>{{ run.location}}<br />
-					Click <a href="{{ run.map_link}}">here</a> for directions.</p>
+                    <a href="{{ run.map_link}}">Click here for directions.</a></p>
 				<p><em><strong>When: </strong></em>{{ run.run_time }}</p>
 				<p><em><strong>What: </strong></em>{{ run.details }}</a></p>
-				<p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}	</a></p>
+				<p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></p>
 			{% empty %}
 				<p class="quiet large">No run scheduled for today</p>
             {% endfor %}
 
             <h2 class="label label-orange">Next Run</h2>
             {% for run in next_run %}
-                <p class="quiet large"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></p>
+                <h3 class="quiet "><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
                 {% if run.get_run_news %}
-                    <p><strong>Latest News:</strong><br />
-                        {% for item in run.get_run_news|slice:":3" %}
-                        {{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
-                        {% endfor %}
-                    </p>
+                    <h4>Latest News:</h4>
+                    {% for item in run.get_run_news|slice:":3" %}
+                        <h4 class="quiet">{{ item.pub_date|date }}</h4>
+                        <div>{{ item.body|markdown }}</div>
+                    {% endfor %}
                 {% endif %}
                 <p><em><strong>Where: </strong></em>{{ run.location}}<br />
-                    Click <a href="{{ run.map_link}}">here</a> for directions.</p>
-                <p><em><strong>When: </strong></em>{{ run.run_time }}</p>
+                    <a href="{{ run.map_link}}">Click here for directions.</a></p>
+                <p><em><strong>When: </strong></em>{{ run.get_day_of_week_display }} {{ run.run_time }}</p>
                 {% if not todays_run %}
                     <p><em><strong>What: </strong></em>{{ run.details }}</a></p>
-                    <p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }} </a></p>
+                    <p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></p>
                 {% endif %}
             {% empty %}
-                <p class="quiet large">No run scheduled for today</p>
+                <p class="quiet large">No upcoming scheduled runs</p>
             {% endfor %}
 
 		</div>
@@ -97,8 +98,8 @@
 									<a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
 								<p><strong><em>Course: </em></strong>{{ latest_race.description|markdown }}<br />
 									{% if latest_race.course_map %}
-                                                                          Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
-								        {% endif %}
+                                    Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
+								    {% endif %}
 									<ul>
 										{% for reg in latest_race.get_reg_dates %}
 										<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>

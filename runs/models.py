@@ -17,9 +17,13 @@ class TodayManager(models.Manager):
 class NextManager(models.Manager):
 
     def get_query_set(self):
-        weekday = (datetime.datetime.now() + datetime.timedelta(days=1)).weekday()
-        queryset = super(NextManager, self).get_query_set().filter(day_of_week=weekday)
-        return queryset
+        queryset = super(NextManager, self).get_query_set()
+        for day in range(1, 6):
+            weekday = (datetime.datetime.now() + datetime.timedelta(days=day)).weekday()
+            next_day = queryset.filter(day_of_week=weekday)
+            if next_day.count():
+                return next_day
+        return []
 
 
 class Run(models.Model):
