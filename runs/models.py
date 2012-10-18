@@ -11,7 +11,6 @@ class TodayManager(models.Manager):
     def get_query_set(self):
         weekday = datetime.datetime.now().weekday()
         queryset = super(TodayManager, self).get_query_set().filter(day_of_week=weekday)
-        print queryset
         return queryset
 
 
@@ -20,7 +19,6 @@ class NextManager(models.Manager):
     def get_query_set(self):
         weekday = (datetime.datetime.now() + datetime.timedelta(days=1)).weekday()
         queryset = super(NextManager, self).get_query_set().filter(day_of_week=weekday)
-        print queryset
         return queryset
 
 
