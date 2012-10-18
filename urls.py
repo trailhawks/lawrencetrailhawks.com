@@ -3,18 +3,9 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
 
-from lawrencetrailhawks.lib.Extras import get_latest
-
-admin.autodiscover()
-
-
-def redirect(url):
-    def inner(request):
-        return HttpResponseRedirect(url)
-    return inner
 
 urlpatterns = patterns('',
-    (r'^$', direct_to_template, {'template': 'homepage.html', 'extra_context': get_latest()}),
+    (r'^$', direct_to_template, {'template': 'homepage.html'}),
     (r'^live/$', direct_to_template, {'template': 'live_coverage.html'}),
     (r'^about/$', direct_to_template, {'template': 'about.html'}),
     (r'^blog/', include('lawrencetrailhawks.blog.urls')),
@@ -29,8 +20,6 @@ urlpatterns = patterns('',
     (r'^runs/', include('lawrencetrailhawks.runs.urls')),
     (r'^sponsors/', 'lawrencetrailhawks.sponsors.views.get_sponsors'),
     (r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
-    #(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-    #        {'document_root': settings.STATIC_DOC_ROOT}),
     (r'^admin/', include(admin.site.urls)),
 )
 
