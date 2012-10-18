@@ -4,6 +4,8 @@ from django.contrib import admin
 from django.views.generic.simple import direct_to_template
 
 
+admin.autodiscover()
+
 urlpatterns = patterns('',
     (r'^$', direct_to_template, {'template': 'homepage.html'}),
     (r'^live/$', direct_to_template, {'template': 'live_coverage.html'}),
