@@ -1,15 +1,16 @@
 import feedparser
-from django.template import Library, Node
-import datetime
-from dateutil.tz import *
+
 from dateutil.parser import *
+from dateutil.tz import *
+from django.template import Library, Node
+
 
 register = Library()
 
 
 class RRCANewsNode(Node):
     def render(self, context):
-        d = feedparser.parse("http://feeds.feedburner.com/RRCA-News?format=xml")
+        d = feedparser.parse('http://feeds.feedburner.com/RRCA-News?format=xml')
         context['rrca_news'] = d['entries'][:4]
         return ''
 
@@ -20,11 +21,11 @@ def get_rrca_news(parser, token):
 
 class TwitterNode(Node):
     def render(self, context):
-        d = feedparser.parse("http://twitter.com/statuses/user_timeline/40239504.rss")
+        d = feedparser.parse('https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=trailhawks')
         raw_tweets = d['entries'][:4]
         tweets = []
         for t in raw_tweets:
-            text = t['title'].replace("trailhawks: ", "")
+            text = t['title'].replace('trailhawks: ', '')
             date = parse(t['updated'])
             tweet = {}
             tweet['text'] = text
