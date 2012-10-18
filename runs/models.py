@@ -1,7 +1,27 @@
+import datetime
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from members.models import Member
+
+
+class TodayManager(models.Manager):
+
+    def get_query_set(self):
+        weekday = datetime.datetime.now().weekday()
+        queryset = super(TodayManager, self).get_query_set().filter(day_of_week=weekday)
+        print queryset
+        return queryset
+
+
+class NextManager(models.Manager):
+
+    def get_query_set(self):
+        weekday = (datetime.datetime.now() + datetime.timedelta(days=1)).weekday()
+        queryset = super(NextManager, self).get_query_set().filter(day_of_week=weekday)
+        print queryset
+        return queryset
 
 
 class Run(models.Model):
@@ -24,6 +44,10 @@ class Run(models.Model):
     details = models.TextField()
     contact = models.ForeignKey(Member)
 
+    objects = models.Manager()
+    today_objects = TodayManager()
+    next_objects = NextManager()
+
     class Meta:
         verbose_name_plural = "Runs"
         ordering = ['day_of_week']
@@ -37,7 +61,7 @@ class Run(models.Model):
 
     @property
     def get_run_news(self):
-        return News.published_objects.filter(run=self).order_by('-pub_date')
+        return News.recent_objects.filter(run=self).order_by('-pub_date')
 
 
 class DraftManager(models.Manager):
@@ -51,6 +75,14 @@ class PublicManager(models.Manager):
 
     def get_query_set(self):
         queryset = super(PublicManager, self).get_query_set().filter(status__exact=News.STATUS_PUBLIC)
+        return queryset
+
+
+class RecentManager(models.Manager):
+
+    def get_query_set(self):
+        recent_date = datetime.datetime.now() - datetime.timedelta(days=7)
+        queryset = super(RecentManager, self).get_query_set().filter(status__exact=News.STATUS_PUBLIC, pub_date__gte=recent_date)
         return queryset
 
 
@@ -71,6 +103,7 @@ class News(models.Model):
     objects = models.Manager()
     published_objects = PublicManager()
     draft_objects = DraftManager()
+    recent_objects = RecentManager()
 
     class Meta:
         verbose_name_plural = "Latest Run Updates"

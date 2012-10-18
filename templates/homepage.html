@@ -19,32 +19,54 @@
 			<h2 class="label label-orange">Today's Run</h2>
 			{% load run_extras %}
 			{% get_todays_run %}
-			{% if todays_run %}
-				<p class="quiet large"><a href="{{ todays_run.get_absolute_url }}">{{ todays_run.name }}</a></p>
-				{% if todays_run.get_run_news %}
+            {% for run in todays_run %}
+				<p class="quiet large"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></p>
+				{% if run.get_run_news %}
 				<p><strong>Latest News:</strong><br />
-					{% for item in todays_run.get_run_news|slice:":3" %}
-					&nbsp;&nbsp;{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
+					{% for item in run.get_run_news|slice:":3" %}
+					{{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
 					{% endfor %}
 				</p>
 				{% endif %}
-				<p><em><strong>Where: </strong></em>{{ todays_run.location}}<br />
-					Click <a href="{{ todays_run.map_link}}">here</a> for directions.</p>
-				<p><em><strong>When: </strong></em>{{ todays_run.run_time }}</p>
-				<p><em><strong>What: </strong></em>{{ todays_run.details }}</a></p>
-				<p><em><strong>Contact: </strong></em><a href="mailto:{{todays_run.contact.email}}">{{ todays_run.contact.full_hawk_name }}	</a></p>
-			{% else %}
+				<p><em><strong>Where: </strong></em>{{ run.location}}<br />
+					Click <a href="{{ run.map_link}}">here</a> for directions.</p>
+				<p><em><strong>When: </strong></em>{{ run.run_time }}</p>
+				<p><em><strong>What: </strong></em>{{ run.details }}</a></p>
+				<p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}	</a></p>
+			{% empty %}
 				<p class="quiet large">No run scheduled for today</p>
-			{% endif %}
+            {% endfor %}
+
+            <h2 class="label label-orange">Next Run</h2>
+            {% for run in next_run %}
+                <p class="quiet large"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></p>
+                {% if run.get_run_news %}
+                    <p><strong>Latest News:</strong><br />
+                        {% for item in run.get_run_news|slice:":3" %}
+                        {{ item.body }} - <span class="quiet">({{ item.pub_date|date }})</span>
+                        {% endfor %}
+                    </p>
+                {% endif %}
+                <p><em><strong>Where: </strong></em>{{ run.location}}<br />
+                    Click <a href="{{ run.map_link}}">here</a> for directions.</p>
+                <p><em><strong>When: </strong></em>{{ run.run_time }}</p>
+                {% if not todays_run %}
+                    <p><em><strong>What: </strong></em>{{ run.details }}</a></p>
+                    <p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }} </a></p>
+                {% endif %}
+            {% empty %}
+                <p class="quiet large">No run scheduled for today</p>
+            {% endfor %}
+
 		</div>
 		<div class="col3 right">
 			{% load twitterfy %}
 			<h2 class="label label-blue">Follow Us</h2>
 			<p class="quiet large"><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
 		    {% get_latest_tweets %}
-                    {% for t in stweets %}
-                    <p>{{ t.text|twitterfy }} - <a href="{{t.url}}">({{ t.pub_time|timesince }} ago)</a></p>
-                    {% endfor %}
+            {% for t in stweets %}
+                <p>{{ t.text|twitterfy }} - <a href="{{ t.url }}">({{ t.pub_time|timesince }} ago)</a></p>
+            {% endfor %}
 		</div>
 		<div class="clearer">&nbsp;</div>
 	</div>
@@ -61,9 +83,9 @@
 							<div class="post-date">{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
 							<div class="post-body">
 								{% if latest_race.logo %}
-                                                                  <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
+                                    <p><a href="#"><img src="/site_media/{{latest_race.logo}}" width="400" alt="" class="bordered" /></a></p>
 								{% endif %}
-                                                                <p class="large">{{ latest_race.slogan }}</p>
+                                <p class="large">{{ latest_race.slogan }}</p>
 								{% if latest_race.get_race_news %}
 								<p><strong>Latest News:</strong>
 									{% for item in latest_race.get_race_news|slice:":3" %}
@@ -134,17 +156,19 @@
                     <p><a href="http://lawrencetrailhawks.com{% url race_ical %}">Subscribe</a></p>
                 </div>
             </div>
-                        <div class="section">
-                            <div class="section-title">RRCA Syndicated News</div>
-                            <div class="section-content">
-                                <ul class="nice-list">
-                                  {% get_rrca_news %}
-                                    {% for item in rrca_news %}
-                                    <li><a href="{{item.link}}">{{item.title}}</a></li>
-                                  {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
+
+            <div class="section">
+                <div class="section-title">RRCA Syndicated News</div>
+                <div class="section-content">
+                    <ul class="nice-list">
+                      {% get_rrca_news %}
+                        {% for item in rrca_news %}
+                        <li><a href="{{item.link}}">{{item.title}}</a></li>
+                      {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
 			<div class="section">
 				{% block blog_preview %}
 				{% load blog_extras %}
@@ -160,13 +184,14 @@
 				</div>
 				{% endblock %}
 			</div>
+
 			<div class="section">
 				<div class="section-title">About Us</div>
 				<div class="section-content">
-						<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
-						<p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
-						<p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
-						<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
+				<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
+				<p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
+				<p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
+				<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
 				</div>
 			</div>
 		</div>
