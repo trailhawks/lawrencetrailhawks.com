@@ -23,9 +23,10 @@
 		{{ object.map_iframe|safe}}
 		{% endblock %}
 
-		<div id="fb-root">
-			<fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
+		<div>
+			<iframe src="https://www.facebook.com/plugins/like.php?href=http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}" scrolling="no" frameborder="0" style="border:none; width:500px; height:80px"></iframe>
 		</div>
+
 		{% include "comments/comments.html" %}
 	</div>
 

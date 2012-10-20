@@ -45,17 +45,18 @@
 
 {% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock %}
 
-
 {% block race_detail %}
 	<div class="main" id="main-two-columns">
 
 		<div class="left" id="main-content">
 			<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
 			<h4>{{ object.slogan }}</h4>
-                        {% if object.logo %}
-                          <img src="/site_media/{{object.logo}}" width="400" />
-                        {% endif %}
+
+            {% if object.logo %}
+              <img src="/site_media/{{object.logo}}" width="400" />
+            {% endif %}
 			<br />
+
 			{% if object.get_race_news %}
 			<p><strong>Latest News:</strong>
 				{% for item in object.get_race_news|slice:":3" %}
@@ -141,9 +142,10 @@
 			</p>
 			{% endif %}
 
-			<div id="fb-root">
-				<fb:like href="http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}"></fb:like>
+			<div>
+				<iframe src="https://www.facebook.com/plugins/like.php?href=http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}" scrolling="no" frameborder="0" style="border:none; width:500px; height:80px"></iframe>
 			</div>
+
 			{% include "comments/comments.html" %}
 
 		</div>
