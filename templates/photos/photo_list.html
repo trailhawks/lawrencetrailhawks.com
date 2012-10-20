@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load oembed_tags %}
+
+{% block title %}Photos{% endblock %}
+
+{% block photos %}
+<div class="main">
+
+	<div class="section">
+
+		<div class="section-content">
+
+			<div class="post">
+
+				<div class="post-title"><h2><a href="#">Trail Hawk Photos</a></h2></div>
+
+				<div class="post-date"></div>
+
+				<div class="post-body">
+
+			      {% for photo in photos %}
+			        <div>
+			        	<a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"600x600" }}</a>
+			        	<p>{{ photo.description|safe }}</p>
+			        </div>
+			      {% endfor %}
+
+				</div>
+
+			</div>
+
+			<div class="content-separator"></div>
+			<p><a href="http://www.flickr.com/photos/trailhawks">Check out our Flickr page for more photos.</a></p>
+			<div class="clearer">&nbsp;</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endblock %}

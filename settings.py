@@ -103,13 +103,14 @@ INSTALLED_APPS = [
     'syncr.twitter',
     'tagging',
 
-    'lth',
-    'faq',
     'blog',
+    'faq',
+    'hawknews',
     'links',
+    'lth',
     'members',
+    'photos',
+    'races',
     'runs',
     'sponsors',
-    'races',
-    'hawknews',
 ]
