@@ -1,6 +1,7 @@
 import datetime
 
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.generic.date_based import object_detail, archive_index
 from django.views.generic.list_detail import object_detail as obj_detail
 from syncr.flickr.models import Photo
@@ -52,8 +53,9 @@ def race_detail(request, slug, year, month, day, allow_future, queryset, date_fi
 
 
 def racer_detail(request, object_id, queryset):
-    person = Racer.objects.get(pk=object_id)
+    person = get_object_or_404(Racer, pk=object_id)
     photos = Photo.objects.filter(tags__icontains=person.first_name).filter(tags__icontains=person.last_name).order_by('?')[0:7]
+
     return obj_detail(request,
                          queryset=queryset,
                          object_id=object_id,
