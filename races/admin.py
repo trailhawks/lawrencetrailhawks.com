@@ -1,24 +1,11 @@
 from django.contrib import admin
 
-from lawrencetrailhawks.races.models import EmergencyContact
-from lawrencetrailhawks.races.models import News
-from lawrencetrailhawks.races.models import Race
-from lawrencetrailhawks.races.models import Racer
-from lawrencetrailhawks.races.models import RaceType
-from lawrencetrailhawks.races.models import Registration
-from lawrencetrailhawks.races.models import Report
-from lawrencetrailhawks.races.models import Result
+from .models import EmergencyContact, News, Race, Racer, RaceType, Registration, Report, Result
+from news.admin import NewsInline
 
-#class MemberInline(admin.TabularInline):
-#    model = Race.contacts.through
-#    #model = Member
 
 class RegistrationInline(admin.TabularInline):
     model = Registration
-
-
-class NewsInline(admin.StackedInline):
-    model = News
 
 
 class SponsorsInline(admin.TabularInline):
@@ -38,9 +25,11 @@ class RaceAdmin(admin.ModelAdmin):
     list_display = ('title', 'annual', 'start_datetime')
     list_filter = ('start_datetime', 'annual', )
     ordering = ['-start_datetime']
-    inlines = (SponsorsInline, RegistrationInline, NewsInline, )
-    #inlines = [MemberInline, SponsorsInline, RegistrationInline, NewsInline]
-    #inlines = [SponsorsInline, RegistrationInline, NewsInline]
+    inlines = (
+        SponsorsInline,
+        RegistrationInline,
+        NewsInline,
+    )
     exclude = ('sponsors', )
 
 
@@ -69,6 +58,7 @@ class EmergencyContactAdmin(admin.ModelAdmin):
 
 class RaceTypeAdmin(admin.ModelAdmin):
     pass
+
 
 admin.site.register(Race, RaceAdmin)
 admin.site.register(RaceType, RaceTypeAdmin)

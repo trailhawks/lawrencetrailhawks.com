@@ -106,6 +106,7 @@ INSTALLED_APPS = [
     'blog',
     'faq',
     'hawknews',
+    'news',
     'links',
     'lth',
     'members',
