@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from runs.models import Run, News
+from .models import Run, News
 from news.admin import NewsInline
 
 

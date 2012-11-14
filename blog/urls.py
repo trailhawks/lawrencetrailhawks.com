@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 
-from lawrencetrailhawks.blog.models import Post
+from .models import Post
+
 
 blog_info_dict = {
     'queryset': Post.published_objects.all(),

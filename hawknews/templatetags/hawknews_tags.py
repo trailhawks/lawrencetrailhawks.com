@@ -1,7 +1,8 @@
 from django.template import Library, Node
 from django.template import TemplateSyntaxError
 
-from hawknews.models import HawkNews
+from ..models import HawkNews
+
 
 register = Library()
 

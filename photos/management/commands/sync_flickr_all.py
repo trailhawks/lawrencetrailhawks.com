@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 
-from lawrencetrailhawks.lib.syncer import sync_flickr_all
+from lib.syncer import sync_flickr_all
 
 
 class Command(NoArgsCommand):

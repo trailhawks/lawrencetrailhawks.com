@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from lawrencetrailhawks.sponsors.models import Sponsor
-import datetime
+from sponsors.models import Sponsor
 
 
 def get_sponsors(request):

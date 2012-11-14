@@ -2,7 +2,7 @@ import csv
 
 from django.core.management.base import BaseCommand
 from optparse import make_option
-from lawrencetrailhawks.races.models import Race, RaceType, Racer, Result
+from races.models import Race, RaceType, Racer, Result
 
 
 class Command(BaseCommand):

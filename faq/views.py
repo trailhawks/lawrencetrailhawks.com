@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from lawrencetrailhawks.faq.models import FAQ
-import datetime
+
+from .models import FAQ
 
 
 def get_faq_list(request):

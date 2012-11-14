@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-from lawrencetrailhawks.links.models import Links
-import datetime
+
+from .models import Links
 
 
 def get_links(request):

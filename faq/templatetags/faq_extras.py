@@ -1,5 +1,6 @@
 from django.template import Library, Node
 from django.db.models import get_model
+
 register = Library()
 
 
@@ -17,7 +18,7 @@ class RandomFaqNode(Node):
 def get_latest(parser, token):
     bits = token.contents.split()
     if len(bits) != 5:
-        raise TemplateSyntaxError, "get_latest tag takes exactly four arguments"
+        raise TemplateSyntaxError("get_latest tag takes exactly four arguments")
     if bits[3] != 'as':
-        raise TemplateSyntaxError, "third argument to get_latest tag must be 'as'"
+        raise TemplateSyntaxError("third argument to get_latest tag must be 'as'")
     return RandomFaqNode(bits[1], bits[2], bits[4])

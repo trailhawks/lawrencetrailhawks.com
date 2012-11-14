@@ -10,7 +10,7 @@ photo_info_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^$', ('lawrencetrailhawks.photos.views.photo_list')),
+    url(r'^$', ('photos.views.photo_list')),
     url(r'^(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', photo_info_dict, 'race_archive_year'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$', 'django.views.generic.date_based.archive_month', photo_info_dict, 'race_archive_month'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', photo_info_dict, 'race_archive_day'),

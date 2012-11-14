@@ -1,7 +1,7 @@
 from django.template import Library, Node
 from django.template import TemplateSyntaxError
 
-from blog.models import Post
+from ..models import Post
 
 register = Library()
 

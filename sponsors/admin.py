@@ -1,5 +1,6 @@
 from django.contrib import admin
-from lawrencetrailhawks.sponsors.models import Sponsor
+
+from .models import Sponsor
 
 
 class SponsorAdmin(admin.ModelAdmin):

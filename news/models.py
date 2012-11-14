@@ -33,8 +33,10 @@ class News(models.Model):
     body = models.TextField()
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
 
-    content_type = models.ForeignKey(ContentType, null=True, blank=True)
-    object_id = models.PositiveIntegerField(null=True, blank=True)
+    # show in main news feed? handy for race results...
+
+    content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     objects = models.Manager()
@@ -56,7 +58,7 @@ class News(models.Model):
 
         #now = timezone.now()
         now = datetime.now()
-        self.updated = now
+        #self.updated = now
 
         if not self.pub_date and self.status == self.STATUS_PUBLIC:
             self.pub_date = now

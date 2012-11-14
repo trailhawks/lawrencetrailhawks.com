@@ -1,18 +1,19 @@
 from django.conf.urls.defaults import *
 
-from lawrencetrailhawks.links.models import Links
+from .models import FAQ
 
-link_info_dict = {
-    'queryset': Links.objects.all(),
+
+faq_info_dict = {
+    'queryset': FAQ.objects.all(),
 }
 
 urlpatterns = patterns('django.views.generic.list_detail',
      (r'^$',
      'object_list',
-     link_info_dict,
-     'link_list'),
+     faq_info_dict,
+     'faq_list'),
     (r'^(?P<object_id>[-\w]+)/$',
      'object_detail',
-     link_info_dict,
-     'link_detail'),
+     faq_info_dict,
+     'faq_detail'),
 )

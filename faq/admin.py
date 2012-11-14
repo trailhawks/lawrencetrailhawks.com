@@ -1,5 +1,6 @@
 from django.contrib import admin
-from lawrencetrailhawks.faq.models import FAQ
+
+from .models import FAQ
 
 
 class FAQAdmin(admin.ModelAdmin):

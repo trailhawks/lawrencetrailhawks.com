@@ -6,7 +6,7 @@ from django.views.generic.date_based import object_detail, archive_index
 from django.views.generic.list_detail import object_detail as obj_detail
 from syncr.flickr.models import Photo
 
-from lawrencetrailhawks.races.models import Race, Racer
+from .models import Race, Racer
 
 
 def upcoming_races(request):

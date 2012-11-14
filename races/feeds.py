@@ -1,6 +1,6 @@
 from django_ical.views import ICalFeed
 
-from races.models import Race
+from .models import Race
 
 
 class RaceFeed(ICalFeed):

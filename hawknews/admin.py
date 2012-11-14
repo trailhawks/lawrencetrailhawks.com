@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from hawknews.models import HawkNews
+from .models import HawkNews
 
 
 class HawkNewsAdmin(admin.ModelAdmin):

@@ -1,14 +1,11 @@
 import datetime
-import tagging
 
-from django.conf import settings
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 
 from members.models import Member
-from lawrencetrailhawks.blog import listeners
 
 
 class DraftManager(models.Manager):

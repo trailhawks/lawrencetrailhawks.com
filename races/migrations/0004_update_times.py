@@ -3,7 +3,7 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-from lawrencetrailhawks.races.models import Result
+from races.models import Result
 
 
 class Migration(DataMigration):

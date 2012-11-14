@@ -1,5 +1,6 @@
 from django.core.management.base import NoArgsCommand
-from lawrencetrailhawks.lib.syncer import sync_twitter
+
+from lib.syncer import sync_twitter
 
 
 class Command(NoArgsCommand):

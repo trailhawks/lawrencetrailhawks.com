@@ -59,7 +59,7 @@ class Run(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('lawrencetrailhawks.runs.views.run_detail', (), {'slug': self.slug})
+        return ('runs.views.run_detail', (), {'slug': self.slug})
 
     @property
     def get_run_news(self):
