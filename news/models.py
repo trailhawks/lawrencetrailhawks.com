@@ -29,7 +29,7 @@ class News(models.Model):
     )
     pub_date = models.DateTimeField(blank=True, null=True)
     title = models.CharField(max_length=250)
-    slug = models.SlugField(blank=True, unique=True)
+    slug = models.SlugField(blank=True, null=True)
     body = models.TextField()
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
 
