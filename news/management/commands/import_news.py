@@ -27,17 +27,26 @@ class Command(BaseCommand):
     def import_hawknew(self):
         for obj in HawkNews.objects.all():
             self.log.debug('importing hawk news ({0})'.format(obj.pk))
-            self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.status)
+            try:
+                self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.status)
+            except Exception as e:
+                self.log.exception(e)
 
     def import_race_news(self):
         for obj in RaceNews.objects.all():
             self.log.debug('importing race news ({0})'.format(obj.pk))
-            self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.status, obj=obj.race)
+            try:
+                self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.draft, obj=obj.race)
+            except Exception as e:
+                self.log.exception(e)
 
     def import_run_news(self):
         for obj in RunNews.objects.all():
             self.log.debug('importing run news ({0})'.format(obj.pk))
-            self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.status, obj.run)
+            try:
+                self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.status, obj.run)
+            except Exception as e:
+                self.log.exception(e)
 
     def handle(self, *args, **options):
         self.log = logging.getLogger(__name__)
