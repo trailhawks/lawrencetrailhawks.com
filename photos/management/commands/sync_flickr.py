@@ -1,7 +1,7 @@
 import logging
 
 from django.core.management.base import NoArgsCommand
-from lib.syncer import sync_flickr
+from core.syncer import sync_flickr
 
 
 logger = logging.getLogger(__name__)
