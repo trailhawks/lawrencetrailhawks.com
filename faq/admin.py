@@ -1,9 +1,15 @@
 from django.contrib import admin
+from django.contrib.contenttypes import generic
 
 from .models import FAQ
 
 
-class FAQAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ['question']}
+class FaqInline(generic.GenericStackedInline):
+    model = FAQ
 
-admin.site.register(FAQ)
+
+class FaqAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(FAQ, FaqAdmin)

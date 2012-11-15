@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import EmergencyContact, News, Race, Racer, RaceType, Registration, Report, Result
+from faq.admin import FaqInline
 from news.admin import NewsInline
 
 
@@ -29,6 +30,7 @@ class RaceAdmin(admin.ModelAdmin):
         SponsorsInline,
         RegistrationInline,
         NewsInline,
+        FaqInline,
     )
     exclude = ('sponsors', )
 
