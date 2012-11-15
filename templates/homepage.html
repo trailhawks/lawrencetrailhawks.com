@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load hawknews_tags %}
+{% load news_tags %}
 {% load lth %}
 {% load markup %}
 {% load run_extras %}
@@ -10,7 +10,7 @@
         <div class="col3 left">
             <h2 class="label label-green">Latest Hawk News</h2>
             <p class="quiet large">What's happening</p>
-            {% get_latest_hawknews 4 as latest_news %}
+            {% get_latest_news 4 as latest_news %}
             {% for item in latest_news %}
             <h4>{{ item.pub_date|date }}</h4>
             {{ item.body|markdown|truncatewords_html:"100" }}
@@ -130,7 +130,7 @@
 			<div class="section">
 				{% block faq_preview %}
 				{% load faq_extras %}
-				{% get_latest faq.FAQ 5 as recent_faqs %}
+				{% get_latest_faqs 5 as recent_faqs %}
 				<div class="section-title">FAQ</div>
 				<div class="section-content">
 					<ul class="nice-list">
@@ -141,7 +141,7 @@
 							<div class="clearer">&nbsp;</div>
 						</li>
 						{% endfor %}
-						<li><a href="/faq/" class="more">Browse all FAQ &#187;</a></li>
+						<li><a href="{% url faq_list %}" class="more">Browse all FAQ &#187;</a></li>
 					</ul>
 				</div>
 				{% endblock %}
