@@ -1,5 +1,4 @@
 from django.conf.urls.defaults import patterns, url
-
 from syncr.flickr.models import Photo
 from syncr.flickr.views import flickr_photo_detail_in_set as photo_detail
 

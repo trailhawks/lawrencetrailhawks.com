@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.template import Context, loader
-
 from syncr.flickr.models import Photo
 
 
