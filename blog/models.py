@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
-from tagging.fields import TagField
+from taggit.managers import TaggableManager
 
 from members.models import Member
 
@@ -40,11 +40,11 @@ class Post(models.Model):
     publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
-    repost_url = models.URLField(help_text="URL of original blog posting.",
+    repost_url = models.URLField(verify_exists=False, help_text="URL of original blog posting.",
                                  verbose_name='Original Post', null=True, blank=True)
     repost_date = models.DateField(help_text="Date of original blog posting",
                                    verbose_name="Original Post Date", null=True, blank=True)
-    tags = TagField()
+    tags = TaggableManager()
 
     objects = models.Manager()
     published_objects = PublicManager()

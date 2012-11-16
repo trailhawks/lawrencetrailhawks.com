@@ -101,8 +101,10 @@ INSTALLED_APPS = [
     'south',
     'syncr.flickr',
     'syncr.twitter',
-    'tagging',
+    'taggit',
+]
 
+PROJECT_APPS = [
     'core',
     'blog',
     'faq',
@@ -115,3 +117,5 @@ INSTALLED_APPS = [
     'runs',
     'sponsors',
 ]
+
+INSTALLED_APPS += PROJECT_APPS

@@ -1,3 +1,4 @@
+from akismet import Akismet
 from django.conf import settings
 from django.contrib.comments.models import Comment
 from django.contrib.comments.signals import comment_was_posted
@@ -6,24 +7,23 @@ from django.core.mail import EmailMultiAlternatives
 from django.template import loader, Context
 from django.utils.encoding import smart_str
 
-from core import akismet
 from members.models import Member
 
 
-AKISMET_API_KEY = getattr(settings, 'AKISMET_API_KEY', '')
-
-
 def moderate_comment(sender, comment, request, **kwargs):
-    ak = akismet.Akismet(
-        key=AKISMET_API_KEY,
+    akismet_api_key = getattr(settings, 'AKISMET_API_KEY', '')
+    ak = Akismet(
+        key=akismet_api_key,
         blog_url='http://%s/' % Site.objects.get_current().domain
     )
     data = {
+        'comment_type': 'comment',
+        'referrer': request.META.get('HTTP_REFERRER', ''),
         'user_ip': request.META.get('REMOTE_ADDR', ''),
         'user_agent': request.META.get('HTTP_USER_AGENT', ''),
-        'referrer': request.META.get('HTTP_REFERRER', ''),
-        'comment_type': 'comment',
-        'comment_author': smart_str(comment.user_name),
+        'comment_author': smart_str(comment.person_name),
+        'comment_author_email': smart_str(comment.person_email),
+        'comment_author_url': smart_str(comment.homepage),
     }
     if ak.comment_check(smart_str(comment.comment), data=data, build_data=True):
         comment.is_public = False
