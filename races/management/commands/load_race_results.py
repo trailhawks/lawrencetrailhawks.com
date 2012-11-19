@@ -49,7 +49,7 @@ class Command(BaseCommand):
             time = row[1]
             place = row[5]
 
-            if row[4] == 'M':
+            if row[4].strip() == 'M':
                 gender = 1
             else:
                 gender = 2
