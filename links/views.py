@@ -1,14 +1,12 @@
-from django.http import HttpResponse
-from django.template import Context, loader
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from .models import Links
 
 
-def get_links(request):
-    links = Links.objects.all()
-    t = loader.get_template('links.html')
-    c = Context({
-        "links": links,
-    })
+class LinkDetailView(DetailView):
+    model = Links
 
-    return HttpResponse(t.render(c))
+
+class LinkListView(ListView):
+    model = Links

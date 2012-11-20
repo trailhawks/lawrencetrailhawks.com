@@ -1,18 +1,9 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns, url
 
-from links.models import Links
+from .views import LinkDetailView, LinkListView
 
-link_info_dict = {
-    'queryset': Links.objects.all(),
-}
 
-urlpatterns = patterns('django.views.generic.list_detail',
-     (r'^$',
-     'object_list',
-     link_info_dict,
-     'link_list'),
-    (r'^(?P<object_id>[-\w]+)/$',
-     'object_detail',
-     link_info_dict,
-     'link_detail'),
+urlpatterns = patterns('',
+    url(r'^$', LinkListView.as_view(), name='link_list'),
+    url(r'^(?P<pk>\d+)/$', LinkDetailView.as_view(), name='link_detail'),
 )
