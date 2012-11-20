@@ -1,13 +1,13 @@
-from django.http import HttpResponse
-from django.template import Context, loader
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+
 from syncr.flickr.models import Photo
 
 
-def photo_list(request):
-    photos = Photo.objects.all().order_by('?')[:12]
-    t = loader.get_template('photos/photo_list.html')
-    c = Context({
-        'photos': photos,
-    })
+class PhotoDetailView(DetailView):
+    model = Photo
 
-    return HttpResponse(t.render(c))
+
+class PhotoListView(ListView):
+    model = Photo
+    paginate_by = 12
