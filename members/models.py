@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import F
 
 from core.models import MachineTagMixin
 
@@ -9,7 +10,7 @@ from core.models import MachineTagMixin
 class ActiveMemberManager(models.Manager):
 
     def get_query_set(self):
-        queryset = super(ActiveMemberManager, self).get_query_set().filter(date_paid__lte=datetime.date.today())
+        queryset = super(ActiveMemberManager, self).get_query_set().filter(date_paid__lte=F('date_paid') + datetime.timedelta(weeks=52))
         return queryset
 
 

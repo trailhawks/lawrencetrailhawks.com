@@ -1,6 +1,6 @@
-from django.conf import settings
 from django.conf.urls.defaults import include, patterns, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.simple import direct_to_template
 
 
@@ -22,9 +22,4 @@ urlpatterns = patterns('',
     url(r'^sponsors/', include('sponsors.urls')),
     url(r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
     url(r'^admin/', include(admin.site.urls)),
-)
-
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DOC_ROOT}),
-    )
+) + staticfiles_urlpatterns()

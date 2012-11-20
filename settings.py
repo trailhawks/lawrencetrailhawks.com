@@ -1,7 +1,9 @@
-# Django settings for lawrencetrailhawks project.
+import os
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+
+DEBUG = TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Nick Lang', 'nick.lang@gmail.com'),
@@ -9,14 +11,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-'''
-DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
-'''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -31,59 +25,64 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
+USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+TIME_ZONE = 'America/Chicago'
+LANGUAGE_CODE = 'en-us'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+# These are for user-uploaded content.
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
+MEDIA_URL = '/media/'
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+# These are for site static media (e.g. CSS and JS)
+# This one is where static content is collected to.
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_root')
+STATIC_URL = '/site_media/'
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, 'static'),
+]
+
+print STATICFILES_DIRS
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+# Template stuff
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '&8$_9c)l=)$et_!ou7-denw5k@+68%ehgoh0w=u&puf-r2f*9$'
+SECRET_KEY = ''
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
-)
+# Template stuff
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
-)
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+]
+
+TEMPLATE_DIRS = [
+    os.path.join(PROJECT_ROOT, 'templates'),
+]
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    'templates',
-)
-
-#twitter and flickr details left blank, please use your own.
-TWITTER = {'username': '', 'password': ''}
-FLICKR = {'key': '', 'secret': ''}
-
-CARROT_BACKEND = "ghettoq.taproot.Database"
-
-INSTALLED_APPS = [
+PREREQ_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.comments',
@@ -96,7 +95,6 @@ INSTALLED_APPS = [
 
     #'djcelery',
     'django_gravatar',
-    'ghettoq',
     'oembed',
     'south',
     'syncr.flickr',
@@ -117,6 +115,10 @@ PROJECT_APPS = [
     'sponsors',
 ]
 
-INSTALLED_APPS += PROJECT_APPS
+INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
 
 MACHINE_TAG_NAMESPACE = 'trailhawks'
+
+#twitter and flickr details left blank, please use your own.
+TWITTER = {'username': '', 'password': ''}
+FLICKR = {'key': '', 'secret': ''}

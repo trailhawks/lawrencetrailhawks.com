@@ -18,7 +18,7 @@ class MemberDetailView(DetailView):
 
 
 class MemberListView(ListView):
-    model = Member
+    queryset = Member.active_objects.all()
 
 
 def officer_list(request):
