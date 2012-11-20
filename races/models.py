@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 
+from core.models import MachineTagMixin
 from members.models import Member
 from sponsors.models import Sponsor
 
@@ -20,7 +21,7 @@ class RaceType(models.Model):
         return self.name
 
 
-class Race(models.Model):
+class Race(MachineTagMixin):
     KM = 1
     MI = 2
     UNIT_CHOICES = (
@@ -39,8 +40,7 @@ class Race(models.Model):
     slogan = models.CharField(max_length=300, blank=True, null=True)
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
     annual = models.CharField(max_length=15)
-    slug = models.SlugField(unique=True,
-                            help_text="Suggested value automatically generated from title and annual. Must be unique.")
+    slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title and annual. Must be unique.")
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     awards = models.CharField(max_length=300)
@@ -48,23 +48,17 @@ class Race(models.Model):
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
-    course_map = models.URLField(default="http://", blank=True, null=True,
-                                 help_text="Link to course map if avail.")
-    cut_off = models.CharField(max_length=75, null=True, blank=True,
-                               help_text="eg: 13 hours")
+    course_map = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to course map if avail.")
+    cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
     contact = models.ForeignKey(Member)
     location = models.TextField()
     location_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(default="http://",
-                               help_text="Link to google maps or other mapping software pointing towards the start location")
-    reg_url = models.URLField(default="http://", blank=True, null=True,
-                              help_text="Link to registartion flyer or to registration URL for online signup.")
+    map_link = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to google maps or other mapping software pointing towards the start location")
+    reg_url = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to registartion flyer or to registration URL for online signup.")
     reg_description = models.TextField()
     entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
-    discounts = models.TextField(blank=True, null=True,
-                                 help_text="Describe discounts for the race if they exist.")
-    lodging = models.URLField(default="http://", blank=True, null=True,
-                              help_text="link to lodging information.")
+    discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
+    lodging = models.URLField(blank=True, null=True, verify_exists=False, help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
@@ -166,7 +160,7 @@ class EmergencyContact(models.Model):
         return "%s %s" % (self.first_name, self.last_name)
 
 
-class Racer(models.Model):
+class Racer(MachineTagMixin):
     MALE = 1
     FEMALE = 2
     GENDER_CHOICES = (
@@ -187,8 +181,7 @@ class Racer(models.Model):
 
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True,
-                             help_text="If racer is a trailhawk select profile.")
+    trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True, help_text="If racer is a trailhawk select profile.")
     email = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
     gender = models.IntegerField(choices=GENDER_CHOICES)
@@ -205,13 +198,22 @@ class Racer(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
-    @property
-    def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
-
     @models.permalink
     def get_absolute_url(self):
         return ('racer_detail', (), {'object_id': self.pk})
+
+    def get_machine_tags(self):
+        machine_tags = super(Racer, self).get_machine_tags()
+        try:
+            if self.trailhawk:
+                machine_tags += self.trailhawk.get_machine_tags()
+        except IndexError:
+            pass
+        return machine_tags
+
+    @property
+    def full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
 
     @property
     def get_results(self):
@@ -235,8 +237,7 @@ class Result(models.Model):
     race_type = models.ForeignKey(RaceType, null=True, blank=True, help_text='For races with multiple race types.')
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
-    place = models.TextField(null=True, blank=True,
-                             help_text='Ex. First Overall Male or First Masters Female')
+    place = models.TextField(null=True, blank=True, help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField()
     dq = models.BooleanField(verbose_name="Disqualified")
     dns = models.BooleanField(verbose_name="Did not Start")
@@ -247,8 +248,7 @@ class Result(models.Model):
 
 
 class Report(models.Model):
-    report = models.URLField(default="http://",
-                             help_text="Link to race report")
+    report = models.URLField(verify_exists=False, help_text="Link to race report")
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)

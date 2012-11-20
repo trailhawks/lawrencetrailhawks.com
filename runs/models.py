@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from core.models import MachineTagMixin
 from members.models import Member
 
 
@@ -26,7 +27,7 @@ class NextManager(models.Manager):
         return []
 
 
-class Run(models.Model):
+class Run(MachineTagMixin):
     DAY_OF_WEEK = (
         (0, 'Monday'),
         (1, 'Tuesday'),
@@ -42,7 +43,7 @@ class Run(models.Model):
     run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
     location = models.TextField()
     map_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(default="http://", help_text="Link to google maps location")
+    map_link = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to google maps location")
     details = models.TextField()
     contact = models.ForeignKey(Member)
 

@@ -3,6 +3,8 @@ import datetime
 from django.contrib.auth.models import User
 from django.db import models
 
+from core.models import MachineTagMixin
+
 
 class ActiveMemberManager(models.Manager):
 
@@ -18,7 +20,7 @@ class ReceiveCommentEmailsManager(models.Manager):
         return queryset
 
 
-class Member(models.Model):
+class Member(MachineTagMixin):
     PRESIDENT = 1
     VICE_PRESIDENT = 2
     TREASURER = 3
@@ -80,8 +82,14 @@ class Member(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        """docstring for get_absolute_url"""
         return ('member_detail', (), {'object_id': self.pk})
+
+    def get_machine_tags(self):
+        machine_tags = super(Member, self).get_machine_tags()
+        machine_tags += [
+            'trailhawk:member={0}'.format('-'.join([self.first_name, self.last_name]).lower())
+        ]
+        return machine_tags
 
     def active(self):
         try:
