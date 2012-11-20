@@ -3,7 +3,7 @@
 {% load url from future %}
 {% load oembed_tags %}
 
-{% block title %}Photos{% endblock %}
+{% block title %}Photos{% endblock title %}
 
 {% block photos %}
 <div class="main">
@@ -49,8 +49,6 @@
 			<div class="content-separator"></div>
 			<p><a href="http://www.flickr.com/photos/trailhawks">Check out our Flickr page for more photos.</a></p>
 
-
-
 			<div class="clearer">&nbsp;</div>
 
 		</div>
@@ -58,4 +56,4 @@
 	</div>
 
 </div>
-{% endblock %}
+{% endblock photos %}
