@@ -23,7 +23,8 @@ def results(request):
 
 def race_result(request, *args, **kwargs):
     slug = kwargs.get('slug')
-    photos = Photo.objects.filter(tags__contains=slug.replace("-", "")).order_by('?')[0:7]
+    #photos = Photo.objects.filter(tags__contains=slug.replace("-", "")).order_by('?')[0:7]
+    photos = Photo.objects.all().order_by('?')[0:7]
 
     year = kwargs.get('year')
     month = kwargs.get('month')
@@ -38,7 +39,8 @@ def race_result(request, *args, **kwargs):
 
 
 def race_detail(request, slug, year, month, day, allow_future, queryset, date_field, extra_context):
-    photos = Photo.objects.filter(tags__contains=slug.replace("-", "")).order_by('?')[0:7]
+    #photos = Photo.objects.filter(tags__contains=slug.replace("-", "")).order_by('?')[0:7]
+    photos = Photo.objects.all().order_by('?')[0:7]
 
     return object_detail(request,
                          year=year,
@@ -53,8 +55,9 @@ def race_detail(request, slug, year, month, day, allow_future, queryset, date_fi
 
 
 def racer_detail(request, object_id, queryset):
-    person = get_object_or_404(Racer, pk=object_id)
-    photos = Photo.objects.filter(tags__icontains=person.first_name).filter(tags__icontains=person.last_name).order_by('?')[0:7]
+    racer = get_object_or_404(Racer, pk=object_id)
+    #photos = Photo.objects.filter(tags__icontains=person.first_name).filter(tags__icontains=person.last_name).order_by('?')[0:7]
+    photos = Photo.objects.all().order_by('?')[0:7]
 
     return obj_detail(request,
                          queryset=queryset,

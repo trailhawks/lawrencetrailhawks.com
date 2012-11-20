@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import EmergencyContact, News, Race, Racer, RaceType, Registration, Report, Result
+from .models import EmergencyContact, Race, Racer, RaceType, Registration, Report, Result
 from faq.admin import FaqInline
 from news.admin import NewsInline
 from sponsors.admin import SponsorInline
@@ -16,10 +16,6 @@ class SponsorsInline(admin.TabularInline):
 
 class RegistrationAdmin(admin.ModelAdmin):
     pass
-
-
-class NewsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ['title']}
 
 
 class RaceAdmin(admin.ModelAdmin):
@@ -70,5 +66,4 @@ admin.site.register(Racer, RacerAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Result, ResultAdmin)
 admin.site.register(Registration, RegistrationAdmin)
-admin.site.register(News, NewsAdmin)
 admin.site.register(EmergencyContact, EmergencyContactAdmin)

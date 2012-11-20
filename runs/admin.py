@@ -1,12 +1,8 @@
 from django.contrib import admin
 
-from .models import Run, News
+from .models import Run
 from faq.admin import FaqInline
 from news.admin import NewsInline
-
-
-class NewsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ['title']}
 
 
 class RunAdmin(admin.ModelAdmin):
@@ -19,4 +15,3 @@ class RunAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Run, RunAdmin)
-admin.site.register(News, NewsAdmin)
