@@ -108,7 +108,6 @@ PROJECT_APPS = [
     'core',
     'blog',
     'faq',
-    'hawknews',
     'news',
     'links',
     'members',
