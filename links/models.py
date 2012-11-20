@@ -22,4 +22,4 @@ class Links(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('link_detail', (), {'object_id': self.pk})
+        return ('link_detail', (), {'pk': self.pk})

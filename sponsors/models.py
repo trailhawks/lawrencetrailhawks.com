@@ -39,3 +39,7 @@ class Sponsor(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Sponsor, self).save(*args, **kwargs)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('sponsor_detail', (), {'pk': self.pk})

@@ -32,20 +32,20 @@ class Member(MachineTagMixin):
     SOCIAL_MEDIA_DIRECTOR = 9
 
     POSITION_CHOICES = (
-        (PRESIDENT, "President"),
-        (VICE_PRESIDENT, "Vice President"),
-        (TREASURER, "Treasurer"),
-        (SECRETARY, "Secretary"),
-        (WEB_MASTER, "Web Master"),
-        (MEMBERSHIP_DIRECTOR, "Membership Director"),
-        (PR, "PR Director"),
-        (EX_PRESIDENT, "Ex-President"),
-        (SOCIAL_MEDIA_DIRECTOR, "Social Media Director"),
+        (PRESIDENT, 'President'),
+        (VICE_PRESIDENT, 'Vice President'),
+        (TREASURER, 'Treasurer'),
+        (SECRETARY, 'Secretary'),
+        (WEB_MASTER, 'Web Master'),
+        (MEMBERSHIP_DIRECTOR, 'Membership Director'),
+        (PR, 'PR Director'),
+        (EX_PRESIDENT, 'Ex-President'),
+        (SOCIAL_MEDIA_DIRECTOR, 'Social Media Director'),
     )
 
     GENDER_CHOICES = (
-        (1, "Male"),
-        (2, "Female"),
+        (1, 'Male'),
+        (2, 'Female'),
     )
 
     username = models.ForeignKey(User, null=True, blank=True)
@@ -59,7 +59,7 @@ class Member(MachineTagMixin):
     city = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=2, blank=True, null=True)
     zip = models.CharField(max_length=25, blank=True, null=True)
-    avatar = models.ImageField(upload_to="members/avatars", blank=True, null=True)
+    avatar = models.ImageField(upload_to='members/avatars', blank=True, null=True)
     #active = models.BooleanField()
     date_paid = models.DateField(null=True, blank=True)
     member_since = models.DateField(null=True, blank=True)
@@ -73,16 +73,16 @@ class Member(MachineTagMixin):
     comment_email_objects = ReceiveCommentEmailsManager()
 
     class Meta:
-        verbose_name = "Member"
-        verbose_name_plural = "Members"
-        ordering = ["last_name"]
+        verbose_name = 'Member'
+        verbose_name_plural = 'Members'
+        ordering = ['last_name']
 
     def __unicode__(self):
         return self.full_hawk_name
 
     @models.permalink
     def get_absolute_url(self):
-        return ('member_detail', (), {'object_id': self.pk})
+        return ('member_detail', (), {'pk': self.pk})
 
     def get_machine_tags(self):
         machine_tags = super(Member, self).get_machine_tags()
@@ -117,7 +117,7 @@ class Member(MachineTagMixin):
 
     @property
     def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return '%s %s' % (self.first_name, self.last_name)
 
     @property
     def get_position(self):

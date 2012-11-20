@@ -21,4 +21,4 @@ class FAQ(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('faq_detail', (), {'object_id': self.pk})
+        return ('faq_detail', (), {'pk': self.pk})
