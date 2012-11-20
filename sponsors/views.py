@@ -1,13 +1,12 @@
-from django.http import HttpResponse
-from django.template import Context, loader
-from sponsors.models import Sponsor
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+
+from .models import Sponsor
 
 
-def get_sponsors(request):
-    sponsors = Sponsor.objects.active()
-    t = loader.get_template('sponsors.html')
-    c = Context({
-        "sponsors": sponsors,
-    })
+class SponsorDetailView(DetailView):
+    model = Sponsor
 
-    return HttpResponse(t.render(c))
+
+class SponsorListView(ListView):
+    model = Sponsor

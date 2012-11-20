@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+
 {% load oembed_tags %}
 {% load flickr %}
 
-{% block title %}Sponsors{% endblock %}
+{% block title %}Sponsors{% endblock title %}
 
 {% block header %}
 	<div id="header">
@@ -24,10 +25,9 @@
 			<div class="clearer">&nbsp;</div>
 		</div>
 	</div>
-{% endblock %}
+{% endblock header %}
 
 {% block sub_nav %}
-
 <div class="navigation" id="sub-nav">
 	<ul class="tabbed">
 		<li><a href="/links/">Links</a></li>
@@ -35,15 +35,14 @@
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
-
-{% endblock %}
+{% endblock sub_nav %}
 
 {% block sponsors %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
 		<table>
-		{% for sponsor in sponsors %}
+		{% for sponsor in object_list %}
 		  <tr>
 			<td><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" /></a></td>
 		       	<td>{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
@@ -52,16 +51,16 @@
 		  </tr>
 		{% endfor %}
 		</table>
-		{% block sponsor_detail %}{% endblock %}	
+		{% block sponsor_detail %}{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
 
 			{% include "includes/flickr_photos.html" %}
-		
+
 	</div>
 
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
+{% endblock sponsors %}
