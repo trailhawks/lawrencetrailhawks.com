@@ -34,17 +34,15 @@
 	<div class="left" id="main-content">
 		<ul>
 		  {% for faq in object_list %}
-		    <h3><a href="{{ faq.get_absolute_url }}">{{ faq.question}}</a></h3>
-		    <p>{{ faq.answer|markdown }}</p>
+		    <h3>{{ faq.question}}</h3>
+		    {{ faq.answer|markdown }}
 		  {% endfor %}
 		  </ul>
-		{% block faq_detail %}{% endblock %}
+		{% block faq_detail %}{% endblock faq_detail %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
-
 		{% include "includes/flickr_photos.html" %}
-
 	</div>
 
 	<div class="clearer">&nbsp;</div>
