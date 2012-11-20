@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import EmergencyContact, News, Race, Racer, RaceType, Registration, Report, Result
 from faq.admin import FaqInline
 from news.admin import NewsInline
+from sponsors.admin import SponsorInline
 
 
 class RegistrationInline(admin.TabularInline):
@@ -29,6 +30,7 @@ class RaceAdmin(admin.ModelAdmin):
     inlines = (
         SponsorsInline,
         RegistrationInline,
+        SponsorInline,
         NewsInline,
         FaqInline,
     )
