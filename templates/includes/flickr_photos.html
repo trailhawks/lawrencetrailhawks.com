@@ -1,5 +1,6 @@
 {% load flickr %}
 {% load oembed_tags %}
+
 {% if photos %}
   {% for photo in photos %}
     <p><a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />

@@ -1,5 +1,9 @@
 {% extends "runs/run_base.html" %}
 
+{% load faq_tags %}
+{% load markup %}
+{% load photo_tags %}
+
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block weekly_runs %}
@@ -27,12 +31,14 @@
 		    <iframe src="https://www.facebook.com/plugins/like.php?href=http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}" scrolling="no" frameborder="0" style="border:none; width:500px; height:80px"></iframe>
 		</div>
 
-		{% include "comments/comments.html" %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
-		{% include "includes/flickr_photos.html" %}
+		{% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+		{% include "includes/flickr_photos.html" with photos=photos_list %}
 	</div>
+
+	{% include "comments/comments.html" %}
 
 	<div class="clearer">&nbsp;</div>
 

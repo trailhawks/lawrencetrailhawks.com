@@ -1,5 +1,6 @@
+{% load race_tags %}
+
 {% block results %}
-{% load race_extras %}
 
 {% with object.get_race_type_results as race_type_results %}
 {% if race_type_results|length %}
@@ -60,5 +61,4 @@
 	</table>
 {% endif %}
 {% endwith %}
-
-{% endblock %}
+{% endblock results %}

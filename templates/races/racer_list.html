@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+
 {% load flickr %}
 {% load oembed_tags %}
+{% load photo_tags %}
 
-{% block title %}Racers Index{% endblock %}
+{% block title %}Racers Index{% endblock title %}
 
 {% block header %}
 	<div id="header">
@@ -24,10 +26,9 @@
 			<div class="clearer">&nbsp;</div>
 		</div>
 	</div>
-{% endblock %}
+{% endblock header %}
 
 {% block sub_nav %}
-
 <div class="navigation" id="sub-nav">
 	<ul class="tabbed">
 		<li><a href="/races/">All Races</a></li>
@@ -37,8 +38,7 @@
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
-
-{% endblock %}
+{% endblock sub_nav %}
 
 {% block racer_index %}
 <div class="main" id="main-two-columns">
@@ -48,17 +48,16 @@
 		  	{% for racer in object_list %}
 				<li><a href="{{ racer.get_absolute_url }}">{{racer}}</a></li>
 			  {% endfor %}
-		  </ul>	
-		{% block racer_detail %}{% endblock %}	
+		  </ul>
+		{% block racer_detail %}{% endblock %}
 	</div>
 
-	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-		
-	</div>
+		<div class="right sidebar" id="sidebar">
+			{% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+			{% include "includes/flickr_photos.html" with photos=photos_list %}
+		</div>
 
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
+{% endblock racer_index %}

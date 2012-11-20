@@ -3,7 +3,8 @@
 {% load flickr %}
 {% load markup %}
 {% load oembed_tags %}
-{% load race_extras %}
+{% load photo_tags %}
+{% load race_tags %}
 
 {% block header %}
 	<div id="header">
@@ -25,7 +26,7 @@
 			<div class="clearer">&nbsp;</div>
 		</div>
 	</div>
-{% endblock %}
+{% endblock header %}
 
 {% block sub_nav %}
 <div class="navigation" id="sub-nav">
@@ -40,10 +41,9 @@
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
+{% endblock sub_nav %}
 
-{% endblock %}
-
-{% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock %}
+{% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
 
 {% block race_detail %}
 	<div class="main" id="main-two-columns">
@@ -151,10 +151,11 @@
 		</div>
 
 		<div class="right sidebar" id="sidebar">
-			{% include "includes/flickr_photos.html" %}
+			{% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+			{% include "includes/flickr_photos.html" with photos=photos_list %}
 		</div>
 
 		<div class="clearer">&nbsp;</div>
 
 	</div>
-{% endblock %}
+{% endblock race_detail %}
