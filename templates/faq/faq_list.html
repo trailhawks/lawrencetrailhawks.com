@@ -4,7 +4,7 @@
 {% load markup %}
 {% load oembed_tags %}
 
-{% block title %}FAQ{% endblock %}
+{% block title %}FAQ{% endblock title %}
 
 {% block header %}
 	<div id="header">
@@ -26,7 +26,7 @@
 			<div class="clearer">&nbsp;</div>
 		</div>
 	</div>
-{% endblock %}
+{% endblock header %}
 
 {% block faq %}
 <div class="main" id="main-two-columns">
@@ -39,8 +39,6 @@
 		  {% endfor %}
 		  </ul>
 		{% block faq_detail %}{% endblock %}
-		<p>For more questions email Gary Henry at <a href="mailto:unews@ultrastory.com">unews@ultrastory.com</a></p>
-
 	</div>
 
 	<div class="right sidebar" id="sidebar">
@@ -52,5 +50,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
-
+{% endblock faq %}

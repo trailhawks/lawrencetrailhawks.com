@@ -9,7 +9,7 @@ class FaqInline(generic.GenericStackedInline):
 
 
 class FaqAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('question', 'content_type')
 
 
 admin.site.register(FAQ, FaqAdmin)

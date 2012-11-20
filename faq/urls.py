@@ -1,13 +1,9 @@
 from django.conf.urls.defaults import patterns, url
 
-from .models import FAQ
+from .views import FaqDetailView, FaqListView
 
 
-faq_info_dict = {
-    'queryset': FAQ.objects.all(),
-}
-
-urlpatterns = patterns('django.views.generic.list_detail',
-    url(r'^$', 'object_list', faq_info_dict, 'faq_list'),
-    url(r'^(?P<object_id>[-\w]+)/$', 'object_detail', faq_info_dict, 'faq_detail'),
+urlpatterns = patterns('',
+    url(r'^$', FaqListView.as_view(), name='faq_list'),
+    url(r'^(?P<pk>\d+)/$', FaqDetailView.as_view(), name='faq_detail'),
 )
