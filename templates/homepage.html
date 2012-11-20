@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
-{% load news_tags %}
+{% load blog_extras %}
+{% load faq_tags %}
 {% load lth %}
 {% load markup %}
+{% load news_tags %}
+{% load race_extras %}
 {% load run_extras %}
+{% load twitterfy %}
 
 {% block home_page %}
 	<div id="splash">
@@ -59,7 +63,6 @@
 
 		</div>
 		<div class="col3 right">
-			{% load twitterfy %}
 			<h2 class="label label-blue">Follow Us</h2>
 			<p class="quiet large"><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
 		    {% get_latest_tweets %}
@@ -72,7 +75,6 @@
 	<div class="main" id="main-two-columns">
 		<div class="left" id="main-content">
 			<div class="section">
-				{% load race_extras %}
 				{% get_latest_race %}
 				{% if latest_race %}
 					<div class="section-title">Upcoming Event</div>
@@ -129,7 +131,6 @@
 
 			<div class="section">
 				{% block faq_preview %}
-				{% load faq_extras %}
 				{% get_latest_faqs 5 as recent_faqs %}
 				<div class="section-title">FAQ</div>
 				<div class="section-content">
@@ -170,7 +171,6 @@
 
 			<div class="section">
 				{% block blog_preview %}
-				{% load blog_extras %}
 				{% get_latest_posts 5 as posts %}
 				<div class="section-title">Hawk Talk</div>
 				<div class="section-content">
