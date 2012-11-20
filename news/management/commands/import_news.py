@@ -3,7 +3,6 @@ import logging
 from django.core.management.base import BaseCommand
 
 from news.models import News
-from hawknews.models import HawkNews
 from races.models import News as RaceNews
 from runs.models import News as RunNews
 
@@ -23,14 +22,6 @@ class Command(BaseCommand):
         news, created = News.objects.get_or_create(title=title, pub_date=pub_date, defaults=defaults)
         if created:
             self.log.debug('created news ({0})'.format(news.pk))
-
-    def import_hawknew(self):
-        for obj in HawkNews.objects.all():
-            self.log.debug('importing hawk news ({0})'.format(obj.pk))
-            try:
-                self.get_or_create_news(obj.title, obj.slug, obj.pub_date, obj.body, obj.status)
-            except Exception as e:
-                self.log.exception(e)
 
     def import_race_news(self):
         for obj in RaceNews.objects.all():
@@ -55,6 +46,5 @@ class Command(BaseCommand):
         ch.setLevel(logging.DEBUG)
         self.log.addHandler(ch)
 
-        self.import_hawknew()
         self.import_race_news()
         self.import_run_news()
