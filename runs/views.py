@@ -1,28 +1,13 @@
-from django.http import HttpResponse
-from django.template import Context, loader
-from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from .models import Run
 
 
-def run_list(request):
-    return object_list(
-            request,
-            queryset=Run.objects.all())
+class RunDetailView(DetailView):
+    model = Run
+    slug_field = 'slug'
 
 
-def run_detail(request, slug):
-    return object_detail(
-            request,
-            queryset=Run.objects.all(),
-            slug=slug,
-            extra_context={'object_list': Run.objects.all()})
-
-
-def get_runs_list(request):
-    runs = Run.objects.all()
-    t = loader.get_template('runs.html')
-    c = Context({
-        "runs": runs,
-    })
-    return HttpResponse(t.render(c))
+class RunListView(ListView):
+    model = Run

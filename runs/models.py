@@ -60,4 +60,4 @@ class Run(MachineTagMixin):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('runs.views.run_detail', (), {'slug': self.slug})
+        return ('run_detail', (), {'slug': self.slug})
