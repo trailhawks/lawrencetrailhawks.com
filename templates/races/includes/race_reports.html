@@ -1,8 +1,6 @@
-{% block race_reports %}
 <h3>Race Reports</h3>
 <ul>
 	{% for report in object.get_race_reports %}
-	<li><a href="{{ report.report }}">{{ report.title }}</a> by {{report.racer.full_name}}</li>
+	<li><a href="{{ report.report }}">{{ report.title }}</a> by {{ report.racer.full_name }}</li>
 	{% endfor %}
 </ul>
-{% endblock %}

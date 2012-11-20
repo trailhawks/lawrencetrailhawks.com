@@ -21,7 +21,7 @@
 				<div class="post-body">
 			      {% for photo in object_list %}
 			        <span>
-			        	<a href="{{ photo.photopage_url }}"><img src="{{ photo.get_large_square_url }}"></a>
+			        	<a href="{{ photo.photopage_url }}"><img src="{{ photo.get_large_url }}"></a>
 			        	<p>{{ photo.description|safe }}</p>
 			        </span>
 			      {% endfor %}
