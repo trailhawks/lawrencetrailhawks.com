@@ -16,7 +16,7 @@ class SearchPhotoNode(Node):
         try:
             machine_tags = self.machine_tags.resolve(context)
             context[self.varname] = Photo.objects.filter(tags__name__in=machine_tags).order_by('?')[:self.num]
-        except VariableDoesNotExist:
+        except (VariableDoesNotExist, Exception):
             pass
 
         return ''
