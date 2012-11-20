@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^photos/', include('photos.urls')),
     url(r'^races/', include('races.urls')),
     url(r'^runs/', include('runs.urls')),
-    url(r'^sponsors/', 'sponsors.views.get_sponsors'),
+    url(r'^sponsors/', include('sponsors.urls')),
     url(r'^thanks/$', direct_to_template, {'template': 'thanks.html'}),
     url(r'^admin/', include(admin.site.urls)),
 )
