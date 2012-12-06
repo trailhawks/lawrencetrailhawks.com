@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 
 from core.models import MachineTagMixin
 from members.models import Member
@@ -27,7 +28,7 @@ class NextManager(models.Manager):
         return []
 
 
-class Run(MachineTagMixin):
+class Run(MachineTagMixin, ShortUrlMixin):
     DAY_OF_WEEK = (
         (0, 'Monday'),
         (1, 'Tuesday'),
@@ -52,7 +53,8 @@ class Run(MachineTagMixin):
     next_objects = NextManager()
 
     class Meta:
-        verbose_name_plural = "Runs"
+        verbose_name = _('Run')
+        verbose_name_plural = _('Runs')
         ordering = ['day_of_week']
 
     def __unicode__(self):

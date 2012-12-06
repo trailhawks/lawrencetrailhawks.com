@@ -94,6 +94,7 @@ PREREQ_APPS = [
     #'djcelery',
     'django_gravatar',
     'oembed',
+    'shorturls',
     'south',
     'syncr.flickr',
     'syncr.twitter',
@@ -112,6 +113,19 @@ PROJECT_APPS = [
     'runs',
     'sponsors',
 ]
+
+#SHORT_BASE_URL = 'http://ltrh.ws/'
+SHORT_BASE_URL = 'http://localhost/'
+
+SHORTEN_MODELS = {
+    'B': 'blog.post',
+    'F': 'faq.faq',
+    'L': 'links.links',
+    'M': 'members.member',
+    'N': 'news.news',
+    'R': 'races.race',
+    'U': 'runs.run',
+}
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
 

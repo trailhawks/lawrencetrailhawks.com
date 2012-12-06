@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 
 
 class DraftManager(models.Manager):
@@ -20,7 +21,7 @@ class PublicManager(models.Manager):
         return queryset
 
 
-class News(models.Model):
+class News(models.Model, ShortUrlMixin):
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
     STATUS_CHOICES = (

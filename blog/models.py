@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 from taggit.managers import TaggableManager
 
 from members.models import Member
@@ -22,7 +23,7 @@ class PublicManager(models.Manager):
         return queryset
 
 
-class Post(models.Model):
+class Post(models.Model, ShortUrlMixin):
     """Post model."""
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
@@ -51,11 +52,11 @@ class Post(models.Model):
     draft_objects = DraftManager()
 
     class Meta:
+        db_table = 'blog_posts'
+        get_latest_by = 'publish'
+        ordering = ('-publish',)
         verbose_name = _('post')
         verbose_name_plural = _('posts')
-        db_table = 'blog_posts'
-        ordering = ('-publish', )
-        get_latest_by = 'publish'
 
     def __unicode__(self):
         return u'%s' % self.title

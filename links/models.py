@@ -2,9 +2,10 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 
 
-class Links(models.Model):
+class Links(models.Model, ShortUrlMixin):
     name = models.CharField(max_length=250)
     link = models.URLField(verify_exists=False, help_text='URL to link')
     description = models.TextField()
@@ -14,6 +15,7 @@ class Links(models.Model):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     class Meta:
+        ordering = ('name',)
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
 

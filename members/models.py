@@ -3,6 +3,8 @@ import datetime
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import F
+from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 
 from core.models import MachineTagMixin
 
@@ -14,6 +16,13 @@ class ActiveMemberManager(models.Manager):
         return queryset
 
 
+class BoardManager(ActiveMemberManager):
+
+    def get_query_set(self):
+        queryset = super(ActiveMemberManager, self).get_query_set().filter(position__isnull=False)
+        return queryset
+
+
 class ReceiveCommentEmailsManager(models.Manager):
 
     def get_query_set(self):
@@ -21,7 +30,7 @@ class ReceiveCommentEmailsManager(models.Manager):
         return queryset
 
 
-class Member(MachineTagMixin):
+class Member(MachineTagMixin, ShortUrlMixin):
     PRESIDENT = 1
     VICE_PRESIDENT = 2
     TREASURER = 3
@@ -71,11 +80,12 @@ class Member(MachineTagMixin):
 
     objects = models.Manager()
     active_objects = ActiveMemberManager()
+    board_objects = BoardManager()
     comment_email_objects = ReceiveCommentEmailsManager()
 
     class Meta:
-        verbose_name = 'Member'
-        verbose_name_plural = 'Members'
+        verbose_name = _('Member')
+        verbose_name_plural = _('Members')
         ordering = ['last_name']
 
     def __unicode__(self):
@@ -98,11 +108,6 @@ class Member(MachineTagMixin):
         except:
             return False
     active.boolean = True
-
-    @property
-    def position_name(self):
-        if self.position:
-            return dict(Member.POSITION_CHOICES)[self.position]
 
     @property
     def date_expires(self):

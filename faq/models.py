@@ -2,9 +2,10 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 
 
-class FAQ(models.Model):
+class FAQ(models.Model, ShortUrlMixin):
     question = models.TextField()
     answer = models.TextField()
 

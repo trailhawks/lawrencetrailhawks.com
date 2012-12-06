@@ -5,8 +5,8 @@ from .models import Sponsor
 
 
 class SponsorDetailView(DetailView):
-    model = Sponsor
+    queryset = Sponsor.active_objects.all()
 
 
 class SponsorListView(ListView):
-    model = Sponsor
+    queryset = Sponsor.active_objects.all()

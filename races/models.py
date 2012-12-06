@@ -2,6 +2,8 @@ import datetime
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
+from shorturls.models import ShortUrlMixin
 
 from core.models import MachineTagMixin
 from members.models import Member
@@ -21,7 +23,7 @@ class RaceType(models.Model):
         return self.name
 
 
-class Race(MachineTagMixin):
+class Race(MachineTagMixin, ShortUrlMixin):
     KM = 1
     MI = 2
     UNIT_CHOICES = (
@@ -60,6 +62,11 @@ class Race(MachineTagMixin):
     discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
     lodging = models.URLField(blank=True, null=True, verify_exists=False, help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Race')
+        verbose_name_plural = _('Races')
+        ordering = ['-start_datetime']
 
     def __unicode__(self):
         return u'{0} {1}'.format(self.annual, self.title)
@@ -110,7 +117,8 @@ class Registration(models.Model):
     race = models.ForeignKey(Race)
 
     class Meta:
-        verbose_name_plural = "Registration Dates"
+        verbose_name = _('Registration Dates')
+        verbose_name_plural = _('Registration Dates')
 
     def __unicode__(self):
         return "%s %s" % (self.race.title, self.reg_date)
@@ -122,6 +130,10 @@ class EmergencyContact(models.Model):
     phone = models.CharField(max_length=13)
     address = models.TextField()
     relationship = models.CharField(max_length=40)
+
+    class Meta:
+        verbose_name = _('Emergency Contact')
+        verbose_name_plural = _('Emergency Contacts')
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -161,6 +173,8 @@ class Racer(MachineTagMixin):
 
     class Meta:
         ordering = ['last_name', 'first_name']
+        verbose_name = _('Racer')
+        verbose_name_plural = _('Racers')
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -210,6 +224,10 @@ class Result(models.Model):
     dns = models.BooleanField(verbose_name="Did not Start")
     dnf = models.BooleanField(verbose_name="Did not Finish")
 
+    class Meta:
+        verbose_name = _('Result')
+        verbose_name_plural = _('Results')
+
     def __unicode__(self):
         return "%s - %s - %s" % (self.racer, self.race.title, self.time)
 
@@ -219,6 +237,10 @@ class Report(models.Model):
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)
+
+    class Meta:
+        verbose_name = _('Report')
+        verbose_name_plural = _('Reports')
 
     def __unicode__(self):
         return self.title
