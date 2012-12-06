@@ -1,19 +1,9 @@
-{% extends "base.html" %}
+{% extends "sponsors/base.html" %}
 
 {% load flickr %}
 {% load oembed_tags %}
 
 {% block title %}Sponsors{% endblock title %}
-
-{% block sub_nav %}
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		<li><a href="/links/">Links</a></li>
-		<li class="current-tab"><a href="/Sponsors/">Sponsors</a></li>
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-{% endblock sub_nav %}
 
 {% block content %}
 <div class="main" id="main-two-columns">
@@ -22,14 +12,13 @@
 		<table>
 		{% for sponsor in object_list %}
 		  <tr>
-			<td><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" /></a></td>
-		       	<td>{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
-			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
-			<td />
+			<td><a href="{{ sponsor.url }}"><img src="{{ sponsor.get_logo_url }}" alt="{{ sponsor.title }}" /></a></td>
+		    <td>{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
+				<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+			</td>
 		  </tr>
 		{% endfor %}
 		</table>
-		{% block sponsor_detail %}{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
@@ -39,4 +28,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock sponsors %}
+{% endblock content %}
