@@ -1,11 +1,11 @@
 from django.template import Library
 
-from ..models import News
+from ..models import Links
 
 
 register = Library()
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_news(context, num):
-    return News.published_objects.all()[:num]
+def get_links(context):
+    return Links.board.all()

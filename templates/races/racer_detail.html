@@ -2,7 +2,7 @@
 
 {% block title %}{{ object.full_name }}{% endblock title %}
 
-{% block racer_detail %}
+{% block content %}
   <p><strong>Name:</strong> {{ object.full_name }}</p>
   <p><strong>Age:</strong> {{ object.age }}</p>
   <p><strong>Gender:</strong> {{ object.get_gender_display }}</p>
@@ -14,4 +14,4 @@
 	{% endfor %}
 	</ul></p>
   {% endif %}
-{% endblock racer_detail %}
+{% endblock content %}

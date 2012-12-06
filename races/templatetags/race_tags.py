@@ -1,6 +1,6 @@
 import datetime
 
-from django.template import Library, Node
+from django.template import Library
 
 from blog.models import Post
 from races.models import Race
@@ -19,19 +19,13 @@ def replace_char(value, arg):
     return value.replace(arg[0], arg[1])
 
 
-class LatestRaceNode(Node):
-    def render(self, context):
-        try:
-            context['latest_race'] = Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime').latest('start_datetime')
-        except:
-            latest_post = Post.published_objects.all()
-            if len(latest_post):
-                context['latest_post'] = latest_post[0]
-            else:
-                context['latest_post'] = []
-        return ''
-
-
-@register.tag
-def get_latest_race(parser, token):
-    return LatestRaceNode()
+@register.assignment_tag(takes_context=True)
+def get_latest_races(context):
+    try:
+        return Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime').latest('start_datetime')
+    except:
+        latest_post = Post.published_objects.all()
+        if len(latest_post):
+            return latest_post[0]
+        else:
+            return []

@@ -9,12 +9,12 @@
 {% load run_tags %}
 {% load twitterfy %}
 
-{% block home_page %}
+{% block content %}
 	<div id="splash">
         <div class="col3 left">
             <h2 class="label label-green">Latest Hawk News</h2>
             <p class="quiet large">What's happening</p>
-            {% get_latest_news 4 as latest_news %}
+            {% get_latest_news num=4 as latest_news %}
             {% for item in latest_news %}
             <h4>{{ item.pub_date|date }}</h4>
             {{ item.body|markdown|truncatewords_html:"100" }}
@@ -23,8 +23,8 @@
 
         <div class="col3-mid left">
 			<h2 class="label label-orange">Today's Run</h2>
-			{% get_todays_run %}
-            {% for run in todays_run %}
+			{% get_todays_runs as runs %}
+            {% for run in runs.todays_run %}
 				<h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
                 {% if run.get_run_news %}
                     <h4>Latest News:</h4>
@@ -41,8 +41,8 @@
 				<p class="quiet large">No run scheduled for today</p>
             {% endfor %}
 
-            <h2 class="label label-orange">Next Run</h2>
-            {% for run in next_run %}
+            <h2 class="label label-purple">Next Run</h2>
+            {% for run in runs.next_run %}
                 <h3 class="quiet "><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
                 {% if run.get_run_news %}
                     <h4>Latest News:</h4>
@@ -75,7 +75,7 @@
 	<div class="main" id="main-two-columns">
 		<div class="left" id="main-content">
 			<div class="section">
-				{% get_latest_race %}
+				{% get_latest_races as latest_race %}
 				{% if latest_race %}
 					<div class="section-title">Upcoming Event</div>
 					<div class="section-content">
@@ -196,4 +196,4 @@
 		</div>
 		<div class="clearer">&nbsp;</div>
 	</div>
-{% endblock %}
+{% endblock content %}

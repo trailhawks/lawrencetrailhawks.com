@@ -9,15 +9,14 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		{% block run_detail %}
 		<p>The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
 		<p>We welcome runners of all abilities. So come join us for a run.</p>
-		Weekly runs:<ul>
+		<p>Weekly runs:</p>
+		<ul>
 			{% for object in object_list %}
 			<li><a href={{ object.get_absolute_url }}>{{ object.get_day_of_week_display }}: {{ object.name }} at {{ object.run_time }}</a></li>
 			{% endfor %}
 		</ul>
-		{% endblock %}
 	</div>
 
 	<div class="right sidebar" id="sidebar">
