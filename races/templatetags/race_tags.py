@@ -2,8 +2,7 @@ import datetime
 
 from django.template import Library
 
-from blog.models import Post
-from races.models import Race
+from races.models import Race, RaceType, Result
 
 
 register = Library()
@@ -24,8 +23,26 @@ def get_latest_races(context):
     try:
         return Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime').latest('start_datetime')
     except:
-        latest_post = Post.published_objects.all()
-        if len(latest_post):
-            return latest_post[0]
-        else:
-            return []
+        return []
+
+
+@register.assignment_tag(takes_context=True)
+def get_results_for_race(context, race, race_type=None, gender=None):
+    queryset = Result.objects.filter(race=race)
+    if race_type:
+        queryset = queryset.filter(race_type__pk=race_type.pk)
+    if gender:
+        queryset = queryset.filter(racer__gender=gender)
+    return queryset
+
+
+@register.assignment_tag(takes_context=True)
+def get_race_types_for_race(context, race):
+    return RaceType.objects.filter(result__race__pk=race.pk).distinct('name')
+
+
+@register.inclusion_tag('races/includes/results_table.html', takes_context=True)
+def render_results(context, race_results):
+    return {
+        'race_results': race_results,
+    }
