@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load flickr %}
+{% load oembed_tags %}
+
+{% block title %}Weekly Runs{% endblock title %}
+
+{% block sub_nav %}
+    <div class="navigation" id="sub-nav">
+        <ul class="tabbed">
+            {% for run in object_list %}
+            {% ifchanged %}
+            <li{% if object.slug %}{% else %} class="current-tab"{% endif %}><a href="{% url run_list %}">All</a></li>
+            {% endifchanged %}
+            {% ifequal object.slug run.slug %}
+                <li class="current-tab"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
+            {% else %}
+            <li><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
+            {% endifequal %}
+            {% endfor %}
+        </ul>
+        <div class="clearer">&nbsp;</div>
+    </div>
+{% endblock sub_nav %}
+
+{% block right_bar %}
+<div class="right sidebar" id="sidebar">
+  {% include "includes/flickr_photos.html" %}
+</div>
+<div class="clearer">&nbsp;</div>
+{% endblock right_bar %}

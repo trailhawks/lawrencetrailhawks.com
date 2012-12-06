@@ -4,7 +4,7 @@
 
 {% block title %}FAQ{% endblock title %}
 
-{% block faq_detail %}
-<h2>{{ object.question }}</h2>
-<p>{{ object.answer|markdown }}</p>
-{% endblock faq_detail %}
+{% block content %}
+    <h2>{{ object.question }}</h2>
+    <p>{{ object.answer|markdown }}</p>
+{% endblock content %}

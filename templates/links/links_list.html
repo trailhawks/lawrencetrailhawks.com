@@ -4,32 +4,9 @@
 {% load markup %}
 {% load oembed_tags %}
 
-{% block title %}Links{% endblock %}
-
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li class="current-tab"><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
+{% block title %}Links{% endblock title %}
 
 {% block sub_nav %}
-
 <div class="navigation" id="sub-nav">
 	<ul class="tabbed">
 		<li class="current-tab"><a href="/links/">Links</a></li>
@@ -37,10 +14,9 @@
 	</ul>
 	<div class="clearer">&nbsp;</div>
 </div>
+{% endblock sub_nav %}
 
-{% endblock %}
-
-{% block sponsors %}
+{% block content %}
 <div class="main" id="main-two-columns">
 	<div class="left" id="main-content">
 		{% for link in object_list %}
@@ -56,5 +32,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
-
+{% endblock content %}

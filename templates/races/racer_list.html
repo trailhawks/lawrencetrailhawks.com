@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "races/base.html" %}
 
 {% load flickr %}
 {% load oembed_tags %}
@@ -6,41 +6,7 @@
 
 {% block title %}Racers Index{% endblock title %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li class="current-tab"><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock header %}
-
-{% block sub_nav %}
-<div class="navigation" id="sub-nav">
-	<ul class="tabbed">
-		<li><a href="/races/">All Races</a></li>
-		<li><a href="/races/results/">Race Results</a></li>
-		<li><a href="/races/upcoming/">Upcoming Races</a></li>
-		<li class="current-tab"><a href="/races/racers/">Racers</a></li>
-	</ul>
-	<div class="clearer">&nbsp;</div>
-</div>
-{% endblock sub_nav %}
-
-{% block racer_index %}
+{% block content %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
@@ -60,4 +26,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock racer_index %}
+{% endblock content %}

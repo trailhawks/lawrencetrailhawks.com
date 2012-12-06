@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Result Index{% endblock %}
+{% block title %}Result Index{% endblock title %}
 
-{% block result_day_index %}
+{% block content %}
 <h2>Results in {{ month|date:"F Y" }}</h2>
 <ul>
   {% for result in object_list %}
@@ -10,4 +10,4 @@
 	<p><a href="{{ result.get_absolute_url }}">{{ result.race_date|date:"F j, Y" }}</a></p>
   {% endfor %}
 </ul>
-{% endblock %}
+{% endblock content %}

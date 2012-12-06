@@ -1,9 +1,10 @@
-{% extends "blog/post_archive.html" %}
+{% extends "base.html" %}
+
 {% load markup %}
 
-{% block title %}{{object.title}}{% endblock %}
+{% block title %}{{ object.title }}{% endblock title %}
 
-{% block blog_detail %}
+{% block content %}
 <div class="post-title"><h2>{{ object.title }}</h2></div>
 <div class="post-date">{{ object.publish|date}} by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></div>
 <p class="other_posts">
@@ -35,4 +36,4 @@
 
 {% include "comments/comments.html" %}
 
-{% endblock %}
+{% endblock content%}

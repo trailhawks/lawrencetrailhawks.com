@@ -1,41 +1,20 @@
 {% extends "base.html" %}
+
 {% load oembed_tags %}
 {% load flickr %}
+{% load url from future %}
 
 {% block title %}Contact Us{% endblock %}
-
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
 
 {% block contact %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
 		<h2>Trailhawk Officers</h2>
-                <br />
-                {% for officer in officers %}
-		    <p><strong>{{ officer.position_name }}</strong> - {{ officer }}</p>
+        {% for officer in officers %}
+		    <p><strong>{{ officer.get_position_display }}</strong> - <a href="{% url 'member_detail' pk=officer.pk %}">{{ officer }}</a></p>
 		{% endfor %}
-	
+
     <hr />
     <h2>Contact us</h2>
     <br />
@@ -64,14 +43,10 @@
         </div>
 
 	<div class="right sidebar" id="sidebar">
-
-			{% include "includes/flickr_photos.html" %}
-
+		{% include "includes/flickr_photos.html" %}
 	</div>
 
 	<div class="clearer">&nbsp;</div>
 
 </div>
 {% endblock %}
-
-

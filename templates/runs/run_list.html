@@ -1,11 +1,11 @@
-{% extends "runs/run_base.html" %}
+{% extends "runs/base.html" %}
 
 {% load flickr %}
 {% load oembed_tags %}
 
-{% block title %}Weekly Runs{% endblock %}
+{% block title %}Weekly Runs{% endblock title %}
 
-{% block weekly_runs %}
+{% block content %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
@@ -27,5 +27,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
-
+{% endblock content %}

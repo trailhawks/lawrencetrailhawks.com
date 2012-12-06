@@ -1,10 +1,10 @@
-{% extends "members/member_list.html" %}
+{% extends "base.html" %}
 
 {% load race_tags $}
 
 {% block title %}{{object.name}}{% endblock title %}
 
-{% block member_detail %}
+{% block content %}
 <h2>Member info for {{ object.full_hawk_name }}</h2>
 <table>
 <tr>
@@ -18,7 +18,7 @@
 <!--
 <p><strong>Paid date:</strong> {{ object.date_paid }}</p>
 -->
-<p><strong>Member since:</strong> {{ object.member_since }}</p>
+<p><strong>Member since:</strong> {{ object.member_since|date }}</p>
 </td>
 </tr>
 </table>
@@ -51,4 +51,4 @@
 	</ul>
 </p>
 {% endif %}
-{% endblock member_detail %}
+{% endblock content %}

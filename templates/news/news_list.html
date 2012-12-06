@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load oembed_tags %}
+{% load url from future %}
+
+{% block title %}News{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for news in object_list %}
+    <li><a href="{% url 'news_detail' news.pk %}">{{ news.pub_date|date }}: {{ news.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}

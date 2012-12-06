@@ -1,14 +1,12 @@
-{% extends "base.html" %}
+{% extends "races/base.html" %}
 
-{% block title %}Result Index{% endblock %}
+{% block title %}Result Index{% endblock title %}
 
-{% block result_day_index %}
+{% block content %}
 <h2>Results in {{ year }}</h2>
   <ul>
   {% for month in date_list %}
     <li><a href="/results/{{ year }}/{{ month|date:"b" }}/">{{ month|date:"F" }}</a></li>
     <li>{{ date|date:"F j, Y" }}</li>
   {% endfor %}
-{% endblock %}
-
-
+{% endblock content %}
