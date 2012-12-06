@@ -225,6 +225,7 @@ class Result(models.Model):
     dnf = models.BooleanField(verbose_name="Did not Finish")
 
     class Meta:
+        ordering = ('time',)
         verbose_name = _('Result')
         verbose_name_plural = _('Results')
 

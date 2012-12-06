@@ -96,11 +96,13 @@
 
 		{% if object.get_overall_results %}
 		  <p><h3>Results:</h3>
+		  {% get_race_types_for_race object as race_types %}
 		  <ul>
-			<li><a href="{{ object.get_absolute_url }}results/#overallresults">Overall Results</a></li>
-			<li><a href="{{ object.get_absolute_url }}results/#maleresults">Male Results</a></li>
-			<li><a href="{{ object.get_absolute_url }}results/#femaleresults">Female Results</a></li>
-		  {% block race_result %}{% endblock %}
+		  {% for race_type in race_types %}
+			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
+			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
+		  {% endfor %}
 		</ul>
 		</p>
 		{% endif %}
