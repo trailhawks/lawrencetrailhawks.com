@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load core_tags %}
 {% load markup %}
 
 {% block title %}{{ object.title }}{% endblock title %}
@@ -30,9 +31,7 @@
     <p>{{ object.body|markdown }}</p>
 </div>
 
-<div id="fb-root">
-    <iframe src="https://www.facebook.com/plugins/like.php?href=http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}" scrolling="no" frameborder="0" style="border:none; width:500px; height:80px"></iframe>
-</div>
+{% render_facebook_like obj=object %}
 
 {% include "comments/comments.html" %}
 

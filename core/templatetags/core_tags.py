@@ -2,43 +2,44 @@ import feedparser
 
 from dateutil.parser import *
 from dateutil.tz import *
-from django.template import Library, Node
+from django.template import Library
 
 
 register = Library()
 
 
-class RRCANewsNode(Node):
-    def render(self, context):
-        d = feedparser.parse('http://feeds.feedburner.com/RRCA-News?format=xml')
-        context['rrca_news'] = d['entries'][:4]
-        return ''
-
-
-def get_rrca_news(parser, token):
-    return RRCANewsNode()
-
-
-class TwitterNode(Node):
-    def render(self, context):
+@register.assignment_tag(takes_context=True)
+def get_latest_tweets(context):
+    try:
         d = feedparser.parse('https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=trailhawks')
         raw_tweets = d['entries'][:4]
         tweets = []
-        for t in raw_tweets:
-            text = t['title'].replace('trailhawks: ', '')
-            date = parse(t['updated'])
-            tweet = {}
-            tweet['text'] = text
-            tweet['url'] = t['link']
-            tweet['pub_time'] = date.astimezone(gettz())
-            tweets.append(tweet)
+        for tweet in raw_tweets:
+            text = tweet['title'].replace('trailhawks: ', '')
+            date = parse(tweet['updated'])
+            data = {}
+            data['text'] = text
+            data['url'] = tweet['link']
+            data['pub_time'] = date.astimezone(gettz())
+            tweets.append(data)
+        return tweets
 
-        context['stweets'] = tweets
-        return ''
+    except:
+        return
 
 
-def get_latest_tweets(parser, token):
-    return TwitterNode()
+@register.assignment_tag(takes_context=True)
+def get_rrca_news(context):
+    try:
+        d = feedparser.parse('http://feeds.feedburner.com/RRCA-News?format=xml')
+        return d['entries'][:4]
 
-get_latest_tweets = register.tag(get_latest_tweets)
-get_rrca_news = register.tag(get_rrca_news)
+    except:
+        return
+
+
+@register.inclusion_tag('includes/facebook_like.html', takes_context=True)
+def render_facebook_like(context, obj):
+    return {
+        'object': obj,
+    }

@@ -127,7 +127,7 @@ PROJECT_APPS = [
 ]
 
 #SHORT_BASE_URL = 'http://ltrh.ws/'
-SHORT_BASE_URL = 'http://localhost/'
+SHORT_BASE_URL = 'http://lawrencetrailhawks.com/'
 
 SHORTEN_MODELS = {
     'B': 'blog.post',

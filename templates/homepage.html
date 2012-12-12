@@ -4,6 +4,7 @@
 {% load core_tags %}
 {% load faq_tags %}
 {% load markup %}
+{% load mailhide %}
 {% load news_tags %}
 {% load race_tags %}
 {% load run_tags %}
@@ -36,7 +37,7 @@
                     <a href="{{ run.map_link}}">Click here for directions.</a></p>
 				<p><em><strong>When: </strong></em>{{ run.run_time }}</p>
 				<p><em><strong>What: </strong></em>{{ run.details }}</a></p>
-				<p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></p>
+				<p><em><strong>Contact: </strong></em><a href={{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></p>
 			{% empty %}
 				<p class="quiet large">No run scheduled for today</p>
             {% endfor %}
@@ -65,9 +66,9 @@
 		<div class="col3 right">
 			<h2 class="label label-blue">Follow Us</h2>
 			<p class="quiet large"><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
-		    {% get_latest_tweets %}
-            {% for t in stweets %}
-                <p>{{ t.text|twitterfy }} - <a href="{{ t.url }}">({{ t.pub_time|timesince }} ago)</a></p>
+		    {% get_latest_tweets as tweets %}
+            {% for tweet in tweets %}
+                <p>{{ tweet.text|twitterfy }} - <a href="{{ tweet.url }}">({{ tweet.pub_time|timesince }} ago)</a></p>
             {% endfor %}
 		</div>
 		<div class="clearer">&nbsp;</div>
@@ -161,9 +162,9 @@
                 <div class="section-title">RRCA Syndicated News</div>
                 <div class="section-content">
                     <ul class="nice-list">
-                      {% get_rrca_news %}
+                      {% get_rrca_news as rrca_news %}
                         {% for item in rrca_news %}
-                        <li><a href="{{item.link}}">{{item.title}}</a></li>
+                        <li><a href="{{ item.link }}">{{ item.title }}</a></li>
                       {% endfor %}
                     </ul>
                 </div>

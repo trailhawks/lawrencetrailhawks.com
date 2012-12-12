@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% load oembed_tags %}
 {% load flickr %}
+{% load oembed_tags %}
 {% load url from future %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}Contact Us{% endblock title %}
 
-{% block contact %}
+{% block content %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
@@ -49,4 +49,4 @@
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
+{% endblock content %}

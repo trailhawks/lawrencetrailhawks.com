@@ -23,7 +23,7 @@
         {% if result.dq or result.dns or result.dnf %}
             <td>&mdash;</td>
             <td>{{ result.bib_number }}</td>
-            <td>{{ result.racer.full_name }}</td>
+            <td><a name="#racer-{{ result.racer.pk }}"></a>{{ result.racer.full_name }}</td>
             <td>{{ result.racer.get_gender_display }}</td>
             {% if result.dq or result.dns or result.dnf %}
                 {% if result.dq %}

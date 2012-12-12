@@ -10,7 +10,7 @@
   <p><strong>Results:</strong>
 	<ul>
 	{% for result in object.get_results %}
-		<li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> - in {{ result.time }} {% if result.course_record %}(course record){% endif %}</li>
+		<li>Ran <a href="{{ result.race.get_absolute_url }}results/#racer-{{ result.racer.pk }}">{{ result.race.title }}</a> - in {{ result.time }} {% if result.course_record %}(course record){% endif %}</li>
 	{% endfor %}
 	</ul></p>
   {% endif %}

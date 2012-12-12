@@ -2,7 +2,7 @@ import datetime
 
 from django.template import Library
 
-from races.models import Race, RaceType, Result
+from ..models import Race, RaceType, Result
 
 
 register = Library()

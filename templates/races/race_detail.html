@@ -1,10 +1,13 @@
 {% extends "races/base.html" %}
 
+{% load core_tags %}
 {% load flickr %}
+{% load mailhide %}
 {% load markup %}
 {% load oembed_tags %}
 {% load photo_tags %}
 {% load race_tags %}
+{% load url from future %}
 
 {% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
 
@@ -55,8 +58,7 @@
 		{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
 		{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
 
-		<p><strong>Contact:</strong> {{ object.contact.full_name }}<br/>
-		&nbsp;&nbsp;Email: <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a></p>
+		<p><strong>Contact:</strong> <a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></p>
 
 		{% if not object.get_overall_results %}
 			<p>
@@ -94,9 +96,9 @@
 		  {% include "races/includes/race_reports.html" %}
 		{% endif %}
 
-		{% if object.get_overall_results %}
+		{% get_race_types_for_race object as race_types %}
+		{% if race_types %}
 		  <p><h3>Results:</h3>
-		  {% get_race_types_for_race object as race_types %}
 		  <ul>
 		  {% for race_type in race_types %}
 			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
@@ -107,9 +109,7 @@
 		</p>
 		{% endif %}
 
-		<div id="fb-root">
-		    <iframe src="https://www.facebook.com/plugins/like.php?href=http://www.lawrencetrailhawks.com/{{ object.get_absolute_url }}" scrolling="no" frameborder="0" style="border:none; width:500px; height:80px"></iframe>
-		</div>
+		{% render_facebook_like obj=object %}
 
 		{% include "comments/comments.html" %}
 
