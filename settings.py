@@ -80,16 +80,28 @@ TEMPLATE_DIRS = [
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls'
 
+# Middleware
+MIDDLEWARE_CLASSES = [
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+]
+
 PREREQ_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.comments',
     'django.contrib.contenttypes',
-    'django.contrib.flatpages',
-    'django.contrib.markup',
-    'django.contrib.redirects',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.comments',
+    'django.contrib.flatpages',
+    'django.contrib.markup',
+    'django.contrib.messages',
+    'django.contrib.redirects',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
 
     #'djcelery',
     'django_gravatar',
