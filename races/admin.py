@@ -6,12 +6,13 @@ from news.admin import NewsInline
 from sponsors.admin import SponsorInline
 
 
+class RaceDirectorInline(admin.StackedInline):
+    model = Race.race_directors.through
+    raw_id_fields = ('member',)
+
+
 class RegistrationInline(admin.TabularInline):
     model = Registration
-
-
-class SponsorsInline(admin.TabularInline):
-    model = Race.sponsors.through
 
 
 class RegistrationAdmin(admin.ModelAdmin):
@@ -24,13 +25,13 @@ class RaceAdmin(admin.ModelAdmin):
     list_filter = ('start_datetime', 'annual', )
     ordering = ['-start_datetime']
     inlines = (
-        SponsorsInline,
+        RaceDirectorInline,
         RegistrationInline,
         SponsorInline,
         NewsInline,
         FaqInline,
     )
-    exclude = ('sponsors', )
+    exclude = ('race_directors', 'sponsors',)
 
 
 class ResultAdmin(admin.ModelAdmin):
