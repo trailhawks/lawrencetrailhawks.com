@@ -1,6 +1,7 @@
 {% extends "runs/base.html" %}
 
 {% load core_tags %}
+{% load faq_tags %}
 {% load mailhide %}
 {% load markup %}
 {% load photo_tags %}
@@ -27,6 +28,15 @@
 		{{ object.map_iframe|safe}}
 
 		{% render_facebook_like obj=object %}
+
+		{% get_faqs_for_object object as faq_list %}
+		{% if faq_list %}
+		<h3>Frequently Asked Questions</h3>
+		{% for faq in faq_list %}
+		    <h4>{{ faq.question }}</h4>
+		    {{ faq.answer|markdown }}
+		{% endfor %}
+		{% endif %}
 
 		{% include "comments/comments.html" %}
 

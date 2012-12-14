@@ -1,6 +1,7 @@
 {% extends "races/base.html" %}
 
 {% load core_tags %}
+{% load faq_tags %}
 {% load flickr %}
 {% load mailhide %}
 {% load markup %}
@@ -119,6 +120,15 @@
 		{% endif %}
 
 		{% render_facebook_like obj=object %}
+
+		{% get_faqs_for_object object as faq_list %}
+		{% if faq_list %}
+		<h3>Frequently Asked Questions</h3>
+		{% for faq in faq_list %}
+		    <h4>{{ faq.question }}</h4>
+		    {{ faq.answer|markdown }}
+		{% endfor %}
+		{% endif %}
 
 		{% include "comments/comments.html" %}
 
