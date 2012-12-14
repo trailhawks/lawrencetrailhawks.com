@@ -53,7 +53,6 @@ class Race(MachineTagMixin, ShortUrlMixin):
     description = models.TextField()
     course_map = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
-    contact = models.ForeignKey(Member, related_name='race_contacts')
     location = models.TextField()
     location_iframe = models.TextField(blank=True, null=True)
     map_link = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to google maps or other mapping software pointing towards the start location")

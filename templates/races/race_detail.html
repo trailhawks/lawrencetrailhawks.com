@@ -58,7 +58,16 @@
 		{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
 		{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
 
-		<p><strong>Contact:</strong> <a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></p>
+		{% if object.race_directors.count %}
+		<p>
+			<strong>Race Director{{ object.race_directors.count|pluralize }}</strong>
+			<ul>
+			{% for race_directory in object.race_directors.all %}
+				<li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="{{ race_directory.email|mailhide }}">contact</a></li>
+			{% endfor %}
+			</ul>
+		</p>
+		{% endif %}
 
 		{% if not object.get_overall_results %}
 			<p>
