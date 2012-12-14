@@ -56,7 +56,7 @@
                 <p><em><strong>When: </strong></em>{{ run.get_day_of_week_display }} {{ run.run_time }}</p>
                 {% if not todays_run %}
                     <p><em><strong>What: </strong></em>{{ run.details }}</a></p>
-                    <p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></p>
+                    <p><em><strong>Contact: </strong></em><a href="mailto:{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></p>
                 {% endif %}
             {% empty %}
                 <p class="quiet large">No upcoming scheduled runs</p>
