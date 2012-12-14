@@ -14,6 +14,7 @@ class FAQ(models.Model, ShortUrlMixin):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     class Meta:
+        ordering = ('-content_type',)
         verbose_name = _('FAQ')
         verbose_name_plural = _('FAQs')
 

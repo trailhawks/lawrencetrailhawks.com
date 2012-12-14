@@ -9,6 +9,7 @@
 {% load race_tags %}
 {% load run_tags %}
 {% load twitterfy %}
+{% load url form future %}
 
 {% block content %}
 	<div id="splash">
@@ -139,11 +140,11 @@
 						{% for faq in recent_faqs %}
 						<li>
 							<div class="left">{{ faq.question }}</div>
-							<div class="right"><a href="{{faq.get_absolute_url}}">answer</a></div>
+							<div class="right"><a href="{{ faq.get_absolute_url }}">answer</a></div>
 							<div class="clearer">&nbsp;</div>
 						</li>
 						{% endfor %}
-						<li><a href="{% url faq_list %}" class="more">Browse all FAQ &#187;</a></li>
+						<li><a href="{% url 'faq_list' %}" class="more">Browse all FAQ &#187;</a></li>
 					</ul>
 				</div>
 				{% endblock %}
@@ -154,7 +155,7 @@
                 <div class="section-content">
                     <p>Subscribe to our calendar to keep upto date on
                     all Trailhawk events, not just our races.</p>
-                    <p><a href="http://lawrencetrailhawks.com{% url race_ical %}">Subscribe</a></p>
+                    <p><a href="http://lawrencetrailhawks.com{% url 'race_ical' %}">Subscribe</a></p>
                 </div>
             </div>
 
