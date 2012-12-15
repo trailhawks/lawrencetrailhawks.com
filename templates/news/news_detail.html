@@ -9,5 +9,5 @@
 {% block content %}
 <h2>{{ object.title }}</h2>
 <h3>{{ object.pub_date|date }}</h3>
-{{ object.body|markdown|oembed:"600x600" }}
+{{ object.body|oembed:"600x600"|markdown }}
 {% endblock content %}
