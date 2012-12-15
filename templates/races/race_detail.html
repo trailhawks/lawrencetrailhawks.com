@@ -28,14 +28,14 @@
 		{% if object.get_race_news %}
 		<p><strong>Latest News:</strong>
 			{% for item in object.get_race_news|slice:":3" %}
-			&nbsp;&nbsp;{{ item.body|oembed:"600x600"|markdown }}
+			&nbsp;&nbsp;{{ item.body|markdown }}
 			{% endfor %}
 		</p>
 		{% endif %}
 		<p><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</p>
 		<p><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</p>
 		<p><strong>Race distance:</strong> {{ object.distance }} {# object.get_unit_display #}</p>
-        <p><strong>Race details:</strong> {{ object.description|oembed:"600x600"|markdown }}</p>
+        <p><strong>Race details:</strong> {{ object.description|markdown }}</p>
 
 		{% if object.course_map %}
 		<p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
@@ -45,7 +45,7 @@
         <p><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width='90'></a></p>
         {% endfor %}
 
-        <p><strong>Awards:</strong> {{ object.awards|oembed:"600x600"|markdown }}</p>
+        <p><strong>Awards:</strong> {{ object.awards|markdown }}</p>
 
 		{% if object.cut_off %}<p><strong>Cut off time:</strong> {{ object.cut_off }}</p>{% endif %}
 		<p><strong>Location:</strong>
@@ -86,7 +86,7 @@
             <p>{{ object.discounts }}</p>
 
             {% if object.packet_pickup %}
-			<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|oembed:"600x600"|markdown }}</p>
+			<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|markdown }}</p>
 			{% endif %}
 
         {% endif %}
@@ -120,7 +120,7 @@
 		<h3>Links</h3>
 		{% for link in link_list %}
 		    <h4>{{ link.name }}</h4>
-		    {{ link.description|oembed:"600x600"|markdown }}
+		    {{ link.description|markdown }}
 		{% endfor %}
 		{% endif %}
 
@@ -130,7 +130,7 @@
 		<h3>Frequently Asked Questions</h3>
 		{% for faq in faq_list %}
 		    <h4>{{ faq.question }}</h4>
-		    {{ faq.answer|oembed:"600x600"|markdown }}
+		    {{ faq.answer|markdown }}
 		{% endfor %}
 		{% endif %}
 
