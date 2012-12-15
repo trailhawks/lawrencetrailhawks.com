@@ -18,8 +18,8 @@ def get_faqs_by_content_type(context, content_type):
 @register.assignment_tag(takes_context=True)
 def get_faqs_for_object(context, obj):
     """Find FAQs for an object and all model types."""
-    query = Q(content_type__app_label=obj._meta.app_label)
-    query = query & Q(Q(object_id__isnull=True) or Q(object_id=obj.pk))
+    query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
+    query = query or Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
     queryset = FAQ.objects.filter(query)
     return queryset
 
