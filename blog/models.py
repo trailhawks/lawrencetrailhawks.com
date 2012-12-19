@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 from taggit.managers import TaggableManager
 
+from . import listeners
 from members.models import Member
 
 
