@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="right sidebar" id="sidebar">
-		{% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
 		{% include "includes/flickr_photos.html" with photos=photos_list %}
 	</div>
 

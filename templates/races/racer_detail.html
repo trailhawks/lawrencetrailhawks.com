@@ -1,17 +1,31 @@
 {% extends "races/racer_list.html" %}
 
+{% load photo_tags %}
+
 {% block title %}{{ object.full_name }}{% endblock title %}
 
 {% block content %}
-  <p><strong>Name:</strong> {{ object.full_name }}</p>
-  <p><strong>Age:</strong> {{ object.age }}</p>
-  <p><strong>Gender:</strong> {{ object.get_gender_display }}</p>
-  {% if object.get_results %}
-  <p><strong>Results:</strong>
-	<ul>
-	{% for result in object.get_results %}
-		<li>Ran <a href="{{ result.race.get_absolute_url }}results/#racer-{{ result.racer.pk }}">{{ result.race.title }}</a> - in {{ result.time }} {% if result.course_record %}(course record){% endif %}</li>
-	{% endfor %}
-	</ul></p>
-  {% endif %}
+<div class="main" id="main-two-columns">
+
+  <div class="left" id="main-content">
+    <p><strong>Name:</strong> {{ object.full_name }}</p>
+    <p><strong>Age:</strong> {{ object.age }}</p>
+    <p><strong>Gender:</strong> {{ object.get_gender_display }}</p>
+    {% if object.get_results %}
+    <p><strong>Results:</strong>
+  	<ul>
+  	{% for result in object.get_results %}
+  		<li>Ran <a href="{{ result.race.get_absolute_url }}results/#racer-{{ result.racer.pk }}">{{ result.race.title }}</a> - in {{ result.time }} {% if result.course_record %}(course record){% endif %}</li>
+  	{% endfor %}
+  	</ul></p>
+    {% endif %}
+  </div>
+
+  <div class="right sidebar" id="sidebar">
+    {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+    {% include "includes/flickr_photos.html" with photos=photos_list %}
+  </div>
+
+  <div class="clearer">&nbsp;</div>
+
 {% endblock content %}
