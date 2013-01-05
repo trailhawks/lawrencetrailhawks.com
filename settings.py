@@ -126,8 +126,7 @@ PROJECT_APPS = [
     'sponsors',
 ]
 
-#SHORT_BASE_URL = 'http://ltrh.ws/'
-SHORT_BASE_URL = 'http://lawrencetrailhawks.com/'
+SHORT_BASE_URL = 'http://lth.im/'
 
 SHORTEN_MODELS = {
     'B': 'blog.post',
