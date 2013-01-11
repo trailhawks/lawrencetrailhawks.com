@@ -10,11 +10,12 @@
 
 	<div class="left" id="main-content">
 	{% for sponsor in object_list %}
-		<div>{{ sponsor.logo }}</div>
-		<div>{{ sponsor.logo_url }}</div>
-		<div><a href="{{ sponsor.url }}"><img src="{{ sponsor.get_logo_url }}" alt="{{ sponsor.title }}" border="1"/>{{ sponsor.get_logo_url }}</a></div>
-	    {% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
-		<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+		<div>
+			<h3>{{ sponsor }}</h3>
+			<div><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" alt="{{ sponsor.title }}" border="1"/>{{ sponsor.get_logo_url }}</a></div>
+	    	{% if sponsor.address %}<p><strong>Address: </strong>{{ sponsor.address }}</p>{% endif %}
+			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+		</div>
 	{% endfor %}
 	</div>
 
