@@ -10,14 +10,16 @@ from sponsors.admin import SponsorInline
 class RaceDirectorInline(admin.StackedInline):
     model = Race.race_directors.through
     raw_id_fields = ('member',)
+    extra = 0
 
 
 class RegistrationInline(admin.TabularInline):
     model = Registration
+    extra = 0
 
 
 class RegistrationAdmin(admin.ModelAdmin):
-    pass
+    raw_id_fields = ('race',)
 
 
 class RaceAdmin(admin.ModelAdmin):
@@ -25,6 +27,7 @@ class RaceAdmin(admin.ModelAdmin):
     list_display = ('title', 'annual', 'start_datetime')
     list_filter = ('start_datetime', 'annual', )
     ordering = ['-start_datetime']
+    save_on_top = True
     inlines = (
         RaceDirectorInline,
         RegistrationInline,
@@ -53,6 +56,7 @@ class RacerAdmin(admin.ModelAdmin):
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('title', 'racer', )
     list_filter = ('racer', )
+    raw_id_fields = ('race', 'racer')
 
 
 class EmergencyContactAdmin(admin.ModelAdmin):

@@ -19,7 +19,7 @@ class Sponsor(models.Model):
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     email = models.EmailField()
-    logo = models.ImageField(upload_to='sponsors/images')
+    logo = models.ImageField(upload_to='sponsors')
     discount_detail = models.TextField()
     active = models.BooleanField()
 
@@ -39,7 +39,6 @@ class Sponsor(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
             self.slug = slugify(self.name)
         super(Sponsor, self).save(*args, **kwargs)
 

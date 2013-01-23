@@ -5,6 +5,7 @@ from .models import Member
 
 class MemberInline(admin.TabularInline):
     model = Member
+    extra = 0
 
 
 class MemberAdmin(admin.ModelAdmin):

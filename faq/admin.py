@@ -6,6 +6,7 @@ from .models import FAQ
 
 class FaqInline(generic.GenericStackedInline):
     model = FAQ
+    extra = 0
 
 
 class FaqAdmin(admin.ModelAdmin):
