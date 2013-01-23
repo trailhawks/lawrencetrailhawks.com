@@ -39,7 +39,7 @@
                     <a href="{{ run.map_link}}">Click here for directions.</a></p>
 				<p><em><strong>When: </strong></em>{{ run.run_time }}</p>
 				<p><em><strong>What: </strong></em>{{ run.details }}</a></p>
-				<p><em><strong>Contact: </strong></em><a href={{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></p>
+				<p><em><strong>Contact: </strong></em><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></p>
 			{% empty %}
 				<p class="quiet large">No run scheduled for today</p>
             {% endfor %}
