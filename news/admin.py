@@ -6,6 +6,7 @@ from .models import News
 
 class NewsInline(generic.GenericStackedInline):
     model = News
+    extra = 0
 
 
 class NewsAdmin(admin.ModelAdmin):

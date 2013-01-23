@@ -6,6 +6,11 @@ from .models import Links
 
 class LinksInline(generic.GenericStackedInline):
     model = Links
+    extra = 0
 
 
-admin.site.register(Links)
+class LinksAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Links, LinksAdmin)

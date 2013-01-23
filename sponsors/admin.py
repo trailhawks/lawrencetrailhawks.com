@@ -6,6 +6,7 @@ from .models import Sponsor
 
 class SponsorInline(generic.GenericStackedInline):
     model = Sponsor
+    extra = 0
 
 
 class SponsorAdmin(admin.ModelAdmin):

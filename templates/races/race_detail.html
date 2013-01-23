@@ -88,7 +88,6 @@
             {% if object.packet_pickup %}
 			<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|markdown }}</p>
 			{% endif %}
-
         {% endif %}
 
 		{% if object.lodging %}
@@ -114,7 +113,6 @@
 
 		{% render_facebook_like obj=object %}
 
-
 		{% get_links_for_object object as link_list %}
 		{% if link_list %}
 		<h3>Links</h3>
@@ -139,7 +137,7 @@
 	</div>
 
 	<div class="right sidebar" id="sidebar">
-		{% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
 		{% include "includes/flickr_photos.html" with photos=photos_list %}
 	</div>
 

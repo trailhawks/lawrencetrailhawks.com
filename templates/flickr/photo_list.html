@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
-{% load url from future %}
 {% load oembed_tags %}
+{% load photo_tags %}
+{% load url from future %}
 
 {% block title %}Photos{% endblock title %}
 
@@ -16,16 +17,13 @@
 
 				<div class="post-title"><h2><a href="#">Trail Hawk Photos</a></h2></div>
 
-				<div class="post-date"></div>
-
 				<div class="post-body">
 			      {% for photo in object_list %}
-			        <span>
-			        	<a href="{{ photo.photopage_url }}"><img src="{{ photo.get_large_url }}"></a>
+			        <div>
+					    <a href="{{ photo.photopage_url }}"><img src='{% thumbor_url photo.get_medium_url|remove_http height=480 width=480 smart=True fit_in=True %}'></a>
 			        	<p>{{ photo.description|safe }}</p>
-			        </span>
+			        </div>
 			      {% endfor %}
-
 				</div>
 
 			</div>

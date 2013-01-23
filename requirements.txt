@@ -19,3 +19,7 @@ simplejson==2.6.2
 South==0.7.6
 
 git+https://github.com/jefftriplett/django-syncr.git#egg=django-syncr-git
+
+# for remote thumbnail support
+thumbor==3.6.10
+libthumbor==1.0.1
