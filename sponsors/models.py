@@ -40,6 +40,7 @@ class Sponsor(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+            self.slug = slugify(self.name)
         super(Sponsor, self).save(*args, **kwargs)
 
     @models.permalink
