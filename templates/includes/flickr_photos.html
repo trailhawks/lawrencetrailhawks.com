@@ -4,14 +4,21 @@
 
 {% if photos %}
   {% for photo in photos %}
+    {% comment %}
     <p><img src='{% thumbor_url photo.get_medium_url|remove_http height=240 width=240 smart=True fit_in=True %}'></p>
+    {% endcomment %}
+    <p><a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />
+
     {{ photo.description|safe }}
     </p>
   {% endfor %}
 {% else %}
   {% get_random_photos 7 as random_photos %}
   {% for photo in random_photos %}
+    {% comment %}
     <p><img src='{% thumbor_url photo.get_medium_url|remove_http height=240 width=240 smart=True fit_in=True %}'></p>
+    {% endcomment %}
+    <p><a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a><br />
     {{ photo.description|safe }}
     </p>
   {% endfor %}

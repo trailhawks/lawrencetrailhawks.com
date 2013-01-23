@@ -20,7 +20,10 @@
 				<div class="post-body">
 			      {% for photo in object_list %}
 			        <div>
+			        	{% comment %}
 					    <a href="{{ photo.photopage_url }}"><img src='{% thumbor_url photo.get_medium_url|remove_http height=480 width=480 smart=True fit_in=True %}'></a>
+					    {% endcomment %}
+						<a href="{{ photo.photopage_url }}"><img src="{{ photo.get_large_url }}"></a>
 			        	<p>{{ photo.description|safe }}</p>
 			        </div>
 			      {% endfor %}
