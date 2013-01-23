@@ -18,9 +18,9 @@ class Sponsor(models.Model):
     url = models.URLField(verify_exists=False, help_text='URL to website')
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
-    email = models.EmailField()
-    logo = models.ImageField(upload_to='sponsors')
-    discount_detail = models.TextField()
+    email = models.EmailField(blank=True, null=True)
+    logo = models.ImageField(upload_to='sponsors', blank=True, null=True)
+    discount_detail = models.TextField(blank=True, null=True)
     active = models.BooleanField()
 
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
