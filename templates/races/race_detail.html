@@ -9,6 +9,7 @@
 {% load oembed_tags %}
 {% load photo_tags %}
 {% load race_tags %}
+{% load sponsors_tags %}
 {% load url from future %}
 
 {% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
@@ -69,6 +70,9 @@
 				{% if object.reg_url %}
 				For online registration click <a href="{{object.reg_url}}">here</a>.<br />
 				{% endif %}
+
+				<a class="btn btn-large btn-primary" href="{{ object.reg_url }}">Register!</a>
+
 				{% if object.entry_form %}
 				<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
 				{% endif %}
@@ -115,6 +119,7 @@
 
 		{% get_links_for_object object as link_list %}
 		{% if link_list %}
+		<hr>
 		<h3>Links</h3>
 		{% for link in link_list %}
 		    <h4>{{ link.name }}</h4>
@@ -125,6 +130,7 @@
 
 		{% get_faqs_for_object object as faq_list %}
 		{% if faq_list %}
+		<hr>
 		<h3>Frequently Asked Questions</h3>
 		{% for faq in faq_list %}
 		    <h4>{{ faq.question }}</h4>
@@ -132,6 +138,18 @@
 		{% endfor %}
 		{% endif %}
 
+
+		{% get_sponsors_for_object object as sponsor_list %}
+		{% if sponsor_list %}
+		<hr>
+		<h3>Sponsors</h3>
+		{% for sponsor in sponsor_list %}
+		    <h4>{{ sponsor.name }}</h4>
+		    {{ sponsor.discount_detail|markdown }}
+		{% endfor %}
+		{% endif %}
+
+		<hr>
 		{% include "comments/comments.html" %}
 
 	</div>
