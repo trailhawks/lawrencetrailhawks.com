@@ -6,7 +6,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 DEBUG = TEMPLATE_DEBUG = True
 
 ADMINS = (
-    # ('Nick Lang', 'nick.lang@gmail.com'),
+    # ('Nick Lang', 'nick.lang@example.com'),
 )
 
 MANAGERS = ADMINS
