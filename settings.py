@@ -126,6 +126,8 @@ PROJECT_APPS = [
     'sponsors',
 ]
 
+INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
+
 SHORT_BASE_URL = 'http://lth.im/'
 
 SHORTEN_MODELS = {
@@ -138,7 +140,14 @@ SHORTEN_MODELS = {
     'U': 'runs.run',
 }
 
-INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
+ALLOWED_HOSTS = [
+    'hawkhundred.com',
+    '.hawkhundred.com',
+    'lawrencetrailhawks.com',
+    '.lawrencetrailhawks.com',
+    'lth.im',
+    '.lth.im',
+]
 
 MACHINE_TAG_NAMESPACE = 'trailhawks'
 
