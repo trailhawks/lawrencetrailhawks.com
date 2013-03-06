@@ -5,7 +5,7 @@ django-ical==1.1
 micawber==0.2.5
 django-registration==0.8
 django-taggit==0.9.3
-Django==1.4.5
+Django>=1.5,<1.6
 feedparser==5.1.2
 flickrapi==1.4.2
 httplib2==0.7.6
