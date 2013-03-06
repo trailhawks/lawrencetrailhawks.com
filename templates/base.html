@@ -26,12 +26,17 @@
 				</div>
 				<div class="left navigation" id="main-nav">
 					<ul class="tabbed">
-						<li {% if request.PATH_INFO == '/' %}class="current-tab"{% endif %}><a href="/">Home</a></li>
+                        {% comment %}
+						<li {% if request.PATH_INFO == '/' %}class="current-tab"{% endif %}><a href="/">Home</a></li>{% endcomment %}
 						<li><a href="/races/">Races</a></li>
 						<li><a href="/runs/">Runs</a></li>
 						<li><a href="/blog/">Blog</a></li>
+                        {% comment %}
 						<li><a href="/photos/">Photos</a></li>
-						<li><a href="/links/">Links</a></li>
+                        {% endcomment %}
+                        <li><a href="/faq/">FAQs</a></li>
+                        <li><a href="/links/">Links</a></li>
+                        <li><a href="/sponsors/">Sponsors</a></li>
 					</ul>
 					<div class="clearer">&nbsp;</div>
 				</div>

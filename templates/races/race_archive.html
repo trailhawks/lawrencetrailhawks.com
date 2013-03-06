@@ -2,13 +2,17 @@
 
 {% block title %}Races{% endblock title %}
 
+{% comment %}
+TODO: Fix
+{% endcomment %}
+
 {% block content %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		{% if upcoming_races %}
+		{% if object_list %}
 		<h2>Upcoming Races</h2>
-		{% regroup upcoming_races by start_datetime|date:"Y" as race_list %}
+		{% regroup object_list by start_datetime|date:"Y" as race_list %}
 		{% for race in race_list %}
 		    <h3>{{ race.grouper }}</h3>
 		    <ul>

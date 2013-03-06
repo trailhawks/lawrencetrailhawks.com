@@ -1,6 +1,5 @@
 {% extends base_template_name|default:"base.html" %}
 
-{% load flickr %}
 {% load run_tags %}
 
 {% block title %}Weekly Runs{% endblock title %}
@@ -11,7 +10,7 @@
             {% get_weekly_runs as weekly_run_list %}
             {% for run in weekly_run_list %}
             {% ifchanged %}
-            <li{% if object.slug %}{% else %} class="current-tab"{% endif %}><a href="{% url run_list %}">All</a></li>
+            <li{% if object.slug %}{% else %} class="current-tab"{% endif %}><a href="{% url 'run_list' %}">All</a></li>
             {% endifchanged %}
             {% ifequal object.slug run.slug %}
                 <li class="current-tab"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></li>
