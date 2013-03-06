@@ -65,12 +65,15 @@
 
 		{% if not object.get_overall_results %}
 			<p>
-				<strong>Registration:</strong> {{ object.reg_description|markdown }}<br />
-				{% if object.reg_url %}
-				For online registration click <a href="{{ object.reg_url }}">here</a>.<br />
-				{% endif %}
+				<strong>Registration:</strong>
 
-				<a class="btn btn-large btn-primary" href="{{ object.reg_url }}">Register!</a>
+				{{ object.reg_description|markdown }}<br />
+
+				{% if object.reg_url %}
+				<p class="largest loud highlight signup text-center">
+				<a href="{{ object.reg_url }}">Register online today!</a>
+				</p>
+				{% endif %}
 
 				{% if object.entry_form %}
 				<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
