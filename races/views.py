@@ -1,4 +1,4 @@
-from django.views.generic import dates
+from django.views.generic import dates, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
@@ -11,9 +11,24 @@ class RaceMixin(object):
     allow_future = True
 
 
-class RaceIndex(RaceMixin, dates.ArchiveIndexView):
-    make_object_list = True
-    pass
+class RaceIndex(TemplateView):
+    template_name = 'races/race_archive.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RaceIndex, self).get_context_data(**kwargs)
+        context['completed_races'] = Race.objects.complete()
+        context['upcoming_races'] = Race.objects.upcoming()
+        return context
+
+
+#class RaceIndex(RaceMixin, dates.ArchiveIndexView):
+#    make_object_list = True
+#    pass
+
+
+class RaceUpcomingList(ListView):
+    queryset = Race.objects.upcoming()
+    template_name = 'races/upcoming.html'
 
 
 class RaceYear(RaceMixin, dates.YearArchiveView):
@@ -37,9 +52,9 @@ class RaceResultDetail(RaceMixin, dates.DateDetailView):
     template_name = 'races/race_result.html'
 
 
-class RacerDetailView(DetailView):
+class RacerDetail(DetailView):
     model = Racer
 
 
-class RacerListView(ListView):
+class RacerList(ListView):
     model = Racer

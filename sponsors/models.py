@@ -4,12 +4,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-
-class ActiveManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(ActiveManager, self).get_query_set().filter(active__exact=True)
-        return queryset
+from .managers import SponsorManager
 
 
 class Sponsor(models.Model):
@@ -27,8 +22,7 @@ class Sponsor(models.Model):
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    objects = models.Manager()
-    active_objects = ActiveManager()
+    objects = SponsorManager()
 
     class Meta:
         verbose_name = _('Sponsor')

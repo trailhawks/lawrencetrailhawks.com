@@ -1,24 +1,12 @@
-from datetime import datetime
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
-
-class DraftManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(DraftManager, self).get_query_set().filter(status__exact=News.STATUS_DRAFT)
-        return queryset
-
-
-class PublicManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(PublicManager, self).get_query_set().filter(status__exact=News.STATUS_PUBLIC)
-        return queryset
+from .managers import NewsManager
 
 
 class News(models.Model, ShortUrlMixin):
@@ -40,9 +28,7 @@ class News(models.Model, ShortUrlMixin):
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    objects = models.Manager()
-    published_objects = PublicManager()
-    draft_objects = DraftManager()
+    objects = NewsManager()
 
     class Meta:
         ordering = ('-pub_date',)
@@ -57,9 +43,7 @@ class News(models.Model, ShortUrlMixin):
         if not self.slug:
             self.slug = slugify(self.title)
 
-        #now = timezone.now()
-        now = datetime.now()
-        #self.updated = now
+        now = timezone.now()
 
         if not self.pub_date and self.status == self.STATUS_PUBLIC:
             self.pub_date = now

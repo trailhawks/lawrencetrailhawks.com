@@ -1,31 +1,10 @@
-import datetime
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
+from .managers import RunManager
 from core.models import MachineTagMixin
 from members.models import Member
-
-
-class TodayManager(models.Manager):
-
-    def get_query_set(self):
-        weekday = datetime.datetime.now().weekday()
-        queryset = super(TodayManager, self).get_query_set().filter(day_of_week=weekday)
-        return queryset
-
-
-class NextManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(NextManager, self).get_query_set()
-        for day in range(1, 6):
-            weekday = (datetime.datetime.now() + datetime.timedelta(days=day)).weekday()
-            next_day = queryset.filter(day_of_week=weekday)
-            if next_day.count():
-                return next_day
-        return []
 
 
 class Run(MachineTagMixin, ShortUrlMixin):
@@ -48,9 +27,7 @@ class Run(MachineTagMixin, ShortUrlMixin):
     details = models.TextField()
     contact = models.ForeignKey(Member)
 
-    objects = models.Manager()
-    today_objects = TodayManager()
-    next_objects = NextManager()
+    objects = RunManager()
 
     class Meta:
         verbose_name = _('Run')

@@ -25,5 +25,5 @@ def get_links_for_object(context, obj):
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_links(context, num):
+def get_latest_links(context, num=10):
     return Links.objects.all()[:num]

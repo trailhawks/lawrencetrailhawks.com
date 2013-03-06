@@ -7,5 +7,5 @@ register = Library()
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_news(context, num):
-    return News.published_objects.all()[:num]
+def get_latest_news(context, num=10):
+    return News.objects.public()[:num]

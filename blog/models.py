@@ -1,27 +1,13 @@
-import datetime
-
 from django.db import models
 from django.db.models import permalink
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 from taggit.managers import TaggableManager
 
-from . import listeners
+#from . import listeners
+from .managers import PostManager
 from members.models import Member
-
-
-class DraftManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(DraftManager, self).get_query_set().filter(status__exact=Post.STATUS_DRAFT)
-        return queryset
-
-
-class PublicManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(PublicManager, self).get_query_set().filter(status__exact=Post.STATUS_PUBLIC)
-        return queryset
 
 
 class Post(models.Model, ShortUrlMixin):
@@ -39,7 +25,7 @@ class Post(models.Model, ShortUrlMixin):
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
-    publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
+    publish = models.DateTimeField(_('publish'), default=timezone.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     repost_url = models.URLField(help_text="URL of original blog posting.",
@@ -48,9 +34,7 @@ class Post(models.Model, ShortUrlMixin):
                                    verbose_name="Original Post Date", null=True, blank=True)
     tags = TaggableManager()
 
-    objects = models.Manager()
-    published_objects = PublicManager()
-    draft_objects = DraftManager()
+    objects = PostManager()
 
     class Meta:
         db_table = 'blog_posts'
@@ -60,7 +44,7 @@ class Post(models.Model, ShortUrlMixin):
         verbose_name_plural = _('posts')
 
     def __unicode__(self):
-        return u'%s' % self.title
+        return self.title
 
     @permalink
     def get_absolute_url(self):

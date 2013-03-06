@@ -1,10 +1,10 @@
-import datetime
-
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
+from .managers import RaceManager
 from core.models import MachineTagMixin
 from members.models import Member
 from sponsors.models import Sponsor
@@ -62,6 +62,8 @@ class Race(MachineTagMixin, ShortUrlMixin):
     discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
     lodging = models.URLField(blank=True, null=True, help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
+
+    objects = RaceManager()
 
     class Meta:
         verbose_name = _('Race')
@@ -202,7 +204,7 @@ class Racer(MachineTagMixin):
 
     @property
     def age(self):
-        TODAY = datetime.date.today()
+        TODAY = timezone.today()
         return (TODAY.year - self.birth_date.year)
 
     @property

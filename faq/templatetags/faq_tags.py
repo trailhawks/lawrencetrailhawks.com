@@ -25,5 +25,5 @@ def get_faqs_for_object(context, obj):
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_faqs(context, num):
+def get_latest_faqs(context, num=10):
     return FAQ.objects.all()[:num]
