@@ -65,9 +65,9 @@
 
 		{% if not object.get_overall_results %}
 			<p>
-				<strong>Registration:</strong> {{ object.reg_description }}<br />
+				<strong>Registration:</strong> {{ object.reg_description|markdown }}<br />
 				{% if object.reg_url %}
-				For online registration click <a href="{{object.reg_url}}">here</a>.<br />
+				For online registration click <a href="{{ object.reg_url }}">here</a>.<br />
 				{% endif %}
 
 				<a class="btn btn-large btn-primary" href="{{ object.reg_url }}">Register!</a>
@@ -86,7 +86,7 @@
 				</ul>
 			{% endif %}
 
-            <p>{{ object.discounts }}</p>
+            <p>{{ object.discounts|markdown }}</p>
 
             {% if object.packet_pickup %}
 			<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|markdown }}</p>
