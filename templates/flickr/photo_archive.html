@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends base_template_name|default:"base.html" %}
 
-{% load oembed_tags %}
+{% load micawber_tags %}
 
 {% block content %}
 {% for set in latest %}

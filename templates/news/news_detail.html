@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends base_template_name|default:"base.html" %}
 
 {% load markup %}
-{% load oembed_tags %}
+{% load micawber_tags %}
 {% load url from future %}
 
 {% block title %}News{% endblock title %}

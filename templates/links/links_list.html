@@ -1,8 +1,6 @@
-{% extends "base.html" %}
+{% extends base_template_name|default:"base.html" %}
 
-{% load flickr %}
 {% load markup %}
-{% load oembed_tags %}
 
 {% block title %}Links{% endblock title %}
 

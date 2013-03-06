@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends base_template_name|default:"base.html" %}
 
 {% load blog_tags %}
 {% load core_tags %}
@@ -6,7 +6,7 @@
 {% load mailhide %}
 {% load markup %}
 {% load news_tags %}
-{% load oembed_tags %}
+{% load micawber_tags %}
 {% load race_tags %}
 {% load run_tags %}
 {% load twitterfy %}

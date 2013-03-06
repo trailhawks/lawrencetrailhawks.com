@@ -1,32 +1,8 @@
-{% extends "base.html" %}
-{% load oembed_tags %}
-{% load flickr %}
+{% extends base_template_name|default:"base.html" %}
 
 {% block title %}Page not found{% endblock %}
 
-{% block header %}
-	<div id="header">
-		<div id="top">
-			<div class="left" id="logo">
-				<a href="/"><img src="http://www.ultrastory.com/Trail_Hawks/Hawk_logo.jpg" alt="" width="259" height="179" /></a>
-			</div>
-			<div class="left navigation" id="main-nav">
-				<ul class="tabbed">
-					<li><a href="/">Home</a></li>
-					<li><a href="/races/">Races</a></li>
-					<li><a href="/runs/">Runs</a></li>
-					<li><a href="/blog/">Blog</a></li>
-					<li><a href="/photos/">Photos</a></li>
-					<li><a href="/links/">Links</a></li>
-				</ul>
-				<div class="clearer">&nbsp;</div>
-			</div>
-			<div class="clearer">&nbsp;</div>
-		</div>
-	</div>
-{% endblock %}
-
-{% block contact %}
+{% block content %}
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
@@ -40,13 +16,11 @@
 
 	<div class="right sidebar" id="sidebar">
 
-			{% include "includes/flickr_photos.html" %}
+		{% include "includes/flickr_photos.html" %}
 
 	</div>
 
 	<div class="clearer">&nbsp;</div>
 
 </div>
-{% endblock %}
-
-
+{% endblock content %}

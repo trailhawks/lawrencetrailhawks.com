@@ -1,7 +1,6 @@
-{% extends "base.html" %}
+{% extends base_template_name|default:"base.html" %}
 
 {% load flickr %}
-{% load oembed_tags %}
 {% load run_tags %}
 
 {% block title %}Weekly Runs{% endblock title %}

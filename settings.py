@@ -105,7 +105,7 @@ PREREQ_APPS = [
 
     #'djcelery',
     'django_gravatar',
-    'oembed',
+    'micawber.contrib.mcdjango',
     'shorturls',
     'south',
     'syncr.flickr',
