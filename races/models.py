@@ -51,16 +51,16 @@ class Race(MachineTagMixin, ShortUrlMixin):
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
-    course_map = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to course map if avail.")
+    course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
     location = models.TextField()
     location_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to google maps or other mapping software pointing towards the start location")
-    reg_url = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to registartion flyer or to registration URL for online signup.")
+    map_link = models.URLField(blank=True, null=True, help_text="Link to google maps or other mapping software pointing towards the start location")
+    reg_url = models.URLField(blank=True, null=True, help_text="Link to registartion flyer or to registration URL for online signup.")
     reg_description = models.TextField()
     entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
     discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
-    lodging = models.URLField(blank=True, null=True, verify_exists=False, help_text="link to lodging information.")
+    lodging = models.URLField(blank=True, null=True, help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -181,7 +181,7 @@ class Racer(MachineTagMixin):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('racer_detail', (), {'object_id': self.pk})
+        return ('racer_detail', (), {'pk': self.pk})
 
     def get_machine_tags(self):
         machine_tags = super(Racer, self).get_machine_tags()
@@ -234,7 +234,7 @@ class Result(models.Model):
 
 
 class Report(models.Model):
-    report = models.URLField(verify_exists=False, help_text="Link to race report")
+    report = models.URLField(help_text="Link to race report")
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)

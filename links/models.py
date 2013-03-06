@@ -7,7 +7,7 @@ from shorturls.models import ShortUrlMixin
 
 class Links(models.Model, ShortUrlMixin):
     name = models.CharField(max_length=250)
-    link = models.URLField(verify_exists=False, help_text='URL to link')
+    link = models.URLField(help_text='URL to link')
     description = models.TextField()
 
     content_type = models.ForeignKey(ContentType, blank=True, null=True)

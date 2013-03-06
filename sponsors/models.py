@@ -15,7 +15,7 @@ class ActiveManager(models.Manager):
 class Sponsor(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(blank=True, null=True, help_text='Suggested value automatically generated from name. Must be unique.')
-    url = models.URLField(verify_exists=False, help_text='URL to website')
+    url = models.URLField(help_text='URL to website')
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)

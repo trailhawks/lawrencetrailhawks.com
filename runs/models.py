@@ -44,7 +44,7 @@ class Run(MachineTagMixin, ShortUrlMixin):
     run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
     location = models.TextField()
     map_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to google maps location")
+    map_link = models.URLField(blank=True, null=True, help_text="Link to google maps location")
     details = models.TextField()
     contact = models.ForeignKey(Member)
 
