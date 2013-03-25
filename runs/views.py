@@ -11,3 +11,6 @@ class RunDetailView(DetailView):
 
 class RunListView(ListView):
     model = Run
+
+    def get_queryset(self):
+        return super(RunListView, self).get_queryset().active()
