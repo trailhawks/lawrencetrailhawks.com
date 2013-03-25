@@ -26,6 +26,7 @@ class Run(MachineTagMixin, ShortUrlMixin):
     map_link = models.URLField(blank=True, null=True, help_text="Link to google maps location")
     details = models.TextField()
     contact = models.ForeignKey(Member)
+    active = models.BooleanField(default=True)
 
     objects = RunManager()
 

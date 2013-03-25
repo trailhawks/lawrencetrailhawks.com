@@ -8,12 +8,12 @@ from django.utils import timezone
 class RunQuerySet(QuerySet):
     def today(self):
         weekday = timezone.now().weekday()
-        return self.filter(day_of_week=weekday)
+        return self.filter(active__exact=True, day_of_week=weekday)
 
     def next(self):
         for day in range(1, 6):
             weekday = (timezone.now() + datetime.timedelta(days=day)).weekday()
-            next_day = self.filter(day_of_week=weekday)
+            next_day = self.filter(active__exact=True, day_of_week=weekday)
             if next_day.count():
                 return next_day
 
