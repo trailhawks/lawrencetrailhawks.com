@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
     url(r'^ical/$', RaceFeed(), name='race_ical'),
     #url(r'^results/', 'races.views.results', name='race_result_list'),
+    #url(r'^racers/$', views.RacerList.as_view(), name='racer_list'),
     url(r'^upcoming/$', views.RaceUpcomingList.as_view(), name='race_upcoming'),
-    url(r'^racers/$', views.RacerList.as_view(), name='racer_list'),
     url(r'^racers/(?P<pk>[-\w]+)/$', views.RacerDetail.as_view(), name='racer_detail'),
 )

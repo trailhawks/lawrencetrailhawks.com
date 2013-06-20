@@ -175,7 +175,7 @@ ul.nice-list li .right {color: #999;}
 
 
 /* Tables */
-
+/*
 table {margin-bottom: 1.4em; width: 100%;}
 th {font-weight: bold;}
 thead th {background: #C3D9FF;}
@@ -202,7 +202,7 @@ table.data-table td {
 	border: 1px solid #DDD;
 }
 table.data-table tr.even td {background: #FCFCFC;}
-
+*/
 
 /* Misc classes */
 

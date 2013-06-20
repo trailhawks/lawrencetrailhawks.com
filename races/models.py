@@ -123,7 +123,7 @@ class Registration(models.Model):
     @property
     def has_expired(self):
         if self.end_date:
-            return datetime.datetime.now() < self.end_date
+            return timezone.now() < self.end_date
         return False
 
 

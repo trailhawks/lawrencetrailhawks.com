@@ -1,4 +1,4 @@
-<html>
+<html>{% load url from future %}
 <head>
     <meta name="google-site-verification" content="2E8N9HpaAbhAW34jsh9AS-jtFQXqtbIImO6nrtk24CY" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -13,7 +13,8 @@
 <meta property="og:image" content=""/>
 <meta property="og:description" content=""/>
 {% endcomment %}
-	<link rel="stylesheet" type="text/css" href="/site_media/css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/site_media/css/bootstrap.css" media="screen" />
 	<title>{% block title %}Lawrence Trailhawks {% endblock %}</title>
 </head>
 <body>
@@ -26,17 +27,12 @@
 				</div>
 				<div class="left navigation" id="main-nav">
 					<ul class="tabbed">
-                        {% comment %}
-						<li {% if request.PATH_INFO == '/' %}class="current-tab"{% endif %}><a href="/">Home</a></li>{% endcomment %}
-						<li><a href="/races/">Races</a></li>
+                        {% comment %}<li {% if request.PATH_INFO == '/' %}class="current-tab"{% endif %}><a href="/">Home</a></li>{% endcomment %}
+						<li {% if request.PATH_INFO == '/events/' %}class="current-tab"{% endif %}><a href="{% url 'event_list' %}">Events</a></li>
 						<li><a href="/runs/">Runs</a></li>
 						<li><a href="/blog/">Blog</a></li>
-                        {% comment %}
 						<li><a href="/photos/">Photos</a></li>
-                        {% endcomment %}
-                        <li><a href="/faq/">FAQs</a></li>
-                        <li><a href="/links/">Links</a></li>
-                        <li><a href="/sponsors/">Sponsors</a></li>
+						<li><a href="/links/">Links</a></li>
 					</ul>
 					<div class="clearer">&nbsp;</div>
 				</div>

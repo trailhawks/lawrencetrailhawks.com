@@ -20,10 +20,10 @@
 		<h2>{{ object.title }} - {{ object.start_datetime|date }}</h2>
 
 		{% if not object.is_finished %}
-		<h2><a href="{{ object.reg_url }}">[-- REGISTER TODAY --]</a></h2>
+		<p><a class="btn btn-large btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
 
 		{% if object.registration_set.count %}
-		<table class="table">
+		<table class="table table-hover table-striped">
 			<thead>
 				<tr>
 					<th>Price level</th>
@@ -49,7 +49,19 @@
 
 		<h3>Location</h3>
 
+		{% if object.map_link %}
+		<a href="{{object.map_link}}">{{ object.location }}</a>
+		{% else %}
+		{{ object.location }}
+		{% endif %}</p>
+
+		{% if object.location_iframe %}
+		<p>{{object.location_iframe|safe}}</p>
+		{% endif %}
+
+		{% if object.slogan %}
 		<h4>{{ object.slogan }}</h4>
+        {% endif %}
 
         {% if object.logo %}
           <img src="/site_media/{{ object.logo }}" width="400" />
@@ -57,16 +69,16 @@
 		<br />
 
 		{% if object.get_race_news %}
-		<p><strong>Latest News:</strong>
-			{% for item in object.get_race_news|slice:":3" %}
-			&nbsp;&nbsp;{{ item.body|markdown }}
-			{% endfor %}
-		</p>
+		<h4>Latest News</h4>
+		{% for item in object.get_race_news|slice:":3" %}
+		<p>&nbsp;&nbsp;{{ item.body|markdown }}</p>
+		{% endfor %}
 		{% endif %}
 		<p><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</p>
 		<p><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</p>
 		<p><strong>Race distance:</strong> {{ object.distance }} {# object.get_unit_display #}</p>
-        <p><strong>Race details:</strong> {{ object.description|markdown }}</p>
+
+		{{ object.description|markdown }}
 
 		{% if object.course_map %}
 		<p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
@@ -76,16 +88,15 @@
         <p><a href="{{ sponsor.url }}"><img src="/site_media/{{ sponsor.logo }}" width='90'></a></p>
         {% endfor %}
 
-        <p><strong>Awards:</strong> {{ object.awards|markdown }}</p>
+		<h4>Awards</h4>
+
+    	{{ object.awards|markdown }}</p>
 
 		{% if object.cut_off %}<p><strong>Cut off time:</strong> {{ object.cut_off }}</p>{% endif %}
-		<p><strong>Location:</strong>
-		{% if object.map_link %}<a href="{{object.map_link}}">{{ object.location }}</a>{% else %} {{ object.location }}{% endif %}<br /></p>
-		{% if object.location_iframe %}<p>{{object.location_iframe|safe}}<br /></p>{% endif %}
 
 		{% if object.race_directors.count %}
+		<h4>Race Director{{ object.race_directors.count|pluralize }}</h4>
 		<p>
-			<strong>Race Director{{ object.race_directors.count|pluralize }}</strong>
 			<ul>
 			{% for race_directory in object.race_directors.all %}
 				<li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="{{ race_directory.email|mailhide }}">contact</a></li>
@@ -95,21 +106,21 @@
 		{% endif %}
 
 		{% if not object.get_overall_results %}
-			<p>
-				<strong>Registration:</strong>
+			<h3>Registration</h3>
 
-				{{ object.reg_description|markdown }}<br />
+			{{ object.reg_description|markdown }}<br />
 
-				{% if object.reg_url %}
-				<p class="largest loud highlight signup text-center">
-				<a href="{{ object.reg_url }}">Register online today!</a>
-				</p>
-				{% endif %}
-
-				{% if object.entry_form %}
-				<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
-				{% endif %}
+			{% comment %}
+			{% if object.reg_url %}
+			<p class="largest loud highlight signup text-center">
+			<a href="{{ object.reg_url }}">Register online today!</a>
 			</p>
+			{% endif %}
+			{% endcomment %}
+
+			{% if not object.is_finished %}
+			<p><a class="btn btn-large btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+			{% endif %}
 
 			{% if object.get_reg_dates %}
 	            <p><strong><em>Entry fee:</em></strong></p>
@@ -120,15 +131,17 @@
 				</ul>
 			{% endif %}
 
-            <p>{{ object.discounts|markdown }}</p>
+            {{ object.discounts|markdown }}
 
             {% if object.packet_pickup %}
-			<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|markdown }}</p>
+			<h3>Packet Pickup</h3>
+			{{ object.packet_pickup|markdown }}
 			{% endif %}
         {% endif %}
 
 		{% if object.lodging %}
-		<p><strong>Lodging:</strong> Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
+		<h3>Lodging:</h3>
+		<p>Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
 		{% endif %}
 
 		{% if object.get_race_reports %}
@@ -137,15 +150,14 @@
 
 		{% get_race_types_for_race object as race_types %}
 		{% if race_types %}
-		  <p><h3>Results:</h3>
+		  <h3>Results:</h3>
 		  <ul>
 		  {% for race_type in race_types %}
 			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
 			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
 			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
 		  {% endfor %}
-		</ul>
-		</p>
+		  </ul>
 		{% endif %}
 
 		{% render_facebook_like obj=object %}
@@ -171,6 +183,8 @@
 		{% endfor %}
 		{% endif %}
 
+		<hr>
+		<h3>Spectators and Volunteers</h3>
 
 		{% get_sponsors_for_object object as sponsor_list %}
 		{% if sponsor_list %}

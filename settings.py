@@ -115,12 +115,13 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
-    'core',
     'blog',
+    'core',
+    'events',
     'faq',
-    'news',
     'links',
     'members',
+    'news',
     'photos',
     'races',
     'runs',
@@ -133,6 +134,7 @@ SHORT_BASE_URL = 'http://lth.im/'
 
 SHORTEN_MODELS = {
     'B': 'blog.post',
+    'E': 'events.event',
     'F': 'faq.faq',
     'L': 'links.links',
     'M': 'members.member',

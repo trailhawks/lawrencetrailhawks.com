@@ -1,0 +1,51 @@
+{% extends base_template_name|default:"base.html" %}
+
+{% load core_tags %}
+{% load faq_tags %}
+{% load markup %}
+{% load photo_tags %}
+{% load micawber_tags %}
+{% load url from future %}
+
+{% block title %}{{ object.title }}{% endblock title %}
+
+{% block content %}
+<div class="main" id="main-two-columns">
+
+    <div class="left" id="main-content">
+
+        <h2>{{ object.title }}</h2>
+
+        {{ object.body|oembed:"600x600"|markdown }}
+
+        <h3>Races</h3>
+        <ul>
+            {% for race in object.races.all %}
+            <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
+            {% endfor %}
+        </ul>
+
+        {% render_facebook_like obj=object %}
+
+        {% get_faqs_for_object object as faq_list %}
+        {% if faq_list %}
+        <h3>Frequently Asked Questions</h3>
+        {% for faq in faq_list %}
+            <h4>{{ faq.question|oembed:"600x600"|markdown }}</h4>
+            {{ faq.answer|oembed:"600x600"|markdown }}
+        {% endfor %}
+        {% endif %}
+
+        {# include "comments/comments.html" #}
+    </div>
+
+    <div class="right sidebar" id="sidebar">
+        {{ object.get_machine_tags }}
+        {% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+        {% include "includes/flickr_photos.html" %}
+    </div>
+
+    <div class="clearer">&nbsp;</div>
+
+</div>
+{% endblock content %}

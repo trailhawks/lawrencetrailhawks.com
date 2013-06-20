@@ -1,50 +1,40 @@
 {% load race_tags %}
 
-<table border="1" cellpadding="10">
-    <tr align="center">
-        <th>Place</th>
-        <th>Bib</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Time</th>
-        <th>Award</th>
-        <th></th>
-    </tr>
-  {% for result in race_results %}
-    {% if result.course_record %}
-      {% ifequal result.racer.gender 1 %}
-        <tr bgcolor="CCFFFF">
-      {% else %}
-        <tr bgcolor="#FFCCCC">
-      {% endifequal %}
-    {% else %}
-    <tr>
-    {% endif %}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Place</th>
+            <th>Bib</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Time</th>
+            <th>Award</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for result in race_results %}
+        <tr class="{% if result.course_record %}success{% endif %}">
         {% if result.dq or result.dns or result.dnf %}
             <td>&mdash;</td>
-            <td>{{ result.bib_number }}</td>
-            <td><a name="#racer-{{ result.racer.pk }}"></a>{{ result.racer.full_name }}</td>
-            <td>{{ result.racer.get_gender_display }}</td>
-            {% if result.dq or result.dns or result.dnf %}
-                {% if result.dq %}
-                    <td>DQ</td>
-                {% else %}
-                    <td>{{ result.time }}</td>
-                {% endif %}
-            {% endif %}
-            <td>{{ result.place }}</td>
-            <td></td>
         {% else %}
             <td>{% ifchanged result.time %}{{ forloop.counter }}{% else %}&ndash;{% endifchanged %}</td>
-            <td>{{ result.bib_number }}</td>
-            <td><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
-            <td>{{ result.racer.get_gender_display }}</td>
-            <td>{{ result.time|replace_char:",:" }}</td>
-            <td>{{ result.place }}</td>
-            {% if result.course_record %}
-                <td>CR</td>
-            {% endif %}
         {% endif %}
+        <td>{{ result.bib_number }}</td>
+        <td><a name="#racer-{{ result.racer.pk }}"></a>{{ result.racer.full_name }}</td>
+        <td>{{ result.racer.get_gender_display }}</td>
+
+        {% if result.dq or result.dns or result.dnf %}
+            {% if result.dq %}
+                <td>DQ</td>
+            {% else %}
+                <td>{{ result.time }}</td>
+            {% endif %}
+        {% else %}
+            <td>{{ result.time|replace_char:",:" }}</td>
+        {% endif %}
+        <td>{{ result.place }}</td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
