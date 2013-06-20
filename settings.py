@@ -114,12 +114,13 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
-    'core',
     'blog',
+    'core',
+    'events',
     'faq',
-    'news',
     'links',
     'members',
+    'news',
     'photos',
     'races',
     'runs',
