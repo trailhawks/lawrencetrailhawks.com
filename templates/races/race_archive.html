@@ -6,35 +6,43 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		{% if upcoming_races %}
 		<h2>Upcoming Races</h2>
-		{% regroup upcoming_races by start_datetime|date:"Y" as race_list %}
-		{% for race in race_list %}
-		    <h3>{{ race.grouper }}</h3>
-		    <ul>
-		        {% for item in race.list %}
-				<li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a> ({{ item.start_datetime|date:"F j" }})</li>
-		        {% endfor %}
-		    </ul>
-		{% endfor %}
-		{% endif %}
 
-		{% if upcoming_races and completed_races %}
-		<hr>
-		{% endif %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>event</th>
+					<th>date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for race in upcoming_races %}
+				<tr>
+					<td><a href="{{ race.get_absolute_url }}">{{ race.title }}</a></td>
+					<td>{{ race.start_datetime }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-		{% if completed_races %}
-		<h2>Results</h2>
-		{% regroup completed_races by start_datetime|date:"Y" as race_list %}
-		{% for race in race_list %}
-		    <h3>{{ race.grouper }}</h3>
-		    <ul>
-		        {% for item in race.list %}
-				<li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a> ({{ item.start_datetime|date:"F j" }})</li>
-		        {% endfor %}
-		    </ul>
-		{% endfor %}
-		{% endif %}
+		<h2>Past Races</h2>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>event</th>
+					<th>date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for race in completed_races %}
+				<tr>
+					<td><a href="{{ race.get_absolute_url }}">{{ race.title }}</a></td>
+					<td>{{ race.start_datetime|date }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 
 	<div class="right sidebar" id="sidebar">

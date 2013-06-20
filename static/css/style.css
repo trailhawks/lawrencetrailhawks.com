@@ -1,4 +1,4 @@
-/*  
+/*
 Template name: Simple Organization
 Template URI: http://templates.arcsin.se/simple-organization-website-template/
 Release date: 2009-09-20
@@ -19,7 +19,7 @@ http://templates.arcsin.se/license/
 
 /* Bellow the list of tweets "<li>" */
 
-#juitterContainer .twittLI{list-style:none;background:#FFF;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #CAF8C9;padding:3px;clear:both;height:25px;} 
+#juitterContainer .twittLI{list-style:none;background:#FFF;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #CAF8C9;padding:3px;clear:both;height:25px;}
 #juitterContainer .twittList SPAN.time{color:#777;font-size:0.9em}
 #juitterContainer .twittList A{color:#006600;} /*Links inside the tweets list */
 
@@ -36,7 +36,7 @@ http://templates.arcsin.se/license/
 /*end of Juitter CSS*/
 
 
-/* 
+/*
    Reset
 ------------------------------------------------------------------- */
 
@@ -50,8 +50,8 @@ a img {border: none;}
 :focus {outline: 0;}
 
 
-/* 
-   General 
+/*
+   General
 ------------------------------------------------------------------- */
 
 html {
@@ -67,8 +67,8 @@ body {
 }
 
 
-/* 
-   Typography 
+/*
+   Typography
 ------------------------------------------------------------------- */
 
 /* Headings */
@@ -219,6 +219,7 @@ table.data-table tr.even td {background: #FCFCFC;}
 .quiet, .quiet a {color: #999;}
 .loud, .loud a {color: #000;}
 .highlight, .highlight a {background:#ff0;}
+.signup a {text-decoration: underline;}
 
 .text-left {text-align: left;}
 .text-right {text-align: right;}
@@ -254,8 +255,8 @@ table.data-table tr.even td {background: #FCFCFC;}
 .label-orange {border-left-color: #FA8F6F;}
 
 
-/* 
-   Forms 
+/*
+   Forms
 ------------------------------------------------------------------- */
 
 label {
@@ -313,8 +314,8 @@ form .required {font-weight: bold;}
 
 
 
-/* 
-   Alignment 
+/*
+   Alignment
 ------------------------------------------------------------------- */
 
 /* General */
@@ -337,7 +338,7 @@ img.alignleft, img.left {margin: 0 1.5em 1em 0;}
 img.alignright, img.right {margin: 0 0 1em 1.5em;}
 
 
-/* Floats */   
+/* Floats */
 
 .left,.alignleft {float: left;}
 .right,.alignright {float: right;}
@@ -351,8 +352,8 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 }
 
 
-/* 
-   Separators 
+/*
+   Separators
 ------------------------------------------------------------------- */
 
 .content-separator, .archive-separator {
@@ -362,14 +363,14 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 	display: block;
 	font-size: 0;
 	line-height: 0;
-	height: 1px;	
+	height: 1px;
 }
 .content-separator {margin: 32px 0;}
 .archive-separator {margin-bottom: 20px;}
 
 
-/* 
-   Posts 
+/*
+   Posts
 ------------------------------------------------------------------- */
 
 .post {margin-bottom: 20px;}
@@ -421,8 +422,8 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 .archive-post-day {font: normal 1.6em Georgia,serif;}
 
 
-/* 
-   Comments 
+/*
+   Comments
 ------------------------------------------------------------------- */
 
 .comment-input-text textarea {width: 80%;}
@@ -524,8 +525,8 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 }
 
 
-/* 
-   Layout 
+/*
+   Layout
 ------------------------------------------------------------------- */
 
 /* Common */
@@ -646,7 +647,7 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 
 
 
-/* 
+/*
    Misc overriding classes
 ------------------------------------------------------------------- */
 
@@ -675,7 +676,7 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 .nolpadding {padding-left: 0;}
 
 
-/* 
+/*
    IE Fixes (zzz)
 ------------------------------------------------------------------- */
 

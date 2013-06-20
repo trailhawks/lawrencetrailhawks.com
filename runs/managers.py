@@ -6,26 +6,32 @@ from django.utils import timezone
 
 
 class RunQuerySet(QuerySet):
-    def today(self):
-        weekday = timezone.now().weekday()
-        return self.filter(active__exact=True, day_of_week=weekday)
+    def active(self):
+        return self.filter(active__exact=True)
 
     def next(self):
         for day in range(1, 6):
             weekday = (timezone.now() + datetime.timedelta(days=day)).weekday()
-            next_day = self.filter(active__exact=True, day_of_week=weekday)
+            next_day = self.active().filter(day_of_week=weekday)
             if next_day.count():
                 return next_day
 
         return []
+
+    def today(self):
+        weekday = timezone.now().weekday()
+        return self.active().filter(day_of_week=weekday)
 
 
 class RunManager(Manager):
     def get_query_set(self):
         return RunQuerySet(self.model, using=self._db)
 
-    def today(self):
-        return self.get_query_set().today()
+    def active(self):
+        return self.get_query_set().active()
 
     def next(self):
         return self.get_query_set().next()
+
+    def today(self):
+        return self.get_query_set().today()

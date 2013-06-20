@@ -17,11 +17,42 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
+		<h2>{{ object.title }} - {{ object.start_datetime|date }}</h2>
+
+		{% if not object.is_finished %}
+		<h2><a href="{{ object.reg_url }}">[-- REGISTER TODAY --]</a></h2>
+
+		{% if object.registration_set.count %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Price level</th>
+					<th></th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for registration in object.registration_set.all %}
+				<tr class="{% if registration.has_expired %}highlight{% endif %}">
+					<td>{{ registration.description }}</td>
+					<td>{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
+					<td>${{ registration.reg_cost }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+
+		{% endif %}
+
+		<h2>Event Information</h2>
+
+		<h3>Location</h3>
+
 		<h4>{{ object.slogan }}</h4>
 
         {% if object.logo %}
-          <img src="/site_media/{{object.logo}}" width="400" />
+          <img src="/site_media/{{ object.logo }}" width="400" />
         {% endif %}
 		<br />
 
@@ -65,12 +96,15 @@
 
 		{% if not object.get_overall_results %}
 			<p>
-				<strong>Registration:</strong> {{ object.reg_description }}<br />
-				{% if object.reg_url %}
-				For online registration click <a href="{{object.reg_url}}">here</a>.<br />
-				{% endif %}
+				<strong>Registration:</strong>
 
-				<a class="btn btn-large btn-primary" href="{{ object.reg_url }}">Register!</a>
+				{{ object.reg_description|markdown }}<br />
+
+				{% if object.reg_url %}
+				<p class="largest loud highlight signup text-center">
+				<a href="{{ object.reg_url }}">Register online today!</a>
+				</p>
+				{% endif %}
 
 				{% if object.entry_form %}
 				<br />For a printable entry form click <a href="/site_media/{{ object.entry_form }}">here</a>.<br />
@@ -86,7 +120,7 @@
 				</ul>
 			{% endif %}
 
-            <p>{{ object.discounts }}</p>
+            <p>{{ object.discounts|markdown }}</p>
 
             {% if object.packet_pickup %}
 			<p><strong>Packet Pickup:</strong> {{ object.packet_pickup|markdown }}</p>

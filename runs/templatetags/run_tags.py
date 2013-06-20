@@ -16,4 +16,4 @@ def get_todays_runs(context):
 
 @register.assignment_tag(takes_context=True)
 def get_weekly_runs(context):
-    return Run.objects.all()
+    return Run.objects.active()

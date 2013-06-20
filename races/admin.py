@@ -19,7 +19,8 @@ class RegistrationInline(admin.TabularInline):
 
 
 class RegistrationAdmin(admin.ModelAdmin):
-    raw_id_fields = ('race',)
+    list_display = ['description', 'race', 'reg_date', 'end_date', 'reg_cost']
+    raw_id_fields = ['race']
 
 
 class RaceAdmin(admin.ModelAdmin):
