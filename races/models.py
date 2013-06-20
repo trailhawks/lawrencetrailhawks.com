@@ -96,25 +96,20 @@ class Race(MachineTagMixin, ShortUrlMixin):
         return self.report_set.all()
 
     @property
-    def get_reg_dates(self):
-        return self.registration_set.all().order_by('reg_date')
-
-    @property
     def get_race_type_results(self):
         return self.result_set.values_list('race_type__name', flat=True).distinct()
 
     @property
     def is_finished(self):
-        if self.result_set.count == 0:
-            return False
-        else:
-            return True
+        return not self.result_set.count() == 0
 
 
 class Registration(models.Model):
-    reg_date = models.DateField(verbose_name="Registration Date")
-    reg_cost = models.IntegerField(verbose_name="Registration Cost")
     race = models.ForeignKey(Race)
+    description = models.CharField(max_length=100, blank=True, null=True)
+    reg_date = models.DateField("Registration Date")
+    end_date = models.DateField("End Date", blank=True, null=True)
+    reg_cost = models.IntegerField("Registration Cost")
 
     class Meta:
         verbose_name = _('Registration Dates')
@@ -122,6 +117,12 @@ class Registration(models.Model):
 
     def __unicode__(self):
         return "%s %s" % (self.race.title, self.reg_date)
+
+    @property
+    def has_expired(self):
+        if self.end_date:
+            return datetime.datetime.now() < self.end_date
+        return False
 
 
 class EmergencyContact(models.Model):

@@ -17,11 +17,42 @@
 <div class="main" id="main-two-columns">
 
 	<div class="left" id="main-content">
-		<h2>{{ object.annual|capfirst }} {{ object.title }}{% if object.get_overall_results %} Results{% endif %}</h2>
+		<h2>{{ object.title }} - {{ object.start_datetime|date }}</h2>
+
+		{% if not object.is_finished %}
+		<h2><a href="{{ object.reg_url }}">[-- REGISTER TODAY --]</a></h2>
+
+		{% if object.registration_set.count %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Price level</th>
+					<th></th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for registration in object.registration_set.all %}
+				<tr class="{% if registration.has_expired %}highlight{% endif %}">
+					<td>{{ registration.description }}</td>
+					<td>{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
+					<td>${{ registration.reg_cost }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+
+		{% endif %}
+
+		<h2>Event Information</h2>
+
+		<h3>Location</h3>
+
 		<h4>{{ object.slogan }}</h4>
 
         {% if object.logo %}
-          <img src="/site_media/{{object.logo}}" width="400" />
+          <img src="/site_media/{{ object.logo }}" width="400" />
         {% endif %}
 		<br />
 
