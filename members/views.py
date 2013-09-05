@@ -2,6 +2,7 @@ import csv
 
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import loader
@@ -42,7 +43,7 @@ def officer_list(request):
             msg.attach_alternative(message_html, 'text/html')
             msg.send()
 
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect(reverse('thanks'))
     else:
         form = ContactForm()
 

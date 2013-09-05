@@ -4,13 +4,13 @@ from django.views.generic.list import ListView
 from .models import Run
 
 
-class RunDetailView(DetailView):
+class RunDetail(DetailView):
     model = Run
     slug_field = 'slug'
 
 
-class RunListView(ListView):
+class RunList(ListView):
     model = Run
 
     def get_queryset(self):
-        return super(RunListView, self).get_queryset().active()
+        return super(RunList, self).get_queryset().active()
