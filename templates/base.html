@@ -1,10 +1,13 @@
-<html>{% load url from future %}
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Lawrence Trail Hawks {% endblock title %}</title>
     <meta name="google-site-verification" content="2E8N9HpaAbhAW34jsh9AS-jtFQXqtbIImO6nrtk24CY" />
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="description" content=""/>
-	<meta name="keywords" content="lawrence trail hawks, trailhawks, running, trail running, trailrunning, lawrence kansas, lawrence ks" />
-	<meta name="author" content="" />
+    <meta name="keywords" content="lawrence trail hawks, trailhawks, running, trail running, trailrunning, lawrence kansas, lawrence ks" />
+    <meta name="author" content="" />
     <meta property="og:site_name" content="Lawrence Trail Hawks"/>
 {% comment %}
 <meta property="og:type" content=""/>
@@ -13,73 +16,93 @@
 <meta property="og:image" content=""/>
 <meta property="og:description" content=""/>
 {% endcomment %}
-    <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/site_media/css/bootstrap.css" media="screen" />
-	<title>{% block title %}Lawrence Trailhawks {% endblock %}</title>
-</head>
-<body>
-	<div id="site-wrapper">
-	{% block header %}
-		<div id="header">
-			<div id="top">
-				<div class="left" id="logo">
-					<a href="/"><img src="/site_media/img/hawk-logo.jpg" alt="" width="259" height="179" /></a>
-				</div>
-				<div class="left navigation" id="main-nav">
-					<ul class="tabbed">
-                        {% comment %}<li {% if request.PATH_INFO == '/' %}class="current-tab"{% endif %}><a href="/">Home</a></li>{% endcomment %}
-						<li {% if request.PATH_INFO == '/events/' %}class="current-tab"{% endif %}><a href="{% url 'event_list' %}">Events</a></li>
-						<li><a href="/runs/">Runs</a></li>
-						<li><a href="/blog/">Blog</a></li>
-						<li><a href="/photos/">Photos</a></li>
-						<li><a href="/links/">Links</a></li>
-					</ul>
-					<div class="clearer">&nbsp;</div>
-				</div>
-				<div class="clearer">&nbsp;</div>
-			</div>
-		</div>
-	{% endblock header %}
 
-    {% block sub_nav %}{% endblock sub_nav %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    {% block content %}{% endblock content %}
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font-awesome.css" rel="stylesheet">
 
-	{% block footer %}
-	<div id="footer">
-		<div class="left" id="footer-left">
-            <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." class="left" /></a>
-			<a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-            &copy; 2009-{% now "Y" %} Lawrence Trail Hawks.<br />All rights Reserved
-			<p class="quiet"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></p>
-            <div class="clearer">&nbsp;</div>
-		</div>
-		<div class="right" id="footer-right">
-			<p class="large">
-                <strong><a href="/signup/">Join Us</a></strong>
-                <span class="text-separator">|</span>
-                <a href="/contact/">Contact us</a>
-                <span class="text-separator">|</span>
-                <a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&ref=ts">Facebook</a>
-                <span class="text-separator">|</span>
-                <a href="http://www.twitter.com/trailhawks">Twitter</a>
-                <span class="text-separator">|</span>
-                <a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/">Yahoo! Group</a>
-                <span class="text-separator">|</span>
-                <a href="http://www.flickr.com/photos/trailhawks">Flickr</a>
-                <span class="text-separator">|</span>
-                <a href="https://github.com/organizations/TrailHawks">Source</a>
-                <span class="text-separator">|</span>
-                <a href="#top" class="quiet">Page Top &uarr;</a>
-            </p>
-		</div>
-		<div class="clearer">&nbsp;</div>
-	</div>
-	{% endblock footer %}
-</div>
-<script type="text/javascript" src="/site_media/js/jquery-1.3.1.min.js"></script>
-<script type="text/javascript" src="/site_media/js/jquery.juitter.js"></script>
-<script type="text/javascript" src="/site_media/js/system.js"></script>
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="{% url 'event_list' %}">Events</a></li>
+            <li><a href="{% url 'run_list' %}">Runs</a></li>
+            <li><a href="{% url 'blog_list' %}">Blog</a></li>
+            <li><a href="{% url 'photo_list' %}">Photos</a></li>
+            <li><a href="{% url 'link_list' %}">Links</a></li>
+            <li><a href="{% url 'sponsor_list' %}">Sponsors</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+        <h1 class="muted">Lawrence Trail Hawks</h1>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+        {% block sub_nav %}{% endblock sub_nav %}
+        </div>
+      </div>
+
+      {% block content-wrapper %}
+      <div class="row">
+        <div class="col-md-12">
+        {% block content %}{% endblock content %}
+        </div>
+      </div>
+      {% endblock content-wrapper %}
+
+      <hr>
+    <footer>
+      {% block footer %}
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <ul class="nav nav-pills">
+                <li><a href="/signup/"><i class="icon-plus-sign"></i> Join Us</a></li>
+                <li><a href="{% url 'contact' %}"><i class="icon-envelope"></i> Contact us</a></li>
+                <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="icon-group"></i> Yahoo! Group</a></li>
+                <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="icon-facebook-sign"></i> Facebook</a></li>
+                <li><a href="http://www.twitter.com/trailhawks"><i class="icon-twitter-sign"></i> Twitter</a></li>
+                <li><a href="http://www.flickr.com/photos/trailhawks"><i class="icon-flickr"></i> Flickr</a></li>
+                <li><a href="https://github.com/organizations/TrailHawks"><i class="icon-github-sign"></i> Github</a></li>
+            </ul>
+            <hr>
+            <p>2009-{% now "Y" %} Lawrence Trail Hawks. All rights Reserved</p>
+          </div>
+          <div class="col-md-2">
+              <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+          </div>
+          <div class="col-md-2">
+              <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
+          </div>
+        </div>
+      </div>
+      {% endblock footer %}
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-min.js"></script>
+
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -89,5 +112,6 @@ try {
 var pageTracker = _gat._getTracker("UA-16156214-1");
 pageTracker._trackPageview();
 } catch(err) {}</script>
-</body>
+
+  </body>
 </html>

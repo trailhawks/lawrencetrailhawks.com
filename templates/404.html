@@ -1,26 +1,20 @@
 {% extends base_template_name|default:"base.html" %}
 
+
 {% block title %}Page not found{% endblock %}
 
+
 {% block content %}
-<div class="main" id="main-two-columns">
+<div class="row">
+    <div class="col-md-8 well">
+        <h2>Uh oh! Good job the page you were trying to get couldn't be found.</h2>
+        <h3>I couldn't find the page you were looking for so here's a
+        Tarsiers with his beloved stick.</h3>
+        <img src="{{ STATIC_URL }}img/stick.jpg" class="img-responsive">
+    </div>
 
-	<div class="left" id="main-content">
-          <h2>Uh oh! Good job the page you were trying to get couldn't
-              be found. </h2>
-          <br>
-          <h3>I couldn't find the page you were looking for so here's a
-          Tarsiers with his beloved stick.</h3>
-            <img src="/site_media/img/stick.jpg">
-      </div>
-
-	<div class="right sidebar" id="sidebar">
-
-		{% include "includes/flickr_photos.html" %}
-
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
 </div>
 {% endblock content %}

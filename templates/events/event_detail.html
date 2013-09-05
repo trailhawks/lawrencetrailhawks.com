@@ -10,13 +10,12 @@
 {% block title %}{{ object.title }}{% endblock title %}
 
 {% block content %}
-<div class="main" id="main-two-columns">
-
-    <div class="left" id="main-content">
+<div class="row">
+    <div class="col-md-8">
 
         <h2>{{ object.title }}</h2>
 
-        {{ object.body|oembed:"600x600"|markdown }}
+        <div class="lead">{{ object.body|oembed:"600x600"|markdown }}</div>
 
         <h3>Races</h3>
         <ul>
@@ -39,13 +38,17 @@
         {# include "comments/comments.html" #}
     </div>
 
-    <div class="right sidebar" id="sidebar">
-        {{ object.get_machine_tags }}
+    <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+          </div>
+          <div class="panel-body">
+            {{ object.get_machine_tags }}
+          </div>
+        </div>
         {% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
         {% include "includes/flickr_photos.html" %}
     </div>
-
-    <div class="clearer">&nbsp;</div>
-
 </div>
 {% endblock content %}

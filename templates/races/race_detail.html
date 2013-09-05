@@ -14,20 +14,44 @@
 {% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
 
 {% block content %}
-<div class="main" id="main-two-columns">
+<div class="row">
+    <div class="col-md-8">
 
-	<div class="left" id="main-content">
-		<h2>{{ object.title }} - {{ object.start_datetime|date }}</h2>
+		<h1>{{ object.title }} <small>{{ object.start_datetime|date }}</small></h1>
+
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Warning!</h4>
+			Best check yo self, you're not...
+		</div>
+
+		<div class="alert alert-warning">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Warning!</h4>
+			Best check yo self, you're not...
+		</div>
+
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Warning!</h4>
+			Best check yo self, you're not...
+		</div>
+
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Warning!</h4>
+			Best check yo self, you're not...
+		</div>
 
 		{% if not object.is_finished %}
-		<p><a class="btn btn-large btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+		<p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
 
 		{% if object.registration_set.count %}
 		<table class="table table-hover table-striped">
 			<thead>
 				<tr>
 					<th>Price level</th>
-					<th></th>
+					<th>Dates</th>
 					<th>Price</th>
 				</tr>
 			</thead>
@@ -119,7 +143,7 @@
 			{% endcomment %}
 
 			{% if not object.is_finished %}
-			<p><a class="btn btn-large btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+			<p><a class="btn btn-lg btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
 			{% endif %}
 
 			{% if object.get_reg_dates %}
@@ -198,15 +222,24 @@
 
 		<hr>
 		{% include "comments/comments.html" %}
-
 	</div>
 
-	<div class="right sidebar" id="sidebar">
+    <div class="col-md-4">
+    	<p><a class="btn btn-lg btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+    	<p><a class="btn btn-lg btn-block btn-success" href="{{ object.reg_url }}">Volunteer?</a></p>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+          </div>
+          <div class="panel-body">
+            <p>{{ object.get_short_url }}</p>
+            <p>{{ object.get_machine_tags }}</p>
+          </div>
+        </div>
+
 		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
 		{% include "includes/flickr_photos.html" with photos=photos_list %}
 	</div>
-
-	<div class="clearer">&nbsp;</div>
-
 </div>
 {% endblock content %}

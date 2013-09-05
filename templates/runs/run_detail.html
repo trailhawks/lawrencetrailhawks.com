@@ -1,4 +1,5 @@
-{% extends "runs/base.html" %}
+{% extends base_template_name|default:"base.html" %}
+
 
 {% load core_tags %}
 {% load faq_tags %}
@@ -6,12 +7,14 @@
 {% load markup %}
 {% load photo_tags %}
 
+
 {% block title %}{{ object.name }}{% endblock title %}
 
-{% block content %}
-<div class="main" id="main-two-columns">
 
-	<div class="left" id="main-content">
+{% block content %}
+<div class="row">
+	<div class="col-md-8">
+
 		<h2>{{ object.name }}</h2>
 		{% if object.get_run_news %}
 			<h3>Latest News</h3>
@@ -21,9 +24,9 @@
 			{% endfor %}
 		</p>
 		{% endif %}
+		<p class="lead">{{ object.details }}</p>
 		<p><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</p>
 		<p><strong>Where:</strong> {{ object.location }}</p>
-		<p><strong>Details:</strong> {{ object.details }}</p>
 		<p><strong>Contact:</strong> <a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></p>
 		{{ object.map_iframe|safe}}
 
@@ -39,15 +42,11 @@
 		{% endif %}
 
 		{% include "comments/comments.html" %}
-
 	</div>
 
-	<div class="right sidebar" id="sidebar">
+	<div class="col-md-4">
 		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
 		{% include "includes/flickr_photos.html" with photos=photos_list %}
 	</div>
-
-	<div class="clearer">&nbsp;</div>
-
 </div>
 {% endblock content %}

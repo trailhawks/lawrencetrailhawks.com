@@ -1,0 +1,26 @@
+{% comment %}
+based on: http://qz.com/39568/how-a-bogus-claim-about-instagram-losing-users-made-facebooks-stock-drop-nearly-3/
+{% endcomment %}
+<div class="short-url">
+    <span>Share this:</span>
+    <input type="text" name="shortURL" value="{{ object.get_short_url }}" />
+    <div class="share-buttons">
+        <ul data-author="<%= item.author %>" data-title="<%= item.title %>" data-on="<%= item.obsession %>">
+            <li class="email">
+                <a title="Email" class="share-action email" href="mailto:?subject=TrailHawks: {% firstof object.title|escape object.name|escape %}&amp;body={{ object.get_short_url }}%0A%0A{% firstof object.description|escape object.body|escape %}%0A%0A" target="_blank">Email</a>
+            </li>
+
+            <li class="twitter">
+                <a title="Tweet" class="share-action twitter" href="https://twitter.com/share?text={% firstof object.title|escape object.name|escape %}&amp;url={{ object.get_short_url }}&amp;via=trailhawks" target="_blank">Twitter</a>
+            </li>
+
+            <li class="facebook">
+                <a title="Share on Facebook" class="share-action facebook" href="https://www.facebook.com/sharer.php?s=100&amp;p[title]={% firstof object.title|escape object.name|escape %}&amp;p[url]={{ object.get_short_url }}&amp;p[summary]={% firstof object.description|escape object.body|escape %}&amp;p[images][0]=<%= item.image %>" target="_blank">Facebook</a>
+            </li>
+
+            <li class="instapaper">
+                <a title="Read Later on Instapaper" class="share-action instapaper" href="http://www.instapaper.com/hello2?url={{ object.get_short_url }}&amp;title={% firstof object.title|escape object.name|escape %}&amp;description={% firstof object.description|escape object.body|escape %}" target="_blank">Instapaper</a>
+            </li>
+        </ul>
+    </div>
+</div>

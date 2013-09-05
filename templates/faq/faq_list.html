@@ -1,14 +1,16 @@
 {% extends base_template_name|default:"base.html" %}
 
+
 {% load markup %}
+
 
 {% block title %}FAQ{% endblock title %}
 
-{% block content %}
-<div class="main" id="main-two-columns">
 
-	<div class="left" id="main-content">
-		<h2>Frequently Asked Questions</h2>
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+		<h1>Frequently Asked Questions</h1>
 
 		{% regroup object_list by content_type as obj_list %}
 		{% for obj in obj_list %}
@@ -26,11 +28,8 @@
 		{% endfor %}
 	</div>
 
-	<div class="right sidebar" id="sidebar">
-		{% include "includes/flickr_photos.html" %}
-	</div>
-
-	<div class="clearer">&nbsp;</div>
-
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
 </div>
 {% endblock content %}
