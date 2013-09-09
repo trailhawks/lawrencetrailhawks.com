@@ -22,6 +22,8 @@ class Run(MachineTagMixin, ShortUrlMixin):
     day_of_week = models.IntegerField(choices=DAY_OF_WEEK, default=0)
     run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
     location = models.TextField()
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True, blank=True)
     map_iframe = models.TextField(blank=True, null=True)
     map_link = models.URLField(blank=True, null=True, help_text="Link to google maps location")
     details = models.TextField()
@@ -41,3 +43,9 @@ class Run(MachineTagMixin, ShortUrlMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('run_detail', (), {'slug': self.slug})
+    @property
+    def is_geocoded(self):
+        if not self.latitude == 0 and not self.longitude == 0:
+            return True
+        else:
+            return False

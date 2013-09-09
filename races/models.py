@@ -54,8 +54,11 @@ class Race(MachineTagMixin, ShortUrlMixin):
     course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
     location = models.TextField()
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True, blank=True)
     location_iframe = models.TextField(blank=True, null=True)
     map_link = models.URLField(blank=True, null=True, help_text="Link to google maps or other mapping software pointing towards the start location")
+
     reg_url = models.URLField(blank=True, null=True, help_text="Link to registartion flyer or to registration URL for online signup.")
     reg_description = models.TextField()
     entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
@@ -80,6 +83,13 @@ class Race(MachineTagMixin, ShortUrlMixin):
             'month': self.start_datetime.strftime("%b").lower(),
             'day': self.start_datetime.strftime("%d"),
             'slug': self.slug})
+
+    @property
+    def is_geocoded(self):
+        if not self.latitude == 0 and not self.longitude == 0:
+            return True
+        else:
+            return False
 
     @property
     def get_overall_results(self):
