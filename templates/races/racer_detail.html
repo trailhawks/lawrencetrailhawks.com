@@ -32,8 +32,30 @@
       {% endif %}
     </div>
 
+    {% include "panels/share.html" %}
+    {% include "panels/meta.html" %}
+
     <div class="col-md-4">
-        {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Meta</h3>
+          </div>
+          <div class="panel-body">
+            <dl>
+              <dt>short url</dt>
+              <dd>{{ object.get_short_url }}</dd>
+
+              <dt>machine tags</dt>
+              <dd>{{ object.get_machine_tags }}</dd>
+              {% if photos %}
+              <dt>photos</dt>
+              <dd>{{ photos|length }}</dd>
+              {% endif %}
+            </dl>
+          </div>
+        </div>
+
+        {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos %}
         {% include "includes/flickr_photos.html" %}
     </div>
 </div>

@@ -15,8 +15,10 @@
 
 	{% for sponsor in object_list %}
 		<div>
-			<h3>{{ sponsor }}</h3>
-			<div><a href="{{ sponsor.url }}"><img src="{% if sponsor.logo %}{{ sponsor.logo.url }}{% endif %}" alt="{{ sponsor.title }}" border="1"/>{{ sponsor.get_logo_url }}</a></div>
+			<h2>{{ sponsor.name }}</h2>
+            {% if sponsor.logo %}
+			<a href="{{ sponsor.url }}"><img class="img-responsive img-thumbnail" src="{{ sponsor.logo.url }}" alt="{{ sponsor.title }}">{{ sponsor.get_logo_url }}</a>
+            {% endif %}
 	    	{% if sponsor.address %}
 	    	<address>
 			{{ sponsor.address }}
@@ -24,6 +26,7 @@
 	    	{% endif %}
 			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
 		</div>
+        <hr>
 	{% endfor %}
 	</div>
 

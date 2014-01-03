@@ -43,9 +43,10 @@ class Run(MachineTagMixin, ShortUrlMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('run_detail', (), {'slug': self.slug})
-    @property
+
     def is_geocoded(self):
-        if not self.latitude == 0 and not self.longitude == 0:
+        if self.latitude and self.longitude:
             return True
         else:
             return False
+    is_geocoded.boolean = True

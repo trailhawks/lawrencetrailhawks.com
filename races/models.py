@@ -84,12 +84,12 @@ class Race(MachineTagMixin, ShortUrlMixin):
             'day': self.start_datetime.strftime("%d"),
             'slug': self.slug})
 
-    @property
     def is_geocoded(self):
-        if not self.latitude == 0 and not self.longitude == 0:
+        if self.latitude and self.longitude:
             return True
         else:
             return False
+    is_geocoded.boolean = True
 
     @property
     def get_overall_results(self):

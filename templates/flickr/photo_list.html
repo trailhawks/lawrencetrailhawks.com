@@ -1,6 +1,13 @@
 {% extends base_template_name|default:"base.html" %}
 
 
+{% load waffle_tags %}
+
+{% switch use_thumbor %}
+{% load thumbor_tags %}
+{% endswitch %}
+
+
 {% block title %}Photos{% endblock title %}
 
 
@@ -11,8 +18,12 @@
 
 		<div class="row">
 	      	{% for photo in object_list %}
-	        <div class="col-md-4">
-				<a href="{{ photo.photopage_url }}"><img src="{{ photo.get_medium_url }}" class="img-responsive"></a>
+	        <div class="col-md-3">
+	        	{% switch use_thumbor %}
+		        	<a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=300 width=300 %}'></a>
+		        {% else %}
+					<a href="{{ photo.photopage_url }}"><img src="{{ photo.get_medium_url }}" class="img-responsive"></a>
+				{% endswitch %}
 	        	<p>{{ photo.description|safe }}</p>
 	        </div>
 	      	{% endfor %}

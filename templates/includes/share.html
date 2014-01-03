@@ -1,26 +1,34 @@
+{% load waffle_tags %}
+
 {% comment %}
 based on: http://qz.com/39568/how-a-bogus-claim-about-instagram-losing-users-made-facebooks-stock-drop-nearly-3/
 {% endcomment %}
-<div class="short-url">
-    <span>Share this:</span>
-    <input type="text" name="shortURL" value="{{ object.get_short_url }}" />
-    <div class="share-buttons">
-        <ul data-author="<%= item.author %>" data-title="<%= item.title %>" data-on="<%= item.obsession %>">
-            <li class="email">
-                <a title="Email" class="share-action email" href="mailto:?subject=TrailHawks: {% firstof object.title|escape object.name|escape %}&amp;body={{ object.get_short_url }}%0A%0A{% firstof object.description|escape object.body|escape %}%0A%0A" target="_blank">Email</a>
-            </li>
 
-            <li class="twitter">
-                <a title="Tweet" class="share-action twitter" href="https://twitter.com/share?text={% firstof object.title|escape object.name|escape %}&amp;url={{ object.get_short_url }}&amp;via=trailhawks" target="_blank">Twitter</a>
-            </li>
-
-            <li class="facebook">
-                <a title="Share on Facebook" class="share-action facebook" href="https://www.facebook.com/sharer.php?s=100&amp;p[title]={% firstof object.title|escape object.name|escape %}&amp;p[url]={{ object.get_short_url }}&amp;p[summary]={% firstof object.description|escape object.body|escape %}&amp;p[images][0]=<%= item.image %>" target="_blank">Facebook</a>
-            </li>
-
-            <li class="instapaper">
-                <a title="Read Later on Instapaper" class="share-action instapaper" href="http://www.instapaper.com/hello2?url={{ object.get_short_url }}&amp;title={% firstof object.title|escape object.name|escape %}&amp;description={% firstof object.description|escape object.body|escape %}" target="_blank">Instapaper</a>
-            </li>
-        </ul>
+{% flag use_share_panel %}
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                Share this: <input type="text" name="shortURL" value="{{ object.get_short_url }}">
+            </div>
+            <div class="form-group">
+                <a class="btn btn-default btn-sm" title="Share via Email" href="mailto:?subject=TrailHawks: {% firstof object.title|escape object.name|escape %}&amp;body={{ object.get_short_url }}%0A%0A{% firstof object.description|escape object.body|escape %}%0A%0A" target="_blank"><i class="fa fa-envelope"></i></a>
+                <a class="btn btn-default btn-sm" title="Share on Facebook" href="https://www.facebook.com/sharer.php?s=100&amp;p[title]={% firstof object.title|escape object.name|escape %}&amp;p[url]={{ object.get_short_url }}&amp;p[summary]={% firstof object.description|escape object.body|escape %}&amp;p[images][0]=<%= item.image %>" target="_blank"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-default btn-sm" title="Share on Twitter" href="https://twitter.com/share?text={% firstof object.title|escape object.name|escape %}&amp;url={{ object.get_short_url }}&amp;via=trailhawks" target="_blank"><i class="fa fa-twitter"></i></a>
+                <a class="btn btn-default btn-sm" title="Share on Google+" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url={{ object.get_short_url }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-default btn-sm" title="Share on Tumblr" href="" target="_blank"><i class="fa fa-tumblr"></i></a>
+            </div>
+        </form>
     </div>
 </div>
+{% comment %}
+<!--
+    <li><a href="{% url 'contact' %}"><i class="icon-envelope"></i> Contact us</a></li>
+    <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="icon-group"></i> Yahoo! Group</a></li>
+    <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="icon-facebook-sign"></i> Facebook</a></li>
+    <li><a href="http://www.twitter.com/trailhawks"><i class="icon-twitter-sign"></i> Twitter</a></li>
+    <li><a href="http://www.flickr.com/photos/trailhawks"><i class="icon-flickr"></i> Flickr</a></li>
+    <li><a href="https://github.com/organizations/TrailHawks"><i class="icon-github-sign"></i> Github</a></li>
+-->
+{% endcomment %}
+{% endflag use_share_panel %}

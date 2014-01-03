@@ -9,10 +9,12 @@ class RaceMixin(object):
     queryset = Race.objects.all()
     date_field = 'start_datetime'
     allow_future = True
+    navitem = 'races'
 
 
 class RaceIndex(TemplateView):
     template_name = 'races/race_archive.html'
+    navitem = 'races'
 
     def get_context_data(self, **kwargs):
         context = super(RaceIndex, self).get_context_data(**kwargs)
@@ -29,6 +31,7 @@ class RaceIndex(TemplateView):
 class RaceUpcomingList(ListView):
     queryset = Race.objects.upcoming()
     template_name = 'races/upcoming.html'
+    navitem = 'races'
 
 
 class RaceYear(RaceMixin, dates.YearArchiveView):
@@ -54,7 +57,9 @@ class RaceResultDetail(RaceMixin, dates.DateDetailView):
 
 class RacerDetail(DetailView):
     model = Racer
+    navitem = 'races'
 
 
 class RacerList(ListView):
     model = Racer
+    navitem = 'races'

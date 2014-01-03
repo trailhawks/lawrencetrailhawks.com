@@ -1,25 +1,37 @@
 akismet==0.2.0
-DateUtils==0.5.2
+DateUtils
 django-gravatar2==1.0.6
 django-ical==1.1
-micawber==0.2.5
 django-registration==0.8
+django-storages
 django-taggit==0.9.3
+django-waffle
+djrill==0.7.0
 Django>=1.5,<1.6
+fabric
 feedparser==5.1.2
 flickrapi==1.4.2
+gunicorn==0.17.2
 httplib2==0.7.6
 Markdown==2.2.1
-PIL==1.1.7
+micawber==0.2.5
+Pillow==2.1.0
 psycopg2==2.4.5
 raven==2.0.10
 recaptcha-client==1.0.6
 requests==0.14.2
 simplejson==2.6.2
-South==0.7.6
+South==0.8.2
+Unipath==1.0
+
+dogapi
+git+https://github.com/conorbranagan/django-datadog.git#egg=django-datadog-git
 
 git+https://github.com/jefftriplett/django-syncr.git#egg=django-syncr-git
+git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-migration-git
 
 # for remote thumbnail support
-thumbor==3.6.10
-libthumbor==1.0.1
+thumbor
+django-thumbor
+libthumbor
+git+https://github.com/willtrking/thumbor_aws.git#egg=thumbor_aws-git

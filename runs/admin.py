@@ -7,7 +7,7 @@ from news.admin import NewsInline
 
 class RunAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['name']}
-    list_display = ['day_of_week', 'name', 'run_time', 'active']
+    list_display = ['day_of_week', 'name', 'run_time', 'active', 'is_geocoded']
     list_filter = ['day_of_week', 'run_time']
     raw_id_fields = ['contact']
     inlines = (

@@ -1,16 +1,19 @@
 import os
 
+from unipath import FSPath as Path
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
-DEBUG = TEMPLATE_DEBUG = True
+#PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+PROJECT_ROOT = Path(__file__).ancestor(1)
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Nick Lang', 'nick.lang@example.com'),
 )
 
 MANAGERS = ADMINS
-
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -31,6 +34,17 @@ USE_L10N = True
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
 
+MEDIA_ROOT = PROJECT_ROOT.child('media_root')
+MEDIA_URL = '/media/'
+#MEDIA_URL = 'http://s3.lth.im.s3.amazonaws.com/'
+
+STATIC_ROOT = PROJECT_ROOT.child('static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    PROJECT_ROOT.child('assets')
+]
+
+'''
 # These are for user-uploaded content.
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
 MEDIA_URL = '/media/'
@@ -42,6 +56,7 @@ STATIC_URL = '/site_media/'
 STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, 'static'),
 ]
+'''
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -89,6 +104,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'waffle.middleware.WaffleMiddleware',
+    'datadog.middleware.DatadogMiddleware',
 ]
 
 PREREQ_APPS = [
@@ -105,13 +122,21 @@ PREREQ_APPS = [
     'django.contrib.admin',
 
     #'djcelery',
+    #'gypsy_weather',
+    'datadog',
+    'django_extensions',
     'django_gravatar',
+    'django_thumbor',
+    'djrill',
     'micawber.contrib.mcdjango',
     'shorturls',
     'south',
+    'storage_migration',
+    'storages',
     'syncr.flickr',
     'syncr.twitter',
     'taggit',
+    'waffle',
 ]
 
 PROJECT_APPS = [

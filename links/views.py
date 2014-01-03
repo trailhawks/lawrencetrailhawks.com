@@ -6,7 +6,9 @@ from .models import Links
 
 class LinkDetailView(DetailView):
     model = Links
+    navitem = 'links'
 
 
 class LinkListView(ListView):
     model = Links
+    navitem = 'links'

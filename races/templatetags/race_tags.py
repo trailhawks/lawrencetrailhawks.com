@@ -28,7 +28,7 @@ def get_latest_races(context):
 
 @register.assignment_tag(takes_context=True)
 def get_results_for_race(context, race, race_type=None, gender=None):
-    queryset = Result.objects.filter(race=race)
+    queryset = Result.objects.filter(race=race).order_by('dq', 'dnf', 'dns', 'time')
     if race_type:
         queryset = queryset.filter(race_type__pk=race_type.pk)
     if gender:

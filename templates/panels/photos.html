@@ -1,0 +1,57 @@
+{% load flickr %}
+{% load micawber_tags %}
+{% load photo_tags %}
+{% load waffle_tags %}
+
+{% switch use_thumbor %}
+{% load thumbor_tags %}
+{% endswitch %}
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Photos</h3>
+  </div>
+  <div class="panel-body">
+    {% if not photos %}
+      {% get_random_photos 7 as photos %}
+      {% for photo in photos %}
+        {% switch use_thumbor %}
+          <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=300 width=300 %}'></a>
+        {% endswitch use_thumbor %}
+      {% endfor %}
+    {% endif %}
+
+    <div class="row">
+    {% for photo in photos %}
+      {% comment %}
+      <p><img src='{% thumbor_url photo.get_medium_url|remove_http height=240 width=240 smart=True fit_in=True %}'></p>
+      {% endcomment %}
+      {% if forloop.first %}
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="tumbnail">
+            {% switch use_thumbor %}
+              <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=400 width=400 %}'></a>
+            {% else %}
+              {{ photo.photopage_url|oembed:"400x400" }}
+            {% endswitch %}
+          </div>
+        </div>
+      </div>
+      {% else %}
+
+      <div class="col-sm-12 col-md-4">
+        <div class="tumbnail">
+            {% switch use_thumbor %}
+              <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=200 width=200 %}'></a>
+            {% else %}
+              {{ photo.photopage_url|oembed:"100x100" }}
+            {% endswitch %}
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
