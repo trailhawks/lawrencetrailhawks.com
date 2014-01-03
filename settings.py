@@ -38,7 +38,7 @@ MEDIA_ROOT = PROJECT_ROOT.child('media_root')
 MEDIA_URL = '/media/'
 #MEDIA_URL = 'http://s3.lth.im.s3.amazonaws.com/'
 
-STATIC_ROOT = PROJECT_ROOT.child('static')
+STATIC_ROOT = PROJECT_ROOT.child('static_root')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     PROJECT_ROOT.child('assets')
