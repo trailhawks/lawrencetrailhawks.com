@@ -6,11 +6,11 @@ from .models import Post
 class PostMixin(object):
     queryset = Post.objects.public()
     date_field = 'publish'
+    navitem = 'blog'
 
 
 class PostArchive(PostMixin, dates.ArchiveIndexView):
     make_object_list = True
-    pass
 
 
 class PostYearArchive(PostMixin, dates.YearArchiveView):
