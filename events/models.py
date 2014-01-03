@@ -6,20 +6,7 @@ from shorturls.models import ShortUrlMixin
 
 from core.models import MachineTagMixin
 from races.models import Race
-
-
-class DraftManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(DraftManager, self).get_query_set().filter(status__exact=Event.STATUS_DRAFT)
-        return queryset
-
-
-class PublicManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(PublicManager, self).get_query_set().filter(status__exact=Event.STATUS_PUBLIC)
-        return queryset
+from .managers import EventManager
 
 
 class Event(MachineTagMixin, ShortUrlMixin):
@@ -36,9 +23,7 @@ class Event(MachineTagMixin, ShortUrlMixin):
     races = models.ManyToManyField(Race, related_name='events')
     #allow_comments = models.BooleanField(_('allow comments'), default=True)
 
-    objects = models.Manager()
-    published_objects = PublicManager()
-    draft_objects = DraftManager()
+    objects = EventManager()
 
     class Meta:
         verbose_name = _('Event')

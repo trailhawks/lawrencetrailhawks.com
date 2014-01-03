@@ -6,8 +6,10 @@ from .models import Event
 
 class EventDetailView(DetailView):
     model = Event
+    navitem = 'events'
     slug_field = 'slug'
 
 
 class EventListView(ListView):
-    queryset = Event.published_objects.all()
+    queryset = Event.objects.public()
+    navitem = 'events'
