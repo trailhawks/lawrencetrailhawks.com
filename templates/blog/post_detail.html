@@ -12,7 +12,7 @@
 
       <h4>{{ object.publish|date}} <small>by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></small></h4>
 
-      {% if object.repost_url %}
+      {% if object.repost_url and object.repost_date %}
       <div class='original-post'>
       	<p>Originally published on <a href="{{ object.repost_url }}">{% firstof object.repost_date|date 'unknown' %}</a></p>
       </div>

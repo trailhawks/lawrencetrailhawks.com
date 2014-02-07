@@ -64,10 +64,14 @@ var polygon = L.polygon([
 
 
 {% block content %}
+
+<header class="masthead">
+	<h1>{{ object.title }}</h1>
+	<h3>{{ object.slogan }}</h3>
+</header>
+
 <div class="row">
     <div class="col-md-8">
-
-		<h1>{{ object.title }} <small>{{ object.start_datetime|date }}</small></h1>
 
         {% if object.logo %}
 		<div class="row">
@@ -237,7 +241,7 @@ var polygon = L.polygon([
 		{% if object.lodging %}
 		<hr>
 
-		<h3>Lodging:</h3>
+		<h3>Lodging</h3>
 
 		<p>Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
 		{% endif %}
@@ -250,7 +254,7 @@ var polygon = L.polygon([
 		{% if race_types %}
 		  <hr>
 
-		  <h3>Results:</h3>
+		  <h3>Results</h3>
 		  <ul>
 		  {% for race_type in race_types %}
 			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
@@ -261,52 +265,6 @@ var polygon = L.polygon([
 		{% endif %}
 
 		{% render_facebook_like obj=object %}
-
-		<hr>
-
-		<h3>Race Timeline</h3>
-
-		<div class="row">
-		    <table class="table">
-		    	<tbody>
-		    		<tr>
-					    <td>
-					    	{{ object.start_datetime|date:"F" }}<br>
-					    	{{ object.start_datetime|date:"Y" }}
-					    </td>
-					    <td>
-					    	<strong>{{ object.start_datetime|date:"M j" }}</strong><br>
-					    	race day
-					    </td>
-					</tr>
-				{% for registration in object.registration_set.all %}
-		    		<tr>
-					    <td>
-					    	{{ registration.reg_date|date:"F" }}<br>
-					    	{{ registration.reg_date|date:"Y" }}
-					    </td>
-					    <td>
-					    	<strong>{{ registration.reg_date|date:"M j" }}</strong><br>
-					    	{{ registration.description }}
-			    		</td>
-			    	</tr>
-		    		<tr>
-					    <td>
-					    	{{ registration.end_date|date:"F" }}<br>
-					    	{{ registration.end_date|date:"Y" }}
-			    		</td>
-			    		<td>
-					    	<strong>{{ registration.end_date|date:"M j" }}</strong><br>
-					    	registration increases to ${{ registration.reg_cost }}
-					    </td>
-					</tr>
-			{% endfor %}
-				</tbody>
-			</table>
-			{% get_news_for_object object as object_news %}
-			{{ object_news|length }}
-
-		</div>
 
 		{% get_links_for_object object as link_list %}
 		{% if link_list %}
@@ -346,21 +304,24 @@ var polygon = L.polygon([
 
 		<hr>
 
-		{% include "comments/comments.html" %}
+		{# include "comments/comments.html" #}
 	</div>
 
     <div class="col-md-4">
 		<ul class="nav nav-pills nav-stacked">
-			<li><a class="btn btn-block btn-lg btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></li>
-			<li><a class="btn btn-block btn-lg btn-success" href="{{ object.reg_url }}">Volunteer?</a></li>
-			<li><a class="btn btn-block btn-default" href="#">News</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Register</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Atheletes</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Results</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Travel</a></li>
+			<li><a class="btn btn-block btn-default" href="{{ object.reg_url }}">Register</a></li>
 			<li><a class="btn btn-block btn-default" href="#">Volunteer</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Sponsors</a></li>
+			<li><a class="btn btn-block btn-default" href="#">News</a></li>
+
+			<!-- only visible if the other two are not... -->
+			<li><a class="btn btn-block btn-default" href="#">Results</a></li>
+
+			<li><a class="btn btn-block btn-default" href="#">Awards</a></li>
+			<li><a class="btn btn-block btn-default" href="#">Race Directors</a></li>
+
+			<li><a class="btn btn-block btn-default" href="#">Travel</a></li>
 			<li><a class="btn btn-block btn-default" href="#">Contact</a></li>
+			<li><a class="btn btn-block btn-default" href="#">Sponsors</a></li>
 		</ul>
 
         {% include "panels/meta.html" %}
