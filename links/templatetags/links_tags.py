@@ -17,7 +17,7 @@ def get_links_by_content_type(context, content_type):
 
 @register.assignment_tag(takes_context=True)
 def get_links_for_object(context, obj):
-    """Find Linkss for an object and all model types."""
+    """Find Links for an object and all model types."""
     query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
     query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
     queryset = Links.objects.filter(query)
