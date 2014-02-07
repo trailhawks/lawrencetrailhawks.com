@@ -19,9 +19,17 @@ def replace_char(value, arg):
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_races(context):
+def get_latest_race(context):
     try:
         return Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime')[0]
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
+def get_latest_races(context):
+    try:
+        return Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime')
     except:
         return None
 
