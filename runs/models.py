@@ -38,7 +38,7 @@ class Run(MachineTagMixin, ShortUrlMixin):
         ordering = ['day_of_week']
 
     def __unicode__(self):
-        return self.name
+        return '{0}: {1}'.format(self.get_day_of_week_display(), self.name)
 
     @models.permalink
     def get_absolute_url(self):
