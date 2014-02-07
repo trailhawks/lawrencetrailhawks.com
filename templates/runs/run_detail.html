@@ -5,6 +5,7 @@
 {% load faq_tags %}
 {% load mailhide %}
 {% load markup %}
+{% load news_tags %}
 {% load photo_tags %}
 
 
@@ -56,14 +57,18 @@ var polygon = L.polygon([
 	<div class="col-md-8">
 
 		<h2>{{ object.name }}</h2>
-		{% if object.get_run_news %}
-			<h3>Latest News</h3>
-			{% for item in object.get_run_news|slice:":3" %}
-				<h4 class="quiet">{{ item.pub_date|date }}</h4>
-				<p>{{ item.body }}</p>
-			{% endfor %}
-		</p>
-		{% endif %}
+
+        {% get_news_for_object object as news_list %}
+        {% if news_list %}
+        <h3>Latest News</h3>
+        {% for news in news_list|slice:":3" %}
+        <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+            <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
+            {{ news.body|markdown }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
 		<p class="lead">{{ object.details }}</p>
 		<p><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</p>
 		<p><strong>Where:</strong> {{ object.location }}</p>

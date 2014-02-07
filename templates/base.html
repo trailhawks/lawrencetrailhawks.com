@@ -48,7 +48,7 @@
             {% if weekly_runs %}
             <li class="divider"></li>
             {% for weekly_run in weekly_runs %}
-            <li><a href="{{ weekly_run.get_absolute_url }}">{{ weekly_run.name }}</a></li>
+            <li><a href="{{ weekly_run.get_absolute_url }}">{{ weekly_run }}</a></li>
             {% endfor %}
             <li class="divider"></li>
             <li><a href="{% url 'faq_list' %}#Race+Questions">Running FAQs?</a></li>

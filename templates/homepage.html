@@ -79,10 +79,12 @@
           </div>
           <div class="panel-body">
             {% get_latest_news num=4 as latest_news %}
-            {% for item in latest_news %}
-              <h4 class="">{{ item.pub_date|date }}</h4>
-              {{ item.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
-              <hr>
+            {% for news in latest_news %}
+            <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+              <h4 class="">{{ news.pub_date|date }}</h4>
+              {{ news.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
+            </div>
+            <hr>
             {% endfor %}
             <a class="btn btn-block btn-primary" href="{% url 'news_list' %}">more news</a>
           </div>
@@ -95,11 +97,24 @@
       <h2>Today's Run</h2>
       {% for run in runs.todays_run %}
         <h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
+
+        {% get_news_for_object run as news_list %}
+        {% for news in latest_news|slice:"1" %}
+        <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+          <h4 class="">{{ news.pub_date|date }}</h4>
+          {{ news.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
+        </div>
+        <hr>
+        {% endfor %}
+
         {% if run.get_run_news %}
         <h4>Latest News:</h4>
         {% for item in run.get_run_news|slice:":3" %}
           <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
         {% endfor %}
+
+
+
         {% endif %}
         <p><strong>Where: </strong>{{ run.location}} <a href="{{ run.map_link}}">(Directions?)</a></p>
         <p><strong>When: </strong>{{ run.run_time }}</p>
