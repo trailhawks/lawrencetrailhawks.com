@@ -19,7 +19,7 @@ def get_sponsors_by_content_type(context, content_type):
 def get_sponsors_for_object(context, obj):
     """Find Sponsors for an object and all model types."""
     query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
-    query = query or Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
+    query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
     queryset = Sponsor.objects.active().filter(query)
     return queryset
 
