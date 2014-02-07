@@ -11,7 +11,7 @@ class NewsInline(generic.GenericStackedInline):
 
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title']}
-    list_display = ('title', 'pub_date', 'status')
+    list_display = ('title', 'pub_date', 'status', 'content_type', 'object_id')
     list_filter = ('pub_date', 'status')
 
 admin.site.register(News, NewsAdmin)

@@ -10,7 +10,7 @@ class LinksInline(generic.GenericStackedInline):
 
 
 class LinksAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'content_type', 'object_id')
 
 
 admin.site.register(Links, LinksAdmin)
