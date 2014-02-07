@@ -9,6 +9,15 @@ from shorturls.models import ShortUrlMixin
 from .managers import NewsManager
 
 
+ALERT_CHOICES = (
+    ('', _('Default no style.')),
+    ('success', _('success')),
+    ('info', _('info')),
+    ('warning', _('warning')),
+    ('danger', _('danger')),
+)
+
+
 class News(models.Model, ShortUrlMixin):
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
@@ -21,9 +30,9 @@ class News(models.Model, ShortUrlMixin):
     slug = models.SlugField(blank=True, null=True)
     body = models.TextField()
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
+    alert_status = models.CharField(max_length=50, choices=ALERT_CHOICES, default='')
 
     # show in main news feed? handy for race results...
-
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
