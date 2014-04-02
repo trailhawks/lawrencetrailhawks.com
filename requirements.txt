@@ -1,5 +1,5 @@
 DateUtils
-Django>=1.5,<1.6
+Django>=1.6,<1.7
 Markdown==2.2.1
 Pillow==2.1.0
 South==0.8.2
@@ -10,8 +10,8 @@ django-gravatar2==1.0.6
 django-ical==1.1
 django-registration==0.8
 django-storages
-django-taggit==0.9.3
-django-waffle
+django-taggit==0.11.2
+django-waffle==0.10
 djrill==0.7.0
 fabric
 feedparser==5.1.2
