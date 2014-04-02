@@ -2,14 +2,17 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
 
-from core.models import MachineTagMixin
+from core.models import CommentMixin, MachineTagMixin
 from races.models import Race
 from .managers import EventManager
 
 
-class Event(MachineTagMixin, ShortUrlMixin):
+class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
+    """Event model."""
+
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
     STATUS_CHOICES = (
@@ -21,7 +24,6 @@ class Event(MachineTagMixin, ShortUrlMixin):
     body = models.TextField()
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
     races = models.ManyToManyField(Race, related_name='events')
-    #allow_comments = models.BooleanField(_('allow comments'), default=True)
 
     objects = EventManager()
 
