@@ -26,9 +26,10 @@ class RegistrationAdmin(admin.ModelAdmin):
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
     list_display = ('title', 'annual', 'start_datetime')
-    list_filter = ('start_datetime', 'annual', )
+    list_filter = ('start_datetime', 'annual', 'location')
     ordering = ['-start_datetime']
     save_on_top = True
+    search_fields = ('title', 'slogan', 'description', 'slogan')
     inlines = (
         RaceDirectorInline,
         RegistrationInline,
@@ -55,9 +56,8 @@ class RacerAdmin(admin.ModelAdmin):
 
 
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ('title', 'racer', )
-    list_filter = ('racer', )
-    raw_id_fields = ('race', 'racer')
+    list_display = ['title', 'racer']
+    raw_id_fields = ['race', 'racer']
 
 
 class EmergencyContactAdmin(admin.ModelAdmin):
