@@ -11,6 +11,7 @@ class PostMixin(object):
 
 class PostArchive(PostMixin, dates.ArchiveIndexView):
     make_object_list = True
+    paginate_by = 10
 
 
 class PostYearArchive(PostMixin, dates.YearArchiveView):
