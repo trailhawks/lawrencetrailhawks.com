@@ -6,8 +6,10 @@ South==0.8.2
 Unipath==1.0
 akismet==0.2.0
 boto==2.27.0
+django-contrib-comments==1.5
 django-gravatar2==1.0.6
 django-ical==1.1
+django-markup-deprecated==0.0.3
 django-registration==0.8
 django-storages
 django-taggit==0.11.2
