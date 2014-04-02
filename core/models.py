@@ -2,7 +2,15 @@ from django.conf import settings
 from django.db import models
 
 
+class CommentMixin(models.Model):
+    enable_comments = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
+
+
 class MachineTagMixin(models.Model):
+
     class Meta:
         abstract = True
 
