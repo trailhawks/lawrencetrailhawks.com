@@ -1,10 +1,29 @@
 from django.contrib import admin
 
 from .models import EmergencyContact, Race, Racer, RaceType, Registration, Report, Result
+from core.actions import disable_comments, enable_comments
 from faq.admin import FaqInline
 from links.admin import LinksInline
 from news.admin import NewsInline
 from sponsors.admin import SponsorInline
+
+
+def set_location_to_clinton(modeladmin, request, queryset):
+    queryset.update(location=2)
+
+set_location_to_clinton.short_description = 'Set location to Clinton Lake'
+
+
+def set_location_to_river_trails(modeladmin, request, queryset):
+    queryset.update(location=1)
+
+set_location_to_river_trails.short_description = 'Set location to the River Trails'
+
+
+def set_location_to_olathe_pc(modeladmin, request, queryset):
+    queryset.update(location=4)
+
+set_location_to_olathe_pc.short_description = 'Set location to the Olathe Prairie Center'
 
 
 class RaceDirectorInline(admin.StackedInline):
@@ -25,11 +44,18 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
-    list_display = ('title', 'annual', 'start_datetime')
-    list_filter = ('start_datetime', 'annual', 'location')
+    list_display = ('title', 'annual', 'enable_comments', 'start_datetime')
+    list_filter = ('enable_comments', 'start_datetime', 'annual', 'location')
     ordering = ['-start_datetime']
     save_on_top = True
     search_fields = ('title', 'slogan', 'description', 'slogan')
+    actions = [
+        set_location_to_clinton,
+        set_location_to_river_trails,
+        set_location_to_olathe_pc,
+        disable_comments,
+        enable_comments
+    ]
     inlines = (
         RaceDirectorInline,
         RegistrationInline,
