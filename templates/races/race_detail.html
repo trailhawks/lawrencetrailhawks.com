@@ -13,344 +13,341 @@
 {% load race_tags %}
 {% load share_tags %}
 {% load sponsors_tags %}
-{% load waffle_tags %}
-
-
-{% switch use_thumbor %}
+{% load staticfiles %}
 {% load thumbor_tags %}
-{% endswitch %}
+
 
 {% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
 
 
-{% block post_style %}
-<style>
-#map { height: 240px; }
-</style>
-{% endblock post_style %}
-
-
 {% block post_script %}
-{% if object.is_geocoded %}
 <script>
-var map = L.map('map', {
-    center: [{{ object.latitude }}, {{ object.longitude }}],
-    zoom: 15,
-    scrollWheelZoom: false
-});
+{% if object.location %}
+function initialize() {
+    var myLatlng = new google.maps.LatLng({{ object.location.latitude }}, {{ object.location.longitude }});
 
-L.tileLayer('http://{s}.tile.cloudmade.com/4a880035a5364f75a7bfbcbf22175258/997/256/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    maxZoom: 50
-}).addTo(map);
+    var mapOptions = {
+        center: myLatlng,
+        zoom: {{ object.location.zoom }}
+    };
 
-var marker = L.marker([{{ object.latitude }}, {{ object.longitude }}]).addTo(map);
-/*
-var circle = L.circle([38.972013,-95.22], 500, {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5
-}).addTo(map);
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-var polygon = L.polygon([
-    [51.509, -0.08],
-    [51.503, -0.06],
-    [51.51, -0.047]
-]).addTo(map);
-*/
-</script>
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Hello World!'
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
 {% endif %}
+
+ZeroClipboard.config({ moviePath: "{% static 'js/ZeroClipboard.swf' %}" });
+
+var client = new ZeroClipboard( document.getElementById("copy-button"));
+
+client.on("ready", function( readyEvent ) {
+  client.on("aftercopy", function(event) {
+    // `this` === `client`
+    // `event.target` === the element that was clicked
+    event.target.style.display = "none";
+    alert("Copied text to clipboard: " + event.data["text/plain"]);
+  });
+});
+</script>
 {% endblock post_script %}
 
 
 {% block content %}
-
 <header class="masthead">
-	<h1>{{ object.title }}</h1>
-	<h3>{{ object.slogan }}</h3>
+    <h1>{{ object.title }}</h1>
+    {% if object.slogan %}
+        <h2>{{ object.slogan }}</h2>
+    {% endif %}
 </header>
 
 <div class="row">
     <div class="col-md-8">
 
         {% if object.logo %}
-		<div class="row">
-		    <div class="col-md-12">
-		        {% switch use_thumbor %}
-	         	<img class="img-response" src="{% thumbor_url object.logo.url width=600 %}">
-	         	{% else %}
-	         	<img class="img-response" src="{{ object.logo.url }}">
-        		{% endswitch use_thumbor %}
-	    	</div>
-    	</div>
+        <div class="row">
+            <div class="col-md-12">
+                <img class="img-response" src="{% thumbor_url object.logo.url width=600 %}">
+            </div>
+        </div>
         {% endif %}
 
-		<div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Warning!</h4>
-			Best check yo self, you're not...
-		</div>
+        {% comment %}
 
-		<div class="alert alert-warning">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Warning!</h4>
-			Best check yo self, you're not...
-		</div>
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Warning!</h4>
+            Best check yo self, you're not...
+        </div>
 
-		<div class="alert alert-info">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Warning!</h4>
-			Best check yo self, you're not...
-		</div>
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Warning!</h4>
+            Best check yo self, you're not...
+        </div>
 
-		<div class="alert alert-success">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Warning!</h4>
-			Best check yo self, you're not...
-		</div>
+        {% endcomment %}
 
-		{% if not object.is_finished %}
-		<p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+        {% if not object.is_finished %}
+            <p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
 
-		{% if object.registration_set.count %}
-		<table class="table table-hover table-striped">
-			<thead>
-				<tr>
-					<th>Price level</th>
-					<th>Dates</th>
-					<th>Price</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for registration in object.registration_set.all %}
-				<tr class="{% if registration.has_expired %}highlight{% endif %}">
-					<td>{{ registration.description }}</td>
-					<td>{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
-					<td>${{ registration.reg_cost }}</td>
-					<td><p><a class="btn btn-sm btn-block btn-warning" href="{{ object.reg_url }}">register!</a></p></td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		{% endif %}
-
-		{% endif %}
-
-		<h2>Event Information</h2>
-
-		<h3>Location</h3>
-		{% comment %}
-		{% if object.map_link %}
-		<a href="{{object.map_link}}">{{ object.location }}</a>
-		{% else %}
-		{{ object.location }}
-		{% endif %}</p>
-		{% endcomment %}
-
-        {% if object.is_geocoded %}
-		<div id="map"></div>
+            {% if object.registration_set.count %}
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Price level</th>
+                        <th>Dates</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registration in object.registration_set.all %}
+                    <tr class="{% if registration.has_expired %}highlight{% endif %}">
+                        <td>{{ registration.description }}</td>
+                        <td>{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
+                        <td>${{ registration.reg_cost }}</td>
+                        <td><p><a class="btn btn-sm btn-block btn-warning" href="{{ object.reg_url }}">register!</a></p></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
         {% endif %}
 
-		{% if object.location_iframe %}
-		<p>{{object.location_iframe|safe}}</p>
-		{% endif %}
-
-		{% if object.slogan %}
-		<h4>{{ object.slogan }}</h4>
+        {% if object.get_race_news %}
+            <h3>Latest News</h3>
+            {% for item in object.get_race_news|slice:":3" %}
+                <p>&nbsp;&nbsp;{{ item.body|markdown }}</p>
+            {% endfor %}
         {% endif %}
 
-		{% if object.get_race_news %}
-		<h4>Latest News</h4>
-		{% for item in object.get_race_news|slice:":3" %}
-		<p>&nbsp;&nbsp;{{ item.body|markdown }}</p>
-		{% endfor %}
-		{% endif %}
-		<p><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</p>
-		<p><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</p>
-		<p><strong>Race distance:</strong> {{ object.distance }} {# object.get_unit_display #}</p>
-		{% if object.cut_off %}<p><strong>Cut off time:</strong> {{ object.cut_off }}</p>{% endif %}
+        {{ object.description|markdown }}
 
-		{{ object.description|markdown }}
+        <dl class="dl-horizontal">
+            <dt>Race date:</dt>
+            <dd>{{ object.start_datetime|date:"F j, Y" }}</dd>
 
-		{% if object.course_map %}
-		<p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
-		{% endif %}
+            <dt>Start time:</dt>
+            <dd>{{ object.start_datetime|time:"h:i A" }}</dd>
 
-		{% for sponsor in object.sponsors.all %}
-        <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
+            <dt>Race distance:</dt>
+            <dd>{{ object.distance }} {# object.get_unit_display #}</dd>
+
+            {% if object.cut_off %}
+                <dt>Cut off time:</dt>
+                <dd>{{ object.cut_off }}</dd>
+            {% endif %}
+        </dl>
+
+        <h2>Event Information</h2>
+
+        {% if object.location %}
+            <h3>Location</h3>
+            <div id="map-canvas"></div>
+            <p>{{ object.location.description|markdown }}</p>
+        {% endif %}
+
+        {% if object.course_map %}
+            <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
+        {% endif %}
+
+        {% for sponsor in object.sponsors.all %}
+            <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
         {% endfor %}
 
-		<hr>
+        <hr>
 
         {% include "includes/share.html" %}
 
-		<hr>
+        <hr>
 
-		<h4>Awards</h4>
+        <h3>Awards</h3>
 
-    	{{ object.awards|markdown }}</p>
+        {{ object.awards|markdown }}</p>
 
-		<hr>
+        <hr>
 
-		{% if object.race_directors.count %}
-		<h4>Race Director{{ object.race_directors.count|pluralize }}</h4>
-		<p>
-			<ul>
-			{% for race_directory in object.race_directors.all %}
-				<li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="{{ race_directory.email|mailhide }}">contact</a></li>
-			{% endfor %}
-			</ul>
-		</p>
-		{% endif %}
-
-		{% if not object.get_overall_results %}
-			<h3>Registration</h3>
-
-			{{ object.reg_description|markdown }}<br />
-
-			{% comment %}
-			{% if object.reg_url %}
-			<p class="largest loud highlight signup text-center">
-			<a href="{{ object.reg_url }}">Register online today!</a>
-			</p>
-			{% endif %}
-			{% endcomment %}
-
-			{% if not object.is_finished %}
-			<p><a class="btn btn-lg btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
-			{% endif %}
-
-			{% if object.get_reg_dates %}
-	            <p><strong><em>Entry fee:</em></strong></p>
-				<ul>
-				{% for reg in object.get_reg_dates %}
-					<li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-				{% endfor %}
-				</ul>
-			{% endif %}
-
-            {{ object.discounts|markdown }}
-
-            {% if object.packet_pickup %}
-			<h3>Packet Pickup</h3>
-			{{ object.packet_pickup|markdown }}
-			{% endif %}
+        {% if object.race_directors.count %}
+            <h3>Race Director{{ object.race_directors.count|pluralize }}</h3>
+            <ul>
+            {% for race_directory in object.race_directors.all %}
+                <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="{{ race_directory.email|mailhide }}">contact</a></li>
+            {% endfor %}
+            </ul>
         {% endif %}
 
-		{% if object.lodging %}
-		<hr>
+        {% if not object.get_overall_results %}
+            <hr>
 
-		<h3>Lodging</h3>
+            <h3>Registration</h3>
 
-		<p>Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
-		{% endif %}
+            {{ object.reg_description|markdown }}<br />
 
-		{% if object.get_race_reports %}
-		  {% include "races/includes/race_reports.html" %}
-		{% endif %}
+            {% comment %}
+            {% if object.reg_url %}
+            <p class="largest loud highlight signup text-center">
+            <a href="{{ object.reg_url }}">Register online today!</a>
+            </p>
+            {% endif %}
+            {% endcomment %}
 
-		{% get_race_types_for_race object as race_types %}
-		{% if race_types %}
-		  <hr>
+            {% if not object.is_finished %}
+                <p><a class="btn btn-lg btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+            {% endif %}
 
-		  <h3>Results</h3>
-		  <ul>
-		  {% for race_type in race_types %}
-			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
-			<li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
-		  {% endfor %}
-		  </ul>
-		{% endif %}
+            {% if object.get_reg_dates %}
+                <p><strong><em>Entry fee:</em></strong></p>
+                <ul>
+                {% for reg in object.get_reg_dates %}
+                    <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
 
-		{% render_facebook_like obj=object %}
+          {{ object.discounts|markdown }}
 
-		{% get_links_for_object object as link_list %}
-		{% if link_list %}
-		<hr>
-		<h3>Links</h3>
-		{% for link in link_list %}
-		    <h4>{{ link.name }}</h4>
-		    {{ link.description|markdown }}
-		{% endfor %}
-		{% endif %}
+          {% if object.packet_pickup %}
+            <h3>Packet Pickup</h3>
+            {{ object.packet_pickup|markdown }}
+        {% endif %}
+    {% endif %}
+
+        {% if object.lodging %}
+            <hr>
+            <h3>Lodging</h3>
+            <p>Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
+        {% endif %}
+
+        {% if object.get_race_reports %}
+            {% include "races/includes/race_reports.html" %}
+        {% endif %}
+
+        {% get_race_types_for_race object as race_types %}
+        {% if race_types %}
+            <hr>
+            <h3>Race Results</h3>
+            <ul>
+            {% for race_type in race_types %}
+                <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+                <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
+                <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% render_facebook_like obj=object %}
+
+        {% get_links_for_object object as link_list %}
+        {% if link_list %}
+            <hr>
+            <h3>Links</h3>
+            {% for link in link_list %}
+                <h4>{{ link.name }}</h4>
+                {{ link.description|markdown }}
+            {% endfor %}
+        {% endif %}
 
 
-		{% get_faqs_for_object object as faq_list %}
-		{% if faq_list %}
-		<hr>
-		<h3>Frequently Asked Questions</h3>
-		{% for faq in faq_list %}
-		    <h4>{{ faq.question }}</h4>
-		    {{ faq.answer|markdown }}
-		{% endfor %}
-		{% endif %}
+        {% get_faqs_for_object object as faq_list %}
+        {% if faq_list %}
+            <hr>
+            <h3>Frequently Asked Questions</h3>
+            {% for faq in faq_list %}
+                <h4>{{ faq.question }}</h4>
+                {{ faq.answer|markdown }}
+            {% endfor %}
+        {% endif %}
 
-		<hr>
+        <hr>
 
-		{% get_sponsors_for_object object as sponsor_list %}
-		{% if sponsor_list %}
-		<h3>Sponsors</h3>
-		{% for sponsor in sponsor_list %}
-		    <h4>{{ sponsor.name }}</h4>
-		    {{ sponsor.discount_detail|markdown }}
-		{% endfor %}
-		{% endif %}
+        {% get_sponsors_for_object object as sponsor_list %}
+        {% if sponsor_list %}
+            <h3>Sponsors</h3>
+            {% for sponsor in sponsor_list %}
+                <h4>{{ sponsor.name }}</h4>
+                {{ sponsor.discount_detail|markdown }}
+            {% endfor %}
+        {% endif %}
 
-		<hr>
+        {% comment %}
+        <hr>
+        <h3>Spectators and Volunteers</h3>
+        {% endcomment %}
 
-		<h3>Spectators and Volunteers</h3>
+        <hr>
 
-		<hr>
-
-		{# include "comments/comments.html" #}
-	</div>
+        {# include "comments/comments.html" #}
+    </div>
 
     <div class="col-md-4">
-		<ul class="nav nav-pills nav-stacked">
-			<li><a class="btn btn-block btn-default" href="{{ object.reg_url }}">Register</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Volunteer</a></li>
-			<li><a class="btn btn-block btn-default" href="#">News</a></li>
 
-			<!-- only visible if the other two are not... -->
-			<li><a class="btn btn-block btn-default" href="#">Results</a></li>
+        <div class="list-group">
+            <a class="list-group-item" href="{{ object.reg_url }}">Register</a>
+            <a class="list-group-item" href="#">Volunteer</a>
+            <a class="list-group-item" href="#">News</a>
 
-			<li><a class="btn btn-block btn-default" href="#">Awards</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Race Directors</a></li>
+            <!-- only visible if the other two are not... -->
+            <a class="list-group-item" href="#">Results</a>
 
-			<li><a class="btn btn-block btn-default" href="#">Travel</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Contact</a></li>
-			<li><a class="btn btn-block btn-default" href="#">Sponsors</a></li>
-		</ul>
+            <a class="list-group-item" href="#">Awards</a>
+            <a class="list-group-item" href="#">Race Directors</a>
+
+            <a class="list-group-item" href="#">Travel</a>
+            <a class="list-group-item" href="#">Contact</a>
+            <a class="list-group-item" href="#">Sponsors</a>
+        </div>
+
+        <div class="panel panel-default">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a class="btn btn-primary" href="{{ object.reg_url }}">Register</a></li>
+                <li><a href="#">Volunteer</a></li>
+                <li><a href="#">News</a></li>
+
+                <!-- only visible if the other two are not... -->
+                <li><a href="#">Results</a></li>
+
+                <li><a href="#">Awards</a></li>
+                <li><a href="#">Race Directors</a></li>
+
+                <li><a href="#">Travel</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Sponsors</a></li>
+            </ul>
+        </div>
 
         {% include "panels/meta.html" %}
 
         <div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Race Results</h3>
-			</div>
-			<ul class="list-group">
-			{% for race_type in race_types %}
-				<li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-				<li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
-				<li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
-			{% endfor %}
-			</ul>
+            <div class="panel-heading">
+                <h3 class="panel-title">Race Results</h3>
+            </div>
+            <ul class="list-group">
+            {% for race_type in race_types %}
+                <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+                <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
+                <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
+            {% endfor %}
+            </ul>
         </div>
 
         {% include "panels/share.html" %}
 
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Sponsors</h3>
-          </div>
-          <div class="panel-body">
-          </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">Sponsors</h3>
+            </div>
+            <div class="panel-body">
+            </div>
         </div>
 
-		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
-		{% include "includes/flickr_photos.html" with photos=photos_list %}
-	</div>
+        {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+        {% include "includes/flickr_photos.html" with photos=photos_list %}
+    </div>
 </div>
 {% endblock content %}

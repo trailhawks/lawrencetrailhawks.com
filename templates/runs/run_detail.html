@@ -12,93 +12,94 @@
 {% block title %}{{ object.name }}{% endblock title %}
 
 
-{% block post_style %}
-<style>
-#map { height: 240px; }
-</style>
-{% endblock post_style %}
-
-
 {% block post_script %}
-{% if object.is_geocoded %}
 <script>
-var map = L.map('map', {
-	center: [{{ object.latitude }}, {{ object.longitude }}],
-	zoom: 15,
-	scrollWheelZoom: false
-});
+{% if object.location %}
+function initialize() {
+    var myLatlng = new google.maps.LatLng({{ object.location.latitude }}, {{ object.location.longitude }});
 
-L.tileLayer('http://{s}.tile.cloudmade.com/4a880035a5364f75a7bfbcbf22175258/997/256/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    maxZoom: 50
-}).addTo(map);
+    var mapOptions = {
+        center: myLatlng,
+        zoom: {{ object.location.zoom }}
+    };
 
-var marker = L.marker([{{ object.latitude }}, {{ object.longitude }}]).addTo(map);
-/*
-var circle = L.circle([38.972013,-95.22], 500, {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5
-}).addTo(map);
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-var polygon = L.polygon([
-    [51.509, -0.08],
-    [51.503, -0.06],
-    [51.51, -0.047]
-]).addTo(map);
-*/
-</script>
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Hello World!'
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
 {% endif %}
+</script>
 {% endblock post_script %}
 
 
 {% block content %}
 <div class="row">
-	<div class="col-md-8">
+  <div class="col-md-8">
 
-		<h2>{{ object.name }}</h2>
+    <h2>{{ object.name }}</h2>
 
-        {% get_news_for_object object as news_list %}
-        {% if news_list %}
-        <h3>Latest News</h3>
-        {% for news in news_list|slice:":3" %}
-        <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
-            <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
-            {{ news.body|markdown }}
-        </div>
-        {% endfor %}
-        {% endif %}
+    <div class="lead">
+      {{ object.details|markdown }}
+    </div>
 
-		<p class="lead">{{ object.details }}</p>
-		<p><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</p>
-		<p><strong>Where:</strong> {{ object.location }}</p>
-		<p><strong>Contact:</strong> <a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></p>
+    <hr>
 
-        {% if object.is_geocoded %}
-		<div id="map"></div>
-        {% endif %}
+    <dl class="dl-horizontal">
+      <dt>When:</dt>
+      <dd>{{ object.get_day_of_week_display }} at {{ object.run_time }}</dd>
+      <dt>Where:</dt>
+      <dd>{{ object.location }}</dd>
+      <dt>Run Leader:</dt>
+      <dd><a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></dd>
+    <dl>
 
-		{{ object.map_iframe|safe}}
+    {% get_news_for_object object as news_list %}
+    {% if news_list %}
+      <hr>
 
-		{% render_facebook_like obj=object %}
+      <h3>Latest News</h3>
+      {% for news in news_list|slice:":3" %}
+      <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+        <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
+        {{ news.body|markdown }}
+      </div>
+      {% endfor %}
+    {% endif %}
 
-		{% get_faqs_for_object object as faq_list %}
-		{% if faq_list %}
-		<h3>Frequently Asked Questions</h3>
-		{% for faq in faq_list %}
-		    <h4>{{ faq.question }}</h4>
-		    {{ faq.answer|markdown }}
-		{% endfor %}
-		{% endif %}
+    {% if object.location %}
+      <h3>Location</h3>
+      <div id="map-canvas"></div>
+    {% endif %}
 
-		{# include "comments/comments.html" #}
-	</div>
+    {# render_facebook_like obj=object #}
+    <hr>
 
-	<div class="col-md-4">
-		{% include "panels/share.html" %}
-		{% include "panels/meta.html" %}
-		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
-		{% include "panels/photos.html" with photos=photos_list %}
-	</div>
+    {% include "includes/share.html" %}
+
+    <hr>
+
+    {% get_faqs_for_object object as faq_list %}
+    {% if faq_list %}
+      <h3>Frequently Asked Questions</h3>
+      {% for faq in faq_list %}
+        <h4>{{ faq.question }}</h4>
+        {{ faq.answer|markdown }}
+      {% endfor %}
+    {% endif %}
+
+    {# include "comments/comments.html" #}
+  </div>
+
+  <div class="col-md-4">
+    {% include "panels/share.html" %}
+    {% include "panels/meta.html" %}
+    {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+    {% include "panels/photos.html" with photos=photos_list %}
+  </div>
 </div>
 {% endblock content %}
