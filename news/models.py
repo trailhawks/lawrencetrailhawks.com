@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
 from .managers import NewsManager
+from core.models import CommentMixin
 
 
 ALERT_CHOICES = (
@@ -18,7 +19,9 @@ ALERT_CHOICES = (
 )
 
 
-class News(models.Model, ShortUrlMixin):
+class News(CommentMixin, ShortUrlMixin, models.Model):
+    """News model."""
+
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
     STATUS_CHOICES = (
@@ -40,6 +43,7 @@ class News(models.Model, ShortUrlMixin):
     objects = NewsManager()
 
     class Meta:
+        get_latest_by = 'pub_date'
         ordering = ('-pub_date',)
         unique_together = (('slug', 'pub_date'),)
         verbose_name = _('news')
@@ -66,3 +70,9 @@ class News(models.Model, ShortUrlMixin):
             'month': self.start_datetime.strftime("%b").lower(),
             'day': self.start_datetime.strftime("%d"),
             'slug': self.slug})
+
+    def get_previous_news(self):
+        return self.get_previous_by_publish(status__gte=self.STATUS_PUBLIC)
+
+    def get_next_news(self):
+        return self.get_next_by_publish(status__gte=self.STATUS_PUBLIC)

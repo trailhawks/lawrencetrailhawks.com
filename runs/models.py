@@ -3,12 +3,14 @@ from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
 from .managers import RunManager
-from core.models import MachineTagMixin
+from core.models import CommentMixin, MachineTagMixin
 from locations.models import Location
 from members.models import Member
 
 
-class Run(MachineTagMixin, ShortUrlMixin):
+class Run(MachineTagMixin, CommentMixin, ShortUrlMixin):
+    """Run model."""
+
     DAY_OF_WEEK = (
         (0, 'Monday'),
         (1, 'Tuesday'),
@@ -30,9 +32,9 @@ class Run(MachineTagMixin, ShortUrlMixin):
     objects = RunManager()
 
     class Meta:
+        ordering = ['day_of_week']
         verbose_name = _('Run')
         verbose_name_plural = _('Runs')
-        ordering = ['day_of_week']
 
     def __unicode__(self):
         return '{0}: {1}'.format(self.get_day_of_week_display(), self.name)

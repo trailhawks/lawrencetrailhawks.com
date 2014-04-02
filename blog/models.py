@@ -7,11 +7,13 @@ from taggit.managers import TaggableManager
 
 #from . import listeners
 from .managers import PostManager
+from core.models import CommentMixin
 from members.models import Member
 
 
-class Post(models.Model, ShortUrlMixin):
+class Post(CommentMixin, ShortUrlMixin, models.Model):
     """Post model."""
+
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
     STATUS_CHOICES = (
@@ -24,7 +26,6 @@ class Post(models.Model, ShortUrlMixin):
     body = models.TextField(_('body'), help_text="The body supports Textile markup. Please use http://textile.thresholdstate.com/ to markup the blog post and get the right formatting.")
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
-    allow_comments = models.BooleanField(_('allow comments'), default=True)
     publish = models.DateTimeField(_('publish'), default=timezone.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
@@ -32,8 +33,8 @@ class Post(models.Model, ShortUrlMixin):
                                  verbose_name='Original Post', null=True, blank=True)
     repost_date = models.DateField(help_text="Date of original blog posting",
                                    verbose_name="Original Post Date", null=True, blank=True)
-    tags = TaggableManager()
 
+    tags = TaggableManager()
     objects = PostManager()
 
     class Meta:
@@ -56,7 +57,7 @@ class Post(models.Model, ShortUrlMixin):
         })
 
     def get_previous_post(self):
-        return self.get_previous_by_publish(status__gte=2)
+        return self.get_previous_by_publish(status__gte=self.STATUS_PUBLIC)
 
     def get_next_post(self):
-        return self.get_next_by_publish(status__gte=2)
+        return self.get_next_by_publish(status__gte=self.STATUS_PUBLIC)

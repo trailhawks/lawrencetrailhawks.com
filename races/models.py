@@ -5,13 +5,15 @@ from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
 from .managers import RaceManager
-from core.models import MachineTagMixin
+from core.models import CommentMixin, MachineTagMixin
 from locations.models import Location
 from members.models import Member
 from sponsors.models import Sponsor
 
 
 class RaceType(models.Model):
+    """Race Type model."""
+
     name = models.CharField(max_length=200)
     slug = models.SlugField(blank=True)
 
@@ -24,7 +26,9 @@ class RaceType(models.Model):
         return self.name
 
 
-class Race(MachineTagMixin, ShortUrlMixin):
+class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
+    """Race model."""
+
     KM = 1
     MI = 2
     UNIT_CHOICES = (
@@ -65,9 +69,9 @@ class Race(MachineTagMixin, ShortUrlMixin):
     objects = RaceManager()
 
     class Meta:
+        ordering = ['-start_datetime']
         verbose_name = _('Race')
         verbose_name_plural = _('Races')
-        ordering = ['-start_datetime']
 
     def __unicode__(self):
         return u'{0} {1}'.format(self.annual, self.title)
@@ -106,6 +110,8 @@ class Race(MachineTagMixin, ShortUrlMixin):
 
 
 class Registration(models.Model):
+    """Registration model."""
+
     race = models.ForeignKey(Race)
     description = models.CharField(max_length=100, blank=True, null=True)
     reg_date = models.DateField("Registration Date")
@@ -127,6 +133,8 @@ class Registration(models.Model):
 
 
 class EmergencyContact(models.Model):
+    """Emergency Contact model."""
+
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     phone = models.CharField(max_length=13)
@@ -142,6 +150,8 @@ class EmergencyContact(models.Model):
 
 
 class Racer(MachineTagMixin):
+    """Racer model."""
+
     MALE = 1
     FEMALE = 2
     GENDER_CHOICES = (
@@ -215,6 +225,8 @@ class Racer(MachineTagMixin):
 
 
 class Result(models.Model):
+    """Result model."""
+
     racer = models.ForeignKey(Racer)
     race = models.ForeignKey(Race)
     race_type = models.ForeignKey(RaceType, null=True, blank=True, help_text='For races with multiple race types.')
@@ -236,6 +248,8 @@ class Result(models.Model):
 
 
 class Report(models.Model):
+    """Report model."""
+
     report = models.URLField(help_text="Link to race report")
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
