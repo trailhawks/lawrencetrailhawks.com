@@ -11,6 +11,11 @@ class HomepageView(TemplateView):
     navitem = 'home'
 
 
+class StyleGuideView(TemplateView):
+    template_name = 'styleguide.html'
+    navitem = 'styleguide'
+
+
 class ThanksView(TemplateView):
     template_name = 'thanks.html'
     navitem = 'thanks'
