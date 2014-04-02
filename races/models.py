@@ -6,6 +6,7 @@ from shorturls.models import ShortUrlMixin
 
 from .managers import RaceManager
 from core.models import MachineTagMixin
+from locations.models import Location
 from members.models import Member
 from sponsors.models import Sponsor
 
@@ -27,16 +28,16 @@ class Race(MachineTagMixin, ShortUrlMixin):
     KM = 1
     MI = 2
     UNIT_CHOICES = (
-        (KM, "km"),
-        (MI, "mi"),
+        (KM, 'Kilometers'),
+        (MI, 'Miles'),
     )
     RUN = 1
     BIKE = 2
     SWIM = 3
     DISCIPLINE_CHOICES = (
-        (RUN, "Run"),
-        (BIKE, "Bike"),
-        (SWIM, "Swim"),
+        (RUN, 'Run'),
+        (BIKE, 'Bike'),
+        (SWIM, 'Swim'),
     )
     logo = models.ImageField(upload_to="races/logos", blank=True, null=True)
     slogan = models.CharField(max_length=300, blank=True, null=True)
@@ -51,14 +52,9 @@ class Race(MachineTagMixin, ShortUrlMixin):
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
+    location = models.ForeignKey(Location, blank=True, null=True)
     course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
-    location = models.TextField()
-    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True, blank=True)
-    location_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(blank=True, null=True, help_text="Link to google maps or other mapping software pointing towards the start location")
-
     reg_url = models.URLField(blank=True, null=True, help_text="Link to registartion flyer or to registration URL for online signup.")
     reg_description = models.TextField()
     entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
@@ -83,13 +79,6 @@ class Race(MachineTagMixin, ShortUrlMixin):
             'month': self.start_datetime.strftime("%b").lower(),
             'day': self.start_datetime.strftime("%d"),
             'slug': self.slug})
-
-    def is_geocoded(self):
-        if self.latitude and self.longitude:
-            return True
-        else:
-            return False
-    is_geocoded.boolean = True
 
     @property
     def get_overall_results(self):
