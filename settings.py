@@ -109,17 +109,19 @@ MIDDLEWARE_CLASSES = [
 ]
 
 PREREQ_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.comments',
     'django.contrib.flatpages',
-    'django.contrib.markup',
     'django.contrib.messages',
     'django.contrib.redirects',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+    #'django.contrib.comments',
+    'django_comments',
+    #'django.contrib.markup',
+    'markup_deprecated',
 
     #'djcelery',
     #'gypsy_weather',
@@ -182,3 +184,6 @@ MACHINE_TAG_NAMESPACE = 'trailhawks'
 #twitter and flickr details left blank, please use your own.
 TWITTER = {'username': '', 'password': ''}
 FLICKR = {'key': '', 'secret': ''}
+
+# Removing deprecation nagging...
+DJANGO_MARKUP_IGNORE_WARNINGS = True
