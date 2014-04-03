@@ -1,34 +1,31 @@
 DateUtils
 Django>=1.6,<1.7
+Fabric==1.8.3
 Markdown==2.2.1
-Pillow==2.1.0
-South==0.8.2
+Pillow==2.4.0
+South==0.8.4
 Unipath==1.0
 akismet==0.2.0
 boto==2.27.0
 django-contrib-comments==1.5
-django-gravatar2==1.0.6
-django-ical==1.1
+django-gravatar2==1.1.4
+django-ical==1.2
 django-markup-deprecated==0.0.3
-django-registration==0.8
-django-storages
+django-registration==1.0
+django-storages==1.1.8
 django-taggit==0.11.2
 django-waffle==0.10
 djrill==0.7.0
-fabric
-feedparser==5.1.2
+feedparser==5.1.3
 flickrapi==1.4.2
-gunicorn==0.17.2
+gunicorn==18.0
 httplib2==0.7.6
-micawber==0.2.5
-psycopg2==2.4.5
+micawber==0.3.0
+psycopg2==2.5.2
 raven==2.0.10
 recaptcha-client==1.0.6
 requests==0.14.2
-simplejson==2.6.2
-
-#dogapi
-#git+https://github.com/conorbranagan/django-datadog.git#egg=django-datadog-git
+simplejson==3.4.0
 
 git+https://github.com/jefftriplett/django-syncr.git#egg=django-syncr-git
 git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-migration-git
@@ -39,7 +36,7 @@ git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-
 #numpy
 
 # for remote thumbnail support
-thumbor==4.0.4
-django-thumbor
-libthumbor
+thumbor==4.1.0
+django-thumbor==0.4
+libthumbor==1.0.1
 git+https://github.com/willtrking/thumbor_aws.git#egg=thumbor_aws-git
