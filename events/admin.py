@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import Event
+from core.actions import disable_comments, enable_comments
 from faq.admin import FaqInline
 from links.admin import LinksInline
 from news.admin import NewsInline
