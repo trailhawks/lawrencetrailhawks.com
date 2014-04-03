@@ -33,16 +33,16 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     KM = 1
     MI = 2
     UNIT_CHOICES = (
-        (KM, 'Kilometers'),
-        (MI, 'Miles'),
+        (KM, _('Kilometers')),
+        (MI, _('Miles')),
     )
     RUN = 1
     BIKE = 2
     SWIM = 3
     DISCIPLINE_CHOICES = (
-        (RUN, 'Run'),
-        (BIKE, 'Bike'),
-        (SWIM, 'Swim'),
+        (RUN, _('Run')),
+        (BIKE, _('Bike')),
+        (SWIM, _('Swim')),
     )
     logo = models.ImageField(upload_to="races/logos", blank=True, null=True)
     slogan = models.CharField(max_length=300, blank=True, null=True)
