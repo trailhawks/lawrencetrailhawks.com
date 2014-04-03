@@ -2,7 +2,6 @@ import json
 
 from django.core.mail import EmailMessage
 from django.dispatch import receiver
-
 from djrill.signals import webhook_event
 
 
