@@ -11,24 +11,32 @@ based on: http://qz.com/39568/how-a-bogus-claim-about-instagram-losing-users-mad
     </div>
     <ul class="list-group" data-author="<%= item.author %>" data-title="<%= item.title %>" data-on="<%= item.obsession %>">
         <li class="list-group-item">
-            Share this: <input type="text" name="shortURL" class="form-control" value="{{ object.get_short_url }}">
+            Share this:
+            <div class="input-group">
+                <input type="text" id="shortURL" class="form-control" value="{{ object.get_short_url }}">
+                <span class="input-group-btn">
+                    <button title="Copy to Clipboard" class="btn btn-primary" id="copy-button" data-clipboard-target="shortURL"><i class="fa fa-clipboard"></i> </button>
+                </span>
+            </div>
         </li>
         <li class="list-group-item">
-            <a title="Email" href="mailto:?subject=TrailHawks: {% firstof object.title|escape object.name|escape %}&amp;body={{ object.get_short_url }}%0A%0A{% firstof object.description|escape object.body|escape %}%0A%0A" target="_blank"><i class="fa fa-envelope"></i> Email</a>
+            <a title="Email" href="mailto:?subject=TrailHawks: {% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;body={{ object.get_short_url }}%0A%0A{% firstof object.description|striptags|escape|truncatechars:200 object.body|striptags|escape|truncatechars:200 %}%0A%0A" target="_blank"><i class="fa fa-envelope"></i> Email</a>
         </li>
-
         <li class="list-group-item">
-            <a title="Tweet" href="https://twitter.com/share?text={% firstof object.title|escape object.name|escape %}&amp;url={{ object.get_short_url }}&amp;via=trailhawks" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
+            <a title="Tweet" href="https://twitter.com/share?text={% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;url={{ object.get_short_url }}&amp;via=trailhawks" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
         </li>
-
         <li class="list-group-item">
-            <a title="Share on Facebook" href="https://www.facebook.com/sharer.php?s=100&amp;p[title]={% firstof object.title|escape object.name|escape %}&amp;p[url]={{ object.get_short_url }}&amp;p[summary]={% firstof object.description|escape object.body|escape %}&amp;p[images][0]=<%= item.image %>" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+            <a title="Share on Facebook" href="https://www.facebook.com/sharer.php?s=100&amp;p[title]={% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;p[url]={{ object.get_short_url }}&amp;p[summary]={% firstof object.description|striptags|escape|truncatechars:200 object.body|striptags|escape|truncatechars:200 %}&amp;p[images][0]=<%= item.image %>" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
         </li>
-
         <li class="list-group-item">
-            <a title="Read Later on Instapaper" href="http://www.instapaper.com/hello2?url={{ object.get_short_url }}&amp;title={% firstof object.title|escape object.name|escape %}&amp;description={% firstof object.description|escape object.body|escape %}" target="_blank">Instapaper</a>
+            <a title="Share on Google+" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url={{ object.get_short_url }}" target="_blank"><i class="fa fa-google-plus"></i> Google+</a>
         </li>
-
+        <li class="list-group-item">
+            <a title="Share on Tumblr" href="" target="_blank"><i class="fa fa-tumblr"></i> Tumblr</a>
+        </li>
+        <li class="list-group-item">
+            <a title="Read Later on Instapaper" href="http://www.instapaper.com/hello2?url={{ object.get_short_url }}&amp;title={% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;description={% firstof object.description|striptags|escape|truncatechars:200 object.body|striptags|escape|truncatechars:200 %}" target="_blank"><i class="fa fa-instapaper"></i> Instapaper</a>
+        </li>
         {% comment %}
         {% load share_tags %}
         {% render_share_link 'email' object.get_short_url as link %}
