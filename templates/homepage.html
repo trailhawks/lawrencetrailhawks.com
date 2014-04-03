@@ -19,27 +19,6 @@
 {% load waffle_tags %}
 
 
-{% block styles %}
-{{ block.super }}
-<style>
-#carousel-homepage {
-  max-height: 720px;
-}
-</style>
-{% endblock styles %}
-
-
-{% block scripts %}
-{{ block.super }}
-<script>
-/* LazyLoad instance */
-$('img').each(function(){
-  $(this).attr('src', $(this).attr('data-src'));
-});
-</script>
-{% endblock scripts %}
-
-
 {% block content %}
 {% switch use_thumbor %}
 <div class="row">

@@ -4,6 +4,18 @@
 {% load race_tags %}
 
 
+{% block post_script %}
+<script>
+$(function () {
+{% get_race_types_for_race object as race_types %}
+{% for race_type in race_types %}
+  $('#{{ race_type.slug }}-tabs a:first').tab('show');
+{% endfor %}
+})
+</script>
+{% endblock post_script %}
+
+
 {% block content %}
 <div class="row">
     <div class="col-md-12">
@@ -69,15 +81,3 @@
     </div>
 </div>
 {% endblock content %}
-
-
-{% block post_script %}
-<script>
-$(function () {
-{% get_race_types_for_race object as race_types %}
-{% for race_type in race_types %}
-  $('#{{ race_type.slug }}-tabs a:first').tab('show');
-{% endfor %}
-})
-</script>
-{% endblock post_script %}

@@ -12,13 +12,9 @@
 
     {% block styles %}
     <link href="{% static 'css/simplex.min.css' %}" rel="stylesheet" media="screen">
-    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'css/fluidity.css' %}" rel="stylesheet" media="screen">
-    <style>
-    #map { height: 300px; }
-    #map-canvas { height: 300px; width: 100%}
-    #id_honeypot { display: none !important; }
-    </style>
+    <link href="{% static 'css/app.css' %}" rel="stylesheet" media="screen">
     {% endblock styles %}
     {% block post_style %}
     {% endblock post_style %}
@@ -49,6 +45,7 @@
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/ZeroClipboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
     {% endblock scripts %}
     {% block post_script %}
     {% endblock post_script %}
