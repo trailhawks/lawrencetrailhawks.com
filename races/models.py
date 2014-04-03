@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
 
 from .managers import RaceManager
@@ -107,6 +108,16 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     @property
     def is_finished(self):
         return not self.result_set.count() == 0
+
+
+class RaceModerator(CommentModerator):
+    email_notification = True
+    enable_field = 'enable_comments'
+    auto_close_field = 'start_datetime'
+    close_after = 30
+
+
+moderator.register(Race, RaceModerator)
 
 
 class Registration(models.Model):

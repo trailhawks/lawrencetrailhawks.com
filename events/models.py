@@ -48,3 +48,13 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('event_detail', (), {'slug': self.slug})
+
+
+class EventModerator(CommentModerator):
+    email_notification = True
+    enable_field = 'enable_comments'
+    #auto_close_field = 'publish'
+    #close_after = 7
+
+
+moderator.register(Event, EventModerator)
