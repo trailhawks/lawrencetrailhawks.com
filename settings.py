@@ -143,6 +143,7 @@ PROJECT_APPS = [
     'events',
     'faq',
     'links',
+    'locations',
     'members',
     'news',
     'photos',
