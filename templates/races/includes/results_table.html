@@ -6,14 +6,13 @@
             <th>Place</th>
             <th>Bib</th>
             <th>Name</th>
-            <th>Gender</th>
             <th>Time</th>
             <th>Award</th>
         </tr>
     </thead>
     <tbody>
     {% for result in race_results %}
-        <tr class="{% if result.course_record %}success{% endif %} {% if result.dq or result.dns or result.dnf %} danger{% endif %}">
+        <tr class="{% if result.course_record %}success{% endif %} {% if result.dq or result.dns or result.dnf %}{% comment %} danger{% endcomment %}{% endif %}">
         {% if result.dq or result.dns or result.dnf %}
             <td>&mdash;</td>
         {% else %}
@@ -21,8 +20,6 @@
         {% endif %}
         <td>{{ result.bib_number }}</td>
         <td><a name="#racer-{{ result.racer.pk }}"></a><a href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a></td>
-        <td>{{ result.racer.get_gender_display }}</td>
-
         {% if result.dq or result.dns or result.dnf %}
             {% if result.dq %}
                 <td>DQ</td>
