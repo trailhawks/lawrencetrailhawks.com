@@ -105,7 +105,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'waffle.middleware.WaffleMiddleware',
-    'datadog.middleware.DatadogMiddleware',
 ]
 
 PREREQ_APPS = [
@@ -118,14 +117,11 @@ PREREQ_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    #'django.contrib.comments',
     'django_comments',
-    #'django.contrib.markup',
     'markup_deprecated',
 
     #'djcelery',
     #'gypsy_weather',
-    'datadog',
     'django_extensions',
     'django_gravatar',
     'django_thumbor',
