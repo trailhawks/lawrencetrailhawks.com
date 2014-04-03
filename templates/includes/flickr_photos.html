@@ -1,11 +1,6 @@
 {% load flickr %}
-{% load micawber_tags %}
 {% load photo_tags %}
-{% load waffle_tags %}
-
-{% switch use_thumbor %}
 {% load thumbor_tags %}
-{% endswitch %}
 
 
 {% if not photos %}
@@ -16,11 +11,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12">
     <div class="tumbnail">
-      {% switch use_thumbor %}
-        <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=300 width=300 %}'></a>
-      {% else %}
-        <a href="{{ photo.photopage_url }}">{{ photo.photopage_url|oembed:"400x400" }}</a>
-      {% endswitch use_thumbor %}
+      <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=400 width=400 %}'></a>
       <div class="caption">
         <h4>{{ photo.description|safe }}</h4>
       </div>

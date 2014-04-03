@@ -10,25 +10,43 @@
 {% block content %}
 <h1>{{ object.full_hawk_name }}</h1>
 
-<table>
-<tr>
-	{% if object.avatar %}
-<td width="100"><img src="{{ object.avatar.url }}" /></td>
+<div class="media">
+  {% if object.avatar %}
+  <a class="pull-left" href="#">
+    <img class="media-object" src="{{ object.avatar.url }}" alt="...">
+  </a>
+  {% endif %}
+  <div class="media-body">
+    {% comment %}
+    <h4 class="media-heading">Media heading</h4>
+    {% endcomment %}
+    <dl {% comment %}class="dl-horizontal"{% endcomment %}>
+      <dt>Hawk Name:</dt>
+      <dd>{{ object.hawk_name }}</dd>
+
+    {% if object.position %}
+      <dt>Position:</dt>
+      <dd>{{ object.get_position }}</dd>
     {% endif %}
-<td align="left"><p><strong>Hawk Name:</strong> {{ object.hawk_name }}</p>
-{% if object.position %}
-<p><strong>Position:</strong> {{ object.get_position }}
+
+      <dt>Member since:</dt>
+      <dd>{{ object.member_since|date }}</dd>
+    </dl>
+  </div>
+</div>
+
+{% if object.get_blog_posts %}
+<h3>Blog Posts</h3>
+<ul>
+  {% for post in object.get_blog_posts %}
+    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> on {{ post.publish|date }}</li>
+  {% endfor %}
+</ul>
 {% endif %}
-<!--
-<p><strong>Paid date:</strong> {{ object.date_paid }}</p>
--->
-<p><strong>Member since:</strong> {{ object.member_since|date }}</p>
-</td>
-</tr>
-</table>
 
 {% if object.get_race_results %}
-<h3>Race Results:</h3>
+<h3>Race Results</h3>
+{{ object.racer_set.results_set }}
 <ul>
 	{% for result in object.get_race_results %}
 		<li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> in {{ result.time }} on {{ result.race.start_datetime|date }}</li>
@@ -36,21 +54,13 @@
 </ul>
 {% endif %}
 
-{% if object.get_blog_posts %}
-<h3>Blog Posts:</h3>
+{% if object.get_race_reports %}
+<h3>Race Reports</h3>
 <ul>
-	{% for post in object.get_blog_posts %}
-		<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> on {{ post.publish|date }}</li>
-	{% endfor %}
+  {% for result in object.get_race_reports %}
+    <li><a href="{{ result.report }}">{{ result.title }}</a> for <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> on {{ result.race.start_datetime|date }}</li>
+  {% endfor %}
 </ul>
 {% endif %}
 
-{% if object.get_race_reports %}
-<h3>Race Reports:</h3>
-<ul>
-	{% for result in object.get_race_reports %}
-		<li><a href="{{ result.report }}">{{ result.title }}</a> for <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> on {{ result.race.start_datetime|date }}</li>
-	{% endfor %}
-</ul>
-{% endif %}
 {% endblock content %}
