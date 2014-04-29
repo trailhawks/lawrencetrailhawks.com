@@ -10,14 +10,8 @@
 {% block content %}
 <div class="row">
     <div class="col-md-8">
-
       <h1>{{ object.full_name }}</h1>
-
       <dl>
-        {% comment %}
-        <dt>Age</dt>
-        <dd>{{ object.age }}</dd>
-        {% endcomment %}
         <dt>Gender</dt>
         <dd>{{ object.get_gender_display }}</dd>
       </dl>
@@ -31,32 +25,12 @@
     	</ul></p>
       {% endif %}
     </div>
-
-    {% include "panels/share.html" %}
-    {% include "panels/meta.html" %}
-
     <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Meta</h3>
-          </div>
-          <div class="panel-body">
-            <dl>
-              <dt>short url</dt>
-              <dd>{{ object.get_short_url }}</dd>
+      {% include "panels/meta.html" %}
 
-              <dt>machine tags</dt>
-              <dd>{{ object.get_machine_tags }}</dd>
-              {% if photos %}
-              <dt>photos</dt>
-              <dd>{{ photos|length }}</dd>
-              {% endif %}
-            </dl>
-          </div>
-        </div>
-
-        {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos %}
-        {% include "includes/flickr_photos.html" %}
+      {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos %}
+      {{ photos|length }}
+      {% include "includes/flickr_photos.html" %}
     </div>
 </div>
 {% endblock content %}
