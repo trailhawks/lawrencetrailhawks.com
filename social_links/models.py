@@ -21,7 +21,6 @@ class SocialLink(models.Model):
     remote_id = models.CharField(max_length=128, blank=True, null=True, help_text='Remote ID of the status update')
 
     class Meta:
-        #ordering = ('name',)
         verbose_name = _('Social Link')
         verbose_name_plural = _('Social Links')
 
