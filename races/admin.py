@@ -75,8 +75,9 @@ class ResultAdmin(admin.ModelAdmin):
 
 
 class RacerAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'gender', 'email', 'trailhawk')
+    list_display = ('last_name', 'first_name', 'gender', 'email', 'trailhawk')
     list_filter = ('gender', )
+    ordering = ['last_name', 'first_name']
     raw_id_fields = ('trailhawk', 'contact')
     search_fields = ('first_name', 'last_name')
 

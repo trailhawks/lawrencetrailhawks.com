@@ -244,10 +244,10 @@ class Result(models.Model):
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
     place = models.TextField(null=True, blank=True, help_text='Ex. First Overall Male or First Masters Female')
-    course_record = models.BooleanField()
-    dq = models.BooleanField(verbose_name="Disqualified")
-    dns = models.BooleanField(verbose_name="Did not Start")
-    dnf = models.BooleanField(verbose_name="Did not Finish")
+    course_record = models.BooleanField(default=False)
+    dq = models.BooleanField('Disqualified', default=False)
+    dns = models.BooleanField('Did not Start', default=False)
+    dnf = models.BooleanField('Did not Finish', default=False)
 
     class Meta:
         ordering = ('time',)
@@ -256,6 +256,19 @@ class Result(models.Model):
 
     def __unicode__(self):
         return "%s - %s - %s" % (self.racer, self.race.title, self.time)
+
+    def save(self, *args, **kwargs):
+
+        if 'cr' in self.time.lower():
+            self.course_record = True
+
+        if 'dnf' in self.time.lower():
+            self.dnf = True
+
+        if 'dns' in self.time.lower():
+            self.dns = True
+
+        return super(Result, self).save(*args, **kwargs)
 
 
 class Report(models.Model):
