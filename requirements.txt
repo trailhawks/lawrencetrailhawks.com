@@ -27,6 +27,10 @@ recaptcha-client==1.0.6
 requests==0.14.2
 simplejson==3.4.0
 
+django-docopt-command
+django-adaptors==0.2.5
+lxml
+
 git+https://github.com/jefftriplett/django-syncr.git#egg=django-syncr-git
 git+https://bitbucket.org/webology/django-shorturls.git#egg=django-shorturls-git
 git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-migration-git
