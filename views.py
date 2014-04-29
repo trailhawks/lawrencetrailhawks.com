@@ -10,6 +10,11 @@ class HomepageView(TemplateView):
     template_name = 'homepage.html'
     navitem = 'home'
 
+    def get_context_data(self, **kwargs):
+        context = super(HomepageView, self).get_context_data(**kwargs)
+        context['use_bootstrap'] = True if self.request.GET.get('bootstrap') else False
+        return context
+
 
 class StyleGuideView(TemplateView):
     template_name = 'styleguide.html'

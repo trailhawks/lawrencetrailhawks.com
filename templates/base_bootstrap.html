@@ -11,7 +11,11 @@
     {% endblock metas %}
 
     {% block styles %}
-    <link href="{% static 'css/simplex.min.css' %}" rel="stylesheet" media="screen">
+    {% if use_bootstrap %}
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    {% else %}
+      <link href="{% static 'css/simplex.min.css' %}" rel="stylesheet" media="screen">
+    {% endif %}
     <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'css/fluidity.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'css/app.css' %}" rel="stylesheet" media="screen">
