@@ -13,7 +13,7 @@
     {% if not photos %}
       {% get_random_photos 4 as photos %}
       {% for photo in photos %}
-        <a href="{{ photo.photopage_url }}"><img class="img-responsive" src="{% thumbor_url photo.get_medium_url height=400 width=400 %}"></a>
+        <a href="{{ photo.photopage_url }}"><img class="img-responsive" src="{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}"></a>
       {% endfor %}
     {% endif %}
 
@@ -24,13 +24,13 @@
       {% if forloop.first %}
         <div class="col-sm-12">
           <div class="tumbnail">
-            <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=500 width=500 %}'></a>
+            <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=500 width=500 smart=True %}'></a>
           </div>
         </div>
       {% else %}
         <div class="col-sm-12 col-md-4">
           <div class="tumbnail">
-              <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=200 width=200 %}'></a>
+              <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=200 width=200 smart=True %}'></a>
           </div>
         </div>
       {% endif %}

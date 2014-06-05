@@ -36,7 +36,7 @@
       <div class="carousel-inner">
         {% for photo in photos %}
         <div class="item {% if forloop.first %}active{% endif %}">
-          <img data-src='{% thumbor_url photo.get_large_url height=500 width=1200 %}' src="http://placehold.it/1200x500"{% comment %}{% static 'img/hawk-logo.jpg' %}{% endcomment %} alt="{{ photo.caption }}" height="500" width="1200">
+          <img data-src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}" src="http://placehold.it/1200x500"{% comment %}{% static 'img/hawk-logo.jpg' %}{% endcomment %} alt="{{ photo.caption }}" height="500" width="1200">
           <div class="carousel-caption">
             {% if photo.caption %}
             <h3>{{ photo.caption|safe }}</h3>
@@ -335,4 +335,3 @@
   {% endcomment %}
 </div>
 {% endblock content %}
-`
