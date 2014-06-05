@@ -75,6 +75,6 @@ def thumb(url, **kwargs):
     return u'{}{}'.format(base, path)
 
 
-@register.simple_tag
-def thumbor_url(image_url, **kwargs):
-    return thumb(image_url, **kwargs)
+#@register.simple_tag
+#def thumbor_url(image_url, **kwargs):
+#    return thumb(image_url, **kwargs)
