@@ -54,12 +54,14 @@ docs/_build/
 target/
 
 # custom project ignores
-bin/*
-cache/*
-images/*
-media_root/*
-previews/*
-static_root/*
+bin/
+bower_components/
+cache/
+images/
+media_root/
+node_modules/
+previews/
+static_root/
 
 alpha.py
 fabfile.py
