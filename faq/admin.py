@@ -11,6 +11,15 @@ class FaqInline(generic.GenericStackedInline):
 
 class FaqAdmin(admin.ModelAdmin):
     list_display = ('question', 'content_type', 'object_id')
+    fieldsets = (
+        (None, {
+            'fields': ('question', 'answer')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('content_type', 'object_id')
+        }),
+    )
 
 
 admin.site.register(FAQ, FaqAdmin)

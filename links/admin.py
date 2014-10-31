@@ -11,6 +11,15 @@ class LinksInline(generic.GenericStackedInline):
 
 class LinksAdmin(admin.ModelAdmin):
     list_display = ('name', 'content_type', 'object_id')
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'link', 'description')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('content_type', 'object_id')
+        }),
+    )
 
 
 admin.site.register(Links, LinksAdmin)
