@@ -18,6 +18,15 @@ class NewsAdmin(admin.ModelAdmin):
         disable_comments,
         enable_comments
     ]
+    fieldsets = (
+        (None, {
+            'fields': ('pub_date', 'title', 'slug', 'body', 'status', 'alert_status', 'enable_comments')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('content_type', 'object_id')
+        }),
+    )
 
 
 admin.site.register(News, NewsAdmin)
