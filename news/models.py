@@ -67,10 +67,8 @@ class News(CommentMixin, ShortUrlMixin, models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('news_detail', (), {
-            'year': self.start_datetime.strftime("%Y"),
-            'month': self.start_datetime.strftime("%b").lower(),
-            'day': self.start_datetime.strftime("%d"),
-            'slug': self.slug})
+            'pk': self.pk,
+        })
 
     def get_previous_news(self):
         return self.get_previous_by_publish(status__gte=self.STATUS_PUBLIC)
