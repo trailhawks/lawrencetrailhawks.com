@@ -35,6 +35,14 @@ def get_latest_races(context):
 
 
 @register.assignment_tag(takes_context=True)
+def get_race_by_slug(context, slug):
+    try:
+        return Race.objects.get(slug=slug)
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
 def get_results_for_race(context, race, race_type=None, gender=None):
     queryset = Result.objects.filter(race=race).order_by('dq', 'dnf', 'dns', 'time')
     if race_type:
