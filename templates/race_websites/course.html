@@ -1,0 +1,14 @@
+{% extends "race_websites/base.html" %}
+
+{% load race_tags %}
+{% load markup %}
+
+{% block content %}
+
+<h1>Course</h1>
+
+{% get_race_by_slug "hawk-100-mile-50-mile-marathon-fifth-annual" as object %}
+
+{{ object.description|markdown }}
+
+{% endblock content %}
