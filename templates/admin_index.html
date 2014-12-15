@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+
+{% load url from future %}
+
+{% block sidebar %}
+
+{{ block.super }}
+
+<div id='django-pghero' style="float: left">
+  <div class="module">
+    <table style="width: 498px">
+      <caption>PgHero</caption>
+      <tbody>
+        <tr>
+          <th>
+            <a href="{% url 'pg_hero_indexes' %}">Indexes</a>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <a href="{% url 'pg_hero_queries' %}">Queries</a>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <a href="{% url 'pg_hero_spaces' %}">Spaces</a>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <a href="{% url 'pg_hero_statuses' %}">Statuses</a>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock sidebar %}
