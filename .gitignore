@@ -54,6 +54,7 @@ docs/_build/
 target/
 
 # custom project ignores
+backups/
 bin/
 bower_components/
 cache/
@@ -66,3 +67,4 @@ static_root/
 alpha.py
 fabfile.py
 standard.py
+tasks.py
