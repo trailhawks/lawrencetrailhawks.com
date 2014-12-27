@@ -93,7 +93,8 @@ TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, 'templates'),
 ]
 
-ROOT_URLCONF = 'lawrencetrailhawks.urls'
+ROOT_URLCONF = 'lawrencetrailhawks.urls.default'
+RACE_URLCONF = 'lawrencetrailhawks.urls.races'
 
 # Middleware
 MIDDLEWARE_CLASSES = [
