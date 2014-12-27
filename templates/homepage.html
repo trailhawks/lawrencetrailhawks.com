@@ -224,8 +224,10 @@ body {
     {% endif %}
 
     <dl class="dl-horizontal">
-      <dt>Where: </dt>
-      <dd>{{ run.location}} <a href="{{ run.map_link}}">(Directions?)</a></dd>
+      {% if run.location %}
+        <dt>Where: </dt>
+        <dd>{{ run.location }} <a href="{{ run.map_link }}">(Directions?)</a></dd>
+      {% endif %}
       <dt>When: </dt>
       <dd>{{ run.run_time }}</dd>
       <dt>What: </dt>
