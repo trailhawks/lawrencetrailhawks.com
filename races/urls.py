@@ -4,7 +4,8 @@ from . import views
 from .feeds import RaceFeed
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', views.RaceIndex.as_view(), name='race_index'),
     url(r'^(?P<year>\d{4})/$', views.RaceYear.as_view(), name='race_archive_year'),
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$', views.RaceMonth.as_view(), name='race_archive_month'),
