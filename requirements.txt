@@ -10,6 +10,7 @@ boto==2.27.0
 django-backupdb==0.6.0
 django-contrib-comments==1.5
 django-gravatar2==1.1.4
+django-hosts==0.6
 django-ical==1.2
 django-markup-deprecated==0.0.3
 django-registration==1.0

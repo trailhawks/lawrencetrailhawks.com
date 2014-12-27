@@ -105,6 +105,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'waffle.middleware.WaffleMiddleware',
+    'middleware.QueryRequestUrlMiddleware',
+    'django_hosts.middleware.HostsMiddleware',
 ]
 
 PREREQ_APPS = [
@@ -125,6 +127,7 @@ PREREQ_APPS = [
     'backupdb',
     'django_extensions',
     'django_gravatar',
+    'django_hosts',
     'django_thumbor',
     'djrill',
     'micawber.contrib.mcdjango',
@@ -185,3 +188,7 @@ FLICKR = {'key': '', 'secret': ''}
 
 # Removing deprecation nagging...
 DJANGO_MARKUP_IGNORE_WARNINGS = True
+
+# Root hostconf
+DEFAULT_HOST = 'default'
+ROOT_HOSTCONF = 'hosts'
