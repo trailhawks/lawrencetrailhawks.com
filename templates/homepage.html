@@ -226,7 +226,7 @@ body {
     <dl class="dl-horizontal">
       {% if run.location %}
         <dt>Where: </dt>
-        <dd>{{ run.location }} <a href="{{ run.map_link }}">(Directions?)</a></dd>
+        <dd>{{ run.location }} <a href="{{ run.map_link }}">(Directions)</a></dd>
       {% endif %}
       <dt>When: </dt>
       <dd>{{ run.run_time }}</dd>
@@ -235,12 +235,6 @@ body {
       <dt>Contact: </dt>
       <dd><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
     </dl>
-    {% comment %}
-    <p><strong>Where: </strong>{{ run.location}} <a href="{{ run.map_link}}">(Directions?)</a></p>
-    <p><strong>When: </strong>{{ run.run_time }}</p>
-    <p><strong>What: </strong>{{ run.details }}</a></p>
-    <p><strong>Contact: </strong><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></p>
-    {% endcomment %}
   {% endfor %}
   </div>
   {% endif %}
@@ -266,12 +260,19 @@ body {
               <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
             {% endfor %}
           {% endif %}
-          <p><strong>Where: </strong>{{ run.location}} <a href="{{ run.map_link}}">(Directions?)</a></p>
-          <p><strong>When: </strong>{{ run.run_time }}</p>
-          <p><strong>What: </strong>{{ run.details }}</a></p>
-          {% if not todays_run %}
-            <p><strong>Contact: </strong><a href="mailto:{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></p>
-          {% endif %}
+
+          <dl class="dl-horizontal">
+            {% if run.location %}
+              <dt>Where: </dt>
+              <dd>{{ run.location }} <a href="{{ run.map_link }}">(Directions)</a></dd>
+            {% endif %}
+            <dt>When: </dt>
+            <dd>{{ run.run_time }}</dd>
+            <dt>What: </dt>
+            <dd>{{ run.details }}</dd>
+            <dt>Contact: </dt>
+            <dd><a href="mailto:{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
+          </dl>
         {% empty %}
           <p class="quiet large">No upcoming scheduled runs</p>
         {% endfor %}
@@ -300,11 +301,12 @@ body {
             {% endfor %}
             </p>
           {% endif %}
-          <p><strong>Where: </strong>{{ latest_race.location }}<br />
-          <a href="{{ latest_race.map_link }}">Click here for directions.</a></p>
+          {% if latest_race.location %}
+            <p><strong>Where: </strong>{{ latest_race.location }} <a href="{{ latest_race.map_link }}">(Directions)</a></dd><br />
+          {% endif %}
           <p><strong>Course: </strong>{{ latest_race.description|oembed:"600x600"|markdown }}<br />
           {% if latest_race.course_map %}
-          Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
+            Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
           {% endif %}
           <ul>
             {% for reg in latest_race.get_reg_dates %}
@@ -338,13 +340,6 @@ body {
       </div>
     {% endif %}
   </div>
-
-  {% comment %}
-  <div class="col-md-3">
-      <h2>Follow Us</h2>
-      <p><a href="http://twitter.com/trailhawks">http://twitter.com/trailhawks</a></p>
-  </div>
-  {% endcomment %}
 </div>
 
 {% comment %}
