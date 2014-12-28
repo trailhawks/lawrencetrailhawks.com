@@ -4,11 +4,12 @@ from django_hosts import patterns, host
 
 host_patterns = patterns(
     '',
-    host(r'lawrencetrailhawks\.(com|dev|im)', settings.ROOT_URLCONF,
+    host(r'(lawrencetrailhawks|trailhawks)\.(com|dev|im)', settings.ROOT_URLCONF,
+         callback='lawrencetrailhawks.races.callbacks.host_',
          name='default'),
 
-    host(r'(alpha|www)\.lawrencetrailhawks\.(com|dev|im)', settings.ROOT_URLCONF,
-         name='default_www'),
+    host(r'(alpha|www)\.(lawrencetrailhawks|trailhawks)\.(com|dev|im)',
+         settings.ROOT_URLCONF, name='default_www'),
 
     host(r'(?P<race>[\w\.-]+)', settings.RACE_URLCONF,
          callback='lawrencetrailhawks.races.callbacks.host_race',
