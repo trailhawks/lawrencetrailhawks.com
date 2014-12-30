@@ -17,7 +17,7 @@
 {% load thumbor_tags %}
 
 
-{% block title %}{{object.title}}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
+{% block title %}{{ object.title }}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
 
 
 {% block post_script %}
@@ -94,8 +94,6 @@ client.on("ready", function( readyEvent ) {
         {% endcomment %}
 
         {% if not object.is_finished %}
-            <p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
-
             {% if object.registration_set.count %}
             <table class="table table-hover table-striped">
                 <thead>
@@ -161,8 +159,6 @@ client.on("ready", function( readyEvent ) {
             <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
         {% endfor %}
 
-        <hr>
-
         {% include "includes/share.html" %}
 
         <hr>
@@ -189,16 +185,8 @@ client.on("ready", function( readyEvent ) {
 
             {{ object.reg_description|markdown }}<br />
 
-            {% comment %}
-            {% if object.reg_url %}
-            <p class="largest loud highlight signup text-center">
-            <a href="{{ object.reg_url }}">Register online today!</a>
-            </p>
-            {% endif %}
-            {% endcomment %}
-
             {% if not object.is_finished %}
-                <p><a class="btn btn-lg btn-block btn-warning" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+                <p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
             {% endif %}
 
             {% if object.get_reg_dates %}
@@ -210,13 +198,13 @@ client.on("ready", function( readyEvent ) {
                 </ul>
             {% endif %}
 
-          {{ object.discounts|markdown }}
+            {{ object.discounts|markdown }}
 
-          {% if object.packet_pickup %}
-            <h3>Packet Pickup</h3>
-            {{ object.packet_pickup|markdown }}
+            {% if object.packet_pickup %}
+                <h3>Packet Pickup</h3>
+                {{ object.packet_pickup|markdown }}
+            {% endif %}
         {% endif %}
-    {% endif %}
 
         {% if object.lodging %}
             <hr>
@@ -275,38 +263,18 @@ client.on("ready", function( readyEvent ) {
             {% endfor %}
         {% endif %}
 
-        {% comment %}
-        <hr>
-        <h3>Spectators and Volunteers</h3>
-        {% endcomment %}
-
         <hr>
 
         {# include "comments/comments.html" #}
     </div>
 
     <div class="col-md-4">
-
-        <div class="list-group">
-            <a class="list-group-item" href="{{ object.reg_url }}">Register</a>
-            <a class="list-group-item" href="#">Volunteer</a>
-            <a class="list-group-item" href="#">News</a>
-
-            <!-- only visible if the other two are not... -->
-            <a class="list-group-item" href="#">Results</a>
-
-            <a class="list-group-item" href="#">Awards</a>
-            <a class="list-group-item" href="#">Race Directors</a>
-
-            <a class="list-group-item" href="#">Travel</a>
-            <a class="list-group-item" href="#">Contact</a>
-            <a class="list-group-item" href="#">Sponsors</a>
-        </div>
-
         <div class="panel panel-default">
             <ul class="nav nav-pills nav-stacked">
                 <li><a class="btn btn-primary" href="{{ object.reg_url }}">Register</a></li>
+                {% comment %}
                 <li><a href="#">Volunteer</a></li>
+                {% endcomment %}
                 <li><a href="#">News</a></li>
 
                 <!-- only visible if the other two are not... -->
@@ -323,21 +291,24 @@ client.on("ready", function( readyEvent ) {
 
         {% include "panels/meta.html" %}
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Race Results</h3>
+        {% if object.get_overall_results %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Race Results</h3>
+                </div>
+                <ul class="list-group">
+                {% for race_type in race_types %}
+                    <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+                    <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
+                    <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
+                {% endfor %}
+                </ul>
             </div>
-            <ul class="list-group">
-            {% for race_type in race_types %}
-                <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-                <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
-                <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
-            {% endfor %}
-            </ul>
-        </div>
+        {% endif %}
 
         {% include "panels/share.html" %}
 
+        {% comment %}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Sponsors</h3>
@@ -345,6 +316,7 @@ client.on("ready", function( readyEvent ) {
             <div class="panel-body">
             </div>
         </div>
+        {% endcomment %}
 
         {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
         {% include "includes/flickr_photos.html" with photos=photos_list %}
