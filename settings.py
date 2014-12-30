@@ -3,7 +3,6 @@ import os
 from unipath import FSPath as Path
 
 
-#PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 PROJECT_ROOT = Path(__file__).ancestor(1)
 
 DEBUG = True
@@ -36,27 +35,12 @@ LANGUAGE_CODE = 'en-us'
 
 MEDIA_ROOT = PROJECT_ROOT.child('media_root')
 MEDIA_URL = '/media/'
-#MEDIA_URL = 'http://s3.lth.im.s3.amazonaws.com/'
 
 STATIC_ROOT = PROJECT_ROOT.child('static_root')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     PROJECT_ROOT.child('assets')
 ]
-
-'''
-# These are for user-uploaded content.
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
-MEDIA_URL = '/media/'
-
-# These are for site static media (e.g. CSS and JS)
-# This one is where static content is collected to.
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_root')
-STATIC_URL = '/site_media/'
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, 'static'),
-]
-'''
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
