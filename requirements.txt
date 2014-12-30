@@ -43,7 +43,7 @@ git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-
 #numpy
 
 # for remote thumbnail support
-thumbor==4.1.0
+thumbor==4.8.1
 django-thumbor==0.4
 libthumbor==1.0.1
 git+https://github.com/willtrking/thumbor_aws.git#egg=thumbor_aws-git
