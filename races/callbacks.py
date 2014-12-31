@@ -26,9 +26,10 @@ def host_race(request, slug):
         request.event = None
 
     logger.debug('race::{0}'.format(slug))
-    if not request.race:
+    if not hasattr(request, 'race'):
         try:
             race = Race.objects.get(slug=slug)
             request.race = race
         except Race.DoesNotExist:
-            request.race = None
+            race = Race.objects.get(slug='hawk-100-mile-50-mile-marathon-fifth-annual')
+            request.race = race
