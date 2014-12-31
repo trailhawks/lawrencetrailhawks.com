@@ -5,17 +5,13 @@
 
 {% block content %}
 
-{% get_race_by_slug "hawk-100-mile-50-mile-marathon-fifth-annual" as object %}
+{% with request.race as object %}
 
-<h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>
+  <h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>
 
-{% get_race_types_for_race object as race_types %}
+  {% get_race_types_for_race object as race_types %}
 
-{{ object }} ::
-{{ race_types }}
-
-
-{% for race_type in race_types %}
+  {% for race_type in race_types %}
     <h2><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
     <ul class="nav nav-tabs" id="{{ race_type.slug }}-tabs">
       <li><a href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a></li>
@@ -37,5 +33,8 @@
       </div>
     </div>
     <hr>
-{% endfor %}
+  {% endfor %}
+
+{% endwith %}
+
 {% endblock content %}

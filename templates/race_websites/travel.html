@@ -1,12 +1,7 @@
 {% extends "race_websites/base.html" %}
 
-{% load race_tags %}
-
 {% block content %}
 <h1>Travel</h1>
-
-{% get_race_by_slug "hawk-100-mile-50-mile-marathon-fifth-annual" as object %}
-{{ object }}
 
 <h2>Directions</h2>
 
@@ -24,6 +19,6 @@
 
 <p>Lawrence is a fantastic college town with much to do and see. If you can, try to take some time to visit the shops and restaurants on Mass St. or to take a drive through the University of Kansas campus. You won’t be disappointed.</p>
 
-{{ object.lodging }}
+{{ request.race.lodging }}
 
 {% endblock content %}
