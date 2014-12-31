@@ -27,3 +27,12 @@ def get_news_for_object(context, obj):
 @register.assignment_tag(takes_context=True)
 def get_latest_news(context, num=10):
     return News.objects.public()[:num]
+
+
+@register.assignment_tag(takes_context=True)
+def get_latest_news_for_object(context, obj):
+    """Find latest News for an object and all model types."""
+    query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
+    query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
+    queryset = News.objects.public().recent().filter(query)
+    return queryset
