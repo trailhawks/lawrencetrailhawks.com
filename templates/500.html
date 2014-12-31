@@ -6,11 +6,10 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12 well">
+    <div class="col-md-12">
         <h1>Uh oh! There was an error!</h1>
-        <h3>I couldn't find the page you were looking for so here's a
-        Tarsiers with his beloved stick.</h3>
-        <img src="{{ STATIC_URL }}img/stick.jpg" class="img-responsive">
+        <p class="lead">I couldn't find the page you were looking for so here's a Tarsiers with his beloved stick.</p>
+        <img class="img-responsive" src="{{ STATIC_URL }}img/stick.jpg">
     </div>
 </div>
 {% endblock content %}
