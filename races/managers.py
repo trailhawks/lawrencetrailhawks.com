@@ -4,14 +4,16 @@ from django.utils import timezone
 
 
 class RaceQuerySet(QuerySet):
+
     def complete(self):
-        return self.filter(start_datetime__lte=timezone.now())  # .order_by('-start_datetime')
+        return self.filter(start_datetime__lte=timezone.now())
 
     def upcoming(self):
-        return self.filter(start_datetime__gt=timezone.now())  # .order_by('start_datetime')
+        return self.filter(start_datetime__gt=timezone.now())
 
 
 class RaceManager(Manager):
+
     def get_query_set(self):
         return RaceQuerySet(self.model, using=self._db)
 
