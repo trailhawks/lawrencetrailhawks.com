@@ -58,7 +58,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <dd><a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></dd>
     <dl>
 
-    {% get_news_for_object object as news_list %}
+    {% get_latest_news_for_object object as news_list %}
     {% if news_list %}
       <hr>
 
@@ -72,14 +72,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
     {% endif %}
 
     {% if object.location %}
+      <hr>
+
       <h3>Location</h3>
       <div id="map-canvas"></div>
     {% endif %}
 
     {# render_facebook_like obj=object #}
+
+    {% comment %}
     <hr>
 
     {% include "includes/share.html" %}
+    {% endcomment %}
 
     <hr>
 
