@@ -59,6 +59,8 @@ client.on("ready", function( readyEvent ) {
 
 
 {% block content %}
+{% get_race_types_for_race object as race_types %}
+
 <header class="masthead">
     <h1>{{ object.title }}</h1>
     {% if object.slogan %}
@@ -119,6 +121,7 @@ client.on("ready", function( readyEvent ) {
         {% endif %}
 
         {% if object.get_race_news %}
+            <a name="news"></a>
             <h3>Latest News</h3>
             {% for item in object.get_race_news|slice:":3" %}
                 <p>&nbsp;&nbsp;{{ item.body|markdown }}</p>
@@ -157,6 +160,7 @@ client.on("ready", function( readyEvent ) {
             <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
         {% endif %}
 
+        <a name="sponsors"></a>
         {% for sponsor in object.sponsors.all %}
             <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
         {% endfor %}
@@ -165,12 +169,14 @@ client.on("ready", function( readyEvent ) {
 
         {% if object.awards %}
             <hr>
+            <a name="awards"></a>
             <h3>Awards</h3>
             {{ object.awards|markdown }}</p>
         {% endif %}
 
         {% if object.race_directors.count %}
             <hr>
+            <a name="rds"></a>
             <h3>Race Director{{ object.race_directors.count|pluralize }}</h3>
             <ul>
             {% for race_directory in object.race_directors.all %}
@@ -216,9 +222,9 @@ client.on("ready", function( readyEvent ) {
             {% include "races/includes/race_reports.html" %}
         {% endif %}
 
-        {% get_race_types_for_race object as race_types %}
         {% if race_types %}
             <hr>
+            <a name="results"></a>
             <h3>Race Results</h3>
             <ul>
             {% for race_type in race_types %}
@@ -274,17 +280,25 @@ client.on("ready", function( readyEvent ) {
                 {% comment %}
                 <li><a href="#">Volunteer</a></li>
                 {% endcomment %}
-                <li><a href="#">News</a></li>
+                {% if object.get_race_news %}
+                    <li><a href="#news">News</a></li>
+                {% endif %}
 
-                <!-- only visible if the other two are not... -->
-                <li><a href="#">Results</a></li>
+                {% if object.awards %}
+                    <li><a href="#awards">Awards</a></li>
+                {% endif %}
 
-                <li><a href="#">Awards</a></li>
-                <li><a href="#">Race Directors</a></li>
+                {% if object.race_directors.count %}
+                    <li><a href="#rds">Race Directors</a></li>
+                {% endif %}
 
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Sponsors</a></li>
+                {% if race_types %}
+                    <li><a href="#results">Results</a></li>
+                {% endif %}
+
+                {% if object.sponsors.count %}
+                    <li><a href="#sponsors">Sponsors</a></li>
+                {% endif %}
             </ul>
         </div>
 
