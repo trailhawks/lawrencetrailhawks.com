@@ -143,6 +143,8 @@ client.on("ready", function( readyEvent ) {
             {% endif %}
         </dl>
 
+        <hr>
+
         <h2>Event Information</h2>
 
         {% if object.location %}
@@ -161,15 +163,14 @@ client.on("ready", function( readyEvent ) {
 
         {% include "includes/share.html" %}
 
-        <hr>
-
-        <h3>Awards</h3>
-
-        {{ object.awards|markdown }}</p>
-
-        <hr>
+        {% if object.awards %}
+            <hr>
+            <h3>Awards</h3>
+            {{ object.awards|markdown }}</p>
+        {% endif %}
 
         {% if object.race_directors.count %}
+            <hr>
             <h3>Race Director{{ object.race_directors.count|pluralize }}</h3>
             <ul>
             {% for race_directory in object.race_directors.all %}
@@ -180,7 +181,6 @@ client.on("ready", function( readyEvent ) {
 
         {% if not object.get_overall_results %}
             <hr>
-
             <h3>Registration</h3>
 
             {{ object.reg_description|markdown }}<br />
@@ -252,10 +252,9 @@ client.on("ready", function( readyEvent ) {
             {% endfor %}
         {% endif %}
 
-        <hr>
-
         {% get_sponsors_for_object object as sponsor_list %}
         {% if sponsor_list %}
+            <hr>
             <h3>Sponsors</h3>
             {% for sponsor in sponsor_list %}
                 <h4>{{ sponsor.name }}</h4>
