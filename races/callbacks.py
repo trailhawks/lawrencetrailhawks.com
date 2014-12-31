@@ -13,13 +13,22 @@ def host_(request):
 
 def host_race(request, slug):
     logger.debug('event::{0}'.format(slug))
+
+    if '.' in slug:
+        slug = slug.split('.')[0]
+
     try:
-        request.event = Event.objects.get(slug=slug)
+        event = Event.objects.get(slug=slug)
+        request.event = event
+        if event.races.count():
+            request.race = event.races.latest('start_datetime')
     except Event.DoesNotExist:
         request.event = None
 
     logger.debug('race::{0}'.format(slug))
-    try:
-        request.race = Race.objects.get(slug=slug)
-    except Race.DoesNotExist:
-        request.race = None
+    if not request.race:
+        try:
+            race = Race.objects.get(slug=slug)
+            request.race = race
+        except Race.DoesNotExist:
+            request.race = None
