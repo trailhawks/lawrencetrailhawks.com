@@ -15,7 +15,7 @@ host_patterns = patterns(
          callback='lawrencetrailhawks.races.callbacks.host_',
          name='localhost'),
 
-    host(r'(?P<race>[\w\.-]+)', settings.RACE_URLCONF,
+    host(r'(?P<slug>[\w\.-]+)', settings.RACE_URLCONF,
          callback='lawrencetrailhawks.races.callbacks.host_race',
          name='hawkhundred_race'),
 
