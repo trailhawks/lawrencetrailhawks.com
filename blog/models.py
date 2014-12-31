@@ -35,7 +35,7 @@ class Post(CommentMixin, ShortUrlMixin, models.Model):
     repost_date = models.DateField(help_text="Date of original blog posting",
                                    verbose_name="Original Post Date", null=True, blank=True)
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     objects = PostManager()
 
     class Meta:
