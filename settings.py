@@ -117,6 +117,7 @@ PREREQ_APPS = [
     'djrill',
     'micawber.contrib.mcdjango',
     'shorturls',
+    'simple_open_graph',
     'south',
     'storage_migration',
     'storages',
