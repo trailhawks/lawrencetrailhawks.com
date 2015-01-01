@@ -24,18 +24,19 @@
     {% block post_style %}
     {% endblock post_style %}
     {% endblock head %}
+    {% block post_head %}
+    {% endblock post_head %}
   </head>
   <body{% block body_attribs %}{% endblock body_attribs %}>
     {% block body %}
       {% block navbar %}
       {% endblock navbar %}
-
-<!-- 2 -->
+      <!-- 2 -->
       {% block content-wrapper %}
       {% block content %}
       {% endblock content %}
       {% endblock content-wrapper %}
-<!-- 2 -->
+      <!-- 2 -->
     {% endblock body %}
 
     {% block footer-wrapper %}
