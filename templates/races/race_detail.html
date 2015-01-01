@@ -12,12 +12,21 @@
 {% load photo_tags %}
 {% load race_tags %}
 {% load share_tags %}
+{% load simple_open_graph %}
 {% load sponsors_tags %}
 {% load staticfiles %}
 {% load thumbor_tags %}
 
 
 {% block title %}{{ object.title }}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
+
+
+{% block metas %}
+{{ block.super }}
+{% with object.description|markdown|striptags|truncatechars:300 as og_description %}
+{% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, description=og_description" %}
+{% endwith %}
+{% endblock metas %}
 
 
 {% block post_script %}

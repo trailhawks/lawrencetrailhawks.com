@@ -7,9 +7,18 @@
 {% load markup %}
 {% load news_tags %}
 {% load photo_tags %}
+{% load simple_open_graph %}
 
 
 {% block title %}{{ object.name }}{% endblock title %}
+
+
+{% block metas %}
+{{ block.super }}
+{% with object.details|markdown|striptags|truncatechars:300 as og_description %}
+{% opengraph_meta "type='article', url=object.get_absolute_url, title=object.name, description=og_description" %}
+{% endwith %}
+{% endblock metas %}
 
 
 {% block post_script %}
