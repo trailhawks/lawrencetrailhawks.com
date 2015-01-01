@@ -113,7 +113,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
     {% include "panels/share.html" %}
     {% include "panels/meta.html" %}
     {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
-    {% include "panels/photos.html" with photos=photos_list %}
+    {# include "panels/photos.html" with photos=photos_list #}
+    {% include "includes/flickr_photos.html" with photos=photos_list %}
   </div>
 </div>
 {% endblock content %}
