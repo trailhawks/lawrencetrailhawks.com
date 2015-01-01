@@ -13,10 +13,18 @@
 {% load photo_tags %}
 {% load race_tags %}
 {% load run_tags %}
+{% load simple_open_graph %}
 {% load staticfiles %}
 {% load thumbor_tags %}
 {% load twitterfy %}
 {% load waffle_tags %}
+
+
+{% block metas %}
+{{ block.super }}
+{% opengraph_meta "url='/', title='The Lawrence Trail Hawks', type='website'" %}
+{% endblock metas %}
+
 
 
 {% block post_style %}
