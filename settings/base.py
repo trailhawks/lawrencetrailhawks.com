@@ -116,6 +116,7 @@ PREREQ_APPS = [
     'django_hosts',
     'django_thumbor',
     'djrill',
+    'favicon',
     'micawber.contrib.mcdjango',
     'shorturls',
     'simple_open_graph',
@@ -228,3 +229,6 @@ LOGGING = {
 }
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+# Favicon path
+FAVICON_PATH = STATIC_URL + 'ico/favicon.png'
