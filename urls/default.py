@@ -32,6 +32,7 @@ urlpatterns = patterns(
     url(r'^runs/', include('runs.urls')),
     url(r'^sponsors/', include('sponsors.urls')),
     url(r'^djrill/', include('djrill.urls')),
+    url(r'^ajaximage/', include('ajaximage.urls')),
 
     # website templates
     url(r'^r/$', TemplateView.as_view(template_name='race_websites/index.html'), name='race_home'),

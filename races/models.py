@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
@@ -48,7 +50,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
         (BIKE, _('Bike')),
         (SWIM, _('Swim')),
     )
-    logo = models.ImageField(upload_to="races/logos", blank=True, null=True)
+    logo = AjaxImageField(upload_to="races/logos", blank=True, null=True)
     slogan = models.CharField(max_length=300, blank=True, null=True)
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
     annual = models.CharField(max_length=15)

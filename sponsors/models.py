@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+from ajaximage.fields import AjaxImageField
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -17,7 +19,7 @@ class Sponsor(models.Model):
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    logo = models.ImageField(upload_to='sponsors', blank=True, null=True)
+    logo = AjaxImageField(upload_to='sponsors', blank=True, null=True)
     discount_detail = models.TextField(blank=True, null=True)
     active = models.BooleanField(default=False)
 

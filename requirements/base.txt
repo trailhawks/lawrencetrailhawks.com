@@ -5,6 +5,7 @@ Unipath==1.0
 akismet==0.2.0
 boto==2.34.0
 django-adaptors==0.2.5
+django-ajaximage==0.2.7
 django-backupdb==0.6.0
 django-contrib-comments==1.5
 django-docopt-command

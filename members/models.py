@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import datetime
 
+from ajaximage.fields import AjaxImageField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -30,8 +31,7 @@ class Member(MachineTagMixin, ShortUrlMixin):
     city = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=2, blank=True, null=True)
     zip = models.CharField(max_length=25, blank=True, null=True)
-    avatar = models.ImageField(upload_to='members/avatars', blank=True, null=True)
-    #active = models.BooleanField()
+    avatar = AjaxImageField(upload_to='members/avatars', blank=True, null=True)
     date_paid = models.DateField(null=True, blank=True)
     member_since = models.DateField(null=True, blank=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)

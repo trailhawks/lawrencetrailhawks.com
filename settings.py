@@ -109,6 +109,7 @@ PREREQ_APPS = [
 
     #'djcelery',
     #'gypsy_weather',
+    'ajaximage',
     'backupdb',
     'django_extensions',
     'django_gravatar',
