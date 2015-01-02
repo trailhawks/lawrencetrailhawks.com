@@ -118,7 +118,6 @@ PREREQ_APPS = [
     'micawber.contrib.mcdjango',
     'shorturls',
     'simple_open_graph',
-    'south',
     'storage_migration',
     'storages',
     'syncr.flickr',
