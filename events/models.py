@@ -1,6 +1,8 @@
+from __future__ import unicode_literals
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
@@ -10,6 +12,7 @@ from races.models import Race
 from .managers import EventManager
 
 
+@python_2_unicode_compatible
 class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
     """Event model."""
 
@@ -31,7 +34,7 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):

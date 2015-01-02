@@ -1,6 +1,8 @@
+from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -10,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 # TODO: rename to remote status update?
+@python_2_unicode_compatible
 class SocialLink(models.Model):
     """Represents a remote status update."""
     content_type = models.ForeignKey(ContentType)
@@ -24,7 +27,7 @@ class SocialLink(models.Model):
         verbose_name = _('Social Link')
         verbose_name_plural = _('Social Links')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.message
 
     #@models.permalink

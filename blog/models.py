@@ -1,6 +1,8 @@
+from __future__ import unicode_literals
 from django.db import models
 from django.db.models import permalink
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
@@ -12,6 +14,7 @@ from core.models import CommentMixin
 from members.models import Member
 
 
+@python_2_unicode_compatible
 class Post(CommentMixin, ShortUrlMixin, models.Model):
     """Post model."""
 
@@ -45,7 +48,7 @@ class Post(CommentMixin, ShortUrlMixin, models.Model):
         verbose_name = _('post')
         verbose_name_plural = _('posts')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @permalink

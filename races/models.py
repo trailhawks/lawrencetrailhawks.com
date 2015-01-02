@@ -1,6 +1,8 @@
+from __future__ import unicode_literals
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
@@ -12,6 +14,7 @@ from members.models import Member
 from sponsors.models import Sponsor
 
 
+@python_2_unicode_compatible
 class RaceType(models.Model):
     """Race Type model."""
 
@@ -23,10 +26,11 @@ class RaceType(models.Model):
             self.slug = slugify(self.name)
         return super(RaceType, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     """Race model."""
 
@@ -74,7 +78,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
         verbose_name = _('Race')
         verbose_name_plural = _('Races')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0} {1}'.format(self.annual, self.title)
 
     @models.permalink
@@ -120,6 +124,7 @@ class RaceModerator(CommentModerator):
 moderator.register(Race, RaceModerator)
 
 
+@python_2_unicode_compatible
 class Registration(models.Model):
     """Registration model."""
 
@@ -133,7 +138,7 @@ class Registration(models.Model):
         verbose_name = _('Registration Dates')
         verbose_name_plural = _('Registration Dates')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.race.title, self.reg_date)
 
     @property
@@ -143,6 +148,7 @@ class Registration(models.Model):
         return False
 
 
+@python_2_unicode_compatible
 class EmergencyContact(models.Model):
     """Emergency Contact model."""
 
@@ -156,10 +162,11 @@ class EmergencyContact(models.Model):
         verbose_name = _('Emergency Contact')
         verbose_name_plural = _('Emergency Contacts')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
 
+@python_2_unicode_compatible
 class Racer(MachineTagMixin):
     """Racer model."""
 
@@ -199,7 +206,7 @@ class Racer(MachineTagMixin):
         verbose_name = _('Racer')
         verbose_name_plural = _('Racers')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
     @models.permalink
@@ -235,6 +242,7 @@ class Racer(MachineTagMixin):
                 return gender
 
 
+@python_2_unicode_compatible
 class Result(models.Model):
     """Result model."""
 
@@ -254,7 +262,7 @@ class Result(models.Model):
         verbose_name = _('Result')
         verbose_name_plural = _('Results')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s - %s" % (self.racer, self.race.title, self.time)
 
     def save(self, *args, **kwargs):
@@ -271,6 +279,7 @@ class Result(models.Model):
         return super(Result, self).save(*args, **kwargs)
 
 
+@python_2_unicode_compatible
 class Report(models.Model):
     """Report model."""
 
@@ -283,5 +292,5 @@ class Report(models.Model):
         verbose_name = _('Report')
         verbose_name_plural = _('Reports')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

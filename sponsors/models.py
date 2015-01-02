@@ -1,12 +1,15 @@
+from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from .managers import SponsorManager
 
 
+@python_2_unicode_compatible
 class Sponsor(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(blank=True, null=True, help_text='Suggested value automatically generated from name. Must be unique.')
@@ -28,7 +31,7 @@ class Sponsor(models.Model):
         verbose_name = _('Sponsor')
         verbose_name_plural = _('Sponsors')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):

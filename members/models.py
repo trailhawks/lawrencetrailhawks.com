@@ -1,7 +1,10 @@
+from __future__ import unicode_literals
+
 import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
@@ -9,6 +12,7 @@ from core.models import MachineTagMixin
 from .managers import MemberManager, TermManager
 
 
+@python_2_unicode_compatible
 class Member(MachineTagMixin, ShortUrlMixin):
     GENDER_CHOICES = (
         (1, 'Male'),
@@ -41,7 +45,7 @@ class Member(MachineTagMixin, ShortUrlMixin):
         verbose_name_plural = _('Members')
         ordering = ['last_name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.full_hawk_name
 
     @models.permalink
@@ -100,6 +104,7 @@ class Member(MachineTagMixin, ShortUrlMixin):
         return Report.objects.filter(racer__trailhawk=self)
 
 
+@python_2_unicode_compatible
 class Office(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
@@ -124,6 +129,3 @@ class Term(models.Model):
     class Meta:
         verbose_name = 'term'
         verbose_name_plural = 'terms'
-
-    #def __str__(self):
-    #    return self.name

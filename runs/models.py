@@ -1,4 +1,6 @@
+from __future__ import unicode_literals
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
@@ -9,6 +11,7 @@ from locations.models import Location
 from members.models import Member
 
 
+@python_2_unicode_compatible
 class Run(MachineTagMixin, CommentMixin, ShortUrlMixin):
     """Run model."""
 
@@ -37,7 +40,7 @@ class Run(MachineTagMixin, CommentMixin, ShortUrlMixin):
         verbose_name = _('Run')
         verbose_name_plural = _('Runs')
 
-    def __unicode__(self):
+    def __str__(self):
         return '{0}: {1}'.format(self.get_day_of_week_display(), self.name)
 
     @models.permalink

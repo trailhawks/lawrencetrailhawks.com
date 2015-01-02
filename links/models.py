@@ -1,10 +1,13 @@
+from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from shorturls.models import ShortUrlMixin
 
 
+@python_2_unicode_compatible
 class Links(models.Model, ShortUrlMixin):
     name = models.CharField(max_length=250)
     link = models.URLField(help_text='URL to link')
@@ -19,7 +22,7 @@ class Links(models.Model, ShortUrlMixin):
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @models.permalink

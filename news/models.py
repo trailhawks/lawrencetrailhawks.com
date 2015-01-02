@@ -1,8 +1,10 @@
+from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 from shorturls.models import ShortUrlMixin
@@ -20,6 +22,7 @@ ALERT_CHOICES = (
 )
 
 
+@python_2_unicode_compatible
 class News(CommentMixin, ShortUrlMixin, models.Model):
     """News model."""
 
@@ -50,7 +53,7 @@ class News(CommentMixin, ShortUrlMixin, models.Model):
         verbose_name = _('news')
         verbose_name_plural = _('news')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
