@@ -8,10 +8,18 @@ class MemberInline(admin.TabularInline):
     extra = 0
 
 
+class TermInline(admin.TabularInline):
+    model = Term
+    extra = 0
+
+
 class MemberAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'first_name', 'last_name', 'phone', 'date_paid', 'active', 'receive_comment_emails')
     list_filter = ('date_paid', 'receive_comment_emails')
     search_fields = ('first_name', 'last_name')
+    inlines = [
+        TermInline,
+    ]
 
 
 class OfficeAdmin(admin.ModelAdmin):
