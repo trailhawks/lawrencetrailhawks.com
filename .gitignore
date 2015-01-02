@@ -66,5 +66,6 @@ static_root/
 
 alpha.py
 fabfile.py
+production.py
 standard.py
 tasks.py
