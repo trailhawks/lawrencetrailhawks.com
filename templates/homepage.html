@@ -204,49 +204,49 @@ body {
         </div>
         <hr>
         {% endfor %}
-        <a class="btn btn-block btn-primary" href="{% url 'news_list' %}">more news</a>
+        <a class="btn btn-block btn-primary" href="{% url 'news_list' %}">More news &#187;</a>
       </div>
     </div>
   </div>
 
   {% get_todays_runs as runs %}
   {% if runs.todays_run %}
-  <div class="col-md-8">
-  <h2>Today's Run</h2>
-  {% for run in runs.todays_run %}
-    <h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
+    <div class="col-md-8">
+      <h2>Today's Run</h2>
+      {% for run in runs.todays_run %}
+        <h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
 
-    {% get_news_for_object run as news_list %}
-    {% for news in latest_news|slice:"1" %}
-    <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
-      <h4 class="">{{ news.pub_date|date }}</h4>
-      {{ news.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
+        {% get_news_for_object run as news_list %}
+        {% for news in latest_news|slice:"1" %}
+        <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+          <h4 class="">{{ news.pub_date|date }}</h4>
+          {{ news.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
+        </div>
+        <hr>
+        {% endfor %}
+
+        {% if run.get_run_news %}
+        <h4>Latest News:</h4>
+        {% for item in run.get_run_news|slice:":3" %}
+          <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
+        {% endfor %}
+
+        {% endif %}
+
+        <dl class="dl-horizontal">
+          <dt>When: </dt>
+          <dd>{{ run.get_day_of_week_display }} at {{ run.run_time }}</dd>
+          {% if run.location %}
+            <dt>Where: </dt>
+            <dd>{{ run.location }} {% if run.map_link %}<a href="{{ run.map_link }}">(Directions)</a>{% endif %}</dd>
+          {% endif %}
+          <dt>What: </dt>
+          <dd>{{ run.details }}</dd>
+          <dt>Contact: </dt>
+          <dd><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
+        </dl>
+      {% endfor %}
     </div>
-    <hr>
-    {% endfor %}
-
-    {% if run.get_run_news %}
-    <h4>Latest News:</h4>
-    {% for item in run.get_run_news|slice:":3" %}
-      <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
-    {% endfor %}
-
-    {% endif %}
-
-    <dl class="dl-horizontal">
-      {% if run.location %}
-        <dt>Where: </dt>
-        <dd>{{ run.location }} <a href="{{ run.map_link }}">(Directions)</a></dd>
-      {% endif %}
-      <dt>When: </dt>
-      <dd>{{ run.run_time }}</dd>
-      <dt>What: </dt>
-      <dd>{{ run.details }}</dd>
-      <dt>Contact: </dt>
-      <dd><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
-    </dl>
-  {% endfor %}
-  </div>
   {% endif %}
 
   <div class="col-md-8">
@@ -255,15 +255,9 @@ body {
         <h2 class="panel-title">Next Run</h2>
       </div>
       <div class="panel-body">
-        {% comment %}
-        <div class="alert alert-success"><strong>Well done!</strong> You successfully read this important alert message.</div>
-        <div class="alert alert-info"><strong>Heads up!</strong> This alert needs your attention, but it's not super important.</div>
-        <div class="alert alert-warning"><strong>Warning!</strong> No Saturday run!</div>
-        <div class="alert alert-danger"><strong>Oh snap!</strong> Change a few things up and try submitting again.</div>
-        {% endcomment %}
-
         {% for run in runs.next_run %}
           <h3><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
+
           {% if run.get_run_news %}
             <h4>Latest News:</h4>
             {% for item in run.get_run_news|slice:":3" %}
@@ -272,12 +266,12 @@ body {
           {% endif %}
 
           <dl class="dl-horizontal">
+            <dt>When: </dt>
+            <dd>{{ run.get_day_of_week_display }} at {{ run.run_time }}</dd>
             {% if run.location %}
               <dt>Where: </dt>
-              <dd>{{ run.location }} <a href="{{ run.map_link }}">(Directions)</a></dd>
+              <dd>{{ run.location }} {% if run.map_link %}<a href="{{ run.map_link }}">(Directions)</a>{% endif %}</dd>
             {% endif %}
-            <dt>When: </dt>
-            <dd>{{ run.run_time }}</dd>
             <dt>What: </dt>
             <dd>{{ run.details }}</dd>
             <dt>Contact: </dt>
@@ -299,9 +293,8 @@ body {
         </div>
         <div class="panel-body">
           <h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2>
-          <div>{{ latest_race.start_datetime|date:"D d M, Y" }}</div>
           {% if latest_race.logo %}
-          <p><a href="{{ latest_race.get_absolute_url }}"><img class="img-responsive" src="{{ latest_race.logo.url }}"></a></p>
+            <p><a href="{{ latest_race.get_absolute_url }}"><img class="img-responsive" src="{{ latest_race.logo.url }}"></a></p>
           {% endif %}
           <h3>{{ latest_race.slogan }}</h3>
           {% if latest_race.get_race_news %}
@@ -311,19 +304,21 @@ body {
             {% endfor %}
             </p>
           {% endif %}
-          {% if latest_race.location %}
-            <p><strong>Where: </strong>{{ latest_race.location }} <a href="{{ latest_race.map_link }}">(Directions)</a></dd><br />
-          {% endif %}
-          <p><strong>Course: </strong>{{ latest_race.description|oembed:"600x600"|markdown }}<br />
-          {% if latest_race.course_map %}
-            Click <a href="{{ latest_race.course_map }}">here</a> for course map.</p>
-          {% endif %}
-          <ul>
-            {% for reg in latest_race.get_reg_dates %}
-              <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-            {% endfor %}
-          </ul>
-          <p>{{ latest_event.discount }}</p>
+
+
+          <dl class="dl-horizontal">
+            <dt>When: </dt>
+            <dd>{{ latest_race.start_datetime|date }} at {{ latest_race.start_datetime|time }} </dd>
+            {% if latest_race.location %}
+              <dt>Where: </dt>
+              <dd>{{ latest_race.location }} {% if latest_race.map_link %}<a href="{{ latest_race.map_link }}">(Directions)</a>{% endif %}</dd>
+            {% endif %}
+          </dl>
+
+          <h4>Course: </h4>
+          {{ latest_race.description|oembed:"600x600"|markdown }}
+
+          <p><a class="btn btn-block btn-primary" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
         </div>
       </div>
     {% else %}
@@ -429,7 +424,7 @@ body {
       </div>
       <div class="panel-body">
         <p>Subscribe to our calendar to keep upto date on all Trailhawk events, not just our races.</p>
-        <p><a class="btn btn-block btn-primary" href="http://lawrencetrailhawks.com{% url 'race_ical' %}">Subscribe</a></p>
+        <p><a class="btn btn-block btn-primary" href="http://lawrencetrailhawks.com{% url 'race_ical' %}">Subscribe &#187;</a></p>
       </div>
     </div>
   </div>
