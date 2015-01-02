@@ -20,7 +20,7 @@ django-waffle==0.10
 djrill==0.7.0
 feedparser==5.1.3
 flickrapi==1.4.2
-gunicorn==18.0
+gunicorn==19.1.1
 httplib2==0.7.6
 micawber==0.3.0
 psycopg2==2.5.2
