@@ -1,0 +1,9 @@
+# for using opencv with thumbor
+#opencv
+#opencv-engine
+#numpy
+
+# for remote thumbnail support
+thumbor==4.8.1
+opencv_engine
+#git+https://github.com/willtrking/thumbor_aws.git#egg=thumbor_aws-git
