@@ -13,9 +13,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.normalize_racers()
-        self.normalize_members()
+        self.match_members_to_racers()
 
-    def normalize_members(self):
+    def match_members_to_racers(self):
         racers = Racer.objects.all().order_by('id')
         for racer in racers:
             if not racer.trailhawk:
@@ -32,6 +32,10 @@ class Command(BaseCommand):
     def normalize_racers(self):
         racers = Racer.objects.all().order_by('id')
         for racer in racers:
+            racer.first_name = racer.first_name.strip()
+            racer.last_name = racer.last_name.strip()
+            racer.save()
+
             # look for duplicate racers....
             racer_values = Racer.objects.filter(first_name=racer.first_name, last_name=racer.last_name).values_list('id', flat=True)
             if len(racer_values) > 1:
