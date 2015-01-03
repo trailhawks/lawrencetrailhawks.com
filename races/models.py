@@ -7,10 +7,9 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
-from shorturls.models import ShortUrlMixin
 
 from .managers import RaceManager
-from core.models import CommentMixin, MachineTagMixin
+from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
 from locations.models import Location
 from members.models import Member
 from sponsors.models import Sponsor

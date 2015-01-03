@@ -5,12 +5,11 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
-from shorturls.models import ShortUrlMixin
 from taggit.managers import TaggableManager
 
 #from . import listeners
 from .managers import PostManager
-from core.models import CommentMixin
+from core.models import CommentMixin, ShortUrlMixin
 from members.models import Member
 
 

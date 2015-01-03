@@ -7,9 +7,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from shorturls.models import ShortUrlMixin
 
-from core.models import MachineTagMixin
+from core.models import MachineTagMixin, ShortUrlMixin
 from .managers import MemberManager, TermManager
 
 
