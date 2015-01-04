@@ -5,6 +5,7 @@
 #opencv
 opencv-engine
 numpy
+git+git://github.com/globocom/remotecv.git#egg=remotecv-git
 
 # for remote thumbnail support
 thumbor==4.8.1
