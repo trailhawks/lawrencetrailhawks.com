@@ -92,8 +92,8 @@ def member_list(request):
     member_list = csv.writer(response)
     member_list.writerow(['id',
                          'First Name',
-                         'Last Name',
                          'Hawk Name',
+                         'Last Name',
                          'Gender',
                          'Club Officer Title',
                          'Address',
@@ -110,8 +110,8 @@ def member_list(request):
     for member in members:
         member_list.writerow([member.id,
                              member.first_name,
+                             '"{}"'.format(member.hawk_name),
                              member.last_name,
-                             member.hawk_name,
                              member.get_gender_display(),
                              #member.get_position(),
                              '',
