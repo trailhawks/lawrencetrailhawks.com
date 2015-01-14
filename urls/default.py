@@ -18,7 +18,6 @@ urlpatterns = patterns(
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^contact/$', 'members.views.officer_list', name='contact'),
     url(r'^contact/thanks/$', ThanksView.as_view(), name='thanks'),
-    url(r'^member_list/$', 'members.views.member_list', name='member_list'),
     url(r'^styleguide/$', StyleGuideView.as_view(), name='styleguide'),
     url(r'^blog/', include('blog.urls')),
     url(r'^comments/', include('django_comments.urls')),

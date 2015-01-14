@@ -2,6 +2,7 @@ import csv
 
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
@@ -72,11 +73,9 @@ def officer_list(request):
     else:
         form = ContactForm()
 
-    return render_to_response('contact.html', {
-        'form': form,
-            },
-        context_instance=RequestContext(request),
-    )
+    return render_to_response('contact.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
 
 
 class MemberExport(TemplateView):
@@ -85,12 +84,14 @@ class MemberExport(TemplateView):
 
 @login_required
 def member_list(request):
-    response = HttpResponse(mimetype='text/csv')
+    response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=member_list.csv'
+    current_site = Site.objects.get_current()
 
-    members = Member.active_objects.all().order_by('-date_paid')
+    members = Member.objects.all().order_by('-date_paid')
     member_list = csv.writer(response)
-    member_list.writerow(['First Name',
+    member_list.writerow(['id',
+                         'First Name',
                          'Last Name',
                          'Hawk Name',
                          'Gender',
@@ -103,14 +104,17 @@ def member_list(request):
                          'Email Address',
                          'Date paid',
                          'Member Since',
-                         'Dues Due'])
+                         'Dues Due',
+                         'Website Admin Url'])
 
     for member in members:
-        member_list.writerow([member.first_name,
+        member_list.writerow([member.id,
+                             member.first_name,
                              member.last_name,
                              member.hawk_name,
                              member.get_gender_display(),
-                             member.get_position_display(),
+                             #member.get_position(),
+                             '',
                              member.address,
                              member.address2,
                              member.city,
@@ -119,6 +123,7 @@ def member_list(request):
                              member.email,
                              member.date_paid,
                              member.member_since,
-                             member.date_expires])
+                             member.date_expires,
+                             'http://' + current_site.domain + reverse('admin:members_member_change', args=[member.pk])])
 
     return response
