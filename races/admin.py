@@ -92,7 +92,7 @@ class EmergencyContactAdmin(admin.ModelAdmin):
 
 
 class RaceTypeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'slug']
 
 
 admin.site.register(Race, RaceAdmin)
