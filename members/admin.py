@@ -17,6 +17,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'first_name', 'last_name', 'phone', 'date_paid', 'active', 'receive_comment_emails')
     list_filter = ('date_paid', 'receive_comment_emails')
     list_per_page = 300
+    ordering = ['last_name', 'first_name']
     search_fields = ('first_name', 'last_name')
     inlines = [
         TermInline,
