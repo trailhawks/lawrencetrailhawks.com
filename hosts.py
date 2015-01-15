@@ -8,7 +8,7 @@ host_patterns = patterns(
          callback='lawrencetrailhawks.races.callbacks.host_',
          name='default'),
 
-    host(r'(alpha|www)\.(lawrencetrailhawks|lth|trailhawks)\.(com|dev|im)',
+    host(r'(alpha|new|www)\.(lawrencetrailhawks|lth|trailhawks)\.(com|dev|im)',
          settings.ROOT_URLCONF, name='default_www'),
 
     host(r'localhost', settings.ROOT_URLCONF,
@@ -23,7 +23,7 @@ host_patterns = patterns(
          callback='lawrencetrailhawks.races.callbacks.host_race',
          name='hawkhundred'),
 
-    host(r'www\.hawkhundred\.(com|dev)', settings.RACE_URLCONF,
+    host(r'(alpha|new|www)\.hawkhundred\.(com|dev)', settings.RACE_URLCONF,
          callback='lawrencetrailhawks.races.callbacks.host_race',
          name='hawkhundred_www'),
 )
