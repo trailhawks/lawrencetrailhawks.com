@@ -20,6 +20,7 @@ urlpatterns = patterns(
     url(r'^gallery/$', TemplateView.as_view(template_name='race_websites/gallery.html'), name='race_gallery'),
     url(r'^results/$', TemplateView.as_view(template_name='race_websites/results.html'), name='race_results'),
     url(r'^signup/$', TemplateView.as_view(template_name='race_websites/signup.html'), name='race_signup'),
+    url(r'^', include('favicon.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()
