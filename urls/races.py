@@ -14,7 +14,7 @@ urlpatterns = patterns(
     url(r'^404/', TemplateView.as_view(template_name='404.html')),
     url(r'^500/', TemplateView.as_view(template_name='500.html')),
     url(r'^course/$', TemplateView.as_view(template_name='race_websites/course.html'), name='race_course'),
-    url(r'^calenda$', TemplateView.as_view(template_name='race_websites/calendar.html'), name='race_calendar'),
+    url(r'^calendar$', TemplateView.as_view(template_name='race_websites/calendar.html'), name='race_calendar'),
     url(r'^faqs/$', TemplateView.as_view(template_name='race_websites/faqs.html'), name='race_faqs'),
     url(r'^travel/$', TemplateView.as_view(template_name='race_websites/travel.html'), name='race_travel'),
     url(r'^gallery/$', TemplateView.as_view(template_name='race_websites/gallery.html'), name='race_gallery'),
