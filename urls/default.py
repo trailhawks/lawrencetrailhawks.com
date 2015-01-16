@@ -36,13 +36,13 @@ urlpatterns = patterns(
 
     # website templates
     url(r'^r/$', TemplateView.as_view(template_name='race_websites/index.html'), name='race_home'),
-    url(r'^r/course/$', TemplateView.as_view(template_name='race_websites/course.html'), name='race_course'),
     url(r'^r/calendar/$', TemplateView.as_view(template_name='race_websites/calendar.html'), name='race_calendar'),
+    url(r'^r/course/$', TemplateView.as_view(template_name='race_websites/course.html'), name='race_course'),
     url(r'^r/faqs/$', TemplateView.as_view(template_name='race_websites/faqs.html'), name='race_faqs'),
-    url(r'^r/travel/$', TemplateView.as_view(template_name='race_websites/travel.html'), name='race_travel'),
     url(r'^r/gallery/$', TemplateView.as_view(template_name='race_websites/gallery.html'), name='race_gallery'),
     url(r'^r/results/$', TemplateView.as_view(template_name='race_websites/results.html'), name='race_results'),
     url(r'^r/signup/$', TemplateView.as_view(template_name='race_websites/signup.html'), name='race_signup'),
+    url(r'^r/travel/$', TemplateView.as_view(template_name='race_websites/travel.html'), name='race_travel'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('shorturls.urls')),
