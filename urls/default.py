@@ -19,8 +19,8 @@ urlpatterns = patterns(
     url(r'^contact/$', 'members.views.officer_list', name='contact'),
     url(r'^contact/thanks/$', ThanksView.as_view(), name='thanks'),
     url(r'^styleguide/$', StyleGuideView.as_view(), name='styleguide'),
+
     url(r'^blog/', include('blog.urls')),
-    url(r'^comments/', include('django_comments.urls')),
     url(r'^events/', include('events.urls')),
     url(r'^faq/', include('faq.urls')),
     url(r'^links/', include('links.urls')),
@@ -30,8 +30,11 @@ urlpatterns = patterns(
     url(r'^races/', include('races.urls')),
     url(r'^runs/', include('runs.urls')),
     url(r'^sponsors/', include('sponsors.urls')),
-    url(r'^djrill/', include('djrill.urls')),
+
     url(r'^ajaximage/', include('ajaximage.urls')),
+    url(r'^comments/', include('django_comments.urls')),
+    url(r'^djrill/', include('djrill.urls')),
+
     url(r'^', include('favicon.urls')),
 
     # website templates

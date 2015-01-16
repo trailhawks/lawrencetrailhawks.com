@@ -113,7 +113,7 @@ body {
 <!--
 <div class="navbar-inner">
   <div class="container">
-    <a class="brand" href="{% url 'race_home' %}"><img src="{% static 'img/header-hawk.jpg' %}"></a>
+    <a class="brand" href="{% url 'homepage' %}"><img src="{% static 'img/header-hawk.jpg' %}"></a>
   </div>
 </div>
 -->
@@ -121,6 +121,7 @@ body {
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
+    base_template_name == {{ base_template_name }}
 
 {% block content %}
 {% endblock content %}
