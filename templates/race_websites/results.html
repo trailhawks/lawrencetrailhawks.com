@@ -18,7 +18,7 @@
       <li><a href="#{{ race_type.slug }}-female-results" data-toggle="tab">Female Results</a></li>
       <li><a href="#{{ race_type.slug }}-male-results" data-toggle="tab">Male Results</a></li>
     </ul>
-    <div class="tab-content">d
+    <div class="tab-content">
       <div class="tab-pane active" id="{{ race_type.slug }}-overall-results">
         {% get_results_for_race race=object race_type=race_type as race_results %}
         {% render_results race_results %}
