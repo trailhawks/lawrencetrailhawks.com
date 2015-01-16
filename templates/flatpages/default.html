@@ -1,5 +1,7 @@
 {% extends base_template_name|default:"base.html" %}
 
-{% block title %}{{ flatpage.title }{% endblock title %}
+{% load markup %}
 
-{% block content %}{{ flatpage.content }}{% endblock content %}
+{% block title %}{{ flatpage.title }}{% endblock title %}
+
+{% block content %}{{ flatpage.content|markdown }}{% endblock content %}
