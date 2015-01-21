@@ -68,4 +68,5 @@ alpha.py
 fabfile.py
 production.py
 standard.py
+stdout
 tasks.py
