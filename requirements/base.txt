@@ -16,6 +16,7 @@ django-hosts==1.1
 django-ical==1.3
 django-markup-deprecated==0.0.3
 django-registration==1.0
+django-robots==1.0
 django-shorturls==1.1.0
 django-simple-open-graph==0.3
 django-storages==1.1.8

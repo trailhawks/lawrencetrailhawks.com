@@ -2,11 +2,17 @@ from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
+from ..sitemaps.default import StaticViewSitemap
 from ..views import AboutView, HomepageView, StyleGuideView, ThanksView
 
+
+sitemaps = {
+    'static': StaticViewSitemap,
+}
 
 admin.autodiscover()
 
@@ -35,6 +41,8 @@ urlpatterns = patterns(
     url(r'^comments/', include('django_comments.urls')),
     url(r'^djrill/', include('djrill.urls')),
 
+    url(r'^robots\.txt$', include('robots.urls')),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^', include('favicon.urls')),
 
     # website templates
