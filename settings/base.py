@@ -71,12 +71,12 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    #'django.core.context_processors.tz',
+    'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
 ]
 
 TEMPLATE_DIRS = [
-    os.path.join(PROJECT_ROOT, 'templates'),
+    os.path.join(PROJECT_ROOT, 'templates', 'defaults'),
 ]
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls.default'
@@ -84,6 +84,8 @@ RACE_URLCONF = 'lawrencetrailhawks.urls.races'
 
 # Middleware
 MIDDLEWARE_CLASSES = [
+    'django_hosts.middleware.HostsRequestMiddleware',
+    'middleware.HostsRequestMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,7 +95,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'waffle.middleware.WaffleMiddleware',
     'middleware.QueryRequestUrlMiddleware',
-    'django_hosts.middleware.HostsMiddleware',
+    'middleware.HostsResponseMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 PREREQ_APPS = [
@@ -236,3 +239,22 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Favicon path
 FAVICON_PATH = STATIC_URL + 'ico/favicon.png'
+
+# VHost middleware mappings...
+
+HOST_MAPPING = {
+    'alpha.hawkhundred.com': 'hawkhundred.com',
+    'hawkhundred.dev': 'hawkhundred.com',
+    'hawkhundred.lawrencetrails.com': 'hawkhundred.com',
+    'www.hawkhundred.com': 'hawkhundred.com',
+    'www.hawkhundred.dev': 'hawkhundred.com',
+}
+
+HOSTS_TEMPLATE_DIRS = {
+    'default': TEMPLATE_DIRS,
+    'hawkhundred.com': [
+        os.path.join(PROJECT_ROOT, 'templates', 'hawkhundred.com'),
+        os.path.join(PROJECT_ROOT, 'templates', 'race_defaults'),
+        os.path.join(PROJECT_ROOT, 'templates', 'defaults'),
+    ]
+}
