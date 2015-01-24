@@ -19,8 +19,8 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', HomepageView.as_view(), name='homepage'),
-    url(r'^404/', TemplateView.as_view(template_name='404.html')),
-    url(r'^500/', TemplateView.as_view(template_name='500.html')),
+    url(r'^404/$', TemplateView.as_view(template_name='404.html')),
+    url(r'^500/$', TemplateView.as_view(template_name='500.html')),
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^contact/$', 'members.views.officer_list', name='contact'),
     url(r'^contact/thanks/$', ThanksView.as_view(), name='thanks'),
@@ -47,7 +47,6 @@ urlpatterns = patterns(
 
     # website templates
     url(r'^r/$', TemplateView.as_view(template_name='race_websites/index.html'), name='race_home'),
-    url(r'^r/calendar/$', TemplateView.as_view(template_name='race_websites/calendar.html'), name='race_calendar'),
     url(r'^r/course/$', TemplateView.as_view(template_name='race_websites/course.html'), name='race_course'),
     url(r'^r/faqs/$', TemplateView.as_view(template_name='race_websites/faqs.html'), name='race_faqs'),
     url(r'^r/gallery/$', TemplateView.as_view(template_name='race_websites/gallery.html'), name='race_gallery'),

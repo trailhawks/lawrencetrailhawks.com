@@ -18,9 +18,8 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='homepage'),
-    url(r'^404/', TemplateView.as_view(template_name='404.html')),
-    url(r'^500/', TemplateView.as_view(template_name='500.html')),
-    url(r'^calendar$', TemplateView.as_view(template_name='calendar.html'), name='race_calendar'),
+    url(r'^404/$', TemplateView.as_view(template_name='404.html')),
+    url(r'^500/$', TemplateView.as_view(template_name='500.html')),
     url(r'^course/$', TemplateView.as_view(template_name='course.html'), name='race_course'),
     url(r'^faqs/$', TemplateView.as_view(template_name='faqs.html'), name='race_faqs'),
     url(r'^gallery/$', TemplateView.as_view(template_name='gallery.html'), name='race_gallery'),
