@@ -82,7 +82,7 @@
         {% for news in latest_news %}
         <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
           <h4 class="">{{ news.pub_date|date }}</h4>
-          {{ news.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
+          {{ news.body|markdown|truncatewords_html:"100" }}
         </div>
         <hr>
         {% endfor %}
@@ -102,7 +102,7 @@
         {% for news in latest_news|slice:"1" %}
         <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
           <h4 class="">{{ news.pub_date|date }}</h4>
-          {{ news.body|oembed:"600x600"|markdown|truncatewords_html:"100" }}
+          {{ news.body|markdown|truncatewords_html:"100" }}
         </div>
         <hr>
         {% endfor %}
@@ -182,7 +182,7 @@
           {% if latest_race.get_race_news %}
             <p><strong>Latest News:</strong>
             {% for item in latest_race.get_race_news|slice:":3" %}
-              {{ item.body|oembed:"600x600"|markdown }}
+              {{ item.body|markdown }}
             {% endfor %}
             </p>
           {% endif %}
