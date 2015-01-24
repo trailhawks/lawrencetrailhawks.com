@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load race_tags %}
+
+{% block content %}
+
+{% get_race_by_slug slug='hawk-100-mile-50-mile-marathon-fifth-annual' as race %}
+
+<h1>Sign Up</h1>
+
+{{ race.reg_description|markdown }}
+
+{% endblock content %}
