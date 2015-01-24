@@ -9,7 +9,7 @@
       <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink">
          {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}</a>
      </li>
-     <li><a href="{% url 'member_list' %}" class="addlink">Download Member List</a></li>
+     <li><a href="{% url 'admin_member_list' %}" class="addlink">Download Member List</a></li>
     </ul>
   {% endif %}
 {% endblock %}
