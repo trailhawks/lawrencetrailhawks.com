@@ -3,6 +3,7 @@
 
 {% load url from future %}
 {% load blog_tags %}
+{% load cache %}
 {% load core_tags %}
 {% load faq_tags %}
 {% load flickr %}
@@ -32,41 +33,43 @@
 {% switch use_thumbor %}
 <div class="row">
   <div class="col-md-12">
-    {% get_random_photos 5 as photos %}
-    <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        {% for photo in photos %}
-        <li data-target="#carousel-homepage" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
-        {% endfor %}
-      </ol>
+    {% cache 60 homepage-carousel %}
+      {% get_random_photos 5 as photos %}
+      <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          {% for photo in photos %}
+          <li data-target="#carousel-homepage" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+          {% endfor %}
+        </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        {% for photo in photos %}
-        <div class="item {% if forloop.first %}active{% endif %}">
-          <img data-src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
-               src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
-               alt="{{ photo.caption }}" height="500" width="1200">
-          <div class="carousel-caption">
-            {% if photo.caption %}
-            <h3>{{ photo.caption|safe }}</h3>
-            {% endif %}
-            <p>{{ photo.description|safe }}</p>
-            <!-- id: {{ photo.id }}; flickr_id: {{ photo.flickr_id }}; title: {{ photo.title|safe }} -->
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          {% for photo in photos %}
+          <div class="item {% if forloop.first %}active{% endif %}">
+            <img data-src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
+                 src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
+                 alt="{{ photo.caption }}" height="500" width="1200">
+            <div class="carousel-caption">
+              {% if photo.caption %}
+              <h3>{{ photo.caption|safe }}</h3>
+              {% endif %}
+              <p>{{ photo.description|safe }}</p>
+              <!-- id: {{ photo.id }}; flickr_id: {{ photo.flickr_id }}; title: {{ photo.title|safe }} -->
+            </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
 
-      <!-- Controls -->
-      <a class="carousel-control left" href="#carousel-homepage" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="carousel-control right" href="#carousel-homepage" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-    </div>
+        <!-- Controls -->
+        <a class="carousel-control left" href="#carousel-homepage" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#carousel-homepage" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    {% endcache %}
   </div>
 </div>
 {% endswitch use_thumbor %}
