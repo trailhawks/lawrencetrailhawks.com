@@ -73,6 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
+    #'context_processors.base_template_name',
 ]
 
 TEMPLATE_DIRS = [
@@ -80,12 +81,9 @@ TEMPLATE_DIRS = [
 ]
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls.default'
-RACE_URLCONF = 'lawrencetrailhawks.urls.races'
 
 # Middleware
 MIDDLEWARE_CLASSES = [
-    'django_hosts.middleware.HostsRequestMiddleware',
-    'middleware.HostsRequestMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -94,9 +92,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'waffle.middleware.WaffleMiddleware',
-    'middleware.QueryRequestUrlMiddleware',
-    'middleware.HostsResponseMiddleware',
-    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 PREREQ_APPS = [
@@ -113,13 +108,10 @@ PREREQ_APPS = [
     'django_comments',
     'markup_deprecated',
 
-    #'djcelery',
-    #'gypsy_weather',
     'ajaximage',
     'backupdb',
     'django_extensions',
     'django_gravatar',
-    'django_hosts',
     'django_thumbor',
     'djrill',
     'favicon',
@@ -151,41 +143,6 @@ PROJECT_APPS = [
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
-
-SHORT_BASE_URL = 'http://lth.im/'
-
-SHORTEN_MODELS = {
-    'B': 'blog.post',
-    'E': 'events.event',
-    'F': 'faq.faq',
-    'L': 'links.links',
-    'M': 'members.member',
-    'N': 'news.news',
-    'R': 'races.race',
-    'U': 'runs.run',
-}
-
-ALLOWED_HOSTS = [
-    'hawkhundred.com',
-    '.hawkhundred.com',
-    'lawrencetrailhawks.com',
-    '.lawrencetrailhawks.com',
-    'lth.im',
-    '.lth.im',
-]
-
-MACHINE_TAG_NAMESPACE = 'trailhawks'
-
-#twitter and flickr details left blank, please use your own.
-TWITTER = {'username': '', 'password': ''}
-FLICKR = {'key': '', 'secret': ''}
-
-# Removing deprecation nagging...
-DJANGO_MARKUP_IGNORE_WARNINGS = True
-
-# Root hostconf
-DEFAULT_HOST = 'default'
-ROOT_HOSTCONF = 'hosts'
 
 # Logging
 
@@ -237,24 +194,32 @@ LOGGING = {
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+SHORT_BASE_URL = 'http://lth.im/'
+
+SHORTEN_MODELS = {
+    'B': 'blog.post',
+    'E': 'events.event',
+    'F': 'faq.faq',
+    'L': 'links.links',
+    'M': 'members.member',
+    'N': 'news.news',
+    'R': 'races.race',
+    'U': 'runs.run',
+}
+
+ALLOWED_HOSTS = [
+    'hawkhundred.com',
+    '.hawkhundred.com',
+    'lawrencetrailhawks.com',
+    '.lawrencetrailhawks.com',
+    'lth.im',
+    '.lth.im',
+]
+
+MACHINE_TAG_NAMESPACE = 'trailhawks'
+
+# Removing deprecation nagging...
+DJANGO_MARKUP_IGNORE_WARNINGS = True
+
 # Favicon path
 FAVICON_PATH = STATIC_URL + 'ico/favicon.png'
-
-# VHost middleware mappings...
-
-HOST_MAPPING = {
-    'alpha.hawkhundred.com': 'hawkhundred.com',
-    'hawkhundred.dev': 'hawkhundred.com',
-    'hawkhundred.lawrencetrails.com': 'hawkhundred.com',
-    'www.hawkhundred.com': 'hawkhundred.com',
-    'www.hawkhundred.dev': 'hawkhundred.com',
-}
-
-HOSTS_TEMPLATE_DIRS = {
-    'default': TEMPLATE_DIRS,
-    'hawkhundred.com': [
-        os.path.join(PROJECT_ROOT, 'templates', 'hawkhundred.com'),
-        os.path.join(PROJECT_ROOT, 'templates', 'race_defaults'),
-        os.path.join(PROJECT_ROOT, 'templates', 'defaults'),
-    ]
-}
