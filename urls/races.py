@@ -19,12 +19,11 @@ urlpatterns = patterns(
     '',
     url(r'^404/$', TemplateView.as_view(template_name='404.html')),
     url(r'^500/$', TemplateView.as_view(template_name='500.html')),
-    url(r'^course/$', TemplateView.as_view(template_name='course.html'), name='race_course'),
     url(r'^faqs/$', TemplateView.as_view(template_name='faqs.html'), name='race_faqs'),
     url(r'^gallery/$', TemplateView.as_view(template_name='gallery.html'), name='race_gallery'),
     url(r'^results/$', TemplateView.as_view(template_name='results.html'), name='race_results'),
-    url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='race_signup'),
-    url(r'^travel/$', TemplateView.as_view(template_name='travel.html'), name='race_travel'),
+    #url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='race_signup'),
+    #url(r'^travel/$', TemplateView.as_view(template_name='travel.html'), name='race_travel'),
 
     url(r'^blog/', include('blog.urls')),
     url(r'^events/', include('events.urls')),
@@ -37,6 +36,7 @@ urlpatterns = patterns(
     url(r'^runs/', include('runs.urls')),
     url(r'^sponsors/', include('sponsors.urls')),
 
+    url(r'^ajaximage/', include('ajaximage.urls')),
     url(r'^robots\.txt$', include('robots.urls')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^', include('favicon.urls')),
