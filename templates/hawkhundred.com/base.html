@@ -1,5 +1,6 @@
 {% extends "base_bootstrap.html" %}
 
+{% load core_tags %}
 {% load staticfiles %}
 
 {% block post_style %}
@@ -146,7 +147,7 @@ body {
         <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
       </ul>
       <hr>
-      <p>&copy; 2009-{% now "Y" %} Lawrence Trail Hawks. All rights Reserved</p>
+      <p>&copy; 2009-{% now "Y" %} <a href="http://lawrencetrailhawks.com/">Lawrence Trail Hawks</a>. All rights Reserved. v{% get_version %}</p>
     </div>
   </div>
 </div>
