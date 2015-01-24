@@ -2,7 +2,6 @@
 
 
 {% load markup %}
-{% load micawber_tags %}
 
 
 {% block title %}News{% endblock title %}
@@ -13,7 +12,7 @@
   <div class="col-md-8">
     <h1>{{ object.title }}</h1>
     <h3>{{ object.pub_date|date }}</h3>
-    {{ object.body|oembed:"600x600"|markdown }}
+    {{ object.body|markdown }}
 
     <ul class="pager">
       {% if object.get_previous_by_publish %}
