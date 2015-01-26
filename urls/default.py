@@ -1,19 +1,43 @@
+from __future__ import absolute_import
+
 from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.sitemaps import FlatPageSitemap
+from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
 from ..sitemaps.default import StaticViewSitemap
 from ..views import AboutView, HomepageView, StyleGuideView, ThanksView
+from blog.models import Post
+from news.models import News
+from races.models import Race
 
+
+blog_dict = {
+    'queryset': Post.objects.public(),
+    'date_field': 'publish',
+}
+
+news_dict = {
+    'queryset': News.objects.public(),
+    'date_field': 'pub_date',
+}
+
+race_dict = {
+    'queryset': Race.objects.all(),
+    'date_field': 'start_datetime',
+}
 
 sitemaps = {
-    'flatpages': FlatPageSitemap,
     'static': StaticViewSitemap,
+    'flatpages': FlatPageSitemap,
+
+    'news': GenericSitemap(news_dict, priority=0.6),
+    'race': GenericSitemap(race_dict, priority=0.6),
+    'blog': GenericSitemap(blog_dict, priority=0.6),
 }
 
 admin.autodiscover()
