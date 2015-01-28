@@ -83,7 +83,7 @@ client.on("ready", function( readyEvent ) {
         {% if object.logo %}
         <div class="row">
             <div class="col-md-12">
-                <img class="img-response" src="{% thumbor_url object.logo.url width=600 %}">
+                <img class="img-response" src="{{ object.logo.url }}">
             </div>
         </div>
         {% endif %}
