@@ -171,7 +171,9 @@ client.on("ready", function( readyEvent ) {
 
         <a name="sponsors"></a>
         {% for sponsor in object.sponsors.all %}
-            <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
+            {% if sponsor.logo %}
+                <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
+            {% endif %}
         {% endfor %}
 
         {% include "includes/share.html" %}
