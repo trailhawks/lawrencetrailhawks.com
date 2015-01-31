@@ -15,7 +15,7 @@
     <div class="row">
       {% for photo in object_list %}
       <div class="col-md-3">
-        <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=300 width=300 %}'></a>
+        <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_large_url height=300 width=300 %}'></a>
         <p>{{ photo.description|safe }}</p>
       </div>
       {% endfor %}
