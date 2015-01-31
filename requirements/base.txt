@@ -27,7 +27,7 @@ django-waffle==0.10.1
 djangorestframework==3.0.4
 djrill==0.7.0
 feedparser==5.1.3
-flickrapi==1.4.2
+flickrapi==2.0
 gunicorn==19.1.1
 httplib2==0.9
 lxml
