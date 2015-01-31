@@ -28,7 +28,7 @@
       {% for photoset in object_list %}
       <div class="col-md-3">
         <a href="{% url 'photoset_detail' flickr_id=photoset.flickr_id %}">
-          <img class="img-responsive img-thumbnail" src='{% thumbor_url photoset.primary.get_medium_url height=300 width=300 %}'>
+          <img class="img-responsive img-thumbnail" src='{% thumbor_url photoset.primary.get_medium_url smart=True height=300 width=300 %}'>
         </a>
         <p>{{ photoset.title|safe }}</p>
       </div>

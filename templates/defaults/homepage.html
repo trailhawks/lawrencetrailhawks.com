@@ -18,7 +18,6 @@
 {% load staticfiles %}
 {% load thumbor_tags %}
 {% load twitterfy %}
-{% load waffle_tags %}
 
 
 {% block metas %}
@@ -30,7 +29,6 @@
 
 
 {% block content %}
-{% switch use_thumbor %}
 <div class="row">
   <div class="col-md-12">
     {% cache 60 homepage-carousel %}
@@ -72,7 +70,6 @@
     {% endcache %}
   </div>
 </div>
-{% endswitch use_thumbor %}
 
 <div class="row">
   <div class="col-md-4">
