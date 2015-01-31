@@ -116,6 +116,7 @@ PREREQ_APPS = [
     'djrill',
     'favicon',
     'micawber.contrib.mcdjango',
+    'rest_framework',
     'robots',
     'shorturls',
     'simple_open_graph',
@@ -223,3 +224,10 @@ DJANGO_MARKUP_IGNORE_WARNINGS = True
 
 # Favicon path
 FAVICON_PATH = STATIC_URL + 'ico/favicon.png'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'PAGINATE_BY_PARAM': 'limit',
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
