@@ -1,0 +1,63 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load thumbor_tags %}
+
+
+{% block title %}Photos{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h1>Trail Hawk Photo Review</h1>
+
+   {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {% for photo in object_list %}
+    <div class="row">
+      <h3 class="text-center">{{ photo.description|safe }}</h3>
+      <div class="col-md-3">
+        <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_large_url smart=True height=400 width=400 %}'></a>
+        <p>Active: {{ photo.active }}</p>
+        <p>Tags: {% for tag in photo.tags.all %}{{ tag }}, {% endfor %}</p>
+        <form action="." method="post" class="form-inline">
+          {% csrf_token %}
+          <input type="hidden" name="photo_id" value="{{ photo.id }}">
+          <input type="hidden" name="page" value="{{ request.GET.page }}">
+          <div>
+            <button name="action" value="enable">Enable</button>
+            <button name="action" value="disable">Disable</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-9">
+        <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_large_url smart=True height=500 width=1200 %}'></a>
+      </div>
+      <hr>
+    </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+      <ul class="pager">
+        {% if page_obj.has_previous %}
+          <li class="previous"><a href="{% url 'photo_review_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+        {% else %}
+          <li class="previous disabled"><a href="#">&laquo; Previous</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+          <li class="next"><a href="{% url 'photo_review_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+        {% else %}
+          <li class="next disabled"><a href="#">Next &raquo;</a></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock content %}
