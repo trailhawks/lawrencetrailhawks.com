@@ -8,13 +8,14 @@ from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
+from rest_framework.routers import DefaultRouter
 
 from ..sitemaps.default import StaticViewSitemap
 from ..views import AboutView, HomepageView, StyleGuideView, ThanksView
 from blog.models import Post
 from news.models import News
 from races.models import Race
-#from photos.apis.views import PhotoViewSet, RandomPhotoViewSet
+from photos.apis import PhotoViewSet, RandomPhotoViewSet
 
 
 blog_dict = {
@@ -41,6 +42,10 @@ sitemaps = {
     'blog': GenericSitemap(blog_dict, priority=0.6),
 }
 
+router = DefaultRouter()
+
+router.register(r'photos', PhotoViewSet)
+router.register(r'random_photos', RandomPhotoViewSet)
 
 admin.autodiscover()
 
@@ -68,7 +73,8 @@ urlpatterns = patterns(
     url(r'^ajaximage/', include('ajaximage.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^djrill/', include('djrill.urls')),
-    url(r'^api/v1/photos/', include('photos.apis.urls')),
+    url(r'^api/v1/', include(router.urls)),
+
 
     url(r'^robots\.txt$', include('robots.urls')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

@@ -4,7 +4,7 @@ from syncr.flickr.models import Photo
 from .serializers import PhotoSerializer
 
 
-class PhotoViewSet(viewsets.ModelViewSet):
+class PhotoViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows photos to be viewed.
     """
@@ -12,7 +12,7 @@ class PhotoViewSet(viewsets.ModelViewSet):
     serializer_class = PhotoSerializer
 
 
-class RandomPhotoViewSet(viewsets.ModelViewSet):
+class RandomPhotoViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows photos to be viewed.
     """
