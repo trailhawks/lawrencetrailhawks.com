@@ -14,6 +14,7 @@ from ..views import AboutView, HomepageView, StyleGuideView, ThanksView
 from blog.models import Post
 from news.models import News
 from races.models import Race
+#from photos.apis.views import PhotoViewSet, RandomPhotoViewSet
 
 
 blog_dict = {
@@ -39,6 +40,7 @@ sitemaps = {
     'race': GenericSitemap(race_dict, priority=0.6),
     'blog': GenericSitemap(blog_dict, priority=0.6),
 }
+
 
 admin.autodiscover()
 
@@ -66,6 +68,7 @@ urlpatterns = patterns(
     url(r'^ajaximage/', include('ajaximage.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^djrill/', include('djrill.urls')),
+    url(r'^api/v1/photos/', include('photos.apis.urls')),
 
     url(r'^robots\.txt$', include('robots.urls')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
