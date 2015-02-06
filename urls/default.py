@@ -11,7 +11,8 @@ from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from ..sitemaps.default import StaticViewSitemap
-from ..views import AboutView, HomepageView, StyleGuideView, ThanksView
+from ..views import (AboutView, HomepageView, HumansView, StyleGuideView,
+                     ThanksView)
 from blog.models import Post
 from news.models import News
 from races.models import Race
@@ -75,7 +76,7 @@ urlpatterns = patterns(
     url(r'^djrill/', include('djrill.urls')),
     url(r'^api/v1/', include(router.urls)),
 
-
+    url(r'^humans\.txt$', HumansView.as_view()),
     url(r'^robots\.txt$', include('robots.urls')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^', include('favicon.urls')),

@@ -16,6 +16,11 @@ class HomepageView(TemplateView):
         return context
 
 
+class HumansView(TemplateView):
+    content_type = 'text/plain'
+    template_name = 'humans.txt'
+
+
 class StyleGuideView(TemplateView):
     template_name = 'styleguide.html'
     navitem = 'styleguide'
