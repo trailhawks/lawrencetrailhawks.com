@@ -8,5 +8,5 @@ numpy
 git+git://github.com/globocom/remotecv.git#egg=remotecv-git
 
 # for remote thumbnail support
-thumbor==4.8.6
+thumbor==4.10.3
 #git+https://github.com/willtrking/thumbor_aws.git#egg=thumbor_aws-git
