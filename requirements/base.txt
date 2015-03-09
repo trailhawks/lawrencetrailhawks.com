@@ -1,9 +1,9 @@
 DateUtils
 Django>=1.7,<1.8
-Markdown==2.5.2
+Markdown==2.6.1
 Unipath==1.0
 akismet==0.2.0
-boto==2.34.0
+boto==2.36.0
 django-adaptors==0.2.5
 django-ajaximage==0.2.7
 django-backupdb==0.6.0
@@ -22,7 +22,7 @@ django-robots==1.0
 django-shorturls==1.1.0
 django-simple-open-graph==0.3
 django-storages==1.1.8
-django-taggit==0.12.2
+django-taggit==0.12.3
 django-thumbor==0.5
 django-waffle==0.10.1
 djangorestframework==3.0.4
@@ -36,7 +36,7 @@ micawber==0.3.1
 psycopg2==2.5.4
 raven==5.1.1
 recaptcha-client==1.0.6
-requests==2.5.1
+requests==2.5.3
 simplejson==3.6.5
 
 #git+https://bitbucket.org/webology/django-shorturls.git#egg=django-shorturls-git
