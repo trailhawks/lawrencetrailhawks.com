@@ -169,13 +169,6 @@ client.on("ready", function( readyEvent ) {
             <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
         {% endif %}
 
-        <a name="sponsors"></a>
-        {% for sponsor in object.sponsors.all %}
-            {% if sponsor.logo %}
-                <p><a href="{{ sponsor.url }}"><img src="{{ sponsor.logo.url }}" width='90'></a></p>
-            {% endif %}
-        {% endfor %}
-
         {% include "includes/share.html" %}
 
         {% if object.awards %}
@@ -272,7 +265,8 @@ client.on("ready", function( readyEvent ) {
         {% get_sponsors_for_object object as sponsor_list %}
         {% if sponsor_list %}
             <hr>
-            <h3>Sponsors</h3>
+
+            <h3><a name="sponsors"></a>Sponsors</h3>
             <div class="row">
             {% for sponsor in sponsor_list %}
                 <div class="col-md-6">
@@ -284,8 +278,6 @@ client.on("ready", function( readyEvent ) {
             {% endfor %}
             </div>
         {% endif %}
-
-        <hr>
 
         {# include "comments/comments.html" #}
     </div>
