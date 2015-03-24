@@ -6,7 +6,9 @@
 
 {% block content %}
 
-{{ block.super }}
+<div class="jumbotron">
+    {{ block.super }}
+</div>
 
 {% get_race_by_slug slug='hawk-100-mile-50-mile-marathon-fifth-annual' as race %}
 {% get_sponsors_for_object race as sponsor_list %}
