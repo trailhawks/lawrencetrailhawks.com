@@ -273,10 +273,16 @@ client.on("ready", function( readyEvent ) {
         {% if sponsor_list %}
             <hr>
             <h3>Sponsors</h3>
+            <div class="row">
             {% for sponsor in sponsor_list %}
-                <h4>{{ sponsor.name }}</h4>
-                {{ sponsor.discount_detail|markdown }}
+                <div class="col-md-6">
+                    <h3>{{ sponsor.name }}</h3>
+                    <a href="{{ sponsor.url }}">
+                        <img class="img-responsive" src="{{ sponsor.logo.url }}" />
+                    </a>
+                </div>
             {% endfor %}
+            </div>
         {% endif %}
 
         <hr>
