@@ -57,7 +57,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)
-    awards = models.CharField(max_length=300, blank=True, null=True)
+    awards = models.TextField(blank=True, null=True)
     distance = models.CharField(max_length=100, help_text="eg 26.2", blank=True, null=True)
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
