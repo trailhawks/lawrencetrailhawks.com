@@ -1,0 +1,30 @@
+{% extends "flatpages/default.html" %}
+
+{% load markup %}
+{% load race_tags %}
+{% load sponsors_tags %}
+
+{% block content %}
+
+<div class="jumbotron">
+    {{ block.super }}
+</div>
+
+{% get_race_by_slug slug='hawk-100-mile-50-mile-marathon-fifth-annual' as race %}
+{% get_sponsors_for_object race as sponsor_list %}
+{% if sponsor_list %}
+    <hr>
+    <h2><a name="sponsors"></a>Sponsors</h2>
+    <div class="row">
+    {% for sponsor in sponsor_list %}
+        <div class="col-md-6">
+            <h3>{{ sponsor.name }}</h3>
+            <a href="{{ sponsor.url }}">
+                <img class="img-responsive" src="{{ sponsor.logo.url }}" />
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock content %}

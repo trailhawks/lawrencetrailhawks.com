@@ -11,5 +11,17 @@ class SponsorInline(generic.GenericStackedInline):
 
 class SponsorAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['name']}
+    list_display = ('name', 'active', 'content_type', 'object_id')
+    list_filter = ('active',)
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'active', 'url', 'address', 'phone', 'email', 'logo', 'discount_detail')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('content_type', 'object_id')
+        }),
+    )
+
 
 admin.site.register(Sponsor, SponsorAdmin)

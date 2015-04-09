@@ -1,0 +1,69 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% block title %}Trail Hawk Members{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>Club Members and Info</h1>
+    <p class="lead">brought to you by viewers like you</p>
+
+    <p><a class="btn btn-primary btn-lg" href="/signup/">Become a member!</a></p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Members</h2>
+        <ul class="list-unstyled">
+          {% for member in object_list %}
+            <li><a href="{{ member.get_absolute_url }}">{{ member.full_hawk_name }}</a></li>
+          {% endfor %}
+        </ul>
+        {% block member_detail %}{% endblock %}
+      </div>
+
+      <div class="col-md-6">
+        <h2>Officers</h2>
+        <dl>
+        {% for term in current_officers %}
+          <dt>{{ term.office.name }}</dt>
+          <dd><a href="{{ term.member.get_absolute_url }}">{{ term.member }}</a></dd>
+        {% endfor %}
+        </dl>
+
+        <h3>Run Leaders</h3>
+        <dl>
+        {% for run in run_leaders %}
+          <dt>{{ run.name }}</dt>
+          <dd><a href="{{ run.contact.get_absolute_url }}">{{ run.contact }}</a></dd>
+        {% endfor %}
+        </dl>
+
+        <h3>Race Directors</h3>
+        <dl>
+        {% for race in race_leaders %}
+          <dt>{{ race }}</dt>
+          {% for rd in race.race_directors.all %}
+          <dd><a href="{{ rd.get_absolute_url }}">{{ rd }}</a></dd>
+          {% endfor %}
+        {% endfor %}
+        </dl>
+
+        <h3>Previous Officers</h3>
+        <dl>
+        {% for term in previous_officers %}
+          {% ifchanged %}<dt>{{ term.office.name }}</dt>{% endifchanged %}
+          <dd><a href="{{ term.member.get_absolute_url }}">{{ term.member }}</a> ({{ term.start|date:"Y" }}{% if term.start|date:"Y" != term.end|date:"Y"%} &ndash; {{ term.end|date:"Y" }}{% endif %})</dd>
+        {% endfor %}
+        </dl>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-4">
+    {% include "includes/flickr_photos.html" %}
+  </div>
+</div>
+{% endblock content %}

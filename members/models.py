@@ -1,58 +1,20 @@
+from __future__ import unicode_literals
+
 import datetime
 
+from ajaximage.fields import AjaxImageField
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import F
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from shorturls.models import ShortUrlMixin
 
-from core.models import MachineTagMixin
-
-
-class ActiveMemberManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(ActiveMemberManager, self).get_query_set().filter(date_paid__lte=F('date_paid') + datetime.timedelta(weeks=52))
-        return queryset
+from core.models import MachineTagMixin, ShortUrlMixin
+from .managers import MemberManager, TermManager
 
 
-class BoardManager(ActiveMemberManager):
-
-    def get_query_set(self):
-        queryset = super(ActiveMemberManager, self).get_query_set().filter(position__isnull=False)
-        return queryset
-
-
-class ReceiveCommentEmailsManager(models.Manager):
-
-    def get_query_set(self):
-        queryset = super(ReceiveCommentEmailsManager, self).get_query_set().filter(email__isnull=False, receive_comment_emails__exact=True)
-        return queryset
-
-
+@python_2_unicode_compatible
 class Member(MachineTagMixin, ShortUrlMixin):
-    PRESIDENT = 1
-    VICE_PRESIDENT = 2
-    TREASURER = 3
-    SECRETARY = 4
-    WEB_MASTER = 5
-    MEMBERSHIP_DIRECTOR = 6
-    PR = 7
-    EX_PRESIDENT = 8
-    SOCIAL_MEDIA_DIRECTOR = 9
-
-    POSITION_CHOICES = (
-        (PRESIDENT, 'President'),
-        (VICE_PRESIDENT, 'Vice President'),
-        (TREASURER, 'Treasurer'),
-        (SECRETARY, 'Secretary'),
-        (WEB_MASTER, 'Web Master'),
-        (MEMBERSHIP_DIRECTOR, 'Membership Director'),
-        (PR, 'PR Director'),
-        (EX_PRESIDENT, 'Ex-President'),
-        (SOCIAL_MEDIA_DIRECTOR, 'Social Media Director'),
-    )
-
     GENDER_CHOICES = (
         (1, 'Male'),
         (2, 'Female'),
@@ -69,26 +31,21 @@ class Member(MachineTagMixin, ShortUrlMixin):
     city = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=2, blank=True, null=True)
     zip = models.CharField(max_length=25, blank=True, null=True)
-    avatar = models.ImageField(upload_to='members/avatars', blank=True, null=True)
-    #active = models.BooleanField()
+    avatar = AjaxImageField(upload_to='members/avatars', blank=True, null=True)
     date_paid = models.DateField(null=True, blank=True)
     member_since = models.DateField(null=True, blank=True)
-    position = models.IntegerField(choices=POSITION_CHOICES, null=True, blank=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     receive_comment_emails = models.BooleanField(default=False, help_text='Should this member be notified when a comment is left on the website?')
 
-    objects = models.Manager()
-    active_objects = ActiveMemberManager()
-    board_objects = BoardManager()
-    comment_email_objects = ReceiveCommentEmailsManager()
+    objects = MemberManager()
 
     class Meta:
         verbose_name = _('Member')
         verbose_name_plural = _('Members')
         ordering = ['last_name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.full_hawk_name
 
     @models.permalink
@@ -111,7 +68,11 @@ class Member(MachineTagMixin, ShortUrlMixin):
 
     @property
     def date_expires(self):
-        date_expires = self.date_paid + datetime.timedelta(weeks=52)
+        if self.date_paid:
+            date_expires = self.date_paid + datetime.timedelta(weeks=52)
+        else:
+            # this is only seen the admin so we can have fun with it
+            date_expires = 'FREELOADER'
         return date_expires
 
     @property
@@ -139,9 +100,36 @@ class Member(MachineTagMixin, ShortUrlMixin):
     @property
     def get_race_results(self):
         from races.models import Result
-        return Result.objects.filter(racer__trailhawk=self)
+        return Result.objects.filter(racer__trailhawk=self).order_by('-race__start_datetime')
 
     @property
     def get_race_reports(self):
         from races.models import Report
         return Report.objects.filter(racer__trailhawk=self)
+
+
+@python_2_unicode_compatible
+class Office(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(blank=True, null=True)
+    order = models.IntegerField(default=100)
+
+    class Meta:
+        verbose_name = 'office'
+        verbose_name_plural = 'offices'
+
+    def __str__(self):
+        return self.name
+
+
+class Term(models.Model):
+    office = models.ForeignKey(Office, blank=True, null=True)
+    member = models.ForeignKey(Member, blank=True, null=True)
+    start = models.DateField()
+    end = models.DateField(blank=True, null=True)
+
+    objects = TermManager()
+
+    class Meta:
+        verbose_name = 'term'
+        verbose_name_plural = 'terms'

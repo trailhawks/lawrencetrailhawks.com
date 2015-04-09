@@ -1,32 +1,31 @@
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import core.models
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'FAQ'
-        db.create_table('faq_faq', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('question', self.gf('django.db.models.fields.TextField')()),
-            ('answer', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal('faq', ['FAQ'])
+    dependencies = [
+        ('contenttypes', '0001_initial'),
+    ]
 
-    def backwards(self, orm):
-        # Deleting model 'FAQ'
-        db.delete_table('faq_faq')
-
-    models = {
-        'faq.faq': {
-            'Meta': {'object_name': 'FAQ'},
-            'answer': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'question': ('django.db.models.fields.TextField', [], {})
-        }
-    }
-
-    complete_apps = ['faq']
+    operations = [
+        migrations.CreateModel(
+            name='FAQ',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('question', models.TextField()),
+                ('answer', models.TextField()),
+                ('object_id', models.PositiveIntegerField(null=True, blank=True)),
+                ('content_type', models.ForeignKey(blank=True, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'ordering': ('-content_type',),
+                'verbose_name': 'FAQ',
+                'verbose_name_plural': 'FAQs',
+            },
+            bases=(models.Model, core.models.ShortUrlMixin),
+        ),
+    ]

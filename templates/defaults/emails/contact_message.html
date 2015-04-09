@@ -1,0 +1,7 @@
+{% extends "emails/base.html" %}
+
+{% block body %}
+<p>The following message was sent from <a href="mailto:{{ sender }}?subject={{ subject }}">{{ sender }}</a>:</p>
+
+<p>{{ body }}</p>
+{% endblock body %}

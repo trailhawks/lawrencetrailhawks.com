@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Lawrence Trail Hawks {% endblock title %}</title>
+    <meta name="google-site-verification" content="2E8N9HpaAbhAW34jsh9AS-jtFQXqtbIImO6nrtk24CY" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content="lawrence trail hawks, trailhawks, running, trail running, trailrunning, lawrence kansas, lawrence ks" />
+    <meta name="author" content="" />
+    <meta property="og:site_name" content="Lawrence Trail Hawks"/>
+    {% comment %}
+    <meta property="og:type" content=""/>
+    <meta property="og:title" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:description" content=""/>
+    {% endcomment %}
+    {% load waffle_tags %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    {% block post_style %}{% endblock post_style %}
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
+  </head>
+
+  <body>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Lawrence Trail Hawks</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            {% flag use_events %}
+            <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'event_list' %}">Events</a></li>
+            {% else %}
+            {% load race_tags %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Races <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'race_index' %}">Race list</a></li>
+                {% get_latest_races as latest_races %}
+                {% if latest_races %}
+                  <li class="divider"></li>
+                  {% for latest_race in latest_races.all %}
+                  <li><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.name }}</a></li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </li>
+            {% endflag use_events %}
+
+            {% load run_tags %}
+            {% get_weekly_runs as weekly_runs %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Runs <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'run_list' %}">Weekly runs</a></li>
+                {% if weekly_runs %}
+                <li class="divider"></li>
+                {% for weekly_run in weekly_runs %}
+                <li><a href="{{ weekly_run.get_absolute_url }}">{{ weekly_run.name }}</a></li>
+                {% endfor %}
+                {% endif %}
+              </ul>
+            </li>
+
+            <li{% if view.navitem == 'blog' %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
+            <li{% if view.navitem == 'members' %} class="active" {% endif %}><a href="{% url 'member_list' %}">Members</a></li>
+            <li{% if view.navitem == 'sponsors' %} class="active" {% endif %}><a href="{% url 'sponsor_list' %}">Sponsors</a></li>
+            <li{% if view.navitem == 'links' %} class="active" {% endif %}><a href="{% url 'link_list' %}">Links</a></li>
+            <li{% if view.navitem == 'about' %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      {% comment %}
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right hidden-xs">
+            <li{% if view.navitem == 'home' %} class="active" {% endif %}><a href="/">Home</a></li>
+            {% flag use_events %}
+            <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'event_list' %}">Events</a></li>
+            {% else %}
+            <li{% if view.navitem == 'races' %} class="active" {% endif %}><a href="{% url 'race_index' %}">Races</a></li>
+            {% endflag use_events %}
+            <li{% if view.navitem == 'runs' %} class="active" {% endif %}><a href="{% url 'run_list' %}">Runs</a></li>
+            <li{% if view.navitem == 'blog' %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
+            <li{% if view.navitem == 'members' %} class="active" {% endif %}><a href="{% url 'member_list' %}">Members</a></li>
+            <li{% if view.navitem == 'sponsors' %} class="active" {% endif %}><a href="{% url 'sponsor_list' %}">Sponsors</a></li>
+            <li{% if view.navitem == 'links' %} class="active" {% endif %}><a href="{% url 'link_list' %}">Links</a></li>
+            <li{% if view.navitem == 'about' %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
+            <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></li>
+        </ul>
+        <h1 class="muted">Lawrence Trail Hawks</h1>
+      </div>
+      {% endcomment %}
+
+      <div class="row">
+        <div class="col-xs-12">
+        {% block sub_nav %}{% endblock sub_nav %}
+        </div>
+      </div>
+
+      {% block content-wrapper %}
+      <div class="row">
+        <div class="col-xs-12">
+        {% block content %}{% endblock content %}
+        </div>
+      </div>
+      {% endblock content-wrapper %}
+
+      <hr>
+    <footer>
+      {% block footer %}
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-8">
+            <ul class="nav nav-pills">
+                <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
+                <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
+                <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
+                <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="fa fa-group"></i> Yahoo! Group</a></li>
+                <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
+                <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+                <li><a href="{% url 'contact' %}"><i class="fa fa-envelope"></i> Contact us</a></li>
+            </ul>
+            <hr>
+            <p>2009-{% now "Y" %} Lawrence Trail Hawks. All rights Reserved</p>
+          </div>
+          <div class="col-xs-2">
+              <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+          </div>
+          <div class="col-xs-2">
+              <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
+          </div>
+        </div>
+      </div>
+      {% endblock footer %}
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+{% comment %}
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-16156214-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+{% endcomment %}
+{% block post_script %}{% endblock post_script %}
+  </body>
+</html>

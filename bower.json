@@ -1,0 +1,17 @@
+{
+  "name": "trailhawks",
+  "version": "0.0.0",
+  "authors": [
+    "Jeff Triplett <jeff.triplett@gmail.com>"
+  ],
+  "license": "BSD",
+  "private": true,
+  "dependencies": {
+    "jquery": "1.9",
+    "font-awesome": "*",
+    "leaflet": "*",
+    "bootstrap": "~3.3.1",
+    "zeroclipboard": "*",
+    "bootstrap-social": "~4.8.0"
+  }
+}

@@ -1,4 +1,0 @@
-Lawrence Trailhawk website.
-
-Dependencies:
- * django-syncr (along with all the dependencies that django-syncr has)

@@ -1,0 +1,64 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load thumbor_tags %}
+
+
+{% block title %}Photos{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h1>Photo Galleries</h1>
+
+    <div class="row">
+      {% comment %}
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="{% url 'photoset_detail' flickr_id=photoset.flickr_id %}">
+            <div class="caption">
+              <img class="img-responsive img-thumbnail" src='{% thumbor_url photoset.primary.get_medium_url height=300 width=300 %}'>
+              <h3>{{ photoset.title|safe }}</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endcomment %}
+      {% for photoset in object_list %}
+      <div class="col-md-3">
+        <a href="{% url 'photoset_detail' flickr_id=photoset.flickr_id %}">
+          <img class="img-responsive img-thumbnail" src='{% thumbor_url photoset.primary.get_medium_url smart=True height=300 width=300 %}'>
+        </a>
+        <p>{{ photoset.title|safe }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+      <ul class="pager">
+        {% if page_obj.has_previous %}
+          <li class="previous"><a href="{% url 'photo_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+        {% else %}
+          <li class="previous disabled"><a href="#">&laquo; Previous</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+          <li class="next"><a href="{% url 'photo_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+        {% else %}
+          <li class="next disabled"><a href="#">Next &raquo;</a></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    {% comment %}
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-center"><a class="btn btn-primary btn-lg" href="http://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
+      </div>
+    </div>
+    {% endcomment %}
+
+  </div>
+</div>
+{% endblock content %}

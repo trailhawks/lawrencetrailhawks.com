@@ -1,0 +1,32 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+
+
+{% block title %}News{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>{{ object.title }}</h1>
+    <h3>{{ object.pub_date|date }}</h3>
+    {{ object.body|markdown }}
+
+    <ul class="pager">
+      {% if object.get_previous_by_publish %}
+        <li class="previous"><a href="{{ object.get_previous_news.get_absolute_url }}">&larr; Older</a></li>
+      {% endif %}
+
+      {% if object.get_next_by_publish %}
+        <li class="next"><a href="{{ object.get_next_news.get_absolute_url }}">Newer &rarr;</a></li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    {% include "includes/flickr_photos.html" %}
+  </div>
+</div>
+{% endblock content %}

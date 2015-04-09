@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Travel</h1>
+
+<h2>Directions</h2>
+
+<p>Lawrence, KS is located 30 minutes west of the Kansas City Metropolitan area.</p>
+
+<p>The nearest major airport is Kansas City International (MCI). The race is about an hour drive from the airport. Note that I-70 between Kansas City and Lawrence is a toll road.</p>
+
+<h2>Lodging</h2>
+
+<p>If you’d like to make arrangements for lodging, a list of options can be found here. The closest hotel to the race start is the Best Western on Iowa. It’s about 5 minutes from the start.</p>
+
+<p>You may also consider camping at Clinton Lake. The park offers both cabins (very nice and brand new) and campsites. Information may be found on their website. Showers and toilets are available in the park.</p>
+
+<h2>About Lawrence</h2>
+
+<p>Lawrence is a fantastic college town with much to do and see. If you can, try to take some time to visit the shops and restaurants on Mass St. or to take a drive through the University of Kansas campus. You won’t be disappointed.</p>
+
+{{ request.race.lodging }}
+
+{% endblock content %}

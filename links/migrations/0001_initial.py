@@ -1,34 +1,32 @@
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import core.models
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Links'
-        db.create_table('links_links', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('link', self.gf('django.db.models.fields.URLField')(default='http://', max_length=200)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal('links', ['Links'])
+    dependencies = [
+        ('contenttypes', '0001_initial'),
+    ]
 
-    def backwards(self, orm):
-        # Deleting model 'Links'
-        db.delete_table('links_links')
-
-    models = {
-        'links.links': {
-            'Meta': {'object_name': 'Links'},
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'link': ('django.db.models.fields.URLField', [], {'default': "'http://'", 'max_length': '200'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        }
-    }
-
-    complete_apps = ['links']
+    operations = [
+        migrations.CreateModel(
+            name='Links',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=250)),
+                ('link', models.URLField(help_text='URL to link')),
+                ('description', models.TextField()),
+                ('object_id', models.PositiveIntegerField(null=True, blank=True)),
+                ('content_type', models.ForeignKey(blank=True, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'ordering': ('name',),
+                'verbose_name': 'Link',
+                'verbose_name_plural': 'Links',
+            },
+            bases=(models.Model, core.models.ShortUrlMixin),
+        ),
+    ]

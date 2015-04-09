@@ -24,7 +24,7 @@ def remove_http(value):
 
 @register.assignment_tag(takes_context=True)
 def get_photos_by_machine_tags(context, machine_tags, num=10, random=False):
-    queryset = Photo.objects.filter(tags__name__in=machine_tags)
+    queryset = Photo.objects.active().filter(tags__name__in=machine_tags)
     if random:
         queryset = queryset.order_by('?')
     return queryset[:num]
@@ -32,7 +32,7 @@ def get_photos_by_machine_tags(context, machine_tags, num=10, random=False):
 
 @register.assignment_tag(takes_context=True)
 def get_photos_count_by_machine_tags(context, machine_tags):
-    return Photo.objects.filter(tags__name__in=machine_tags).all().count()
+    return Photo.objects.active().filter(tags__name__in=machine_tags).all().count()
 
 
 def thumb(url, **kwargs):
@@ -75,6 +75,6 @@ def thumb(url, **kwargs):
     return u'{}{}'.format(base, path)
 
 
-@register.simple_tag
-def thumbor_url(image_url, **kwargs):
-    return thumb(image_url, **kwargs)
+#@register.simple_tag
+#def thumbor_url(image_url, **kwargs):
+#    return thumb(image_url, **kwargs)

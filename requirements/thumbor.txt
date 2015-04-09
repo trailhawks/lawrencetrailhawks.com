@@ -1,0 +1,12 @@
+# for using opencv with thumbor
+# for opencv I have to:
+#     brew install opencv then:
+#     add2virtualenv /usr/local/Cellar/opencv/2.4.9/lib/python2.7/site-packages/
+#opencv
+opencv-engine
+numpy
+git+git://github.com/globocom/remotecv.git#egg=remotecv-git
+
+# for remote thumbnail support
+thumbor==4.10.3
+#git+https://github.com/willtrking/thumbor_aws.git#egg=thumbor_aws-git

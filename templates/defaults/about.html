@@ -1,0 +1,23 @@
+{% extends base_template_name|default:"base.html" %}
+
+{% load url from future %}
+
+{% block title %}About{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>About the Lawrence Trailhawks</h1>
+
+        <p class="lead">The Hawks The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails (sometimes known as the Sand Rat trails), and the Clinton Lake North Shore Trails. We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash. We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails. We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own. We might not do as much as we’d like, but we'll do what we can. Please check this blog page for news of Lawrence Trail Hawks events.</p>
+
+        <p>Questions? Want to join the Lawrence Trail Hawks? <a href="{% url 'contact' %}">Contact us</a> or fill out and send in our membership application.</p>
+
+        <p>See you on the trails!</p>
+     </div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

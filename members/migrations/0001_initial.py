@@ -1,90 +1,75 @@
-# encoding: utf-8
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import ajaximage.fields
+from django.conf import settings
+import core.models
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
 
-        # Adding model 'Member'
-        db.create_table('members_member', (
-            ('username', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('member_since', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('date_paid', self.gf('django.db.models.fields.DateField')()),
-            ('phone', self.gf('django.db.models.fields.CharField')(max_length=15)),
-            ('avatar', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
-            ('address', self.gf('django.db.models.fields.TextField')()),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=False, blank=True)),
-            ('position', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('hawk_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('members', ['Member'])
-    
-    def backwards(self, orm):
-
-        # Deleting model 'Member'
-        db.delete_table('members_member')
-    
-    models = {
-        'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
-        },
-        'auth.permission': {
-            'Meta': {'unique_together': "(('content_type', 'codename'),)", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'auth.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        'contenttypes.contenttype': {
-            'Meta': {'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        'members.member': {
-            'Meta': {'object_name': 'Member'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'address': ('django.db.models.fields.TextField', [], {}),
-            'avatar': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'date_paid': ('django.db.models.fields.DateField', [], {}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'hawk_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'member_since': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '15'}),
-            'position': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'username': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
-        }
-    }
-
-    complete_apps = ['members']
+    operations = [
+        migrations.CreateModel(
+            name='Member',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('first_name', models.CharField(max_length=20)),
+                ('last_name', models.CharField(max_length=20)),
+                ('hawk_name', models.CharField(max_length=50, null=True, blank=True)),
+                ('phone', models.CharField(max_length=15, null=True, blank=True)),
+                ('email', models.EmailField(max_length=75, null=True, blank=True)),
+                ('address', models.TextField(null=True, blank=True)),
+                ('address2', models.CharField(max_length=100, null=True, blank=True)),
+                ('city', models.CharField(max_length=100, null=True, blank=True)),
+                ('state', models.CharField(max_length=2, null=True, blank=True)),
+                ('zip', models.CharField(max_length=25, null=True, blank=True)),
+                ('avatar', ajaximage.fields.AjaxImageField(null=True, blank=True)),
+                ('date_paid', models.DateField(null=True, blank=True)),
+                ('member_since', models.DateField(null=True, blank=True)),
+                ('gender', models.IntegerField(blank=True, null=True, choices=[(1, 'Male'), (2, 'Female')])),
+                ('notes', models.TextField(null=True, blank=True)),
+                ('receive_comment_emails', models.BooleanField(default=False, help_text='Should this member be notified when a comment is left on the website?')),
+                ('username', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+            ],
+            options={
+                'ordering': ['last_name'],
+                'verbose_name': 'Member',
+                'verbose_name_plural': 'Members',
+            },
+            bases=(models.Model, core.models.ShortUrlMixin),
+        ),
+        migrations.CreateModel(
+            name='Office',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=100)),
+                ('slug', models.SlugField(null=True, blank=True)),
+                ('order', models.IntegerField(default=100)),
+            ],
+            options={
+                'verbose_name': 'office',
+                'verbose_name_plural': 'offices',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Term',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('start', models.DateField()),
+                ('end', models.DateField(null=True, blank=True)),
+                ('member', models.ForeignKey(blank=True, to='members.Member', null=True)),
+                ('office', models.ForeignKey(blank=True, to='members.Office', null=True)),
+            ],
+            options={
+                'verbose_name': 'term',
+                'verbose_name_plural': 'terms',
+            },
+            bases=(models.Model,),
+        ),
+    ]

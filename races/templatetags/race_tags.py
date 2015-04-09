@@ -19,7 +19,7 @@ def replace_char(value, arg):
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_races(context):
+def get_latest_race(context):
     try:
         return Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime')[0]
     except:
@@ -27,8 +27,24 @@ def get_latest_races(context):
 
 
 @register.assignment_tag(takes_context=True)
+def get_latest_races(context):
+    try:
+        return Race.objects.filter(start_datetime__gte=datetime.datetime.now()).order_by('start_datetime')
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
+def get_race_by_slug(context, slug):
+    try:
+        return Race.objects.get(slug=slug)
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
 def get_results_for_race(context, race, race_type=None, gender=None):
-    queryset = Result.objects.filter(race=race)
+    queryset = Result.objects.filter(race=race).order_by('dq', 'dnf', 'dns', 'time')
     if race_type:
         queryset = queryset.filter(race_type__pk=race_type.pk)
     if gender:

@@ -19,11 +19,11 @@ def get_faqs_by_content_type(context, content_type):
 def get_faqs_for_object(context, obj):
     """Find FAQs for an object and all model types."""
     query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
-    query = query or Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
+    query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
     queryset = FAQ.objects.filter(query)
     return queryset
 
 
 @register.assignment_tag(takes_context=True)
-def get_latest_faqs(context, num):
+def get_latest_faqs(context, num=10):
     return FAQ.objects.all()[:num]

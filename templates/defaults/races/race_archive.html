@@ -1,0 +1,57 @@
+{% extends "races/base.html" %}
+
+{% block title %}Races{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {% if upcoming_races %}
+    		<h1>Upcoming Races</h1>
+
+    		<table class="table table-striped table-hover">
+    			<thead>
+    				<tr>
+    					<th>Event</th>
+    					<th>Date</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				{% for race in upcoming_races %}
+    				<tr>
+    					<td><a href="{{ race.get_absolute_url }}">{{ race.title }}</a></td>
+    					<td>{{ race.start_datetime|date }}</td>
+    				</tr>
+    				{% endfor %}
+    			</tbody>
+    		</table>
+        {% endif %}
+
+		<h2>Past Races</h2>
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Event</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for race in completed_races %}
+				<tr>
+					<td><a href="{{ race.get_absolute_url }}">{{ race.title }}</a></td>
+					<td>{{ race.start_datetime|date }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+    </div>
+
+    <div class="col-md-4 hidden-sm">
+
+        {% include "panels/share.html" %}
+        {% include "panels/meta.html" %}
+
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

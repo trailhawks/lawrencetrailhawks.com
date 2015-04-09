@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block content %}
+
+<h1>Sign Up</h1>
+
+{{ request.race.reg_description|markdown }}
+
+{% endblock content %}

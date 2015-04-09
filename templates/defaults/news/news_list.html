@@ -1,0 +1,26 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+{% load url from future %}
+
+
+{% block title %}News{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>News</h1>
+        <ul>
+            {% for news in object_list %}
+            <li><a href="{% url 'news_detail' news.pk %}">{{ news.pub_date|date }}: {{ news.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

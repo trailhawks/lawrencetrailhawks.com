@@ -1,33 +1,21 @@
-import datetime
+from django.conf.urls import patterns, url
 
-from django.conf.urls.defaults import patterns, url
+from . import views
+from .feeds import RaceFeed
 
-from races.feeds import RaceFeed
-from races.models import Race, Racer
 
-race_info_dict = {
-    'queryset': Race.objects.all().order_by('last_name', 'first_name'),
-    'date_field': 'start_datetime',
-    'allow_future': True,
-    'extra_context': {'upcoming_races': Race.objects.filter(start_datetime__gt=datetime.datetime.today()).order_by('start_datetime'),
-                      'completed_races': Race.objects.filter(start_datetime__lte=datetime.datetime.today()).order_by('-start_datetime'),
-                    },
-}
+urlpatterns = patterns(
+    '',
+    url(r'^$', views.RaceIndex.as_view(), name='race_index'),
+    url(r'^(?P<year>\d{4})/$', views.RaceYear.as_view(), name='race_archive_year'),
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$', views.RaceMonth.as_view(), name='race_archive_month'),
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$', views.RaceDay.as_view(), name='race_archive_day'),
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', views.RaceDateDetail.as_view(), name='race_detail'),
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/results/$', views.RaceResultDetail.as_view(), name='race_result_detail'),
 
-racer_info_dict = {
-    'queryset': Racer.objects.all().order_by('last_name'),
-}
-
-urlpatterns = patterns('',
-    url(r'^$', 'django.views.generic.date_based.archive_index', race_info_dict, name='race_archive_index'),
-    url(r'^(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', race_info_dict, name='race_archive_year'),
-    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$', 'django.views.generic.date_based.archive_month', race_info_dict, name='race_archive_month'),
-    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', race_info_dict, name='race_archive_day'),
-    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', 'races.views.race_detail', race_info_dict, name='race_detail'),
-    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/results', 'races.views.race_result', race_info_dict, name='race_result_detail'),
     url(r'^ical/$', RaceFeed(), name='race_ical'),
-    url(r'^results/', 'races.views.results', name='race_result_list'),
-    url(r'^upcoming/', 'races.views.upcoming_races', name='race_upcoming'),
-    url(r'^racers/$', 'django.views.generic.list_detail.object_list', racer_info_dict, name='racer_list'),
-    url(r'^racers/(?P<object_id>[-\w]+)/$', 'races.views.racer_detail', racer_info_dict, name='racer_detail'),
+    #url(r'^results/', 'races.views.results', name='race_result_list'),
+    #url(r'^racers/$', views.RacerList.as_view(), name='racer_list'),
+    url(r'^upcoming/$', views.RaceUpcomingList.as_view(), name='race_upcoming'),
+    url(r'^racers/(?P<pk>[-\w]+)/$', views.RacerDetail.as_view(), name='racer_detail'),
 )

@@ -1,0 +1,358 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load url from future %}
+{% load core_tags %}
+{% load faq_tags %}
+{% load flickr %}
+{% load links_tags %}
+{% load mailhide %}
+{% load markup %}
+{% load news_tags %}
+{% load photo_tags %}
+{% load race_tags %}
+{% load share_tags %}
+{% load simple_open_graph %}
+{% load sponsors_tags %}
+{% load staticfiles %}
+{% load thumbor_tags %}
+
+
+{% block title %}{{ object.title }}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
+
+
+{% block metas %}
+{{ block.super }}
+{% with object.description|markdown|striptags|truncatechars:300 as og_description %}
+{% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, description=og_description" %}
+{% endwith %}
+{% endblock metas %}
+
+
+{% block post_script %}
+<script>
+{% if object.location %}
+function initialize() {
+    var myLatlng = new google.maps.LatLng({{ object.location.latitude }}, {{ object.location.longitude }});
+
+    var mapOptions = {
+        center: myLatlng,
+        zoom: {{ object.location.zoom }}
+    };
+
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Hello World!'
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+{% endif %}
+
+ZeroClipboard.config({ moviePath: "{% static 'js/ZeroClipboard.swf' %}" });
+
+var client = new ZeroClipboard( document.getElementById("copy-button"));
+
+client.on("ready", function( readyEvent ) {
+  client.on("aftercopy", function(event) {
+    // `this` === `client`
+    // `event.target` === the element that was clicked
+    event.target.style.display = "none";
+    alert("Copied text to clipboard: " + event.data["text/plain"]);
+  });
+});
+</script>
+{% endblock post_script %}
+
+
+{% block content %}
+{% get_race_types_for_race object as race_types %}
+
+<header class="masthead">
+    <h1>{{ object.title }}</h1>
+    {% if object.slogan %}
+        <h2>{{ object.slogan }}</h2>
+    {% endif %}
+</header>
+
+<div class="row">
+    <div class="col-md-8">
+
+        {% if object.logo %}
+        <div class="row">
+            <div class="col-md-12">
+                <img class="img-response" src="{{ object.logo.url }}">
+            </div>
+        </div>
+        {% endif %}
+
+        {% comment %}
+
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Warning!</h4>
+            Best check yo self, you're not...
+        </div>
+
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Warning!</h4>
+            Best check yo self, you're not...
+        </div>
+
+        {% endcomment %}
+
+        {% if not object.is_finished %}
+            {% if object.registration_set.count %}
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Price level</th>
+                        <th>Dates</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registration in object.registration_set.all %}
+                    <tr class="{% if registration.has_expired %}highlight{% endif %}">
+                        <td>{{ registration.description }}</td>
+                        <td>{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
+                        <td>${{ registration.reg_cost }}</td>
+                        <td><p><a class="btn btn-sm btn-block btn-warning" href="{{ object.reg_url }}">register!</a></p></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        {% endif %}
+
+        {% if object.get_race_news %}
+            <a name="news"></a>
+            <h3>Latest News</h3>
+            {% for item in object.get_race_news|slice:":3" %}
+                <p>&nbsp;&nbsp;{{ item.body|markdown }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {{ object.description|markdown }}
+
+        <dl class="dl-horizontal">
+            <dt>Race date:</dt>
+            <dd>{{ object.start_datetime|date:"F j, Y" }}</dd>
+
+            <dt>Start time:</dt>
+            <dd>{{ object.start_datetime|time:"h:i A" }}</dd>
+
+            <dt>Race distance:</dt>
+            <dd>{{ object.distance }} {# object.get_unit_display #}</dd>
+
+            {% if object.cut_off %}
+                <dt>Cut off time:</dt>
+                <dd>{{ object.cut_off }}</dd>
+            {% endif %}
+        </dl>
+
+        <hr>
+
+        <h2>Event Information</h2>
+
+        {% if object.location %}
+            <h3>Location</h3>
+            <div id="map-canvas"></div>
+            <p>{{ object.location.description|markdown }}</p>
+        {% endif %}
+
+        {% if object.course_map %}
+            <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
+        {% endif %}
+
+        {% include "includes/share.html" %}
+
+        {% if object.awards %}
+            <hr>
+            <a name="awards"></a>
+            <h3>Awards</h3>
+            {{ object.awards|markdown }}</p>
+        {% endif %}
+
+        {% if object.race_directors.count %}
+            <hr>
+            <a name="rds"></a>
+            <h3>Race Director{{ object.race_directors.count|pluralize }}</h3>
+            <ul>
+            {% for race_directory in object.race_directors.all %}
+                <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="{{ race_directory.email|mailhide }}">contact</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if not object.get_overall_results %}
+            <hr>
+            <h3>Registration</h3>
+
+            {{ object.reg_description|markdown }}<br />
+
+            {% if object.entry_form %}
+                <hr>
+                <h3>Entry Form</h3>
+                <p>Prefer to print and mail in your entry form?</p>
+                <p>Make Checks Payable to: <em>Lawrence Trail Hawks</em></p>
+                <p>Mail to: <br>Lawrence Trail Hawks<br>PO Box 442548<br>Lawrence, KS 66044</p>
+                <p><a class="btn btn-info btn-block" href="{{ object.entry_form.url }}">Download Entry Form</a></p>
+            {% endif %}
+
+            {% if not object.is_finished %}
+                <hr>
+                <p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+            {% endif %}
+
+            {% if object.get_reg_dates %}
+                <p><strong><em>Entry fee:</em></strong></p>
+                <ul>
+                {% for reg in object.get_reg_dates %}
+                    <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {{ object.discounts|markdown }}
+
+            {% if object.packet_pickup %}
+                <h3>Packet Pickup</h3>
+                {{ object.packet_pickup|markdown }}
+            {% endif %}
+        {% endif %}
+
+        {% if object.lodging %}
+            <hr>
+            <h3>Lodging</h3>
+            <p>Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
+        {% endif %}
+
+        {% if object.get_race_reports %}
+            {% include "races/includes/race_reports.html" %}
+        {% endif %}
+
+        {% if race_types %}
+            <hr>
+            <a name="results"></a>
+            <h3>Race Results</h3>
+            <ul>
+            {% for race_type in race_types %}
+                <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+                <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
+                <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% render_facebook_like obj=object %}
+
+        {% get_links_for_object object as link_list %}
+        {% if link_list %}
+            <hr>
+            <h3>Links</h3>
+            {% for link in link_list %}
+                <h4>{{ link.name }}</h4>
+                {{ link.description|markdown }}
+            {% endfor %}
+        {% endif %}
+
+
+        {% get_faqs_for_object object as faq_list %}
+        {% if faq_list %}
+            <hr>
+            <h3>Frequently Asked Questions</h3>
+            {% for faq in faq_list %}
+                <h4>{{ faq.question }}</h4>
+                {{ faq.answer|markdown }}
+            {% endfor %}
+        {% endif %}
+
+        {% get_sponsors_for_object object as sponsor_list %}
+        {% if sponsor_list %}
+            <hr>
+
+            <h3><a name="sponsors"></a>Sponsors</h3>
+            <div class="row">
+            {% for sponsor in sponsor_list %}
+                <div class="col-md-6">
+                    <h3>{{ sponsor.name }}</h3>
+                    <a href="{{ sponsor.url }}">
+                        <img class="img-responsive" src="{{ sponsor.logo.url }}" />
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+
+        {# include "comments/comments.html" #}
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a class="btn btn-primary" href="{{ object.reg_url }}">Register</a></li>
+                {% comment %}
+                <li><a href="#">Volunteer</a></li>
+                {% endcomment %}
+                {% if object.get_race_news %}
+                    <li><a href="#news">News</a></li>
+                {% endif %}
+
+                {% if object.awards %}
+                    <li><a href="#awards">Awards</a></li>
+                {% endif %}
+
+                {% if object.race_directors.count %}
+                    <li><a href="#rds">Race Directors</a></li>
+                {% endif %}
+
+                {% if race_types %}
+                    <li><a href="#results">Results</a></li>
+                {% endif %}
+
+                {% if object.sponsors.count %}
+                    <li><a href="#sponsors">Sponsors</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        {% include "panels/meta.html" %}
+
+        {% if object.get_overall_results %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Race Results</h3>
+                </div>
+                <ul class="list-group">
+                {% for race_type in race_types %}
+                    <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+                    <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-maleresults">{{ race_type.name }} Male Results</a></li>
+                    <li class="list-group-item"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-femaleresults">{{ race_type.name }} Female Results</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% include "panels/share.html" %}
+
+        {% comment %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Sponsors</h3>
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
+        {% endcomment %}
+
+        {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+        {# include "panels/photos.html" with photos=photos_list #}
+        {% include "includes/flickr_photos.html" with photos=photos_list %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,46 +1,37 @@
-# encoding: utf-8
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import ajaximage.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
+    dependencies = [
+        ('contenttypes', '0001_initial'),
+    ]
 
-        # Adding model 'Sponsor'
-        db.create_table('sponsors_sponsor', (
-            ('discount_detail', self.gf('django.db.models.fields.TextField')()),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('url', self.gf('django.db.models.fields.URLField')(default='http://', max_length=200)),
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('phone', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('address', self.gf('django.db.models.fields.TextField')()),
-            ('logo', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, db_index=True)),
-        ))
-        db.send_create_signal('sponsors', ['Sponsor'])
-    
-    def backwards(self, orm):
-
-        # Deleting model 'Sponsor'
-        db.delete_table('sponsors_sponsor')
-    
-    models = {
-        'sponsors.sponsor': {
-            'Meta': {'object_name': 'Sponsor'},
-            'address': ('django.db.models.fields.TextField', [], {}),
-            'discount_detail': ('django.db.models.fields.TextField', [], {}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'phone': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'default': "'http://'", 'max_length': '200'})
-        }
-    }
-
-    complete_apps = ['sponsors']
+    operations = [
+        migrations.CreateModel(
+            name='Sponsor',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=200)),
+                ('slug', models.SlugField(help_text='Suggested value automatically generated from name. Must be unique.', null=True, blank=True)),
+                ('url', models.URLField(help_text='URL to website')),
+                ('address', models.TextField(null=True, blank=True)),
+                ('phone', models.CharField(max_length=15, null=True, blank=True)),
+                ('email', models.EmailField(max_length=75, null=True, blank=True)),
+                ('logo', ajaximage.fields.AjaxImageField(null=True, blank=True)),
+                ('discount_detail', models.TextField(null=True, blank=True)),
+                ('active', models.BooleanField(default=False)),
+                ('object_id', models.PositiveIntegerField(null=True, blank=True)),
+                ('content_type', models.ForeignKey(blank=True, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'verbose_name': 'Sponsor',
+                'verbose_name_plural': 'Sponsors',
+            },
+            bases=(models.Model,),
+        ),
+    ]

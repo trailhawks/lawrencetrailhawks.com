@@ -1,0 +1,25 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+
+
+{% block title %}Links{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+    	<h1>Links</h1>
+
+		{% for link in object_list %}
+			<h3><a href="{{ link.link }}">{{ link.name }}</a></h3>
+			{{ link.description|markdown }}
+		{% endfor %}
+	</div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

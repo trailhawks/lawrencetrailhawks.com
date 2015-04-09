@@ -1,16 +1,24 @@
-import datetime
+from __future__ import unicode_literals
 
+from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from shorturls.models import ShortUrlMixin
+from django_comments.moderation import CommentModerator, moderator
 
-from core.models import MachineTagMixin
+from .managers import RaceManager
+from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
+from locations.models import Location
 from members.models import Member
 from sponsors.models import Sponsor
 
 
+@python_2_unicode_compatible
 class RaceType(models.Model):
+    """Race Type model."""
+
     name = models.CharField(max_length=200)
     slug = models.SlugField(blank=True)
 
@@ -19,26 +27,29 @@ class RaceType(models.Model):
             self.slug = slugify(self.name)
         return super(RaceType, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
-class Race(MachineTagMixin, ShortUrlMixin):
+@python_2_unicode_compatible
+class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
+    """Race model."""
+
     KM = 1
     MI = 2
     UNIT_CHOICES = (
-        (KM, "km"),
-        (MI, "mi"),
+        (KM, _('Kilometers')),
+        (MI, _('Miles')),
     )
     RUN = 1
     BIKE = 2
     SWIM = 3
     DISCIPLINE_CHOICES = (
-        (RUN, "Run"),
-        (BIKE, "Bike"),
-        (SWIM, "Swim"),
+        (RUN, _('Run')),
+        (BIKE, _('Bike')),
+        (SWIM, _('Swim')),
     )
-    logo = models.ImageField(upload_to="races/logos", blank=True, null=True)
+    logo = AjaxImageField(upload_to="races/logos", blank=True, null=True)
     slogan = models.CharField(max_length=300, blank=True, null=True)
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
     annual = models.CharField(max_length=15)
@@ -46,29 +57,29 @@ class Race(MachineTagMixin, ShortUrlMixin):
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)
-    awards = models.CharField(max_length=300)
-    distance = models.CharField(max_length=100, help_text="eg 26.2")
+    awards = models.TextField(blank=True, null=True)
+    distance = models.CharField(max_length=100, help_text="eg 26.2", blank=True, null=True)
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
-    course_map = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to course map if avail.")
+    location = models.ForeignKey(Location, blank=True, null=True)
+    course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
     cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
-    location = models.TextField()
-    location_iframe = models.TextField(blank=True, null=True)
-    map_link = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to google maps or other mapping software pointing towards the start location")
-    reg_url = models.URLField(blank=True, null=True, verify_exists=False, help_text="Link to registartion flyer or to registration URL for online signup.")
-    reg_description = models.TextField()
+    reg_url = models.URLField(blank=True, null=True, help_text="Link to registartion flyer or to registration URL for online signup.")
+    reg_description = models.TextField(blank=True, null=True)
     entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
     discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
-    lodging = models.URLField(blank=True, null=True, verify_exists=False, help_text="link to lodging information.")
+    lodging = models.URLField(blank=True, null=True, help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
 
+    objects = RaceManager()
+
     class Meta:
+        ordering = ['-start_datetime']
         verbose_name = _('Race')
         verbose_name_plural = _('Races')
-        ordering = ['-start_datetime']
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0} {1}'.format(self.annual, self.title)
 
     @models.permalink
@@ -96,35 +107,52 @@ class Race(MachineTagMixin, ShortUrlMixin):
         return self.report_set.all()
 
     @property
-    def get_reg_dates(self):
-        return self.registration_set.all().order_by('reg_date')
-
-    @property
     def get_race_type_results(self):
         return self.result_set.values_list('race_type__name', flat=True).distinct()
 
     @property
     def is_finished(self):
-        if self.result_set.count == 0:
-            return False
-        else:
-            return True
+        return not self.result_set.count() == 0
 
 
+class RaceModerator(CommentModerator):
+    email_notification = True
+    enable_field = 'enable_comments'
+    auto_close_field = 'start_datetime'
+    close_after = 30
+
+
+moderator.register(Race, RaceModerator)
+
+
+@python_2_unicode_compatible
 class Registration(models.Model):
-    reg_date = models.DateField(verbose_name="Registration Date")
-    reg_cost = models.IntegerField(verbose_name="Registration Cost")
+    """Registration model."""
+
     race = models.ForeignKey(Race)
+    description = models.CharField(max_length=100, blank=True, null=True)
+    reg_date = models.DateField("Registration Date")
+    end_date = models.DateField("End Date", blank=True, null=True)
+    reg_cost = models.IntegerField("Registration Cost")
 
     class Meta:
         verbose_name = _('Registration Dates')
         verbose_name_plural = _('Registration Dates')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.race.title, self.reg_date)
 
+    @property
+    def has_expired(self):
+        if self.end_date:
+            return timezone.now() < self.end_date
+        return False
 
+
+@python_2_unicode_compatible
 class EmergencyContact(models.Model):
+    """Emergency Contact model."""
+
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     phone = models.CharField(max_length=13)
@@ -135,11 +163,14 @@ class EmergencyContact(models.Model):
         verbose_name = _('Emergency Contact')
         verbose_name_plural = _('Emergency Contacts')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
 
+@python_2_unicode_compatible
 class Racer(MachineTagMixin):
+    """Racer model."""
+
     MALE = 1
     FEMALE = 2
     GENDER_CHOICES = (
@@ -176,12 +207,12 @@ class Racer(MachineTagMixin):
         verbose_name = _('Racer')
         verbose_name_plural = _('Racers')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('racer_detail', (), {'object_id': self.pk})
+        return ('racer_detail', (), {'pk': self.pk})
 
     def get_machine_tags(self):
         machine_tags = super(Racer, self).get_machine_tags()
@@ -202,7 +233,7 @@ class Racer(MachineTagMixin):
 
     @property
     def age(self):
-        TODAY = datetime.date.today()
+        TODAY = timezone.today()
         return (TODAY.year - self.birth_date.year)
 
     @property
@@ -212,29 +243,48 @@ class Racer(MachineTagMixin):
                 return gender
 
 
+@python_2_unicode_compatible
 class Result(models.Model):
+    """Result model."""
+
     racer = models.ForeignKey(Racer)
     race = models.ForeignKey(Race)
     race_type = models.ForeignKey(RaceType, null=True, blank=True, help_text='For races with multiple race types.')
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
     place = models.TextField(null=True, blank=True, help_text='Ex. First Overall Male or First Masters Female')
-    course_record = models.BooleanField()
-    dq = models.BooleanField(verbose_name="Disqualified")
-    dns = models.BooleanField(verbose_name="Did not Start")
-    dnf = models.BooleanField(verbose_name="Did not Finish")
+    course_record = models.BooleanField(default=False)
+    dq = models.BooleanField('Disqualified', default=False)
+    dns = models.BooleanField('Did not Start', default=False)
+    dnf = models.BooleanField('Did not Finish', default=False)
 
     class Meta:
         ordering = ('time',)
         verbose_name = _('Result')
         verbose_name_plural = _('Results')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s - %s" % (self.racer, self.race.title, self.time)
 
+    def save(self, *args, **kwargs):
 
+        if 'cr' in self.time.lower():
+            self.course_record = True
+
+        if 'dnf' in self.time.lower():
+            self.dnf = True
+
+        if 'dns' in self.time.lower():
+            self.dns = True
+
+        return super(Result, self).save(*args, **kwargs)
+
+
+@python_2_unicode_compatible
 class Report(models.Model):
-    report = models.URLField(verify_exists=False, help_text="Link to race report")
+    """Report model."""
+
+    report = models.URLField(help_text="Link to race report")
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)
@@ -243,5 +293,5 @@ class Report(models.Model):
         verbose_name = _('Report')
         verbose_name_plural = _('Reports')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

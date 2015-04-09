@@ -1,0 +1,21 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+
+
+{% block title %}FAQ{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>{{ object.question }}</h1>
+        <p class="lead">{{ object.answer|markdown }}</p>
+    </div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

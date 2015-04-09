@@ -1,0 +1,12 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load micawber_tags %}
+
+
+{% block content %}
+{% for set in latest %}
+{{ set }}
+  <a href="{{ photo.get_absolute_url }}">{% oembed %}{{ photo.photopage_url }}{% endoembed %}</a>
+{% endfor %}
+{% endblock content %}

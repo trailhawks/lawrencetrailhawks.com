@@ -1,0 +1,22 @@
+{% extends "races/base.html" %}
+
+{% block title %}Races{% endblock title %}
+
+{% block content %}
+<div class="main" id="main-two-columns">
+
+	<div class="left" id="main-content">
+		<ul>
+			{% for race in object_list %}
+			<li><a href="{{ race.get_absolute_url }}">{{ race.title }}</a> - {{race.start_datetime|date:"F j, Y"}}</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+		{% include "includes/flickr_photos.html" %}
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+</div>
+{% endblock content %}

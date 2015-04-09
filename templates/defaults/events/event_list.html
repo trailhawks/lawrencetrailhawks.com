@@ -1,0 +1,13 @@
+{% extends base_template_name|default:"base.html" %}
+
+{% load url from future %}
+
+{% block content %}
+<h1>Events</h1>
+
+<ul>
+    {% for event in event_list %}
+    <li><a href="{% url 'event_detail' slug=event.slug %}">{{ event }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}

@@ -1,0 +1,123 @@
+{% extends "base_bootstrap.html" %}
+
+{% load staticfiles %}
+{% load core_tags %}
+{% load race_tags %}
+{% load run_tags %}
+{% load waffle_tags %}
+
+{% block navbar %}
+<div class="navbar-wrapper">
+  <div class="container">
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="{% static 'img/hawk-head-24.png' %}" height="22"> Lawrence Trail Hawks</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        {% flag use_events %}
+          <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'event_list' %}">Events</a></li>
+        {% else %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Races and Results <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'race_index' %}">Race list</a></li>
+            {% get_latest_races as latest_races %}
+            {% if latest_races %}
+              <li class="divider"></li>
+              {% for latest_race in latest_races %}
+              <li><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></li>
+              {% endfor %}
+              <li class="divider"></li>
+              <li><a href="{% url 'faq_list' %}#Race+Questions">Race / Event FAQs?</a></li>
+            {% endif %}
+          </ul>
+        </li>
+        {% endflag use_events %}
+
+        {% get_weekly_runs as weekly_runs %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Group Runs <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'run_list' %}">All Weekly Runs</a></li>
+            {% if weekly_runs %}
+            <li class="divider"></li>
+            {% for weekly_run in weekly_runs %}
+            <li><a href="{{ weekly_run.get_absolute_url }}">{{ weekly_run }}</a></li>
+            {% endfor %}
+            <li class="divider"></li>
+            <li><a href="{% url 'faq_list' %}#Race+Questions">Running FAQs?</a></li>
+            {% endif %}
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Club Information <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+          <li{% if view.navitem == 'blog' %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
+          <li{% if view.navitem == 'links' %} class="active" {% endif %}><a href="{% url 'link_list' %}">Links</a></li>
+          <li{% if view.navitem == 'members' %} class="active" {% endif %}><a href="{% url 'member_list' %}">Members</a></li>
+          <li{% if view.navitem == 'sponsors' %} class="active" {% endif %}><a href="{% url 'sponsor_list' %}">Sponsors</a></li>
+          <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
+          <li><a href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
+          </ul>
+        </li>
+        <li{% if view.navitem == 'about' %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></li>
+        <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+  </div>
+</div>
+{% endblock navbar %}
+
+
+{% block content-wrapper %}
+<div class="container">
+{% block content %}
+{% endblock content %}
+</div>
+{% endblock content-wrapper %}
+
+
+{% block footer %}
+<div class="container">
+  <hr>
+
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="nav nav-pills">
+        <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
+        <li><a href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
+        <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="fa fa-group"></i> Yahoo! Group</a></li>
+        <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
+        <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
+        <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
+        <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+      <hr>
+      <p>&copy; 2009-{% now "Y" %} <a href="http://lawrencetrailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
+    </div>
+    <div class="col-md-2">
+        <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+    </div>
+    <div class="col-md-2">
+        <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
+    </div>
+  </div>
+</div>
+{% endblock footer %}

@@ -4,9 +4,11 @@ from django.views.generic.list import ListView
 from .models import News
 
 
-class NewsDetailView(DetailView):
-    model = News
+class NewsDetail(DetailView):
+    queryset = News.objects.all()
+    navitem = 'news'
 
 
-class NewsListView(ListView):
-    model = News
+class NewsList(ListView):
+    queryset = News.objects.public()
+    navitem = 'news'
