@@ -195,7 +195,17 @@ client.on("ready", function( readyEvent ) {
 
             {{ object.reg_description|markdown }}<br />
 
+            {% if object.entry_form %}
+                <hr>
+                <h3>Entry Form</h3>
+                <p>Prefer to print and mail in your entry form?</p>
+                <p>Make Checks Payable to: <em>Lawrence Trail Hawks</em></p>
+                <p>Mail to: <br>Lawrence Trail Hawks<br>PO Box 442548<br>Lawrence, KS 66044</p>
+                <p><a class="btn btn-info btn-block" href="{{ object.entry_form.url }}">Download Entry Form</a></p>
+            {% endif %}
+
             {% if not object.is_finished %}
+                <hr>
                 <p><a class="btn btn-primary btn-lg btn-block" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
             {% endif %}
 
