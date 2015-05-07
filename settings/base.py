@@ -213,6 +213,8 @@ ALLOWED_HOSTS = [
     '.hawkhundred.com',
     'lawrencetrailhawks.com',
     '.lawrencetrailhawks.com',
+    'trailhawks.com',
+    '.trailhawks.com',
     'lth.im',
     '.lth.im',
 ]
