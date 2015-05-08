@@ -1,7 +1,14 @@
 {% extends "base_bootstrap.html" %}
 
 {% load core_tags %}
+{% load simple_open_graph %}
 {% load staticfiles %}
+
+{% block opengraph %}
+{% with 'The Hawk Hundred is a 100-mile, 50-mile and Marathon Trail race put on by the Lawrence Trail Hawks. This year’s race takes place on September 12th and 13th in Lawrence, Kansas.' as og_description %}
+{% opengraph_meta "type='website', url='/', title='The Hawk Hundred', description=og_description, image='http://trailhawks.com/static/img/hawk-head.png'" %}
+{% endwith %}
+{% endblock opengraph %}
 
 {% block post_style %}
 <style>
