@@ -8,7 +8,7 @@ class RaceFeed(ICalFeed):
     A race event calendar
 
     """
-    product_id = '-//lawrencetrailhawks.com//Races//EN'
+    product_id = '-//trailhawks.com//Races//EN'
     timezone = 'CST'
     title = 'Lawrence Trail Hawks Race Calendar'
 

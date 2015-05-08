@@ -52,17 +52,18 @@ def notify_admins(sender, comment, **kwargs):
 
     notify_list = list(notify_list)
 
-    email = EmailMultiAlternatives(subject,
-            txt_body,
-            from_email="no-reply@lawrencetrailhawks.com",
-            to=notify_list,
-            bcc=['admin@lawrencetrailhawks.com'])
+    email = EmailMultiAlternatives(
+        subject,
+        txt_body,
+        from_email="no-reply@lawrencetrailhawks.com",
+        to=notify_list,
+        bcc=['admin@lawrencetrailhawks.com'])
     email.attach_alternative(t.render(c), "text/html")
     email.send()
 
 
 def notify_commenters(sender, comment, **kwargs):
-    subject = "[lawrencetrailhawks.com]: %s commented on %s" % (comment.user_name, comment.content_object)
+    subject = "[trailhawks.com]: %s commented on %s" % (comment.user_name, comment.content_object)
     c = Context({'comment': comment})
     t = loader.get_template("emails/comments_body.html")
     txt_body = "%s said:\n\n %s" % (comment.user_name, comment.comment)
@@ -75,7 +76,8 @@ def notify_commenters(sender, comment, **kwargs):
         pass
 
     if len(notify_list):
-        email = EmailMultiAlternatives(subject,
+        email = EmailMultiAlternatives(
+            subject,
             txt_body,
             from_email='no-reply@lawrencetrailhawks.com',
             to=['admin@lawrencetrailhawks.com'],

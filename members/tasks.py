@@ -30,4 +30,4 @@ Magical Trailhawk Genie
 """ % (member.full_hawk_name, member.date_expires)
 
             subject = "Your trailhawk membership is about to expire"
-            send_mail(subject, body, 'do-not-replay@lawrencetrailhawks.com', [member.email], fail_silently=False)
+            send_mail(subject, body, 'no-replay@lawrencetrailhawks.com', [member.email], fail_silently=False)
