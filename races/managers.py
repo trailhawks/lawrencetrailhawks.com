@@ -5,11 +5,14 @@ from django.utils import timezone
 
 class RaceQuerySet(QuerySet):
 
+    def active(self):
+        return self.filter(active__exact=True)
+
     def complete(self):
-        return self.filter(start_datetime__lte=timezone.now())
+        return self.active().filter(start_datetime__lte=timezone.now())
 
     def upcoming(self):
-        return self.filter(start_datetime__gt=timezone.now())
+        return self.active().filter(start_datetime__gt=timezone.now())
 
 
 class RaceManager(Manager):
