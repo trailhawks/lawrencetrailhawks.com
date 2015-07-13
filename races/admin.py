@@ -44,8 +44,8 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
-    list_display = ('title', 'annual', 'enable_comments', 'start_datetime')
-    list_filter = ('enable_comments', 'start_datetime', 'annual', 'location')
+    list_display = ('title', 'annual', 'active', 'enable_comments', 'start_datetime')
+    list_filter = ('active', 'enable_comments', 'start_datetime', 'annual', 'location')
     ordering = ['-start_datetime']
     save_on_top = True
     search_fields = ('title', 'slogan', 'description', 'slogan')

@@ -54,6 +54,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
     annual = models.CharField(max_length=15)
     slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title and annual. Must be unique.")
+    active = models.BooleanField(default=True)
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)
