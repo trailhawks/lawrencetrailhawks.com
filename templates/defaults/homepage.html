@@ -66,7 +66,7 @@
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">What's happening</h2>
+        <h2>Latest updates</h2>
       </div>
       <div class="panel-body">
         {% get_latest_news num=4 as latest_news %}
@@ -85,7 +85,7 @@
   {% get_todays_runs as runs %}
   {% if runs.todays_run %}
     <div class="col-md-8">
-      <h2>Today's Run</h2>
+      <h2>Today's run</h2>
       {% for run in runs.todays_run %}
         <h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
 
@@ -99,7 +99,7 @@
         {% endfor %}
 
         {% if run.get_run_news %}
-        <h4>Latest News:</h4>
+        <h4>Latest updates:</h4>
         {% for item in run.get_run_news|slice:":3" %}
           <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
         {% endfor %}
@@ -125,14 +125,14 @@
   <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">Next Run</h2>
+        <h2 class="panel-title">Next run</h2>
       </div>
       <div class="panel-body">
         {% for run in runs.next_run %}
           <h3><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
 
           {% if run.get_run_news %}
-            <h4>Latest News:</h4>
+            <h4>Latest updates:</h4>
             {% for item in run.get_run_news|slice:":3" %}
               <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
             {% endfor %}
@@ -162,7 +162,7 @@
     {% if latest_race %}
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Upcoming Event</h3>
+          <h3 class="panel-title">Upcoming event</h3>
         </div>
         <div class="panel-body">
           <h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2>
@@ -171,7 +171,7 @@
           {% endif %}
           <h3>{{ latest_race.slogan }}</h3>
           {% if latest_race.get_race_news %}
-            <p><strong>Latest News:</strong>
+            <p><strong>Latest updates:</strong>
             {% for item in latest_race.get_race_news|slice:":3" %}
               {{ item.body|markdown }}
             {% endfor %}
@@ -204,7 +204,7 @@
         </div>
       </div>
 
-      <h2>Latest Post</h2>
+      <h2>Latest post</h2>
 
       <div class="section-content">
         <div class="post">
@@ -217,8 +217,23 @@
         </div>
       </div>
     {% endif %}
+
   </div>
 </div>
+
+<section id="races">
+  <div class="row past-races">
+    <div class="col-md-12">
+      <h2>Past races</h2>
+
+      {% get_past_races as past_races %}
+      {% for past_race in past_races reversed %}
+        <div><a href="{{ past_race.get_absolute_url }}">{{ past_race }}</a></div>
+      {% endfor %}
+    </div>
+    <div class="show-more"><a href="javascript:;">Show more</a></div>
+  </div>
+</section>
 
 {% comment %}
 <div class="row">

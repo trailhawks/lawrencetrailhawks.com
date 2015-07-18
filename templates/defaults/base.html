@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load core_tags %}
+{% load humanize %}
 {% load race_tags %}
 {% load run_tags %}
 {% load waffle_tags %}
@@ -26,9 +27,9 @@
           <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'event_list' %}">Events</a></li>
         {% else %}
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Races and Results <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Races and Results <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'race_index' %}">Race list</a></li>
+            <li><a href="{% url 'race_index' %}">Our upcoming / past races</a></li>
             {% get_latest_races as latest_races %}
             {% if latest_races %}
               <li class="divider"></li>
@@ -44,9 +45,9 @@
 
         {% get_weekly_runs as weekly_runs %}
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Group Runs <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Group Runs <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'run_list' %}">All Weekly Runs</a></li>
+            <li><a href="{% url 'run_list' %}">Our weekly group runs</a></li>
             {% if weekly_runs %}
             <li class="divider"></li>
             {% for weekly_run in weekly_runs %}
@@ -95,9 +96,9 @@
 
 
 {% block footer %}
+<footer>
 <div class="container">
   <hr>
-
   <div class="row">
     <div class="col-md-8">
       <ul class="nav nav-pills">
@@ -108,6 +109,12 @@
         <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
         <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
         <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+        {% get_latest_races as latest_races %}
+        <li><a>{{ latest_races.count|intcomma }} upcoming races</a></li>
+        {% get_past_races as past_races %}
+        <li><a>{{ past_races.count|intcomma }} past races</a></li>
+        {% get_all_racers as racers %}
+        <li><a>{{ racers.count|intcomma }} racers</a></li>
       </ul>
       <hr>
       <p>&copy; 2009-{% now "Y" %} <a href="http://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
@@ -120,4 +127,5 @@
     </div>
   </div>
 </div>
+</footer>
 {% endblock footer %}
