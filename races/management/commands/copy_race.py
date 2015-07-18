@@ -10,12 +10,13 @@ from races.models import Race
 
 
 __doc__ = """Usage:
-copy_race [--race=<race>]
+copy_race [--race=<race>] [--number=<number>]
 
 Options:
-  -h --help       Show this screen.
-  --version       Show version.
-  --race=<race>   Race ID or Race slug to associate the results with.
+  -h --help         Show this screen.
+  --version         Show version.
+  --race=<race_id>  Race ID or Race slug to associate the results with.
+  --number=<number> Race number.
 """
 
 
@@ -40,18 +41,25 @@ class Command(DocOptCommand):
         except (ValueError, Race.DoesNotExist):
             return False
 
-    def gather_information(self):
+    def gather_information(self, race_id, number):
         click.echo('Hello there! We are going to copy a race now.')
 
-        races = Race.objects.all().order_by('-start_datetime')
-        for race in races:
-            click.echo('{0}. {1}'.format(race.pk, race.title))
+        # get race
+        if not race_id:
+            races = Race.objects.all().order_by('-start_datetime')
+            for race in races:
+                click.echo('{0}. {1}'.format(race.pk, race.title))
 
-        race = self.get_race(click.prompt("First, give me the ID of the Race object we're gonna copy. If there is more than one race already, give me ID of the latest one."))
+            race = self.get_race(click.prompt("First, give me the ID of the Race object we're gonna copy. If there is more than one race already, give me ID of the latest one."))
+        else:
+            race = self.get_race(race_id)
+
         while not race:
             race = self.get_race(click.prompt("Wrong ID! Try again"))
 
-        number = click.prompt("What is the number of the race? If this is a second race, write 2. If third, then 3. You got it")
+        # get number
+        if not number:
+            number = click.prompt("What is the number of the race? If this is a second race, write 2. If third, then 3. You got it")
 
         date = self.prepare_date(click.prompt("What is the date of this new race? (Format: MM/DD/YYYY)"))
         while not date:
@@ -60,7 +68,11 @@ class Command(DocOptCommand):
         return (race, number, date)
 
     def handle_docopt(self, arguments):
-        (race, number, date) = self.gather_information()
+
+        number = arguments.get('--number')
+        race_id = arguments.get('--race')
+
+        (race, number, date) = self.gather_information(race_id, number)
 
         click.echo("OK! That's it. Now I'll copy your race.")
 
