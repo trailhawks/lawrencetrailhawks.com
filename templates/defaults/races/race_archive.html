@@ -40,7 +40,7 @@
 			<tbody>
 				{% for race in completed_races %}
 				<tr>
-					<td><a href="{{ race.get_absolute_url }}">{{ race.title }}</a></td>
+					<td><a href="{{ race.get_absolute_url }}">{{ race }}</a></td>
 					<td>{{ race.start_datetime|date }}</td>
 				</tr>
 				{% endfor %}
