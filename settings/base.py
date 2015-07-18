@@ -99,6 +99,7 @@ PREREQ_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.flatpages',
+    'django.contrib.humanize',
     'django.contrib.messages',
     'django.contrib.redirects',
     'django.contrib.sessions',
