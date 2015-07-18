@@ -4,6 +4,7 @@ Markdown==2.6.1
 Unipath==1.0
 akismet==0.2.0
 boto==2.36.0
+click==3.3
 django-adaptors==0.2.5
 django-ajaximage==0.2.7
 django-backupdb==0.6.0
