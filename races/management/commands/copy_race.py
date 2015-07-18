@@ -68,7 +68,6 @@ class Command(DocOptCommand):
         return (race, number, date)
 
     def handle_docopt(self, arguments):
-
         number = arguments.get('--number')
         race_id = arguments.get('--race')
 
@@ -86,7 +85,7 @@ class Command(DocOptCommand):
         new_race.title = title
         new_race.slug = slugify(title)
         new_race.start_datetime = date
-        # new_race.active = True
+        new_race.active = True
         new_race.save()
 
         race = self.get_race(race_id)
@@ -105,3 +104,8 @@ class Command(DocOptCommand):
             faq.save()
 
         # copy Sponsors?
+
+        # race url
+        url = new_race.get_absolute_url()
+        click.echo("Your race page is ready here: http://trailhawks.com{0}".format(url))
+        click.echo("Congrats on yet another race!")
