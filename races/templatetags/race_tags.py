@@ -2,7 +2,7 @@ import datetime
 
 from django.template import Library
 
-from ..models import Race, RaceType, Result
+from ..models import Race, Racer, RaceType, Result
 
 
 register = Library()
@@ -27,6 +27,27 @@ def get_latest_race(context):
 def get_latest_races(context):
     try:
         return Race.objects.upcoming().order_by('start_datetime')
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
+def get_all_racers(context):
+    try:
+        return Racer.objects.all()
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
+def get_past_race(context):
+    return Race.objects.complete().order_by('start_datetime').first()
+
+
+@register.assignment_tag(takes_context=True)
+def get_past_races(context):
+    try:
+        return Race.objects.complete().order_by('start_datetime')
     except:
         return None
 
