@@ -8,8 +8,6 @@ import core.models
 
 class Migration(migrations.Migration):
 
-    replaces = [(b'races', '0001_initial'), (b'races', '0002_auto_20150406_1345'), (b'races', '0003_race_active'), (b'races', '0004_race_number'), (b'races', '0005_remove_race_number'), (b'races', '0006_race_number')]
-
     dependencies = [
         ('locations', '__first__'),
         ('members', '__first__'),
@@ -58,8 +56,8 @@ class Migration(migrations.Migration):
                 ('lodging', models.URLField(help_text='link to lodging information.', null=True, blank=True)),
                 ('packet_pickup', models.TextField(null=True, blank=True)),
                 ('location', models.ForeignKey(blank=True, to='locations.Location', null=True)),
-                ('race_directors', models.ManyToManyField(to=b'members.Member')),
-                ('sponsors', models.ManyToManyField(related_name='sponsors', to=b'sponsors.Sponsor')),
+                ('race_directors', models.ManyToManyField(to='members.Member')),
+                ('sponsors', models.ManyToManyField(related_name='sponsors', to='sponsors.Sponsor')),
             ],
             options={
                 'ordering': ['-start_datetime'],
@@ -155,23 +153,5 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Results',
             },
             bases=(models.Model,),
-        ),
-        migrations.AlterField(
-            model_name='race',
-            name='awards',
-            field=models.TextField(null=True, blank=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='race',
-            name='active',
-            field=models.BooleanField(default=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='race',
-            name='number',
-            field=models.IntegerField(null=True, blank=True),
-            preserve_default=True,
         ),
     ]
