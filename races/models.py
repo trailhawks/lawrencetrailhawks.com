@@ -2,11 +2,13 @@ from __future__ import unicode_literals
 
 from ajaximage.fields import AjaxImageField
 from django.db import models
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, title
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
+from num2words import num2words
 
 from .managers import RaceManager
 from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
@@ -55,6 +57,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     annual = models.CharField(max_length=15)
     slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title and annual. Must be unique.")
     active = models.BooleanField(default=True)
+    number = models.IntegerField(blank=True, null=True)
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)
@@ -81,7 +84,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
         verbose_name_plural = _('Races')
 
     def __str__(self):
-        return u'{0} {1}'.format(self.annual, self.title)
+        return self.get_full_name()
 
     @models.permalink
     def get_absolute_url(self):
@@ -91,27 +94,27 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
             'day': self.start_datetime.strftime("%d"),
             'slug': self.slug})
 
-    @property
+    def get_full_name(self):
+        name = ''
+        if self.number:
+            number = num2words(self.number, ordinal=True)
+            if self.number == 1:
+                name = 'Inaugural {0}'.format(self.title)
+            else:
+                name = '{0} Annual {1}'.format(number, self.title)
+        else:
+            name = '{0} {1}'.format(self.annual, self.title)
+        return title(name)
+
+    @cached_property
     def get_overall_results(self):
         return self.result_set.all().order_by('race_type', 'time')
 
-    @property
-    def get_male_results(self):
-        return self.result_set.filter(racer__gender=1).order_by('time')
-
-    @property
-    def get_female_results(self):
-        return self.result_set.filter(racer__gender=2).order_by('time')
-
-    @property
+    @cached_property
     def get_race_reports(self):
         return self.report_set.all()
 
-    @property
-    def get_race_type_results(self):
-        return self.result_set.values_list('race_type__name', flat=True).distinct()
-
-    @property
+    @cached_property
     def is_finished(self):
         return not self.result_set.count() == 0
 

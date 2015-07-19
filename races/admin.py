@@ -8,6 +8,48 @@ from news.admin import NewsInline
 from sponsors.admin import SponsorInline
 
 
+def set_number_to_one(modeladmin, request, queryset):
+    queryset.update(number=1)
+
+set_number_to_one.short_description = 'Set number to 1'
+
+
+def set_number_to_two(modeladmin, request, queryset):
+    queryset.update(number=2)
+
+set_number_to_two.short_description = 'Set number to 2'
+
+
+def set_number_to_three(modeladmin, request, queryset):
+    queryset.update(number=3)
+
+set_number_to_three.short_description = 'Set number to 3'
+
+
+def set_number_to_four(modeladmin, request, queryset):
+    queryset.update(number=4)
+
+set_number_to_four.short_description = 'Set number to 4'
+
+
+def set_number_to_five(modeladmin, request, queryset):
+    queryset.update(number=5)
+
+set_number_to_five.short_description = 'Set number to 5'
+
+
+def set_number_to_six(modeladmin, request, queryset):
+    queryset.update(number=6)
+
+set_number_to_six.short_description = 'Set number to 6'
+
+
+def set_number_to_seven(modeladmin, request, queryset):
+    queryset.update(number=7)
+
+set_number_to_seven.short_description = 'Set number to 7'
+
+
 def set_location_to_clinton(modeladmin, request, queryset):
     queryset.update(location=2)
 
@@ -44,12 +86,19 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['title', 'annual']}
-    list_display = ('title', 'annual', 'active', 'enable_comments', 'start_datetime')
-    list_filter = ('active', 'enable_comments', 'start_datetime', 'annual', 'location')
+    list_display = ('title', 'number', 'annual', 'active', 'enable_comments', 'start_datetime')
+    list_filter = ('active', 'enable_comments', 'start_datetime', 'number', 'annual', 'location')
     ordering = ['-start_datetime']
     save_on_top = True
     search_fields = ('title', 'slogan', 'description', 'slogan')
     actions = [
+        set_number_to_one,
+        set_number_to_two,
+        set_number_to_three,
+        set_number_to_four,
+        set_number_to_five,
+        set_number_to_six,
+        set_number_to_seven,
         set_location_to_clinton,
         set_location_to_river_trails,
         set_location_to_olathe_pc,

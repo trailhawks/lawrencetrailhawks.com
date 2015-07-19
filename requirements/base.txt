@@ -34,6 +34,7 @@ gunicorn==19.1.1
 httplib2==0.9
 lxml
 micawber==0.3.1
+num2words==0.5.3
 psycopg2==2.5.4
 raven==5.1.1
 recaptcha-client==1.0.6
