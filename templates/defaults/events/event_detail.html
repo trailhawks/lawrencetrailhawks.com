@@ -17,12 +17,23 @@
 
         <div class="lead">{{ object.body|oembed:"600x600"|markdown }}</div>
 
-        <h3>Races</h3>
+        {% if object.races.upcoming.count %}
+        <h3>Upcoming races</h3>
         <ul>
-            {% for race in object.races.all %}
+            {% for race in object.races.upcoming %}
             <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
             {% endfor %}
         </ul>
+        {% endif %}
+
+        {% if object.races.complete.count %}
+        <h3>Past races</h3>
+        <ul>
+            {% for race in object.races.complete %}
+            <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
         {% render_facebook_like obj=object %}
 
