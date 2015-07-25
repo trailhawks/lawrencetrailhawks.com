@@ -77,7 +77,7 @@
         </div>
         <hr>
         {% endfor %}
-        <a class="btn btn-block btn-primary" href="{% url 'news_list' %}">More news &#187;</a>
+        <a class="btn btn-block btn-default" href="{% url 'news_list' %}">More news &#187;</a>
       </div>
     </div>
   </div>
@@ -300,7 +300,7 @@
         {% for faq in recent_faqs %}
         <li class="list-group-item"><a href="{{ faq.get_absolute_url }}">{{ faq.question }}</a></li>
         {% endfor %}
-        <li class="list-group-item"><a class="btn btn-block btn-primary" href="{% url 'faq_list' %}" class="more">Browse all FAQ &#187;</a></li>
+        <li class="list-group-item"><a class="btn btn-block btn-default" href="{% url 'faq_list' %}" class="more">Browse all FAQ &#187;</a></li>
       </ul>
     </div>
   </div>
@@ -312,7 +312,7 @@
       </div>
       <div class="panel-body">
         <p>Subscribe to our calendar to keep upto date on all Trailhawk events, not just our races.</p>
-        <p><a class="btn btn-block btn-primary" href="http://trailhawks.com{% url 'race_ical' %}">Subscribe &#187;</a></p>
+        <p><a class="btn btn-block btn-default" href="http://trailhawks.com{% url 'race_ical' %}">Subscribe &#187;</a></p>
       </div>
     </div>
   </div>
@@ -327,7 +327,7 @@
         {% for post in recent_posts %}
         <li class="list-group-item"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></span></li>
         {% endfor %}
-        <li class="list-group-item"><a class="btn btn-block btn-primary" href="{% url 'blog_list' %}">Read more &#187;</a></li>
+        <li class="list-group-item"><a class="btn btn-block btn-default" href="{% url 'blog_list' %}">Read more &#187;</a></li>
       </ul>
     </div>
 	</div>
