@@ -97,35 +97,45 @@
 
 {% block footer %}
 <footer>
-<div class="container">
-  <hr>
-  <div class="row">
-    <div class="col-md-8">
-      <ul class="nav nav-pills">
-        <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
-        <li><a href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
-        <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="fa fa-group"></i> Yahoo! Group</a></li>
-        <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
-        <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
-        <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
-        <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
-        {% get_latest_races as latest_races %}
-        <li><a>{{ latest_races.count|intcomma }} upcoming races</a></li>
-        {% get_past_races as past_races %}
-        <li><a>{{ past_races.count|intcomma }} past races</a></li>
-        {% get_all_racers as racers %}
-        <li><a>{{ racers.count|intcomma }} racers</a></li>
-      </ul>
-      <hr>
-      <p>&copy; 2009-{% now "Y" %} <a href="http://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
+  <div class="container">
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-unstyled">
+          <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
+          <li><a href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
+          <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
+          <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
+          <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
+          <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+          <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="fa fa-group"></i> Yahoo! Group</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <ul class="list-unstyled">
+          {% get_latest_races as latest_races %}
+          <li><b>{{ latest_races.count|intcomma }}</b> upcoming races</a></li>
+          {% get_past_races as past_races %}
+          <li><b>{{ past_races.count|intcomma }}</b> past races</a></li>
+          {% get_all_racers as racers %}
+          <li><b>{{ racers.count|intcomma }}</b> racers</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+          <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+      </div>
+      <div class="col-md-1">
+          <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
+      </div>
     </div>
-    <div class="col-md-2">
-        <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+        <p>&copy; 2009-{% now "Y" %} <a href="http://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
+      </div>
     </div>
-    <div class="col-md-2">
-        <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-    </div>
+
   </div>
-</div>
 </footer>
 {% endblock footer %}
