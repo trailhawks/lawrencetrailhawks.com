@@ -75,6 +75,8 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
     lodging = models.URLField(blank=True, null=True, help_text="link to lodging information.")
     packet_pickup = models.TextField(blank=True, null=True)
+    facebook_url = models.URLField(blank=True, null=True, help_text='Link to Facebook page')
+    facebook_event_url = models.URLField(blank=True, null=True, help_text='Link to Facebook Event page')
 
     objects = RaceManager()
 

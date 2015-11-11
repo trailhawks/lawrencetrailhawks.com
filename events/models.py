@@ -25,6 +25,8 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
     slug = models.SlugField(blank=True, null=True)
     body = models.TextField()
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
+    facebook_url = models.URLField(blank=True, null=True, help_text='Link to Facebook page')
+    facebook_event_url = models.URLField(blank=True, null=True, help_text='Link to Facebook Event page')
     races = models.ManyToManyField(Race, related_name='events')
 
     objects = EventManager()
@@ -55,8 +57,8 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
 class EventModerator(CommentModerator):
     email_notification = True
     enable_field = 'enable_comments'
-    #auto_close_field = 'publish'
-    #close_after = 7
+    # auto_close_field = 'publish'
+    # close_after = 7
 
 
 moderator.register(Event, EventModerator)
