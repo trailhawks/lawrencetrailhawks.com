@@ -1,4 +1,6 @@
+from dateutil.relativedelta import relativedelta
 from django.contrib import admin
+from django.template.defaultfilters import slugify
 
 from .models import EmergencyContact, Race, Racer, RaceType, Registration, Report, Result
 from core.actions import disable_comments, enable_comments
@@ -8,46 +10,16 @@ from news.admin import NewsInline
 from sponsors.admin import SponsorInline
 
 
-def set_number_to_one(modeladmin, request, queryset):
-    queryset.update(number=1)
+def migrate_race(modeladmin, request, queryset):
+    for race in queryset.all():
+        race.pk = None
+        race.number = race.number + 1
+        race.slug = '{0}-{1}'.format(slugify(race.title), race.number)
+        race.active = False
+        race.start_datetime = race.start_datetime + relativedelta(years=1)
+        race.save()
 
-set_number_to_one.short_description = 'Set number to 1'
-
-
-def set_number_to_two(modeladmin, request, queryset):
-    queryset.update(number=2)
-
-set_number_to_two.short_description = 'Set number to 2'
-
-
-def set_number_to_three(modeladmin, request, queryset):
-    queryset.update(number=3)
-
-set_number_to_three.short_description = 'Set number to 3'
-
-
-def set_number_to_four(modeladmin, request, queryset):
-    queryset.update(number=4)
-
-set_number_to_four.short_description = 'Set number to 4'
-
-
-def set_number_to_five(modeladmin, request, queryset):
-    queryset.update(number=5)
-
-set_number_to_five.short_description = 'Set number to 5'
-
-
-def set_number_to_six(modeladmin, request, queryset):
-    queryset.update(number=6)
-
-set_number_to_six.short_description = 'Set number to 6'
-
-
-def set_number_to_seven(modeladmin, request, queryset):
-    queryset.update(number=7)
-
-set_number_to_seven.short_description = 'Set number to 7'
+migrate_race.short_description = 'Duplicate the race for the next year'
 
 
 def set_location_to_clinton(modeladmin, request, queryset):
@@ -92,13 +64,7 @@ class RaceAdmin(admin.ModelAdmin):
     save_on_top = True
     search_fields = ('title', 'slogan', 'description', 'slogan')
     actions = [
-        set_number_to_one,
-        set_number_to_two,
-        set_number_to_three,
-        set_number_to_four,
-        set_number_to_five,
-        set_number_to_six,
-        set_number_to_seven,
+        migrate_race,
         set_location_to_clinton,
         set_location_to_river_trails,
         set_location_to_olathe_pc,
