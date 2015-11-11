@@ -1,7 +1,7 @@
 DateUtils
 Django>=1.7,<1.8
-Markdown==2.6.1
-Unipath==1.0
+Markdown==2.6.4
+Unipath==1.1
 akismet==0.2.0
 boto==2.36.0
 click==3.3
@@ -40,6 +40,7 @@ raven==5.1.1
 recaptcha-client==1.0.6
 requests==2.6.0
 simplejson==3.6.5
+titlecase==0.8.0
 
 #git+https://bitbucket.org/webology/django-shorturls.git#egg=django-shorturls-git
 git+https://github.com/jefftriplett/django-syncr.git#egg=django-syncr-git
