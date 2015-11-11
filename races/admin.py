@@ -1,6 +1,8 @@
 from dateutil.relativedelta import relativedelta
 from django.contrib import admin
 from django.template.defaultfilters import slugify
+from num2words import num2words
+from titlecase import titlecase
 
 from .models import EmergencyContact, Race, Racer, RaceType, Registration, Report, Result
 from core.actions import disable_comments, enable_comments
@@ -14,6 +16,7 @@ def migrate_race(modeladmin, request, queryset):
     for race in queryset.all():
         race.pk = None
         race.number = race.number + 1
+        race.annual = titlecase('{0} Annual'.format(num2words(race.number, ordinal=True)))
         race.slug = '{0}-{1}'.format(slugify(race.title), race.number)
         race.active = False
         race.start_datetime = race.start_datetime + relativedelta(years=1)
