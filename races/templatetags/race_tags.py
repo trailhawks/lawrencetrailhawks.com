@@ -1,5 +1,3 @@
-import datetime
-
 from django.template import Library
 
 from ..models import Race, Racer, RaceType, Result
