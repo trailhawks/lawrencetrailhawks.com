@@ -51,17 +51,19 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
         (BIKE, _('Bike')),
         (SWIM, _('Swim')),
     )
+    title = models.CharField(max_length=200,
+                             help_text='Title of event. If there are multiple races assoiated to an "event", make two events.')
+    active = models.BooleanField(default=True)
+    number = models.IntegerField(blank=True, null=True)
+    annual = models.CharField(max_length=15, blank=True, null=True)
+    slug = models.SlugField(unique=True,
+                            help_text='Suggested value automatically generated from title and annual. Must be unique.')
+
+    slogan = models.CharField(max_length=300, blank=True, null=True)
+
     logo = AjaxImageField(upload_to='races/logos', blank=True, null=True)
     background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
                                 help_text='Optional background photo')
-    slogan = models.CharField(max_length=300, blank=True, null=True)
-    title = models.CharField(max_length=200,
-                             help_text='Title of event. If there are multiple races assoiated to an "event", make two events.')
-    annual = models.CharField(max_length=15)
-    slug = models.SlugField(unique=True,
-                            help_text='Suggested value automatically generated from title and annual. Must be unique.')
-    active = models.BooleanField(default=True)
-    number = models.IntegerField(blank=True, null=True)
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)
@@ -83,7 +85,7 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     discounts = models.TextField(blank=True, null=True,
                                  help_text='Describe discounts for the race if they exist.')
     lodging = models.URLField(blank=True, null=True,
-                              help_text='link to lodging information.')
+                              help_text='Link to lodging information')
     packet_pickup = models.TextField(blank=True, null=True)
     facebook_url = models.URLField(blank=True, null=True,
                                    help_text='Link to Facebook page')
