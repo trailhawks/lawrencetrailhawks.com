@@ -1,6 +1,6 @@
 import datetime
 
-from django.db.models import F, Manager, Q
+from django.db.models import Manager, Q
 from django.db.models.query import QuerySet
 from django.utils import timezone
 
