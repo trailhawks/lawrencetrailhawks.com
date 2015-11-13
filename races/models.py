@@ -51,32 +51,44 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
         (BIKE, _('Bike')),
         (SWIM, _('Swim')),
     )
-    logo = AjaxImageField(upload_to="races/logos", blank=True, null=True)
+    logo = AjaxImageField(upload_to='races/logos', blank=True, null=True)
+    background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
+                                help_text='Optional background photo')
     slogan = models.CharField(max_length=300, blank=True, null=True)
-    title = models.CharField(max_length=200, help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.")
+    title = models.CharField(max_length=200,
+                             help_text='Title of event. If there are multiple races assoiated to an "event", make two events.')
     annual = models.CharField(max_length=15)
-    slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title and annual. Must be unique.")
+    slug = models.SlugField(unique=True,
+                            help_text='Suggested value automatically generated from title and annual. Must be unique.')
     active = models.BooleanField(default=True)
     number = models.IntegerField(blank=True, null=True)
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)
     awards = models.TextField(blank=True, null=True)
-    distance = models.CharField(max_length=100, help_text="eg 26.2", blank=True, null=True)
-    unit = models.IntegerField(choices=UNIT_CHOICES, default=KM)
-    start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
+    distance = models.CharField(max_length=100, blank=True, null=True,
+                                help_text='eg 26.2')
+    unit = models.IntegerField(choices=UNIT_CHOICES, default=KM, blank=True, null=True)
+    start_datetime = models.DateTimeField(verbose_name='Start Date and Time')
     description = models.TextField()
     location = models.ForeignKey(Location, blank=True, null=True)
-    course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
-    cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
-    reg_url = models.URLField(blank=True, null=True, help_text="Link to registartion flyer or to registration URL for online signup.")
+    course_map = models.URLField(blank=True, null=True,
+                                 help_text='Link to course map if avail.')
+    cut_off = models.CharField(max_length=75, null=True, blank=True,
+                               help_text='eg: 13 hours')
+    reg_url = models.URLField(blank=True, null=True,
+                              help_text='Link to registartion flyer or to registration URL for online signup.')
     reg_description = models.TextField(blank=True, null=True)
-    entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
-    discounts = models.TextField(blank=True, null=True, help_text="Describe discounts for the race if they exist.")
-    lodging = models.URLField(blank=True, null=True, help_text="link to lodging information.")
+    entry_form = models.FileField(upload_to='races/entry_forms', null=True, blank=True)
+    discounts = models.TextField(blank=True, null=True,
+                                 help_text='Describe discounts for the race if they exist.')
+    lodging = models.URLField(blank=True, null=True,
+                              help_text='link to lodging information.')
     packet_pickup = models.TextField(blank=True, null=True)
-    facebook_url = models.URLField(blank=True, null=True, help_text='Link to Facebook page')
-    facebook_event_url = models.URLField(blank=True, null=True, help_text='Link to Facebook Event page')
+    facebook_url = models.URLField(blank=True, null=True,
+                                   help_text='Link to Facebook page')
+    facebook_event_url = models.URLField(blank=True, null=True,
+                                         help_text='Link to Facebook Event page')
 
     objects = RaceManager()
 
@@ -91,9 +103,9 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('race_detail', (), {
-            'year': self.start_datetime.strftime("%Y"),
-            'month': self.start_datetime.strftime("%b").lower(),
-            'day': self.start_datetime.strftime("%d"),
+            'year': self.start_datetime.strftime('%Y'),
+            'month': self.start_datetime.strftime('%b').lower(),
+            'day': self.start_datetime.strftime('%d'),
             'slug': self.slug})
 
     def get_full_name(self):
@@ -107,6 +119,10 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
         else:
             name = '{0} {1}'.format(self.annual, self.title)
         return title(name)
+
+    @cached_property
+    def ical_uid(self):
+        return 'race-{0}@trailhawks.com'.format(self.pk)
 
     @cached_property
     def get_overall_results(self):
@@ -137,16 +153,16 @@ class Registration(models.Model):
 
     race = models.ForeignKey(Race)
     description = models.CharField(max_length=100, blank=True, null=True)
-    reg_date = models.DateField("Registration Date")
-    end_date = models.DateField("End Date", blank=True, null=True)
-    reg_cost = models.IntegerField("Registration Cost")
+    reg_date = models.DateField('Registration Date')
+    end_date = models.DateField('End Date', blank=True, null=True)
+    reg_cost = models.IntegerField('Registration Cost')
 
     class Meta:
         verbose_name = _('Registration Dates')
         verbose_name_plural = _('Registration Dates')
 
     def __str__(self):
-        return "%s %s" % (self.race.title, self.reg_date)
+        return '%s %s' % (self.race.title, self.reg_date)
 
     @property
     def has_expired(self):
@@ -170,7 +186,7 @@ class EmergencyContact(models.Model):
         verbose_name_plural = _('Emergency Contacts')
 
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return '%s %s' % (self.first_name, self.last_name)
 
 
 @python_2_unicode_compatible
@@ -180,8 +196,8 @@ class Racer(MachineTagMixin):
     MALE = 1
     FEMALE = 2
     GENDER_CHOICES = (
-        (MALE, "Male"),
-        (FEMALE, "Female"),
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
     )
 
     SMALL = 1
@@ -189,15 +205,16 @@ class Racer(MachineTagMixin):
     LARGE = 3
     XLARGE = 4
     SIZE_CHOICES = (
-        (SMALL, "S"),
-        (MEDIUM, "M"),
-        (LARGE, "L"),
-        (XLARGE, "XL"),
+        (SMALL, 'S'),
+        (MEDIUM, 'M'),
+        (LARGE, 'L'),
+        (XLARGE, 'XL'),
     )
 
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True, help_text="If racer is a trailhawk select profile.")
+    trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True,
+                                  help_text='If racer is a trailhawk select profile.')
     email = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
     gender = models.IntegerField(choices=GENDER_CHOICES)
@@ -206,7 +223,7 @@ class Racer(MachineTagMixin):
     city = models.CharField(max_length=40, null=True, blank=True)
     state = models.CharField(max_length=40, null=True, blank=True)
     country = models.CharField(max_length=40, null=True, blank=True)
-    contact = models.ForeignKey(EmergencyContact, verbose_name="Emergency Contact", blank=True, null=True)
+    contact = models.ForeignKey(EmergencyContact, verbose_name='Emergency Contact', blank=True, null=True)
 
     class Meta:
         ordering = ['last_name', 'first_name']
@@ -214,7 +231,7 @@ class Racer(MachineTagMixin):
         verbose_name_plural = _('Racers')
 
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return '%s %s' % (self.first_name, self.last_name)
 
     @models.permalink
     def get_absolute_url(self):
@@ -231,7 +248,7 @@ class Racer(MachineTagMixin):
 
     @property
     def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return '%s %s' % (self.first_name, self.last_name)
 
     @property
     def get_results(self):
@@ -255,10 +272,12 @@ class Result(models.Model):
 
     racer = models.ForeignKey(Racer)
     race = models.ForeignKey(Race)
-    race_type = models.ForeignKey(RaceType, null=True, blank=True, help_text='For races with multiple race types.')
+    race_type = models.ForeignKey(RaceType, null=True, blank=True,
+                                  help_text='For races with multiple race types.')
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
-    place = models.TextField(null=True, blank=True, help_text='Ex. First Overall Male or First Masters Female')
+    place = models.TextField(null=True, blank=True,
+                             help_text='Ex. First Overall Male or First Masters Female')
     course_record = models.BooleanField(default=False)
     dq = models.BooleanField('Disqualified', default=False)
     dns = models.BooleanField('Did not Start', default=False)
@@ -270,7 +289,7 @@ class Result(models.Model):
         verbose_name_plural = _('Results')
 
     def __str__(self):
-        return "%s - %s - %s" % (self.racer, self.race.title, self.time)
+        return '%s - %s - %s' % (self.racer, self.race.title, self.time)
 
     def save(self, *args, **kwargs):
 
@@ -290,7 +309,7 @@ class Result(models.Model):
 class Report(models.Model):
     """Report model."""
 
-    report = models.URLField(help_text="Link to race report")
+    report = models.URLField(help_text='Link to race report')
     title = models.CharField(max_length=200)
     race = models.ForeignKey(Race)
     racer = models.ForeignKey(Racer)
