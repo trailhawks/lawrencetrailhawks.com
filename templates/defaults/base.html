@@ -1,10 +1,11 @@
 {% extends "base_bootstrap.html" %}
 
-{% load staticfiles %}
 {% load core_tags %}
 {% load humanize %}
+{% load members_tags %}
 {% load race_tags %}
 {% load run_tags %}
+{% load staticfiles %}
 {% load waffle_tags %}
 
 {% block navbar %}
@@ -85,14 +86,26 @@
       </div>
       <div class="col-md-3">
         <ul class="list-unstyled">
+          {# Upcoming races #}
           {% get_latest_races as latest_races %}
           <li><b>{{ latest_races.count|intcomma }}</b> upcoming races</a></li>
+
+          {# Past races #}
           {% get_past_races as past_races %}
           <li><b>{{ past_races.count|intcomma }}</b> past races</a></li>
+
+          {# Total members #}
+          {% get_active_members as active_members %}
+          <li><b>{{ active_members.count|intcomma }}</b> members</a></li>
+
+          {# Total racers #}
           {% get_all_racers as racers %}
           <li><b>{{ racers.count|intcomma }}</b> racers</a></li>
+
+          {# Total results #}
           {% get_all_results as results %}
           <li><b>{{ results.count|intcomma }}</b> results</a></li>
+
         </ul>
       </div>
       <div class="col-md-2">
