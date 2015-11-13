@@ -255,6 +255,7 @@
 
 
 {% get_homepage_sponsors as homepage_sponsors %}
+{% if homepage_sponsors %}
 <section id="sponsors">
   <div class="row">
     <div class="col-md-12">
@@ -268,6 +269,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% comment %}
 <div class="row">
