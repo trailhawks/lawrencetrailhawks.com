@@ -14,6 +14,7 @@
 {% load photo_tags %}
 {% load race_tags %}
 {% load run_tags %}
+{% load sponsors_tags %}
 {% load staticfiles %}
 {% load thumbor_tags %}
 {% load twitterfy %}
@@ -221,17 +222,50 @@
   </div>
 </div>
 
+<section id="events">
+  <div class="row upcoming-races">
+    <div class="col-md-12">
+      <h2>Upcoming races</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% get_latest_races as races %}
+    {% for race in races %}
+      {% include 'includes/_race.html' with race=race %}
+    {% endfor %}
+  </div>
+</section>
+
 <section id="races">
-  <div class="row past-races">
+  <div class="row">
     <div class="col-md-12">
       <h2>Past races</h2>
-
+    </div>
+  </div>
+  <div class="row past-races">
+    <div class="col-md-12">
       {% get_past_races as past_races %}
       {% for past_race in past_races reversed %}
         <div><a href="{{ past_race.get_absolute_url }}">{{ past_race }}</a></div>
       {% endfor %}
     </div>
     <div class="show-more"><a href="javascript:;">Show more</a></div>
+  </div>
+</section>
+
+
+{% get_homepage_sponsors as homepage_sponsors %}
+<section id="sponsors">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Sponsors</h2>
+    </div>
+  </div>
+  <div class="row">
+{% for sponsor in homepage_sponsors %}
+{% include 'includes/_sponsor.html' with sponsor=sponsor %}
+{% endfor %}
+    </div>
   </div>
 </section>
 

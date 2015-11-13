@@ -1,9 +1,9 @@
 <a href="{{ race.get_absolute_url }}">
-    <div class="col-md-4 event">
-        <div class="overlay">
-            <p class="race">{{ race.title }}</p>
-            <span class="date">{{ race.start_datetime|date:"F d, Y" }}</span>
-        </div>
-    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+  <div class="col-md-4 event">
+    <div class="overlay">
+      <p class="race">{{ race.title }}</p>
+      <span class="date">{{ race.start_datetime|date:"F d, Y" }}</span>
     </div>
+  {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+  </div>
 </a>
