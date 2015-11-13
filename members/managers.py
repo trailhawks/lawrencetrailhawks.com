@@ -12,8 +12,8 @@ class MemberQuerySet(QuerySet):
         return self.filter(date_paid__gte=one_year_ago)
 
     def previous(self):
-        # query = Q(start__lt=timezone.now()) & Q(end__lt=timezone.now())
-        return self.filter()  # .order_by('-start_datetime')
+        one_year_ago = timezone.now() - datetime.timedelta(weeks=52)
+        return self.filter(date_paid__lt=one_year_ago)
 
     def receive_comment_emails(self):
         return self.filter(email__isnull=False, receive_comment_emails__exact=True)
