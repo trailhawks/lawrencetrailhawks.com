@@ -289,6 +289,7 @@
 </div>
 {% endcomment %}
 
+{% comment %}
 <div class="row">
   <div class="col-md-4">
     {% get_latest_faqs 5 as recent_faqs %}
@@ -332,7 +333,7 @@
     </div>
 	</div>
 
-  {% comment %}
+  {# comment #}
   <div class="col-md-6">
 		<h3>About Us</h3>
 		<div class="section-content">
@@ -342,6 +343,7 @@
 		<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
 		</div>
 	</div>
-  {% endcomment %}
+  {# endcomment #}
 </div>
+{% endcomment %}
 {% endblock content %}

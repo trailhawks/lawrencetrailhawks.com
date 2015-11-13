@@ -40,6 +40,14 @@ def get_all_racers(context):
 
 
 @register.assignment_tag(takes_context=True)
+def get_all_results(context):
+    try:
+        return Result.objects.all()
+    except:
+        return None
+
+
+@register.assignment_tag(takes_context=True)
 def get_past_race(context):
     return Race.objects.complete().order_by('start_datetime').first()
 
