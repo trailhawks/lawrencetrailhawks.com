@@ -22,6 +22,7 @@ class Sponsor(models.Model):
     logo = AjaxImageField(upload_to='sponsors', blank=True, null=True)
     discount_detail = models.TextField(blank=True, null=True)
     active = models.BooleanField(default=False)
+    homepage = models.BooleanField('Show on homepage?', default=False)
 
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
