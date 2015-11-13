@@ -13,13 +13,13 @@ class RaceMixin(object):
 
 
 class RaceIndex(TemplateView):
-    template_name = 'races/race_archive.html'
+    template_name = 'races/races.html'
     navitem = 'races'
 
     def get_context_data(self, **kwargs):
         context = super(RaceIndex, self).get_context_data(**kwargs)
-        context['completed_races'] = Race.objects.complete()
-        context['upcoming_races'] = Race.objects.upcoming()
+        context['completed_races'] = Race.objects.complete().order_by('-start_datetime')
+        context['upcoming_races'] = Race.objects.upcoming().order_by('start_datetime')
         return context
 
 

@@ -1,0 +1,40 @@
+{% extends "races/base.html" %}
+
+{% block title %}Races{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+
+        {% if upcoming_races %}
+        <section id="events">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Upcoming events
+                        <a class="ical btn btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for race in upcoming_races %}
+                    {% include 'includes/_race.html' with race=race %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section id="events">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Past events</h1>
+                </div>
+            </div>
+            <div class="row">
+                {% for race in completed_races %}
+                    {% include 'includes/_race.html' with race=race %}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}
