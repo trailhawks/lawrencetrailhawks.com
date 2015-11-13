@@ -27,3 +27,8 @@ def get_sponsors_for_object(context, obj):
 @register.assignment_tag(takes_context=True)
 def get_latest_sponsors(context, num=10):
     return Sponsor.objects.active()[:num]
+
+
+@register.assignment_tag(takes_context=True)
+def get_homepage_sponsors(context, num=10):
+    return Sponsor.objects.homepage().order_by('?')[:num]
