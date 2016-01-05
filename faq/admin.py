@@ -10,7 +10,7 @@ class FaqInline(generic.GenericStackedInline):
 
 
 class FaqAdmin(admin.ModelAdmin):
-    list_display = ('question', 'content_type', 'object_id')
+    list_display = ('question', 'content_type', 'get_object_name')
     fieldsets = (
         (None, {
             'fields': ('question', 'answer')
@@ -20,6 +20,11 @@ class FaqAdmin(admin.ModelAdmin):
             'fields': ('content_type', 'object_id')
         }),
     )
+
+    def get_object_name(self, obj):
+        if obj.content_object and len(unicode(obj.content_object)):
+            return obj.content_object
+    get_object_name.short_description = 'associated object'
 
 
 admin.site.register(FAQ, FaqAdmin)
