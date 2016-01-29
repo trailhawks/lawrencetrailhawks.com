@@ -172,7 +172,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            #'filters': ['special']
+            # 'filters': ['special']
         }
     },
     'loggers': {
@@ -189,14 +189,14 @@ LOGGING = {
         'lawrencetrailhawks': {
             'handlers': ['console'],
             'level': 'DEBUG',
-            #'filters': ['special']
+            # 'filters': ['special']
         }
     }
 }
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-SHORT_BASE_URL = 'http://lth.im/'
+SHORT_BASE_URL = 'https://lth.im/'
 
 SHORTEN_MODELS = {
     'B': 'blog.post',
@@ -231,6 +231,6 @@ FAVICON_PATH = STATIC_URL + 'ico/favicon.png'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'PAGINATE_BY_PARAM': 'limit',
-    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 10
 }
