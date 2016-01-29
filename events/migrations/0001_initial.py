@@ -8,7 +8,6 @@ import core.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('races', '0002_auto_20150406_1345'),
     ]
 
     operations = [
@@ -21,7 +20,8 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(null=True, blank=True)),
                 ('body', models.TextField()),
                 ('status', models.IntegerField(default=2, verbose_name='status', choices=[(1, 'Draft'), (2, 'Public')])),
-                ('races', models.ManyToManyField(related_name='events', to='races.Race')),
+                ('facebook_url', models.URLField(help_text='Link to Facebook page', null=True, blank=True)),
+                ('facebook_event_url', models.URLField(help_text='Link to Facebook Event page', null=True, blank=True)),
             ],
             options={
                 'verbose_name': 'Event',

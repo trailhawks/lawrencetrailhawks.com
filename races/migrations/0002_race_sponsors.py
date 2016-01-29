@@ -7,14 +7,15 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('races', '0008_auto_20151113_1046'),
+        ('races', '0001_initial'),
+        ('sponsors', '0001_initial'),
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.AddField(
             model_name='race',
-            name='lodging',
-            field=models.URLField(help_text='Link to lodging information', null=True, blank=True),
+            name='sponsors',
+            field=models.ManyToManyField(related_name='sponsors', to='sponsors.Sponsor'),
             preserve_default=True,
         ),
     ]

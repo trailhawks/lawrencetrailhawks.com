@@ -7,14 +7,15 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sponsors', '0001_initial'),
+        ('races', '0001_initial'),
+        ('events', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='sponsor',
-            name='homepage',
-            field=models.BooleanField(default=False),
+            model_name='event',
+            name='races',
+            field=models.ManyToManyField(related_name='events', to='races.Race'),
             preserve_default=True,
         ),
     ]

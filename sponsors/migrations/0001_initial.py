@@ -25,6 +25,7 @@ class Migration(migrations.Migration):
                 ('logo', ajaximage.fields.AjaxImageField(null=True, blank=True)),
                 ('discount_detail', models.TextField(null=True, blank=True)),
                 ('active', models.BooleanField(default=False)),
+                ('homepage', models.BooleanField(default=False, verbose_name='Show on homepage?')),
                 ('object_id', models.PositiveIntegerField(null=True, blank=True)),
                 ('content_type', models.ForeignKey(blank=True, to='contenttypes.ContentType', null=True)),
             ],

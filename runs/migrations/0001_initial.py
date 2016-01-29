@@ -8,8 +8,8 @@ import core.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0001_initial'),
         ('locations', '0001_initial'),
+        ('members', '0001_initial'),
     ]
 
     operations = [

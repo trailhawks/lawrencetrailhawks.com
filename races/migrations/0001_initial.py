@@ -9,9 +9,8 @@ import core.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('locations', '__first__'),
-        ('members', '__first__'),
-        ('sponsors', '__first__'),
+        ('locations', '0001_initial'),
+        ('members', '0001_initial'),
     ]
 
     operations = [
@@ -36,15 +35,18 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('enable_comments', models.BooleanField(default=True)),
-                ('logo', ajaximage.fields.AjaxImageField(null=True, blank=True)),
-                ('slogan', models.CharField(max_length=300, null=True, blank=True)),
-                ('title', models.CharField(help_text="Title of event. If there are multiple races assoiated to an 'event', make two events.", max_length=200)),
-                ('annual', models.CharField(max_length=15)),
+                ('title', models.CharField(help_text='Title of event. If there are multiple races assoiated to an "event", make two events.', max_length=200)),
+                ('active', models.BooleanField(default=True)),
+                ('number', models.IntegerField(null=True, blank=True)),
+                ('annual', models.CharField(max_length=15, null=True, blank=True)),
                 ('slug', models.SlugField(help_text='Suggested value automatically generated from title and annual. Must be unique.', unique=True)),
+                ('slogan', models.CharField(max_length=300, null=True, blank=True)),
+                ('logo', ajaximage.fields.AjaxImageField(null=True, blank=True)),
+                ('background', ajaximage.fields.AjaxImageField(help_text='Optional background photo', null=True, blank=True)),
                 ('race_type', models.IntegerField(default=1, choices=[(1, 'Run'), (2, 'Bike'), (3, 'Swim')])),
-                ('awards', models.CharField(max_length=300, null=True, blank=True)),
+                ('awards', models.TextField(null=True, blank=True)),
                 ('distance', models.CharField(help_text='eg 26.2', max_length=100, null=True, blank=True)),
-                ('unit', models.IntegerField(default=1, choices=[(1, 'Kilometers'), (2, 'Miles')])),
+                ('unit', models.IntegerField(default=1, null=True, blank=True, choices=[(1, 'Kilometers'), (2, 'Miles')])),
                 ('start_datetime', models.DateTimeField(verbose_name='Start Date and Time')),
                 ('description', models.TextField()),
                 ('course_map', models.URLField(help_text='Link to course map if avail.', null=True, blank=True)),
@@ -53,11 +55,12 @@ class Migration(migrations.Migration):
                 ('reg_description', models.TextField(null=True, blank=True)),
                 ('entry_form', models.FileField(null=True, upload_to='races/entry_forms', blank=True)),
                 ('discounts', models.TextField(help_text='Describe discounts for the race if they exist.', null=True, blank=True)),
-                ('lodging', models.URLField(help_text='link to lodging information.', null=True, blank=True)),
+                ('lodging', models.URLField(help_text='Link to lodging information', null=True, blank=True)),
                 ('packet_pickup', models.TextField(null=True, blank=True)),
+                ('facebook_url', models.URLField(help_text='Link to Facebook page', null=True, blank=True)),
+                ('facebook_event_url', models.URLField(help_text='Link to Facebook Event page', null=True, blank=True)),
                 ('location', models.ForeignKey(blank=True, to='locations.Location', null=True)),
                 ('race_directors', models.ManyToManyField(to='members.Member')),
-                ('sponsors', models.ManyToManyField(related_name='sponsors', to='sponsors.Sponsor')),
             ],
             options={
                 'ordering': ['-start_datetime'],
