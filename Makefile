@@ -9,6 +9,11 @@ ASSET_DEST = assets
 
 FAVICON_FILE = $(ASSET_DEST)/img/hawk-head.png
 
+
+help:
+	@echo 'build - build assets'
+	@echo 'favicon - build favicon'
+
 build:
 	bower update
 	gulp
