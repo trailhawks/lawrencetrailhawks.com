@@ -1,13 +1,13 @@
 .PHONY: build favicon
 
+ASSET_DEST = lawrencetrailhawks/assets
+FAVICON_FILE = $(ASSET_DEST)/img/hawk-head.png
+
 BOOTSTRAP = bower_components/bootstrap/dist
 BOOTSTRAP_SOCIAL = bower_components/bootstrap-social
 FA = bower_components/font-awesome
 JQUERY = bower_components/jquery
 ZERO_CLIPBOARD = bower_components/zeroclipboard/dist
-ASSET_DEST = assets
-
-FAVICON_FILE = $(ASSET_DEST)/img/hawk-head.png
 
 
 help:
