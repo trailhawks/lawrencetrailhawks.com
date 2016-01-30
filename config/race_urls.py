@@ -7,7 +7,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
-from ..sitemaps.races import StaticViewSitemap
+from lawrencetrailhawks.sitemaps.races import StaticViewSitemap
 
 
 sitemaps = {

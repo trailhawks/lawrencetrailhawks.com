@@ -10,9 +10,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
-from ..sitemaps.default import StaticViewSitemap
-from ..views import (AboutView, HomepageView, HumansView, StyleGuideView,
-                     ThanksView)
+from lawrencetrailhawks.sitemaps.default import StaticViewSitemap
+from lawrencetrailhawks.views import (
+    AboutView,
+    HomepageView,
+    HumansView,
+    StyleGuideView,
+    ThanksView,
+)
 from blog.models import Post
 from news.models import News
 from races.models import Race
