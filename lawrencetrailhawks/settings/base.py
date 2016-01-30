@@ -3,7 +3,8 @@ import os
 from unipath import FSPath as Path
 
 
-PROJECT_ROOT = Path(__file__).ancestor(2)
+PROJECT_ROOT = Path(__file__).ancestor(3)
+TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, 'lawrencetrailhawks', 'templates')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -14,15 +15,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Chicago'
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
@@ -41,7 +35,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = PROJECT_ROOT.child('static_root')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    PROJECT_ROOT.child('assets')
+    PROJECT_ROOT.child('lawrencetrailhawks', 'assets')
 ]
 
 STATICFILES_FINDERS = [
@@ -76,7 +70,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 ]
 
 TEMPLATE_DIRS = [
-    os.path.join(PROJECT_ROOT, 'templates', 'defaults'),
+    os.path.join(TEMPLATE_ROOT, 'defaults'),
 ]
 
 ROOT_URLCONF = 'lawrencetrailhawks.urls.default'
