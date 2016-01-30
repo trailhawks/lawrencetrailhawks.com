@@ -13,7 +13,7 @@ class RaceMixin(object):
 
 
 class RaceIndex(TemplateView):
-    template_name = 'races/races.html'
+    template_name = 'races/race_list.html'
     navitem = 'races'
 
     def get_context_data(self, **kwargs):
