@@ -85,11 +85,16 @@
 
   {% get_todays_runs as runs %}
   {% if runs.todays_run %}
-    <div class="col-md-8">
-      <h2>Today's run</h2>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Today's run</h2>
+      </div>
+      <div class="panel-body">
       {% for run in runs.todays_run %}
         <h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
 
+        {% comment %}
         {% get_news_for_object run as news_list %}
         {% for news in latest_news|slice:"1" %}
         <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
@@ -98,13 +103,13 @@
         </div>
         <hr>
         {% endfor %}
+        {% endcomment %}
 
         {% if run.get_run_news %}
-        <h4>Latest updates:</h4>
-        {% for item in run.get_run_news|slice:":3" %}
-          <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
-        {% endfor %}
-
+          <h4>Latest updates:</h4>
+          {% for item in run.get_run_news|slice:":3" %}
+            <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
+          {% endfor %}
         {% endif %}
 
         <dl class="dl-horizontal">
@@ -120,7 +125,9 @@
           <dd><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
         </dl>
       {% endfor %}
+      </div>
     </div>
+  </div>
   {% endif %}
 
   <div class="col-md-8">
