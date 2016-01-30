@@ -73,7 +73,7 @@ TEMPLATE_DIRS = [
     os.path.join(TEMPLATE_ROOT, 'defaults'),
 ]
 
-ROOT_URLCONF = 'lawrencetrailhawks.urls.default'
+ROOT_URLCONF = 'config.urls'
 
 # Middleware
 MIDDLEWARE_CLASSES = [

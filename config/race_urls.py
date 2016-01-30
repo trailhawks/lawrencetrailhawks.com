@@ -24,8 +24,8 @@ urlpatterns = patterns(
     url(r'^faqs/$', TemplateView.as_view(template_name='faqs.html'), name='race_faqs'),
     url(r'^gallery/$', TemplateView.as_view(template_name='gallery.html'), name='race_gallery'),
     url(r'^results/$', TemplateView.as_view(template_name='results.html'), name='race_results'),
-    #url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='race_signup'),
-    #url(r'^travel/$', TemplateView.as_view(template_name='travel.html'), name='race_travel'),
+    # url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='race_signup'),
+    # url(r'^travel/$', TemplateView.as_view(template_name='travel.html'), name='race_travel'),
 
     url(r'^blog/', include('blog.urls')),
     url(r'^events/', include('events.urls')),
