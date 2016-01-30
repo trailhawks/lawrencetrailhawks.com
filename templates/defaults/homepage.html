@@ -67,7 +67,7 @@
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2>Latest updates</h2>
+        <h2 class="panel-title">Latest updates</h2>
       </div>
       <div class="panel-body">
         {% get_latest_news num=4 as latest_news %}
@@ -78,7 +78,7 @@
         </div>
         <hr>
         {% endfor %}
-        <a class="btn btn-block btn-default" href="{% url 'news_list' %}">More news &#187;</a>
+        <a class="btn btn-block btn-primary" href="{% url 'news_list' %}">More news &#187;</a>
       </div>
     </div>
   </div>
@@ -179,7 +179,6 @@
             </p>
           {% endif %}
 
-
           <dl class="dl-horizontal">
             <dt>When: </dt>
             <dd>{{ latest_race.start_datetime|date }} at {{ latest_race.start_datetime|time }} </dd>
@@ -189,7 +188,6 @@
             {% endif %}
           </dl>
 
-          <h4>Course: </h4>
           {{ latest_race.description|oembed:"600x600"|markdown }}
 
           <p><a class="btn btn-block btn-primary" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
