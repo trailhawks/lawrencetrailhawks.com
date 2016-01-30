@@ -62,8 +62,11 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     slogan = models.CharField(max_length=300, blank=True, null=True)
 
     logo = AjaxImageField(upload_to='races/logos', blank=True, null=True)
-    background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
-                                help_text='Optional background photo')
+
+    # background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
+    #                             help_text='Optional background photo')
+    background = models.ForeignKey('flickr.Photo', blank=True, null=True)
+
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
     race_directors = models.ManyToManyField(Member)

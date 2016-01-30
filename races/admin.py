@@ -64,6 +64,7 @@ class RaceAdmin(admin.ModelAdmin):
     list_display = ('title', 'number', 'annual', 'active', 'enable_comments', 'start_datetime')
     list_filter = ('active', 'enable_comments', 'start_datetime', 'number', 'annual', 'location')
     ordering = ['-start_datetime']
+    raw_id_fields = ['background']
     save_on_top = True
     search_fields = ('title', 'slogan', 'description', 'slogan')
     actions = [
