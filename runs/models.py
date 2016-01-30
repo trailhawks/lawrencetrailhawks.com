@@ -6,8 +6,6 @@ from django_comments.moderation import CommentModerator, moderator
 
 from .managers import RunManager
 from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
-from locations.models import Location
-from members.models import Member
 
 
 @python_2_unicode_compatible
@@ -27,9 +25,9 @@ class Run(MachineTagMixin, CommentMixin, ShortUrlMixin):
     slug = models.SlugField(unique=True, help_text="Suggested value automatically generated from title. Must be unique.")
     day_of_week = models.IntegerField(choices=DAY_OF_WEEK, default=0)
     run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
-    location = models.ForeignKey(Location, blank=True, null=True)
+    location = models.ForeignKey('locations.Location', blank=True, null=True)
     details = models.TextField()
-    contact = models.ForeignKey(Member)
+    contact = models.ForeignKey('members.Member')
     active = models.BooleanField(default=True)
 
     objects = RunManager()

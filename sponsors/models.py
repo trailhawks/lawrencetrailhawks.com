@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from ajaximage.fields import AjaxImageField
 from django.contrib.contenttypes import generic
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import python_2_unicode_compatible
@@ -24,7 +23,7 @@ class Sponsor(models.Model):
     active = models.BooleanField(default=False)
     homepage = models.BooleanField('Show on homepage?', default=False)
 
-    content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    content_type = models.ForeignKey('contenttypes.ContentType', blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 

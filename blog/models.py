@@ -7,10 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 from taggit.managers import TaggableManager
 
-#from . import listeners
+# from . import listeners
 from .managers import PostManager
 from core.models import CommentMixin, ShortUrlMixin
-from members.models import Member
 
 
 @python_2_unicode_compatible
@@ -25,7 +24,7 @@ class Post(CommentMixin, ShortUrlMixin, models.Model):
     )
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
-    author = models.ForeignKey(Member, blank=True, null=True)
+    author = models.ForeignKey('members.Member', blank=True, null=True)
     body = models.TextField(_('body'), help_text="The body supports Textile markup. Please use http://textile.thresholdstate.com/ to markup the blog post and get the right formatting.")
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)

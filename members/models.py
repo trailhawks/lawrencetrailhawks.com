@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 import datetime
 
 from ajaximage.fields import AjaxImageField
-from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -19,7 +18,7 @@ class Member(MachineTagMixin, ShortUrlMixin):
         (2, 'Female'),
     )
 
-    username = models.ForeignKey(User, null=True, blank=True)
+    username = models.ForeignKey('auth.User', null=True, blank=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     hawk_name = models.CharField(max_length=50, blank=True, null=True)
@@ -122,8 +121,8 @@ class Office(models.Model):
 
 
 class Term(models.Model):
-    office = models.ForeignKey(Office, blank=True, null=True)
-    member = models.ForeignKey(Member, blank=True, null=True)
+    office = models.ForeignKey('members.Office', blank=True, null=True)
+    member = models.ForeignKey('members.Member', blank=True, null=True)
     start = models.DateField()
     end = models.DateField(blank=True, null=True)
 

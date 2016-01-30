@@ -33,7 +33,7 @@ class ShortUrlMixin(object):
         key = str('%s.%s' % (self._meta.app_label, self.__class__.__name__)).lower()
         return self.__class__._prefixmap[key]
 
-    #@models.permalink
+    # @models.permalink
     def get_short_url(self):
         try:
             prefix = self.get_prefix()

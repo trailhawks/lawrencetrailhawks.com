@@ -1,12 +1,11 @@
 from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
-#class SocialWebsite(models.Model):
+# class SocialWebsite(models.Model):
 #    title = models.CharField(max_length=250)
 #    slug = models.SlugField(blank=True, null=True)
 
@@ -15,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 @python_2_unicode_compatible
 class SocialLink(models.Model):
     """Represents a remote status update."""
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey('contenttypes.ContentType')
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
@@ -30,6 +29,6 @@ class SocialLink(models.Model):
     def __str__(self):
         return self.message
 
-    #@models.permalink
-    #def get_absolute_url(self):
-    #    return ('link_detail', (), {'pk': self.pk})
+    # @models.permalink
+    # def get_absolute_url(self):
+    #     return ('link_detail', (), {'pk': self.pk})

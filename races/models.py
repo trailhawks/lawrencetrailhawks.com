@@ -12,9 +12,6 @@ from num2words import num2words
 
 from .managers import RaceManager
 from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
-from locations.models import Location
-from members.models import Member
-from sponsors.models import Sponsor
 
 
 @python_2_unicode_compatible
@@ -68,15 +65,15 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     background = models.ForeignKey('flickr.Photo', blank=True, null=True)
 
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
-    sponsors = models.ManyToManyField(Sponsor, related_name='sponsors')
-    race_directors = models.ManyToManyField(Member)
+    sponsors = models.ManyToManyField('sponsors.Sponsor', related_name='sponsors')
+    race_directors = models.ManyToManyField('members.Member')
     awards = models.TextField(blank=True, null=True)
     distance = models.CharField(max_length=100, blank=True, null=True,
                                 help_text='eg 26.2')
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM, blank=True, null=True)
     start_datetime = models.DateTimeField(verbose_name='Start Date and Time')
     description = models.TextField()
-    location = models.ForeignKey(Location, blank=True, null=True)
+    location = models.ForeignKey('locations.Location', blank=True, null=True)
     course_map = models.URLField(blank=True, null=True,
                                  help_text='Link to course map if avail.')
     cut_off = models.CharField(max_length=75, null=True, blank=True,
@@ -156,7 +153,7 @@ moderator.register(Race, RaceModerator)
 class Registration(models.Model):
     """Registration model."""
 
-    race = models.ForeignKey(Race)
+    race = models.ForeignKey('races.Race')
     description = models.CharField(max_length=100, blank=True, null=True)
     reg_date = models.DateField('Registration Date')
     end_date = models.DateField('End Date', blank=True, null=True)
@@ -218,7 +215,7 @@ class Racer(MachineTagMixin):
 
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    trailhawk = models.ForeignKey(Member, unique=True, null=True, blank=True,
+    trailhawk = models.ForeignKey('members.Member', unique=True, null=True, blank=True,
                                   help_text='If racer is a trailhawk select profile.')
     email = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
@@ -228,7 +225,7 @@ class Racer(MachineTagMixin):
     city = models.CharField(max_length=40, null=True, blank=True)
     state = models.CharField(max_length=40, null=True, blank=True)
     country = models.CharField(max_length=40, null=True, blank=True)
-    contact = models.ForeignKey(EmergencyContact, verbose_name='Emergency Contact', blank=True, null=True)
+    contact = models.ForeignKey('races.EmergencyContact', verbose_name='Emergency Contact', blank=True, null=True)
 
     class Meta:
         ordering = ['last_name', 'first_name']
@@ -275,9 +272,9 @@ class Racer(MachineTagMixin):
 class Result(models.Model):
     """Result model."""
 
-    racer = models.ForeignKey(Racer)
-    race = models.ForeignKey(Race)
-    race_type = models.ForeignKey(RaceType, null=True, blank=True,
+    racer = models.ForeignKey('races.Racer')
+    race = models.ForeignKey('races.Race')
+    race_type = models.ForeignKey('races.RaceType', null=True, blank=True,
                                   help_text='For races with multiple race types.')
     bib_number = models.IntegerField()
     time = models.CharField(max_length=20, null=True, blank=True)
@@ -316,8 +313,8 @@ class Report(models.Model):
 
     report = models.URLField(help_text='Link to race report')
     title = models.CharField(max_length=200)
-    race = models.ForeignKey(Race)
-    racer = models.ForeignKey(Racer)
+    race = models.ForeignKey('races.Race')
+    racer = models.ForeignKey('races.Racer')
 
     class Meta:
         verbose_name = _('Report')

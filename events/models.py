@@ -7,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator, moderator
 
 from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
-from races.models import Race
 from .managers import EventManager
 
 
@@ -27,7 +26,7 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
     facebook_url = models.URLField(blank=True, null=True, help_text='Link to Facebook page')
     facebook_event_url = models.URLField(blank=True, null=True, help_text='Link to Facebook Event page')
-    races = models.ManyToManyField(Race, related_name='events')
+    races = models.ManyToManyField('races.Race', related_name='events')
 
     objects = EventManager()
 

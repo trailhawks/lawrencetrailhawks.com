@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -14,7 +13,7 @@ class Links(models.Model, ShortUrlMixin):
     link = models.URLField(help_text='URL to link')
     description = models.TextField()
 
-    content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    content_type = models.ForeignKey('contenttypes.ContentType', blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
