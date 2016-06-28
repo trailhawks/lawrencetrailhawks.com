@@ -21,12 +21,15 @@
 {% block title %}{{ object.title }}{% if object.get_overall_results %} Results{% endif %}{% endblock title %}
 
 
-{% block metas %}
-{{ block.super }}
+{% block opengraph %}
 {% with object.description|markdown|striptags|truncatechars:300 as og_description %}
-{% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, description=og_description" %}
+  {% if object.logo %}
+    {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image=object.logo.url, description=og_description" %}
+  {% else %}
+    {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image='https://trailhawks.com/static/img/hawk-head.png', description=og_description" %}
+  {% endif %}
 {% endwith %}
-{% endblock metas %}
+{% endblock opengraph %}
 
 
 {% block post_script %}

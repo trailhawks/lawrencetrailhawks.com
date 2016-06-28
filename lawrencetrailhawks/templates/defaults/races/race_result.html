@@ -1,7 +1,20 @@
 {% extends base_template_name|default:"base.html" %}
 
 
+{% load markup %}
 {% load race_tags %}
+{% load simple_open_graph %}
+
+
+{% block opengraph %}
+{% with object.description|markdown|striptags|truncatechars:300 as og_description %}
+  {% if object.logo %}
+    {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image=object.logo.url, description=og_description" %}
+  {% else %}
+    {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image='https://trailhawks.com/static/img/hawk-head.png', description=og_description" %}
+  {% endif %}
+{% endwith %}
+{% endblock opengraph %}
 
 
 {% block post_script %}
