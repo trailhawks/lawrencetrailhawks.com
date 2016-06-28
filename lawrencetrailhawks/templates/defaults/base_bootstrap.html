@@ -10,10 +10,11 @@
     {% block metas %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% endblock metas %}
+
     {% load simple_open_graph %}
     {% block opengraph %}
     {% with 'The Hawks The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails (sometimes known as the Sand Rat trails), and the Clinton Lake North Shore Trails.' as og_description %}
-    {% opengraph_meta "type='website', url='/', title='The Lawrence Trail Hawks', description=og_description, image='https://trailhawks.com/static/img/hawk-head.png'" %}
+      {% opengraph_meta "type='website', url='/', title='The Lawrence Trail Hawks', description=og_description, image='https://trailhawks.com/static/img/hawk-head.png'" %}
     {% endwith %}
     {% endblock opengraph %}
 
