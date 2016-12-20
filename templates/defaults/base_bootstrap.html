@@ -1,0 +1,68 @@
+{% block doc %}
+<!DOCTYPE html>{% load staticfiles %}
+<html{% block html_attribs %}{% endblock html_attribs %}>
+{% block html %}
+  <head>
+    {% block head %}
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="author" href="humans.txt">
+
+    {% block metas %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock metas %}
+    {% load simple_open_graph %}
+    {% block opengraph %}
+    {% with 'The Hawks The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails (sometimes known as the Sand Rat trails), and the Clinton Lake North Shore Trails.' as og_description %}
+    {% opengraph_meta "type='website', url='/', title='The Lawrence Trail Hawks', description=og_description, image='https://trailhawks.com/static/img/hawk-head.png'" %}
+    {% endwith %}
+    {% endblock opengraph %}
+
+    {% block styles %}
+    {% if use_bootstrap %}
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    {% else %}
+      <link href="{% static 'css/simplex.min.css' %}" rel="stylesheet" media="screen">
+    {% endif %}
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/fluidity.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/bootstrap-social.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/app.css' %}" rel="stylesheet" media="screen">
+    {% endblock styles %}
+    {% block post_style %}
+    {% endblock post_style %}
+    {% endblock head %}
+    {% block post_head %}
+    {% endblock post_head %}
+  </head>
+  <body{% block body_attribs %}{% endblock body_attribs %}>
+    {% block body %}
+      {% block navbar %}
+      {% endblock navbar %}
+      <!-- 2 -->
+      {% block content-wrapper %}
+      {% block content %}
+      {% endblock content %}
+      {% endblock content-wrapper %}
+      <!-- 2 -->
+    {% endblock body %}
+
+    {% block footer-wrapper %}
+    <footer>
+      {% block footer %}
+      {% endblock footer %}
+    </footer>
+    {% endblock footer-wrapper %}
+
+    {% block scripts %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeAsggQuaA-oS-lzAFXGScNbMjiAsJFss&sensor=false"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ZeroClipboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+    {% endblock scripts %}
+    {% block post_script %}
+    {% endblock post_script %}
+  </body>
+{% endblock html %}
+</html>
+{% endblock doc %}

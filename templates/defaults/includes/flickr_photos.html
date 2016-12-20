@@ -1,0 +1,21 @@
+{% load flickr %}
+{% load photo_tags %}
+{% load thumbor_tags %}
+
+
+{% if not photos %}
+  {% get_random_photos 7 as photos %}
+{% endif %}
+
+{% for photo in photos %}
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="tumbnail">
+      <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}'></a>
+      <div class="caption">
+        <h4>{{ photo.description|safe }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

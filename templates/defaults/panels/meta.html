@@ -1,0 +1,30 @@
+{% load waffle_tags %}
+
+
+{% flag use_meta_panel %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Meta</h3>
+  </div>
+  <div class="panel-body">
+    <dl>
+      <dt>short url:</dt>
+      <dd>{{ object.get_short_url }}</dd>
+
+      <dt>machine tags:</dt>
+      <dd>
+        <ul>
+        {% for meta in object.get_machine_tags %}
+        <li>{{ meta }}</li>
+        {% endfor %}
+        <ul>
+      </dd>
+
+      {% if photos %}
+      <dt>photos</dt>
+      <dd>{{ photos|length }}</dd>
+      {% endif %}
+    </dl>
+  </div>
+</div>
+{% endflag %}

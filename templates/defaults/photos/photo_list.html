@@ -1,0 +1,57 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+{% load thumbor_tags %}
+
+
+{% block title %}Photos{% endblock title %}
+
+
+{% block content %}
+<section id="photos">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Trail Hawk Photos
+        <a class="ical btn btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    {% for photo in object_list %}
+      <div class="col-md-3">
+        <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_large_url smart=True height=300 width=300 %}'></a>
+        {{ photo.description|markdown }}
+      </div>
+      {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+    {% endfor %}
+  </div>
+
+  {% if is_paginated %}
+    <div class="row">
+      <ul class="pager">
+        {% if page_obj.has_previous %}
+          <li class="previous btn-lg"><a href="{% url 'photo_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+        {% else %}
+          <li class="previous btn-lg disabled"><a href="#">&laquo; Previous</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+          <li class="next btn-lg"><a href="{% url 'photo_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+        {% else %}
+          <li class="next btn-lg disabled"><a href="#">Next &raquo;</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-center"><a class="btn btn-default btn-lg" href="http://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
+    </div>
+  </div>
+
+</section>
+{% endblock content %}

@@ -12,5 +12,8 @@
     "gulp-util": "^2.2.14",
     "gulp-watch": "^0.5.3",
     "gulp-minify-css": "^0.3.0"
+  },
+  "dependencies": {
+    "bootswatch": "^3.3.6"
   }
 }

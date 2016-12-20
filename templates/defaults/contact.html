@@ -1,0 +1,51 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load flickr %}
+{% load url from future %}
+
+
+{% block title %}Contact Us{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Contact us</h1>
+
+        <p class="lead">You can get in contact with the trail hawks by joining our <a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/">Yahoo mailing list</a> or by filling out the form below. We look forward to running with you soon.</p>
+
+        <form action="/contact/" method="post">
+          {% csrf_token %}
+          <div class="form-group {% if form.subject.errors %}has-error{% endif %}">
+            <label class="control-label" for="id_subject">Subject (required)</label>
+            {{ form.subject.errors }}
+            <input id="id_subject" type="text" name="subject" maxlength="100" class="form-control">
+          </div>
+
+          <div class="form-group {% if form.sender.errors %}has-error{% endif %}">
+
+            <label class="control-label" for="id_sender">Email (required)</label>
+            {{ form.sender.errors }}
+            <input id="id_sender" type="text" name="sender" maxlength="100" class="form-control">
+          </div>
+
+          <div class="form-group {% if form.message.errors %}has-error{% endif %}">
+            <textarea name="message" id="message" class="form-control" rows="10" tabindex="4"></textarea>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="cc_myself"> Cc myself
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

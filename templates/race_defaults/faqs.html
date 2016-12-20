@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load faq_tags %}
+{% load markup %}
+
+{% block content %}
+
+<h1>Frequently Asked Questions</h1>
+
+{% get_faqs_for_object request.race as faq_list %}
+{% if faq_list %}
+    {% for faq in faq_list %}
+        <h2>{{ faq.question }}</h2>
+        {{ faq.answer|markdown }}
+    {% endfor %}
+{% endif %}
+
+{% endblock content %}

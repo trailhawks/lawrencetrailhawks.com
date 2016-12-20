@@ -1,0 +1,63 @@
+{% load waffle_tags %}
+
+{% comment %}
+based on: http://qz.com/39568/how-a-bogus-claim-about-instagram-losing-users-made-facebooks-stock-drop-nearly-3/
+{% endcomment %}
+
+{% flag use_share_panel %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sharing</h3>
+    </div>
+    <ul class="list-group" data-author="<%= item.author %>" data-title="<%= item.title %>" data-on="<%= item.obsession %>">
+        <li class="list-group-item">
+            Share this:
+            <div class="input-group">
+                <input type="text" id="shortURL" class="form-control" value="{{ object.get_short_url }}">
+                <span class="input-group-btn">
+                    <button title="Copy to Clipboard" class="btn btn-primary" id="copy-button" data-clipboard-target="shortURL"><i class="fa fa-clipboard"></i> </button>
+                </span>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <a title="Email" href="mailto:?subject=TrailHawks: {% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;body={{ object.get_short_url }}%0A%0A{% firstof object.description|striptags|escape|truncatechars:200 object.body|striptags|escape|truncatechars:200 %}%0A%0A" target="_blank"><i class="fa fa-envelope"></i> Email</a>
+        </li>
+        <li class="list-group-item">
+            <a title="Tweet" href="https://twitter.com/share?text={% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;url={{ object.get_short_url }}&amp;via=trailhawks" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
+        </li>
+        <li class="list-group-item">
+            <a title="Share on Facebook" href="https://www.facebook.com/sharer.php?s=100&amp;p[title]={% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;p[url]={{ object.get_short_url }}&amp;p[summary]={% firstof object.description|striptags|escape|truncatechars:200 object.body|striptags|escape|truncatechars:200 %}&amp;p[images][0]=<%= item.image %>" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+        </li>
+        <li class="list-group-item">
+            <a title="Share on Google+" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url={{ object.get_short_url }}" target="_blank"><i class="fa fa-google-plus"></i> Google+</a>
+        </li>
+        <li class="list-group-item">
+            <a title="Share on Tumblr" href="" target="_blank"><i class="fa fa-tumblr"></i> Tumblr</a>
+        </li>
+        <li class="list-group-item">
+            <a title="Read Later on Instapaper" href="http://www.instapaper.com/hello2?url={{ object.get_short_url }}&amp;title={% firstof object.title|striptags|escape|truncatechars:200 object.name|striptags|escape|truncatechars:200 %}&amp;description={% firstof object.description|striptags|escape|truncatechars:200 object.body|striptags|escape|truncatechars:200 %}" target="_blank"><i class="fa fa-instapaper"></i> Instapaper</a>
+        </li>
+        {% comment %}
+        {% load share_tags %}
+        {% render_share_link 'email' object.get_short_url as link %}
+        {{ link }}
+
+        {% render_share_link 'facebook' object.get_short_url as link %}
+        {{ link }}
+
+        {% render_share_group object.get_short_url as link %}
+        {{ link }}
+        {% endcomment %}
+    </ul>
+</div>
+{% comment %}
+<!--
+    <li><a href="{% url 'contact' %}"><i class="icon-envelope"></i> Contact us</a></li>
+    <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="icon-group"></i> Yahoo! Group</a></li>
+    <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="icon-facebook-sign"></i> Facebook</a></li>
+    <li><a href="http://www.twitter.com/trailhawks"><i class="icon-twitter-sign"></i> Twitter</a></li>
+    <li><a href="http://www.flickr.com/photos/trailhawks"><i class="icon-flickr"></i> Flickr</a></li>
+    <li><a href="https://github.com/organizations/TrailHawks"><i class="icon-github-sign"></i> Github</a></li>
+-->
+{% endcomment %}
+{% endflag use_share_panel %}

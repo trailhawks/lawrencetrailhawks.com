@@ -1,0 +1,24 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% block title %}Weekly Runs{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8">
+		<p class="lead">The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
+		<p>We welcome runners of all abilities. So come join us for a run.</p>
+		<p>Weekly runs:</p>
+		<ul>
+			{% for object in object_list %}
+			<li><a href={{ object.get_absolute_url }}>{{ object.get_day_of_week_display }}: {{ object.name }} at {{ object.run_time }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="col-md-4">
+		{% include "includes/flickr_photos.html" %}
+	</div>
+</div>
+{% endblock content %}

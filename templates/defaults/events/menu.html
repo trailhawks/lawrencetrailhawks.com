@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand" href="/">
+          <a href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Lawrence Trail Hawks" /></a>
+      </div>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        {% for item in menu %}
+        <li><a href="{{ item.url }}{{ page.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>

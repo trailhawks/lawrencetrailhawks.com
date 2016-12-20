@@ -1,0 +1,38 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+
+
+{% block title %}Frequently Asked Questions{% endblock title %}
+
+
+{% block content %}
+<section id="faqs">
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Frequently Asked Questions</h1>
+  </div>
+</div>
+
+{% regroup object_list by content_type as obj_list %}
+{% for obj in obj_list %}
+  <div class="row">
+    <div class="col-md-12">
+      <h3>{{ obj.grouper|default:"Club"|title }} Questions</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% for faq in obj.list %}
+      <div class="col-md-6">
+        <h4>{{ faq.question }}</h4>
+        {{ faq.answer|markdown }}
+      </div>
+      {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
+
+</section>
+{% endblock content %}

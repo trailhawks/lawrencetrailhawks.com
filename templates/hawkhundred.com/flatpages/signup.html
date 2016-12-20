@@ -1,0 +1,14 @@
+{% extends "flatpages/default.html" %}
+
+{% load markup %}
+{% load race_tags %}
+
+{% block content %}
+
+{{ block.super }}
+
+{% get_race_by_slug slug='hawk-7' as race %}
+
+{{ race.reg_description|markdown }}
+
+{% endblock content %}

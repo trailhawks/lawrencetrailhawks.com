@@ -1,0 +1,31 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load photo_tags %}
+
+
+{% block title %}{{ object.full_name }}{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+      <h1>{{ object.full_name }}</h1>
+      {% if object.get_results %}
+      <p><strong>Results:</strong>
+    	<ul>
+    	{% for result in object.get_results %}
+    		<li>Ran <a href="{{ result.race.get_absolute_url }}results/#racer-{{ result.racer.pk }}">{{ result.race.title }}</a> - in {{ result.time }} {% if result.course_record %}(course record){% endif %}</li>
+    	{% endfor %}
+    	</ul></p>
+      {% endif %}
+    </div>
+    <div class="col-md-4">
+      {% include "panels/meta.html" %}
+
+      {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos %}
+      {{ photos|length }}
+      {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

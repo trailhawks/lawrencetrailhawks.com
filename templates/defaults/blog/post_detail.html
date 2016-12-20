@@ -1,0 +1,61 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load core_tags %}
+{% load markup %}
+{% load simple_open_graph %}
+
+
+{% block title %}{{ object.title }}{% endblock title %}
+
+
+{% block metas %}
+{{ block.super }}
+{% with object.body|markdown|striptags|truncatechars:300 as og_description %}
+{% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, description=og_description" %}
+{% endwith %}
+{% endblock metas %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h2>{{ object.title }}</h2>
+
+    <h4>{{ object.publish|date}} <small>by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></small></h4>
+
+    {% if object.repost_url and object.repost_date %}
+    <div class='original-post'>
+    	<p>Originally published on <a href="{{ object.repost_url }}">{% firstof object.repost_date|date 'unknown' %}</a></p>
+    </div>
+    {% endif %}
+
+    {{ object.body|markdown }}
+
+    {% render_facebook_like obj=object %}
+
+    <ul class="pager">
+      {% if object.get_previous_by_publish %}
+        <li class="previous"><a href="{{ object.get_previous_post.get_absolute_url }}">&larr; Older</a></li>
+      {% endif %}
+
+      {% if object.get_next_by_publish %}
+        <li class="next"><a href="{{ object.get_next_post.get_absolute_url }}">Newer &rarr;</a></li>
+      {% endif %}
+    </ul>
+
+    <hr>
+
+    {% if object.enable_comments %}
+      {% include "comments/comments.html" %}
+    {% endif %}
+
+  </div>
+
+  <div class="col-md-4">
+    {% include "panels/share.html" %}
+    {% include "panels/meta.html" %}
+    {% include "includes/flickr_photos.html" %}
+  </div>
+</div>
+{% endblock content%}

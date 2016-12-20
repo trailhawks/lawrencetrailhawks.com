@@ -1,0 +1,383 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load url from future %}
+{% load blog_tags %}
+{% load cache %}
+{% load core_tags %}
+{% load faq_tags %}
+{% load flickr %}
+{% load mailhide %}
+{% load markup %}
+{% load micawber_tags %}
+{% load news_tags %}
+{% load photo_tags %}
+{% load race_tags %}
+{% load run_tags %}
+{% load sponsors_tags %}
+{% load staticfiles %}
+{% load thumbor_tags %}
+{% load twitterfy %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    {% cache 60 homepage-carousel %}
+      {% get_random_photos 5 as photos %}
+      <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          {% for photo in photos %}
+          <li data-target="#carousel-homepage" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+          {% endfor %}
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          {% for photo in photos %}
+          <div class="item {% if forloop.first %}active{% endif %}">
+            <img data-src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
+                 src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
+                 alt="{{ photo.caption }}" height="500" width="1200">
+            <div class="carousel-caption">
+              {% if photo.caption %}
+              <h3>{{ photo.caption|safe }}</h3>
+              {% endif %}
+              <p>{{ photo.description|safe }}</p>
+              <!-- id: {{ photo.id }}; flickr_id: {{ photo.flickr_id }}; title: {{ photo.title|safe }} -->
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Controls -->
+        <a class="carousel-control left" href="#carousel-homepage" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#carousel-homepage" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    {% endcache %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Latest updates</h2>
+      </div>
+      <div class="panel-body">
+        {% get_latest_news num=4 as latest_news %}
+        {% for news in latest_news %}
+        <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+          <h4 class="">{{ news.pub_date|date }}</h4>
+          {{ news.body|markdown|truncatewords_html:"100" }}
+        </div>
+        <hr>
+        {% endfor %}
+        <a class="btn btn-block btn-primary" href="{% url 'news_list' %}">More news &#187;</a>
+      </div>
+    </div>
+  </div>
+
+  {% get_todays_runs as runs %}
+  {% if runs.todays_run %}
+    <div class="col-md-8">
+      <h2>Today's run</h2>
+      {% for run in runs.todays_run %}
+        <h3 class="quiet"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
+
+        {% get_news_for_object run as news_list %}
+        {% for news in latest_news|slice:"1" %}
+        <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+          <h4 class="">{{ news.pub_date|date }}</h4>
+          {{ news.body|markdown|truncatewords_html:"100" }}
+        </div>
+        <hr>
+        {% endfor %}
+
+        {% if run.get_run_news %}
+        <h4>Latest updates:</h4>
+        {% for item in run.get_run_news|slice:":3" %}
+          <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
+        {% endfor %}
+
+        {% endif %}
+
+        <dl class="dl-horizontal">
+          <dt>When: </dt>
+          <dd>{{ run.get_day_of_week_display }} at {{ run.run_time }}</dd>
+          {% if run.location %}
+            <dt>Where: </dt>
+            <dd>{{ run.location }} {% if run.map_link %}<a href="{{ run.map_link }}">(Directions)</a>{% endif %}</dd>
+          {% endif %}
+          <dt>What: </dt>
+          <dd>{{ run.details }}</dd>
+          <dt>Contact: </dt>
+          <dd><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
+        </dl>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Next run</h2>
+      </div>
+      <div class="panel-body">
+        {% for run in runs.next_run %}
+          <h3><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
+
+          {% if run.get_run_news %}
+            <h4>Latest updates:</h4>
+            {% for item in run.get_run_news|slice:":3" %}
+              <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
+            {% endfor %}
+          {% endif %}
+
+          <dl class="dl-horizontal">
+            <dt>When: </dt>
+            <dd>{{ run.get_day_of_week_display }} at {{ run.run_time }}</dd>
+            {% if run.location %}
+              <dt>Where: </dt>
+              <dd>{{ run.location }} {% if run.map_link %}<a href="{{ run.map_link }}">(Directions)</a>{% endif %}</dd>
+            {% endif %}
+            <dt>What: </dt>
+            <dd>{{ run.details }}</dd>
+            <dt>Contact: </dt>
+            <dd><a href="mailto:{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
+          </dl>
+        {% empty %}
+          <p class="quiet large">No upcoming scheduled runs</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    {% get_latest_race as latest_race %}
+    {% if latest_race %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Upcoming event</h3>
+        </div>
+        <div class="panel-body">
+          <h2><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h2>
+          {% if latest_race.logo %}
+            <p><a href="{{ latest_race.get_absolute_url }}"><img class="img-responsive" src="{{ latest_race.logo.url }}"></a></p>
+          {% endif %}
+          <h3>{{ latest_race.slogan }}</h3>
+          {% if latest_race.get_race_news %}
+            <p><strong>Latest updates:</strong>
+            {% for item in latest_race.get_race_news|slice:":3" %}
+              {{ item.body|markdown }}
+            {% endfor %}
+            </p>
+          {% endif %}
+
+          <dl class="dl-horizontal">
+            <dt>When: </dt>
+            <dd>{{ latest_race.start_datetime|date }} at {{ latest_race.start_datetime|time }} </dd>
+            {% if latest_race.location %}
+              <dt>Where: </dt>
+              <dd>{{ latest_race.location }} {% if latest_race.map_link %}<a href="{{ latest_race.map_link }}">(Directions)</a>{% endif %}</dd>
+            {% endif %}
+          </dl>
+
+          {{ latest_race.description|oembed:"600x600"|markdown }}
+
+          <p><a class="btn btn-block btn-primary" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
+        </div>
+      </div>
+    {% else %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+
+      <h2>Latest post</h2>
+
+      <div class="section-content">
+        <div class="post">
+          <div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
+          <div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
+          <div class="post-body">
+            {{ latest_post.body|markdown|truncatewords:"400" }}
+            <p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<section id="events">
+  <div class="row upcoming-races">
+    <div class="col-md-12">
+      <h2>Upcoming races</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% get_latest_races as races %}
+    {% for race in races %}
+      {% include 'includes/_race.html' with race=race %}
+    {% endfor %}
+  </div>
+</section>
+
+<section id="races">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Past races</h2>
+    </div>
+  </div>
+  <div class="row past-races">
+    <div class="col-md-12">
+      {% get_past_races as past_races %}
+      {% for past_race in past_races reversed %}
+        <div><a href="{{ past_race.get_absolute_url }}">{{ past_race }}</a></div>
+      {% endfor %}
+    </div>
+    <div class="show-more"><a href="javascript:;">Show more</a></div>
+  </div>
+</section>
+
+
+{% get_homepage_sponsors as homepage_sponsors %}
+{% if homepage_sponsors %}
+<section id="sponsors">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Sponsors</h2>
+    </div>
+  </div>
+  <div class="row">
+{% for sponsor in homepage_sponsors %}
+{% include 'includes/_sponsor.html' with sponsor=sponsor %}
+{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% comment %}
+<div class="row">
+
+  <div class="col-md-12">
+    <div>
+      <div id="myCarousel" class="carousel slide">
+
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+
+          <div class="item active">
+            <div class="row-fluid">
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+            </div><!--/row-fluid-->
+          </div><!--/item-->
+
+          <div class="item">
+            <div class="row-fluid">
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+            </div><!--/row-fluid-->
+          </div><!--/item-->
+
+          <div class="item">
+            <div class="row-fluid">
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+              <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+            </div><!--/row-fluid-->
+          </div><!--/item-->
+
+        </div><!--/carousel-inner-->
+
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+      </div><!--/myCarousel-->
+
+    </div><!--/well-->
+  </div>
+</div>
+{% endcomment %}
+
+{% comment %}
+<div class="row">
+  <div class="col-md-4">
+    {% get_latest_faqs 5 as recent_faqs %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">FAQ</h3>
+      </div>
+      <ul class="list-group">
+        {% for faq in recent_faqs %}
+        <li class="list-group-item"><a href="{{ faq.get_absolute_url }}">{{ faq.question }}</a></li>
+        {% endfor %}
+        <li class="list-group-item"><a class="btn btn-block btn-default" href="{% url 'faq_list' %}" class="more">Browse all FAQ &#187;</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Trailhawk Calendar</h3>
+      </div>
+      <div class="panel-body">
+        <p>Subscribe to our calendar to keep upto date on all Trailhawk events, not just our races.</p>
+        <p><a class="btn btn-block btn-default" href="http://trailhawks.com{% url 'race_ical' %}">Subscribe &#187;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+		{% get_latest_posts 5 as recent_posts %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hawk Talk</h3>
+      </div>
+      <ul class="list-group">
+        {% for post in recent_posts %}
+        <li class="list-group-item"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <span class="quiet">by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></span></li>
+        {% endfor %}
+        <li class="list-group-item"><a class="btn btn-block btn-default" href="{% url 'blog_list' %}">Read more &#187;</a></li>
+      </ul>
+    </div>
+	</div>
+
+  {# comment #}
+  <div class="col-md-6">
+		<h3>About Us</h3>
+		<div class="section-content">
+		<p>The Lawrence Trail Hawks, founded by Lawrence area trail and ultra runners, will run on, promote and care for the Lawrence trails, including the Kansas River Trails and the Clinton Lake North Shore Trails.</p>
+		<p>We'll work with the Department of Parks and Wildlife and the Kansas Trails Council to help keep the trails groomed and free of trash.</p>
+		<p>We'll stage events, and help with other groups' events that meet our goals of promoting and caring for the trails.</p>
+		<p>We will take care of the trails, our fellow Trail Hawk members, and all others who have interest in the trails similar to our own.</p>
+		</div>
+	</div>
+  {# endcomment #}
+</div>
+{% endcomment %}
+{% endblock content %}

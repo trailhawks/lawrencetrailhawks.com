@@ -1,0 +1,48 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load thumbor_tags %}
+
+
+{% block title %}Photos{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+		<h1>Trail Hawk Photos</h1>
+
+		<div class="row">
+	      	{% for photo in object_list %}
+	        <div class="col-md-3">
+	        	<a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_medium_url smart=True height=300 width=300 %}'></a>
+	        	<p>{{ photo.description|safe }}</p>
+	        </div>
+	      	{% endfor %}
+	    </div>
+
+		{% if is_paginated %}
+			<ul class="pager">
+	            {% if page_obj.has_previous %}
+	            <li class="previous"><a href="{% url 'photo_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+	            {% else %}
+	            <li class="previous disabled"><a href="#">&laquo; Previous</a></li>
+	            {% endif %}
+
+	            {% if page_obj.has_next %}
+	            <li class="next"><a href="{% url 'photo_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+	            {% else %}
+	            <li class="next disabled"><a href="#">Next &raquo;</a></li>
+	            {% endif %}
+			</ul>
+		{% endif %}
+
+		<div class="row">
+	        <div class="col-md-12">
+				<p class="text-center"><a class="btn btn-primary btn-lg" href="http://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
+			</div>
+		</div>
+
+    </div>
+</div>
+{% endblock content %}

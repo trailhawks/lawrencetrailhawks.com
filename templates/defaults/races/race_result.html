@@ -1,0 +1,96 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load markup %}
+{% load race_tags %}
+{% load simple_open_graph %}
+
+
+{% block opengraph %}
+{% with object.description|markdown|striptags|truncatechars:300 as og_description %}
+  {% if object.logo %}
+    {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image=object.logo.url, description=og_description" %}
+  {% else %}
+    {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image='https://trailhawks.com/static/img/hawk-head.png', description=og_description" %}
+  {% endif %}
+{% endwith %}
+{% endblock opengraph %}
+
+
+{% block post_script %}
+<script>
+$(function () {
+{% get_race_types_for_race object as race_types %}
+{% for race_type in race_types %}
+  $('#{{ race_type.slug }}-tabs a:first').tab('show');
+{% endfor %}
+})
+</script>
+{% endblock post_script %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        {% get_race_types_for_race object as race_types %}
+        {% for race_type in race_types %}
+            <h2><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
+            <ul class="nav nav-tabs" id="{{ race_type.slug }}-tabs">
+              <li><a href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a></li>
+              <li><a href="#{{ race_type.slug }}-female-results" data-toggle="tab">Female Results</a></li>
+              <li><a href="#{{ race_type.slug }}-male-results" data-toggle="tab">Male Results</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="{{ race_type.slug }}-overall-results">
+                {% get_results_for_race race=object race_type=race_type as race_results %}
+                {% render_results race_results %}
+              </div>
+              <div class="tab-pane" id="{{ race_type.slug }}-female-results">
+                {% get_results_for_race race=object race_type=race_type gender=2 as race_results %}
+                {% render_results race_results %}
+              </div>
+              <div class="tab-pane" id="{{ race_type.slug }}-male-results">
+                {% get_results_for_race race=object race_type=race_type gender=1 as race_results %}
+                {% render_results race_results %}
+              </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Race Results</h3>
+          </div>
+          <div class="panel-body">
+            {% get_race_types_for_race object as race_types %}
+            <div class="list-group">
+                {% for race_type in race_types %}
+                <a class="list-group-item" href="#{{ race_type.slug }}"><h4 class="list-group-item-heading">{{ race_type.name }}</h4></a>
+                <a class="list-group-item" href="#{{ race_type.slug }}-overall-results">Overall Results</a>
+                <a class="list-group-item" href="#{{ race_type.slug }}-male-results">Male Results</a>
+                <a class="list-group-item" href="#{{ race_type.slug }}-female-results">Female Results</a>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sponsors</h3>
+          </div>
+          <div class="panel-body">
+          </div>
+        </div>
+
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% block title %}Contact Us{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 well">
+		<h1>Thank you for contacting us!</h1>
+        <div class="lead">
+            <p>One of our offices will answer your questions soon.</p>
+    		<p>- The Lawrence Trail Hawks</p>
+        </div>
+     </div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

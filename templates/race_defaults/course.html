@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block content %}
+
+<h1>Course</h1>
+
+{{ request.race.description|markdown }}
+
+{% endblock content %}

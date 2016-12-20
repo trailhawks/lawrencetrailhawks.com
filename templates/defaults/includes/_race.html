@@ -1,0 +1,12 @@
+{% load thumbor_tags %}
+
+<a href="{{ race.get_absolute_url }}">
+  <div class="col-md-4 event"
+    {% if race.background %}style="background-image: url({% thumbor_url race.background.get_large_url height=180 width=240 smart=True %})"{% endif %}>
+    <div class="overlay">
+      <p class="race">{{ race.title }}</p>
+      <span class="date">{{ race.start_datetime|date:"F d, Y" }}</span>
+    </div>
+    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+  </div>
+</a>

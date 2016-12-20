@@ -1,0 +1,65 @@
+{% extends base_template_name|default:"base.html" %}
+
+{% load core_tags %}
+{% load faq_tags %}
+{% load markup %}
+{% load photo_tags %}
+{% load micawber_tags %}
+{% load url from future %}
+
+{% block title %}{{ object.title }}{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+
+        <h1>{{ object.title }}</h1>
+
+        <div class="lead">{{ object.body|oembed:"600x600"|markdown }}</div>
+
+        {% if object.races.upcoming.count %}
+        <h3>Upcoming races</h3>
+        <ul>
+            {% for race in object.races.upcoming %}
+            <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if object.races.complete.count %}
+        <h3>Past races</h3>
+        <ul>
+            {% for race in object.races.complete %}
+            <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% render_facebook_like obj=object %}
+
+        {% get_faqs_for_object object as faq_list %}
+        {% if faq_list %}
+        <h3>Frequently Asked Questions</h3>
+        {% for faq in faq_list %}
+            <h4>{{ faq.question|oembed:"600x600"|markdown }}</h4>
+            {{ faq.answer|oembed:"600x600"|markdown }}
+        {% endfor %}
+        {% endif %}
+
+        {# include "comments/comments.html" #}
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+          </div>
+          <div class="panel-body">
+            {{ object.get_machine_tags }}
+          </div>
+        </div>
+        {% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "races/base.html" %}
+
+{% load photo_tags %}
+
+{% block title %}Racers Index{% endblock title %}
+
+{% block content %}
+<div class="main" id="main-two-columns">
+
+	<div class="left" id="main-content">
+		<ul>
+		  	{% for racer in object_list %}
+				<li><a href="{{ racer.get_absolute_url }}">{{racer}}</a></li>
+			  {% endfor %}
+		  </ul>
+	</div>
+
+	<div class="right sidebar" id="sidebar">
+		{% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+		{% include "includes/flickr_photos.html" with photos=photos_list %}
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+</div>
+{% endblock content %}

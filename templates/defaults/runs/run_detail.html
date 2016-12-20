@@ -1,0 +1,120 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load core_tags %}
+{% load faq_tags %}
+{% load mailhide %}
+{% load markup %}
+{% load news_tags %}
+{% load photo_tags %}
+{% load simple_open_graph %}
+
+
+{% block title %}{{ object.name }}{% endblock title %}
+
+
+{% block metas %}
+{{ block.super }}
+{% with object.details|markdown|striptags|truncatechars:300 as og_description %}
+{% opengraph_meta "type='article', url=object.get_absolute_url, title=object.name, description=og_description" %}
+{% endwith %}
+{% endblock metas %}
+
+
+{% block post_script %}
+<script>
+{% if object.location %}
+function initialize() {
+    var myLatlng = new google.maps.LatLng({{ object.location.latitude }}, {{ object.location.longitude }});
+
+    var mapOptions = {
+        center: myLatlng,
+        zoom: {{ object.location.zoom }}
+    };
+
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Hello World!'
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+{% endif %}
+</script>
+{% endblock post_script %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+
+    <h2>{{ object.name }}</h2>
+
+    <div class="lead">
+      {{ object.details|markdown }}
+    </div>
+
+    <hr>
+
+    <dl class="dl-horizontal">
+      <dt>When:</dt>
+      <dd>{{ object.get_day_of_week_display }} at {{ object.run_time }}</dd>
+      <dt>Where:</dt>
+      <dd>{{ object.location }}</dd>
+      <dt>Run Leader:</dt>
+      <dd><a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></dd>
+    <dl>
+
+    {% get_latest_news_for_object object as news_list %}
+    {% if news_list %}
+      <hr>
+
+      <h3>Latest News</h3>
+      {% for news in news_list|slice:":3" %}
+      <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
+        <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
+        {{ news.body|markdown }}
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    {% if object.location %}
+      <hr>
+
+      <h3>Location</h3>
+      <div id="map-canvas"></div>
+    {% endif %}
+
+    {# render_facebook_like obj=object #}
+
+    {% comment %}
+    <hr>
+
+    {% include "includes/share.html" %}
+    {% endcomment %}
+
+    <hr>
+
+    {% get_faqs_for_object object as faq_list %}
+    {% if faq_list %}
+      <h3>Frequently Asked Questions</h3>
+      {% for faq in faq_list %}
+        <h4>{{ faq.question }}</h4>
+        {{ faq.answer|markdown }}
+      {% endfor %}
+    {% endif %}
+
+    {# include "comments/comments.html" #}
+  </div>
+
+  <div class="col-md-4">
+    {% include "panels/share.html" %}
+    {% include "panels/meta.html" %}
+    {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
+    {# include "panels/photos.html" with photos=photos_list #}
+    {% include "includes/flickr_photos.html" with photos=photos_list %}
+  </div>
+</div>
+{% endblock content %}

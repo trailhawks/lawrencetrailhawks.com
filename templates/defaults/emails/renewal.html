@@ -1,0 +1,23 @@
+{% extends "emails/base.html" %}
+
+{% load markup %}
+
+{% block body %}
+{% filter markdown %}
+Hello {{ first_name }},
+
+It's me, the Magical Trailhawk Genie here, I just wanted to let you
+know that your membership is about to expire on {{ expire_date|date }}.
+
+If you'd like to renew your membership please you can pay online through
+our [website][signup].
+
+If you have any questions please email Gary at unews@ultrastory.com.
+
+Thanks
+
+Magical Trailhawk Genie
+
+[signup]: http://trailhawks.com/signup/
+{% endfilter markdown %}
+{% endblock body %}

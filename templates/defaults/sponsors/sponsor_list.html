@@ -1,0 +1,37 @@
+{% extends base_template_name|default:"base.html" %}
+
+
+{% load flickr %}
+{% load micawber_tags %}
+
+
+{% block title %}Sponsors{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+    	<h1>Sponsors</h1>
+
+	{% for sponsor in object_list %}
+		<div>
+			<h2>{{ sponsor.name }}</h2>
+            {% if sponsor.logo %}
+			<a href="{{ sponsor.url }}"><img class="img-responsive img-thumbnail" src="{{ sponsor.logo.url }}" alt="{{ sponsor.title }}">{{ sponsor.get_logo_url }}</a>
+            {% endif %}
+	    	{% if sponsor.address %}
+	    	<address>
+			{{ sponsor.address }}
+			</address>
+	    	{% endif %}
+			<p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+		</div>
+        <hr>
+	{% endfor %}
+	</div>
+
+    <div class="col-md-4">
+        {% include "includes/flickr_photos.html" %}
+    </div>
+</div>
+{% endblock content %}
