@@ -1,3 +1,0 @@
-{{ sender }} sent the following message:
-
-{{ body }}
