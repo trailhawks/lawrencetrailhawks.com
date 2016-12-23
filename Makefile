@@ -1,13 +1,14 @@
 .PHONY: build favicon
 
-ASSET_DEST = lawrencetrailhawks/assets
-FAVICON_FILE = $(ASSET_DEST)/img/hawk-head.png
-
+ASSET_DEST = assets
 BOOTSTRAP = bower_components/bootstrap/dist
 BOOTSTRAP_SOCIAL = bower_components/bootstrap-social
+BOOTSWATCH_SIMPLEX = bower_components/bootswatch/simplex
 FA = bower_components/font-awesome
 JQUERY = bower_components/jquery
 ZERO_CLIPBOARD = bower_components/zeroclipboard/dist
+
+FAVICON_FILE = $(ASSET_DEST)/img/hawk-head.png
 
 
 help:
@@ -15,13 +16,14 @@ help:
 	@echo 'favicon - build favicon'
 
 build:
-	bower update
-	gulp
+	#bower update
+	#gulp
 
 	cp $(BOOTSTRAP)/css/* $(ASSET_DEST)/css
 	cp $(BOOTSTRAP)/fonts/* $(ASSET_DEST)/fonts
 	cp $(BOOTSTRAP)/js/* $(ASSET_DEST)/js
 	cp $(BOOTSTRAP_SOCIAL)/*.css $(ASSET_DEST)/css
+	cp $(BOOTSWATCH_SIMPLEX)/bootstrap.min.css $(ASSET_DEST)/css/simplex.min.css
 	cp $(FA)/css/* $(ASSET_DEST)/css
 	cp $(FA)/fonts/* $(ASSET_DEST)/fonts
 	cp $(JQUERY)/jquery.min.* $(ASSET_DEST)/js
