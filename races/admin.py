@@ -83,7 +83,7 @@ class RaceAdmin(admin.ModelAdmin):
         SponsorInline,
         LinksInline,
     )
-    exclude = ('race_directors', 'sponsors',)
+    # exclude = ('race_directors', 'sponsors',)
 
 
 class ResultAdmin(admin.ModelAdmin):
