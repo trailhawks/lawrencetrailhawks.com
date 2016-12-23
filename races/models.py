@@ -215,7 +215,7 @@ class Racer(MachineTagMixin):
 
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    trailhawk = models.ForeignKey('members.Member', unique=True, null=True, blank=True,
+    trailhawk = models.ForeignKey('members.Member', null=True, blank=True,
                                   help_text='If racer is a trailhawk select profile.')
     email = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
