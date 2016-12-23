@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from .models import Links
 
 
-class LinksInline(generic.GenericStackedInline):
+class LinksInline(GenericStackedInline):
     model = Links
     extra = 0
 

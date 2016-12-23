@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from .models import Sponsor
 
 
-class SponsorInline(generic.GenericStackedInline):
+class SponsorInline(GenericStackedInline):
     model = Sponsor
     extra = 0
 

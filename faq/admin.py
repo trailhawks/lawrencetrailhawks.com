@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from .models import FAQ
 
 
-class FaqInline(generic.GenericStackedInline):
+class FaqInline(GenericStackedInline):
     model = FAQ
     extra = 0
 

@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
-from django.contrib.contenttypes import generic
+
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
@@ -40,7 +41,7 @@ class News(CommentMixin, ShortUrlMixin, models.Model):
     # show in main news feed? handy for race results...
     content_type = models.ForeignKey('contenttypes.ContentType', blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     objects = NewsManager()
 

@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from ajaximage.fields import AjaxImageField
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import python_2_unicode_compatible
@@ -25,7 +25,7 @@ class Sponsor(models.Model):
 
     content_type = models.ForeignKey('contenttypes.ContentType', blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     objects = SponsorManager()
 

@@ -1,9 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import FaqDetailView, FaqListView
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', FaqListView.as_view(), name='faq_list'),
     url(r'^(?P<pk>\d+)/$', FaqDetailView.as_view(), name='faq_detail'),
-)
+]

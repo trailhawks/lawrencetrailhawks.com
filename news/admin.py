@@ -1,11 +1,11 @@
 from django.contrib import admin
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from .models import News
 from core.actions import disable_comments, enable_comments
 
 
-class NewsInline(generic.GenericStackedInline):
+class NewsInline(GenericStackedInline):
     model = News
     extra = 0
 
