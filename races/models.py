@@ -65,8 +65,8 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     background = models.ForeignKey('flickr.Photo', blank=True, null=True)
 
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
-    sponsors = models.ManyToManyField('sponsors.Sponsor', related_name='sponsors')
-    race_directors = models.ManyToManyField('members.Member')
+    sponsors = models.ManyToManyField('sponsors.Sponsor', related_name='sponsors', blank=True)
+    race_directors = models.ManyToManyField('members.Member', blank=True)
     awards = models.TextField(blank=True, null=True)
     distance = models.CharField(max_length=100, blank=True, null=True,
                                 help_text='eg 26.2')
