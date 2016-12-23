@@ -13,11 +13,11 @@ class SponsorQuerySet(QuerySet):
 
 class SponsorManager(Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return SponsorQuerySet(self.model, using=self._db)
 
     def active(self):
-        return self.get_query_set().active()
+        return self.get_queryset().active()
 
     def homepage(self):
-        return self.get_query_set().homepage()
+        return self.get_queryset().homepage()

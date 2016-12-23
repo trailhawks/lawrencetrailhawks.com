@@ -21,17 +21,17 @@ class MemberQuerySet(QuerySet):
 
 class MemberManager(Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return MemberQuerySet(self.model, using=self._db)
 
     def current(self):
-        return self.get_query_set().current()
+        return self.get_queryset().current()
 
     def previous(self):
-        return self.get_query_set().previous()
+        return self.get_queryset().previous()
 
     def receive_comment_emails(self):
-        return self.get_query_set().receive_comment_emails()
+        return self.get_queryset().receive_comment_emails()
 
 
 class TermQuerySet(QuerySet):
@@ -47,11 +47,11 @@ class TermQuerySet(QuerySet):
 
 class TermManager(Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return TermQuerySet(self.model, using=self._db)
 
     def current(self):
-        return self.get_query_set().current()
+        return self.get_queryset().current()
 
     def previous(self):
-        return self.get_query_set().previous()
+        return self.get_queryset().previous()

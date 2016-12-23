@@ -26,14 +26,14 @@ class RunQuerySet(QuerySet):
 
 class RunManager(Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return RunQuerySet(self.model, using=self._db)
 
     def active(self):
-        return self.get_query_set().active()
+        return self.get_queryset().active()
 
     def next(self):
-        return self.get_query_set().next()
+        return self.get_queryset().next()
 
     def today(self):
-        return self.get_query_set().today()
+        return self.get_queryset().today()

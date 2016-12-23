@@ -17,11 +17,11 @@ class RaceQuerySet(QuerySet):
 
 class RaceManager(Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return RaceQuerySet(self.model, using=self._db)
 
     def complete(self):
-        return self.get_query_set().complete()
+        return self.get_queryset().complete()
 
     def upcoming(self):
-        return self.get_query_set().upcoming()
+        return self.get_queryset().upcoming()

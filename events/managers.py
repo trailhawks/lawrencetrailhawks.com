@@ -11,11 +11,11 @@ class EventQuerySet(QuerySet):
 
 
 class EventManager(Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return EventQuerySet(self.model, using=self._db)
 
     def draft(self):
-        return self.get_query_set().draft()
+        return self.get_queryset().draft()
 
     def public(self):
-        return self.get_query_set().public()
+        return self.get_queryset().public()
