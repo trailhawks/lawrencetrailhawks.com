@@ -6,7 +6,7 @@ akismet
 boto
 click
 django-adaptors
-django-ajaximage
+# django-ajaximage  # TODO: Add back once it support 1.10
 django-backupdb
 django-braces
 django-contrib-comments
@@ -39,6 +39,8 @@ recaptcha-client
 requests<3.0.0
 simplejson
 titlecase
+
+git+https://github.com/demonno/django-ajaximage.git#egg=django-ajaximage-git
 
 # git+git@github.com:trailhawks/django-syncr.git#egg=django-syncr-git
 # git+https://bitbucket.org/webology/django-shorturls.git#egg=django-shorturls-git
