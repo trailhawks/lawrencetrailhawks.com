@@ -3,7 +3,7 @@ import feedparser
 from dateutil.parser import *
 from dateutil.tz import *
 from django.template import Library
-from lawrencetrailhawks import __VERSION__
+# from lawrencetrailhawks import __VERSION__
 
 
 register = Library()
@@ -41,7 +41,8 @@ def get_rrca_news(context):
 
 @register.simple_tag(takes_context=True)
 def get_version(context):
-    return __VERSION__
+    return 'TODO: Fix __VERSION__'
+    # return __VERSION__
 
 
 @register.inclusion_tag('includes/facebook_like.html', takes_context=True)
