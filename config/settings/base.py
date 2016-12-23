@@ -4,7 +4,7 @@ from unipath import FSPath as Path
 
 
 PROJECT_ROOT = Path(__file__).ancestor(3)
-TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, 'lawrencetrailhawks', 'templates')
+TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, 'templates')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
